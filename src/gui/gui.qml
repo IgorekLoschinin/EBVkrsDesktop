@@ -5,6 +5,7 @@ import QtQuick.Layouts
 import "app"
 
 ApplicationWindow {
+    id: appWindow
     title: "EBVkrsGUI"
     visible: true
 
@@ -13,10 +14,9 @@ ApplicationWindow {
     property double coefScale: 1.2
     property double bgWidth: 1291 / coefScale
     property double bgHeight: 1054 / coefScale
-    property string bgColor: "#0A1832"
+    property color bgColor: "#0A1832"
     property int bgRadius: 10
 
-    property double opacityPanels: 0.10
     property int spacingPanel: 8
 
     width: bgWidth
@@ -24,11 +24,17 @@ ApplicationWindow {
     // minimumHeight: bgHeight
     // minimumWidth: bgWidth
 
-
     background: Rectangle {
         id: bgApp
         color: bgColor
         radius: bgRadius
+
+        MouseArea {
+            id: dragArea
+            anchors.fill: parent
+
+            onPressed: { appWindow.startSystemMove() }
+        }
     }
 
     contentData: AppContentArea {

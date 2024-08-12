@@ -15,9 +15,8 @@ Control {
         // width: parent.width * 0.5
         // height: parent.height
 
-        color: "#D9D9D9"
-        radius: bgRadius
-        opacity: opacityPanels + 0.15
+        color: "#3e485c"
+        radius: bgRadius        
 
         // Кнопка для открытия и закрытия шторки
         Button {
