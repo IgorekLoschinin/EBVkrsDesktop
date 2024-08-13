@@ -2,6 +2,8 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+import "controls"
+
 Control {
     id: idMenuPanel
     anchors.fill: parent
@@ -10,9 +12,10 @@ Control {
         id: panelSett
 
         property int tbMargin: 10
-        property int lrMargin: 6
+        property int lrMargin: 7
 
-        property int shapeImg: 29
+        property int shapeImg: 25
+        property bool visibleText: true
     }
 
     contentItem: ColumnLayout {
@@ -49,9 +52,23 @@ Control {
                     border.color: idMenu.down ? "#3D629F" : "#B3C4E0"
                     border.width: 1
                 }
+
+                onClicked: {
+
+                    if (idSideBar.checkerOpnCls) {
+                        anim1.running = true
+                        idSideBar.checkerOpnCls = false
+                        panelSett.visibleText = false
+
+                    } else {
+                        anim2.running = true
+                        idSideBar.checkerOpnCls = true
+                        panelSett.visibleText = true
+                    }
+
+                }
             }
 
-            // Разделительная линия
             Rectangle {
                 color: 'white'
                 height: 2
@@ -66,199 +83,72 @@ Control {
             Layout.leftMargin: panelSett.lrMargin
             Layout.rightMargin: panelSett.lrMargin
 
-
-            Button {
-                id: idHome
-                hoverEnabled: false
-
-                contentItem: RowLayout {
-                    spacing: 5
-                    Image {
-                        source: "../images/home.png"
-
-                        fillMode: Image.PreserveAspectFit
-                        sourceSize.width: panelSett.shapeImg
-                        sourceSize.height: panelSett.shapeImg
+            Repeater {
+                model: ListModel {
+                    ListElement {
+                        name: "Home"
+                        sourceImg: "../images/home.png"
                     }
-
-                    Label {
-                        text: "Home"
-                        // visible: false
-                        horizontalAlignment: Qt.AlignLeft
-                        verticalAlignment: Qt.AlignVCenter
+                    ListElement {
+                        name: "Processing"
+                        sourceImg: "../images/processing.png"
                     }
-                }
-
-                background: Rectangle {
-                    opacity: 1
-                    implicitHeight: 20
-                    implicitWidth: 20
-
-                    radius: bgRadius
-
-                    border.color: idHome.down ? "#3D629F" : "#B3C4E0"
-                    border.width: 1
-                }
-            }
-
-            Button {
-                id: idProcessing
-                hoverEnabled: false
-
-                contentItem: RowLayout {
-                    Image {
-                        source: "../images/processing.png"
-
-                        fillMode: Image.PreserveAspectFit
-                        sourceSize.width: panelSett.shapeImg
-                        sourceSize.height: panelSett.shapeImg
+                    ListElement {
+                        name: "Estimate"
+                        sourceImg: "../images/estimate.png"
                     }
-
-                    Label {
-                        text: "Processing"
-                        // visible: false
-                        horizontalAlignment: Qt.AlignLeft
-                        verticalAlignment: Qt.AlignVCenter
+                    ListElement {
+                        name: "Index"
+                        sourceImg: "../images/index.png"
+                    }
+                    ListElement {
+                        name: "Pipeline"
+                        sourceImg: "../images/pipeline.png"
+                    }
+                    ListElement {
+                        name: "Modeling"
+                        sourceImg: "../images/modelling.png"
                     }
                 }
 
-                background: Rectangle {
-                    implicitHeight: 20
-                    implicitWidth: 20
+                delegate: Button {
+                    id: idMenuBtn
+                    hoverEnabled: false
 
-                    radius: bgRadius
+                    contentItem: RowLayout {
+                        spacing: 5
+                        Image {
+                            source: model.sourceImg
 
-                    border.color: idProcessing.down ? "#3D629F" : "#B3C4E0"
-                    border.width: 1
-                }
-            }
+                            fillMode: Image.PreserveAspectFit
+                            sourceSize.width: panelSett.shapeImg
+                            sourceSize.height: panelSett.shapeImg
+                        }
 
-            Button {
-                id: idEstimate
-                hoverEnabled: false
-
-                contentItem: RowLayout {
-                    Image {
-                        source: "../images/estimate.png"
-
-                        fillMode: Image.PreserveAspectFit
-                        sourceSize.width: panelSett.shapeImg
-                        sourceSize.height: panelSett.shapeImg
+                        Label {
+                            text: model.name
+                            visible: panelSett.visibleText
+                            horizontalAlignment: Qt.AlignLeft
+                            verticalAlignment: Qt.AlignVCenter
+                        }
                     }
 
-                    Label {
-                        text: "Estimate"
-                        // visible: false
-                        horizontalAlignment: Qt.AlignLeft
-                        verticalAlignment: Qt.AlignVCenter
-                    }
-                }
+                    background: Rectangle {
+                        opacity: 1
+                        implicitHeight: 20
+                        implicitWidth: 20
 
-                background: Rectangle {
-                    implicitHeight: 20
-                    implicitWidth: 20
+                        radius: bgRadius
 
-                    radius: bgRadius
-
-                    border.color: idEstimate.down ? "#3D629F" : "#B3C4E0"
-                    border.width: 1
-                }
-            }
-
-            Button {
-                id: idIndex
-                hoverEnabled: false
-
-                contentItem: RowLayout {
-                    Image {
-                        source: "../images/index.png"
-
-                        fillMode: Image.PreserveAspectFit
-                        sourceSize.width: panelSett.shapeImg
-                        sourceSize.height: panelSett.shapeImg
+                        border.color: idMenuBtn.down ? "#3D629F" : "#B3C4E0"
+                        border.width: 1
                     }
 
-                    Label {
-                        text: "Index"
-                        // visible: false
-                        horizontalAlignment: Qt.AlignLeft
-                        verticalAlignment: Qt.AlignVCenter
+                    onClicked: {
+                        console.log(model.name)
                     }
                 }
 
-                background: Rectangle {
-                    implicitHeight: 20
-                    implicitWidth: 20
-
-                    radius: bgRadius
-
-                    border.color: idIndex.down ? "#3D629F" : "#B3C4E0"
-                    border.width: 1
-                }
-            }
-
-            Button {
-                id: idPipeline
-                hoverEnabled: false
-
-                contentItem: RowLayout {
-                    Image {
-                        source: "../images/pipeline.png"
-
-                        fillMode: Image.PreserveAspectFit
-                        sourceSize.width: panelSett.shapeImg
-                        sourceSize.height: panelSett.shapeImg
-                    }
-
-                    Label {
-                        text: "Pipeline"
-                        // visible: false
-                        horizontalAlignment: Qt.AlignLeft
-                        verticalAlignment: Qt.AlignVCenter
-                    }
-                }
-
-                background: Rectangle {
-                    implicitHeight: 20
-                    implicitWidth: 20
-
-                    radius: bgRadius
-
-                    border.color: idPipeline.down ? "#3D629F" : "#B3C4E0"
-                    border.width: 1
-                }
-            }
-
-            Button {
-                id: idModeling
-                hoverEnabled: false
-
-                contentItem: RowLayout {
-                    Image {
-                        source: "../images/modelling.png"
-
-                        fillMode: Image.PreserveAspectFit
-                        sourceSize.width: panelSett.shapeImg
-                        sourceSize.height: panelSett.shapeImg
-                    }
-
-                    Label {
-                        text: "Modeling"
-                        // visible: false
-                        horizontalAlignment: Qt.AlignLeft
-                        verticalAlignment: Qt.AlignVCenter
-                    }
-                }
-
-                background: Rectangle {
-                    implicitHeight: 20
-                    implicitWidth: 20
-
-                    radius: bgRadius
-
-                    border.color: idModeling.down ? "#3D629F" : "#B3C4E0"
-                    border.width: 1
-                }
             }
 
         }
@@ -287,7 +177,7 @@ Control {
 
                     Label {
                         text: "Account"
-                        // visible: false
+                        visible: panelSett.visibleText
                         horizontalAlignment: Qt.AlignLeft
                         verticalAlignment: Qt.AlignVCenter
                     }
@@ -302,17 +192,18 @@ Control {
                     border.color: idAccount.down ? "#3D629F" : "#B3C4E0"
                     border.width: 1
                 }
+
+                onClicked: {
+                    console.log("Account")
+                }
             }
 
-            // Разделительная линия
             Rectangle {
-
                 Layout.fillWidth: true
                 Layout.topMargin: 50
 
-                color: 'white'
-
                 height: 2
+                color: 'white'                
             }
 
             Button {
@@ -331,7 +222,7 @@ Control {
 
                     Label {
                         text: "Settings"
-                        // visible: false
+                        visible: panelSett.visibleText
                         horizontalAlignment: Qt.AlignLeft
                         verticalAlignment: Qt.AlignVCenter
                     }
@@ -346,11 +237,15 @@ Control {
                     border.color: idSettings.down ? "#3D629F" : "#B3C4E0"
                     border.width: 1
                 }
+
+                onClicked: {
+                    console.log("Settings")
+                }
             }
 
             Button {
                 id: idHelp
-                hoverEnabled: false
+                hoverEnabled: false                                
 
                 contentItem: RowLayout {
                     Image {
@@ -363,7 +258,7 @@ Control {
 
                     Label {
                         text: "Help"
-                        // visible: false
+                        visible: panelSett.visibleText
                         horizontalAlignment: Qt.AlignLeft
                         verticalAlignment: Qt.AlignVCenter
                     }
@@ -377,6 +272,10 @@ Control {
 
                     border.color: idHelp.down ? "#3D629F" : "#B3C4E0"
                     border.width: 1
+                }
+
+                onClicked: {
+                    console.log("Help")
                 }
             }
         }

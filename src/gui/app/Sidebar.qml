@@ -12,53 +12,21 @@ Control {
 
     contentItem: MenuPanel { id: idMenuPanel }
 
+    NumberAnimation on width {
+        id: anim1
+        running: false
+        from: 200 / coefScale
+        to: 69 / 1.4
+        duration: 300
+    }
 
-    // // Кнопка для открытия и закрытия шторки
-    // Button {
-    //     id: toggleButton
-
-    //     Layout.fillWidth: true
-    //     Layout.fillHeight: true
-
-    //     contentItem: Label {
-    //         text: "Drawer"
-    //         anchors.centerIn: parent
-    //     }
-
-    //     background: Rectangle {
-    //         color: "plum"
-    //         radius: bgRadius
-    //     }
-
-    //     onClicked: {
-
-    //         if (idSideBar.checker) {
-    //             anim1.running = true
-    //             idSideBar.checker = false
-    //         } else {
-    //             anim2.running = true
-    //             idSideBar.checker = true
-    //         }
-    //     }
-
-    // }
-
-
-    // NumberAnimation on width {
-    //     id: anim1
-    //     running: false
-    //     from: 200 / coefScale
-    //     to: 69 / 1.4
-    //     duration: 300
-    // }
-
-    // NumberAnimation on width {
-    //     id: anim2
-    //     running: false
-    //     from: anim1.to
-    //     to: anim1.from
-    //     duration: 300
-    // }
+    NumberAnimation on width {
+        id: anim2
+        running: false
+        from: anim1.to
+        to: anim1.from
+        duration: 300
+    }
 
 
     // Item {
