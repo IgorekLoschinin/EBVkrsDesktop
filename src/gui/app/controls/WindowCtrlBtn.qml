@@ -19,7 +19,7 @@ Control {
 
     }
 
-    contentItem: Row {
+    contentItem: RowLayout {
         spacing: 3
 
         Button {
@@ -59,7 +59,7 @@ Control {
 
             contentItem: Image {
                 id: sizeWindImg
-                source: "../../images/expanding-two-opposite-arrows-diagonal-symbol-of-interface.png"
+                source: "../../images/expanding.png"
 
                 fillMode: Image.PreserveAspectFit
                 sourceSize.height: propCtrlBtns.sourceSizeH

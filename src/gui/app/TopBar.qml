@@ -7,8 +7,9 @@ import "controls"
 Control {
     id: idTopBar
 
-    Layout.fillWidth: true    
-    Layout.preferredHeight: 63 / coefScale
+    Layout.fillWidth: true
+    Layout.fillHeight: true
+    Layout.preferredHeight: 63 / coefScale        
 
     contentItem: Rectangle {
         color: '#1f2b43'
@@ -17,17 +18,17 @@ Control {
         Control {
             id: appLogo
 
-            anchors.left: parent.left
+            anchors.fill: parent
             anchors.leftMargin: 15
-            anchors.verticalCenter: parent.verticalCenter
 
             contentItem: Image {
                 id: imgLogo
-                source: "../images/LOGOAPP_new.png"
+                source: "../images/logo_app.png"
 
                 fillMode: Image.PreserveAspectFit
-                sourceSize.height: 45
-                sourceSize.width: 151
+
+                horizontalAlignment: Qt.AlignLeft
+                verticalAlignment: Qt.AlignVCenter
             }
 
         }

@@ -21,8 +21,8 @@ ApplicationWindow {
 
     width: bgWidth
     height: bgHeight
-    // minimumHeight: bgHeight
-    // minimumWidth: bgWidth
+    minimumHeight: bgHeight / 2
+    minimumWidth: bgWidth / 2
 
     background: Rectangle {
         id: bgApp
