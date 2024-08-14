@@ -8,18 +8,27 @@ Control {
     id: idMenuPanel
     anchors.fill: parent
 
+    property double opacityLblP: 1
+
     QtObject {
         id: panelSett
 
         property int tbMargin: 10
-        property int lrMargin: 7
+        property int lrMargin: 8
 
         property int shapeImg: 25
+        property string colorImg: "#F5EDED"
+
         property bool visibleText: true
+        property string colorText: "#FFFAFA"
+
+        property string bgBtnColor: "#5d6575"
+        property string borderColorPressed: "#B3C4E0"
     }
 
     contentItem: ColumnLayout {
 
+        // Button for expanding menu
         ColumnLayout {
             spacing: 5
 
@@ -29,45 +38,7 @@ Control {
             Layout.leftMargin: panelSett.lrMargin
             Layout.rightMargin: panelSett.lrMargin
 
-            Button {
-                id: idMenu
-                hoverEnabled: false
-
-                contentItem: Image {
-                    source: "../images/hamburger.png"
-                    // color: "#F5EDED"
-
-                    fillMode: Image.PreserveAspectFit
-                    sourceSize.width: panelSett.shapeImg
-                    sourceSize.height: panelSett.shapeImg
-                }
-
-                background: Rectangle {
-                    implicitHeight: 20
-                    implicitWidth: 20
-
-                    radius: bgRadius
-                    // opacity: 0.3
-
-                    border.color: idMenu.down ? "#3D629F" : "#B3C4E0"
-                    border.width: 1
-                }
-
-                onClicked: {
-
-                    if (idSideBar.checkerOpnCls) {
-                        anim1.running = true
-                        idSideBar.checkerOpnCls = false
-                        panelSett.visibleText = false
-
-                    } else {
-                        anim2.running = true
-                        idSideBar.checkerOpnCls = true
-                        panelSett.visibleText = true
-                    }
-
-                }
-            }
+            MenuButton { id: idMenu }
 
             Rectangle {
                 color: 'white'
@@ -77,48 +48,50 @@ Control {
             }
         }
 
+        // Panel with modeling processing methods
         ColumnLayout {
-            // spacing: 5
-
-            Layout.leftMargin: panelSett.lrMargin
-            Layout.rightMargin: panelSett.lrMargin
+            spacing: 5
 
             Repeater {
                 model: ListModel {
                     ListElement {
                         name: "Home"
-                        sourceImg: "../images/home.png"
+                        sourceImg: "../icons/home.svg"
                     }
                     ListElement {
                         name: "Processing"
-                        sourceImg: "../images/processing.png"
+                        sourceImg: "../icons/processing.svg"
                     }
                     ListElement {
                         name: "Estimate"
-                        sourceImg: "../images/estimate.png"
+                        sourceImg: "../icons/estimate.svg"
                     }
                     ListElement {
                         name: "Index"
-                        sourceImg: "../images/index.png"
+                        sourceImg: "../icons/index.svg"
                     }
                     ListElement {
                         name: "Pipeline"
-                        sourceImg: "../images/pipeline.png"
+                        sourceImg: "../icons/pipeline.svg"
                     }
                     ListElement {
                         name: "Modeling"
-                        sourceImg: "../images/modelling.png"
+                        sourceImg: "../icons/modelling.svg"
                     }
                 }
 
                 delegate: Button {
-                    id: idMenuBtn
+                    id: idBtnMethods
                     hoverEnabled: false
 
+                    Layout.fillWidth: true
+
+                    leftPadding: panelSett.lrMargin + 3
                     contentItem: RowLayout {
-                        spacing: 5
-                        Image {
+                        spacing: 10
+                        ColorImage {
                             source: model.sourceImg
+                            color: panelSett.colorImg
 
                             fillMode: Image.PreserveAspectFit
                             sourceSize.width: panelSett.shapeImg
@@ -126,21 +99,32 @@ Control {
                         }
 
                         Label {
+                            Layout.fillWidth: true
+
                             text: model.name
-                            visible: panelSett.visibleText
+                            color: panelSett.colorText
+                            opacity: opacityLblP
+
                             horizontalAlignment: Qt.AlignLeft
                             verticalAlignment: Qt.AlignVCenter
                         }
                     }
 
                     background: Rectangle {
+                        id: bgBtnMethod
                         opacity: 1
                         implicitHeight: 20
                         implicitWidth: 20
 
-                        radius: bgRadius
+                        color: panelSett.bgBtnColor
 
-                        border.color: idMenuBtn.down ? "#3D629F" : "#B3C4E0"
+                        Rectangle {
+                            color: '#2CEF00'
+                            width: 4
+                            height: idBtnMethods.height
+                        }
+
+                        border.color: idBtnMethods.down ? panelSett.borderColorPressed : bgBtnMethod.color
                         border.width: 1
                     }
 
@@ -153,22 +137,26 @@ Control {
 
         }
 
+        // Panel with settings, logging and help
         ColumnLayout {
             spacing: 5
 
             Layout.bottomMargin: panelSett.tbMargin + 20
-            Layout.leftMargin: panelSett.lrMargin
-            Layout.rightMargin: panelSett.lrMargin
-
             Layout.alignment: Qt.AlignBottom
 
             Button {
-                id: idAccount
+                id: idBtnAccount
                 hoverEnabled: false
 
+                Layout.fillWidth: true
+
+                leftPadding: panelSett.lrMargin + 3
                 contentItem: RowLayout {
-                    Image {
-                        source: "../images/user.png"
+                    spacing: 10
+
+                    ColorImage {
+                        source: "../icons/user.svg"
+                        color: panelSett.colorImg
 
                         fillMode: Image.PreserveAspectFit
                         sourceSize.width: panelSett.shapeImg
@@ -176,20 +164,32 @@ Control {
                     }
 
                     Label {
+                        Layout.fillWidth: true
+
+                        color: panelSett.colorText
                         text: "Account"
-                        visible: panelSett.visibleText
+                        opacity: opacityLblP
+
                         horizontalAlignment: Qt.AlignLeft
                         verticalAlignment: Qt.AlignVCenter
                     }
                 }
 
                 background: Rectangle {
+                    id: bgBtnAccount
+
                     implicitHeight: 20
                     implicitWidth: 20
 
-                    radius: bgRadius
+                    color: panelSett.bgBtnColor
 
-                    border.color: idAccount.down ? "#3D629F" : "#B3C4E0"
+                    Rectangle {
+                        color: '#2CEF00'
+                        width: 4
+                        height: idBtnAccount.height
+                    }
+
+                    border.color: idBtnAccount.down ? panelSett.borderColorPressed : bgBtnAccount.color
                     border.width: 1
                 }
 
@@ -207,34 +207,51 @@ Control {
             }
 
             Button {
-                id: idSettings
+                id: idBtnSettings
                 hoverEnabled: false
 
-                contentItem: RowLayout {
+                Layout.fillWidth: true
 
-                    Image {
-                        source: "../images/setting.png"
+                leftPadding: panelSett.lrMargin + 3
+                contentItem: RowLayout {
+                    spacing: 10
+
+                    ColorImage {
+                        source: "../icons/setting.svg"
+                        color: panelSett.colorImg
 
                         fillMode: Image.PreserveAspectFit
                         sourceSize.width: panelSett.shapeImg
                         sourceSize.height: panelSett.shapeImg
                     }
 
-                    Label {
+                    Label {                        
+                        Layout.fillWidth: true
+
+                        color: panelSett.colorText
                         text: "Settings"
-                        visible: panelSett.visibleText
+                        opacity: opacityLblP
+
                         horizontalAlignment: Qt.AlignLeft
                         verticalAlignment: Qt.AlignVCenter
                     }
                 }
 
                 background: Rectangle {
+                    id: bgBtnSettings
+
                     implicitHeight: 20
                     implicitWidth: 20
 
-                    radius: bgRadius
+                    color: panelSett.bgBtnColor
 
-                    border.color: idSettings.down ? "#3D629F" : "#B3C4E0"
+                    Rectangle {
+                        color: '#2CEF00'
+                        width: 4
+                        height: idBtnSettings.height
+                    }
+
+                    border.color: idBtnSettings.down ? panelSett.borderColorPressed : bgBtnSettings.color
                     border.width: 1
                 }
 
@@ -244,12 +261,18 @@ Control {
             }
 
             Button {
-                id: idHelp
-                hoverEnabled: false                                
+                id: idBtnHelp
+                hoverEnabled: false
 
+                Layout.fillWidth: true
+
+                leftPadding: panelSett.lrMargin + 3
                 contentItem: RowLayout {
-                    Image {
-                        source: "../images/help.png"
+                    spacing: 10
+
+                    ColorImage {
+                        source: "../icons/help.svg"
+                        color: panelSett.colorImg
 
                         fillMode: Image.PreserveAspectFit
                         sourceSize.width: panelSett.shapeImg
@@ -257,20 +280,33 @@ Control {
                     }
 
                     Label {
+                        Layout.fillWidth: true
+
+                        color: panelSett.colorText
                         text: "Help"
-                        visible: panelSett.visibleText
+                        opacity: opacityLblP
+
                         horizontalAlignment: Qt.AlignLeft
                         verticalAlignment: Qt.AlignVCenter
                     }
                 }
 
                 background: Rectangle {
-                    implicitHeight: 20
-                    implicitWidth: 20
+                    id: bgBtnHelp
 
-                    radius: bgRadius
+                    implicitHeight: 30
+                    implicitWidth: 30
 
-                    border.color: idHelp.down ? "#3D629F" : "#B3C4E0"
+                    color: panelSett.bgBtnColor
+                    visible: true
+
+                    Rectangle {
+                        color: '#2CEF00'
+                        width: 4
+                        height: idBtnHelp.height
+                    }
+
+                    border.color: idBtnHelp.down ? panelSett.borderColorPressed : bgBtnHelp.color
                     border.width: 1
                 }
 
@@ -280,11 +316,6 @@ Control {
             }
         }
 
-    }
-
-    background: Rectangle {
-        color: "#3e485c"
-        radius: bgRadius
     }
 
 }

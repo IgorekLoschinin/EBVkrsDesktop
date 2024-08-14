@@ -11,7 +11,7 @@ Control {
 
     contentItem: RowLayout {
         id: contentLayout
-        spacing: spacingPanel        
+        spacing: spacingPanel
 
         Sidebar { id: idSideBar }
 

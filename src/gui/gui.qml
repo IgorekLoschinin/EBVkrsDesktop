@@ -9,7 +9,7 @@ ApplicationWindow {
     title: "EBVkrsGUI"
     visible: true
 
-    // flags: Qt.Window | Qt.FramelessWindowHint
+    flags: Qt.Window | Qt.FramelessWindowHint
 
     property double coefScale: 1.2
     property double bgWidth: 1291 / coefScale

@@ -29,7 +29,7 @@ Control {
 
             contentItem: Image {
                 id: rollImg
-                source: "../../images/collapse.png"
+                source: "../../icons/collapse.svg"
 
                 fillMode: Image.PreserveAspectFit
                 sourceSize.height: propCtrlBtns.sourceSizeH
@@ -59,7 +59,7 @@ Control {
 
             contentItem: Image {
                 id: sizeWindImg
-                source: "../../images/expanding.png"
+                source: "../../icons/expanding.svg"
 
                 fillMode: Image.PreserveAspectFit
                 sourceSize.height: propCtrlBtns.sourceSizeH
@@ -88,7 +88,7 @@ Control {
 
             contentItem: Image {
                 id: closeImg
-                source: "../../images/close.png"
+                source: "../../icons/close.svg"
 
                 fillMode: Image.PreserveAspectFit
                 sourceSize.height: propCtrlBtns.sourceSizeH

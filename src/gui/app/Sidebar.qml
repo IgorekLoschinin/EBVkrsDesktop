@@ -9,96 +9,79 @@ Control {
     Layout.preferredWidth: 200 / coefScale  // 69 / 1.4
 
     property bool checkerOpnCls: true  // Проверка на раскрытие закрытие
+    property double opacityLbl: 1
 
-    contentItem: MenuPanel { id: idMenuPanel }
+    function sidingMenu () {
 
-    NumberAnimation on width {
+        if (idSideBar.checkerOpnCls) {
+            anim1.running = true
+            anim3.running = true
+            idSideBar.checkerOpnCls = false
+
+        } else {
+            anim2.running = true
+            anim4.running = true
+            idSideBar.checkerOpnCls = true
+        }
+
+    }
+
+    contentItem: MenuPanel {
+        id: idMenuPanel
+        opacityLblP: opacityLbl
+    }
+
+    background: Rectangle {
+        color: "#3e485c"
+        radius: bgRadius
+    }
+
+    NumberAnimation on Layout.preferredWidth {
         id: anim1
         running: false
         from: 200 / coefScale
         to: 69 / 1.4
-        duration: 300
+        duration: 800
+
+        easing.type: Easing.InOutElastic
+        easing.amplitude: 2.0;
+        easing.period: 5
     }
 
-    NumberAnimation on width {
+    NumberAnimation on Layout.preferredWidth {
         id: anim2
         running: false
         from: anim1.to
         to: anim1.from
-        duration: 300
+        duration: 800
+
+        easing.type: Easing.InOutElastic
+        easing.amplitude: 2.0;
+        easing.period: 5
     }
 
+    NumberAnimation on opacityLbl {
+        id: anim3
+        running: false
+        from: 1
+        to: 0
+        duration: 800
 
-    // Item {
-    //      id: container
-    //      width: 300; height: 300
+        easing.type: Easing.InOutElastic
+        easing.amplitude: 2.0;
+        easing.period: 5
+    }
 
-    //     Row {
-    //         spacing: 10
+    NumberAnimation on opacityLbl {
+        id: anim4
+        running: false
+        from: anim3.to
+        to: anim3.from
+        duration: 800
 
-    //      Rectangle {
-    //          id: rect0
-    //          width: 100; height: 100
-    //          color: "red"
-
-    //          MouseArea {
-    //             id: mouseArea0
-    //             anchors.fill: parent
-    //          }
-    //      }
-
-    //      Rectangle {
-    //          id: rect
-    //          width: 100; height: 100
-    //          color: "red"
-
-    //          MouseArea {
-    //             id: mouseArea
-    //             anchors.fill: parent
-    //          }
-
-    //      }
-    //      }
-
-
-    //     states: [
-    //         State {
-    //            name: "resized"
-    //            // when: mouseArea0.clicked
-    //            PropertyChanges {
-    //                rect0 {
-    //                    // color: "blue"
-    //                    height: container.height
-    //                    width: container.width
-    //                }
-    //            }
-    //         },
-
-    //         State {
-    //            // name: "resized"
-    //            when: mouseArea.pressed
-    //            PropertyChanges {
-    //                rect {
-    //                    // color: "blue"
-    //                    height: container.height
-    //                    width: container.width
-    //                }
-    //            }
-    //         }
-    //     ]
-
-    //     transitions: Transition {
-    //         // from: 100
-    //         // to: 300
-
-    //         NumberAnimation {
-    //             targets: [rect0, rect]
-    //             properties: "height, width"
-    //             duration: 500
-    //             easing.type: Easing.InOutQuad
-    //         }
-
-    //     }
-    //  }
+        easing.type: Easing.InOutElastic
+        easing.amplitude: 2.0;
+        easing.period: 5
+    }
 
 }

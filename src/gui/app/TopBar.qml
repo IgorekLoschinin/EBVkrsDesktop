@@ -9,7 +9,7 @@ Control {
 
     Layout.fillWidth: true
     Layout.fillHeight: true
-    Layout.preferredHeight: 63 / coefScale        
+    Layout.preferredHeight: 63 / coefScale
 
     contentItem: Rectangle {
         color: '#1f2b43'
@@ -23,7 +23,7 @@ Control {
 
             contentItem: Image {
                 id: imgLogo
-                source: "../images/logo_app.png"
+                source: "../icons/logo_app.png"
 
                 fillMode: Image.PreserveAspectFit
 
