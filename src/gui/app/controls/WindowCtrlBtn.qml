@@ -13,6 +13,7 @@ Control {
         id: propCtrlBtns
 
         property string colorBgBtn: "#B3C4E0"
+        property string borderColorPress: "#3D629F"
         property int sourceSizeH: 15
         property int sourceSizeW: 15
         property int radiusBg: 5
@@ -22,92 +23,60 @@ Control {
     contentItem: RowLayout {
         spacing: 3
 
-        Button {
-            id: idBtnRoll
-
-            hoverEnabled: false
-
-            contentItem: Image {
-                id: rollImg
-                source: "../../icons/collapse.svg"
-
-                fillMode: Image.PreserveAspectFit
-                sourceSize.height: propCtrlBtns.sourceSizeH
-                sourceSize.width: propCtrlBtns.sourceSizeW
+        Repeater {
+            model: ListModel {
+                ListElement{
+                    name: "roll"
+                    sourceImg: "../../icons/collapse.svg"
+                }
+                ListElement{
+                    name: "fullSize"
+                    sourceImg: "../../icons/expanding.svg"
+                }
+                ListElement{
+                    name: "close"
+                    sourceImg: "../../icons/close.svg"
+                }
             }
 
-            background: Rectangle {
-                color: propCtrlBtns.colorBgBtn
+            delegate: Button {
+                id: idBtnWC
+                hoverEnabled: false
 
-                implicitHeight: 20
-                implicitWidth: 20
-                radius: propCtrlBtns.radiusBg
+                contentItem: Image {
+                    source: model.sourceImg
 
-                border.color: idBtnRoll.down ? "#3D629F" : "#B3C4E0"
-                border.width: 1
-            }
+                    fillMode: Image.PreserveAspectFit
+                    sourceSize.height: propCtrlBtns.sourceSizeH
+                    sourceSize.width: propCtrlBtns.sourceSizeW
+                }
 
-            onClicked: {
-                appWindow.showMinimized()
-            }
-        }
+                background: Rectangle {
+                    color: propCtrlBtns.colorBgBtn
 
-        Button {
-            id: idBtnFullSize
+                    implicitHeight: 20
+                    implicitWidth: 20
+                    radius: propCtrlBtns.radiusBg
 
-            hoverEnabled: false
+                    border.color: idBtnWC.down ? propCtrlBtns.borderColorPress : propCtrlBtns.colorBgBtn
+                    border.width: 1
+                }
 
-            contentItem: Image {
-                id: sizeWindImg
-                source: "../../icons/expanding.svg"
+                onClicked: {
+                    switch (model.name) {
+                    case "roll":
+                        appWindow.showMinimized()
+                        return
 
-                fillMode: Image.PreserveAspectFit
-                sourceSize.height: propCtrlBtns.sourceSizeH
-                sourceSize.width: propCtrlBtns.sourceSizeW
-            }
+                    case "fullSize":
+                        appWindow.showMaximized()
+                        return
 
-            background: Rectangle {
-                color: propCtrlBtns.colorBgBtn
-
-                implicitHeight: 20
-                implicitWidth: 20
-                radius: propCtrlBtns.radiusBg
-
-                border.color: idBtnFullSize.down ? "#3D629F" : "#B3C4E0"
-                border.width: 1
-            }
-
-            onClicked: {
-                appWindow.showMaximized()
-            }
-        }
-
-        Button {
-            id: idBtnClose
-            hoverEnabled: false
-
-            contentItem: Image {
-                id: closeImg
-                source: "../../icons/close.svg"
-
-                fillMode: Image.PreserveAspectFit
-                sourceSize.height: propCtrlBtns.sourceSizeH
-                sourceSize.width: propCtrlBtns.sourceSizeW
-            }
-
-            background: Rectangle {
-                color: propCtrlBtns.colorBgBtn
-
-                implicitHeight: 20
-                implicitWidth: 20
-                radius: propCtrlBtns.radiusBg
-
-                border.color: idBtnClose.down ? "#3D629F" : "#B3C4E0"
-                border.width: 1
-            }
-
-            onClicked: {
-                appWindow.close()
+                    case "close":
+                        appWindow.close()
+                        return
+                    }
+                }
             }
         }
 

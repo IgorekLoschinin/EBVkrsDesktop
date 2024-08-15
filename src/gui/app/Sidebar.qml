@@ -14,13 +14,15 @@ Control {
     function sidingMenu () {
 
         if (idSideBar.checkerOpnCls) {
-            anim1.running = true
-            anim3.running = true
+            idPanelCloseAnim.running = true
+            idHideLbl.running = true
+
             idSideBar.checkerOpnCls = false
 
         } else {
-            anim2.running = true
-            anim4.running = true
+            idPanelOpenAnim.running = true
+            idShowLbl.running = true
+
             idSideBar.checkerOpnCls = true
         }
 
@@ -37,11 +39,11 @@ Control {
     }
 
     NumberAnimation on Layout.preferredWidth {
-        id: anim1
+        id: idPanelCloseAnim
         running: false
         from: 200 / coefScale
         to: 69 / 1.4
-        duration: 800
+        duration: 700
 
         easing.type: Easing.InOutElastic
         easing.amplitude: 2.0;
@@ -49,11 +51,11 @@ Control {
     }
 
     NumberAnimation on Layout.preferredWidth {
-        id: anim2
+        id: idPanelOpenAnim
         running: false
-        from: anim1.to
-        to: anim1.from
-        duration: 800
+        from: idPanelCloseAnim.to
+        to: idPanelCloseAnim.from
+        duration: 700
 
         easing.type: Easing.InOutElastic
         easing.amplitude: 2.0;
@@ -61,7 +63,7 @@ Control {
     }
 
     NumberAnimation on opacityLbl {
-        id: anim3
+        id: idHideLbl
         running: false
         from: 1
         to: 0
@@ -73,10 +75,10 @@ Control {
     }
 
     NumberAnimation on opacityLbl {
-        id: anim4
+        id: idShowLbl
         running: false
-        from: anim3.to
-        to: anim3.from
+        from: idHideLbl.to
+        to: idHideLbl.from
         duration: 800
 
         easing.type: Easing.InOutElastic

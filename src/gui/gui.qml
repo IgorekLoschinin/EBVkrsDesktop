@@ -6,10 +6,11 @@ import "app"
 
 ApplicationWindow {
     id: appWindow
-    title: "EBVkrsGUI"
+    title: qsTr("EBVkrsGUI")
     visible: true
+    color: "#00000000"
 
-    flags: Qt.Window | Qt.FramelessWindowHint
+    // flags: Qt.Window | Qt.FramelessWindowHint
 
     property double coefScale: 1.2
     property double bgWidth: 1291 / coefScale
