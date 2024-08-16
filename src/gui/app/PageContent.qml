@@ -7,6 +7,7 @@ Control {
     id: idContent
 
     Layout.fillWidth: true
+    Layout.fillHeight: true
     Layout.preferredHeight: 916 / coefScale
 
     contentItem: Rectangle {
@@ -15,8 +16,11 @@ Control {
 
         Label {
             text: "height"
-            horizontalAlignment: Qt.AlignHCenter
+
             anchors.centerIn: parent
+
+            horizontalAlignment: Qt.AlignHCenter
+
         }
     }
 }

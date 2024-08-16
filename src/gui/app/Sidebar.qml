@@ -3,91 +3,90 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 Control {
-    id: idSideBar
+    id: idSideBar    
 
-    // Layout.fillWidth: true
+    property double sizeCloseSB: 69 / 1.4
+    property double sizeOpenSb: 200 / coefScale
+    property bool checkerOpnCls: true  // Проверка на раскрытие закрытие
+    property double opacityLbl: 1
+
     Layout.fillHeight: true
-    Layout.preferredWidth: 200 / coefScale
+    Layout.preferredWidth: sizeOpenSb
 
-    contentItem: Rectangle {
-        id: customDrawer
 
-        // width: parent.width * 0.5
-        // height: parent.height
+    function sidingMenu () {
 
-        color: "#D9D9D9"
-        radius: bgRadius
-        opacity: opacityPanels + 0.15
+        if (idSideBar.checkerOpnCls) {
+            idPanelCloseAnim.running = true
+            idHideLbl.running = true
 
-        // Кнопка для открытия и закрытия шторки
-        Button {
-            id: toggleButton
-            // anchors.centerIn: parent
+            idSideBar.checkerOpnCls = false
 
-            Layout.fillWidth: true
-            Layout.fillHeight: true
+        } else {
+            idPanelOpenAnim.running = true
+            idShowLbl.running = true
 
-            contentItem: Label {
-                text: customDrawer.state === "opened" ? "Close Drawer" : "Open Drawer"
-                anchors.centerIn: parent
-            }
-
-            background: Rectangle {
-                // anchors.fill: parent
-                color: "plum"
-                radius: bgRadius
-            }
-
-            onClicked: {
-                if (customDrawer.state === "opened") {
-                    customDrawer.closeDrawer()
-                } else {
-                    customDrawer.openDrawer()
-                }
-            }
+            idSideBar.checkerOpnCls = true
         }
-
-        // Управление состояниями шторки
-        state: "opened"
-
-        states: [
-            State {
-                name: "opened"
-                PropertyChanges {
-                    target: customDrawer;
-                    x: parent.width - customDrawer.width
-
-                }
-            },
-
-            State {
-                name: "closed"
-                PropertyChanges {
-                    target: customDrawer;
-                    x: parent.width - 20
-                }
-            }
-        ]
-
-        transitions: Transition {
-            from: "closed"
-            to: "opened"
-            reversible: true
-            NumberAnimation {
-                target: customDrawer;
-                property: "x";
-                duration: 300
-            }
-        }
-
-        function openDrawer() {
-            state = "opened"
-        }
-
-        function closeDrawer() {
-            state = "closed"
-        }
-
 
     }
+
+    contentItem: MenuPanel {
+        id: idMenuPanel
+        opacityLblP: opacityLbl
+    }
+
+    background: Rectangle {
+        color: "#3e485c"
+        radius: bgRadius
+    }
+
+    NumberAnimation on Layout.preferredWidth {
+        id: idPanelCloseAnim
+        running: false
+        from: sizeOpenSb
+        to: sizeCloseSB
+        duration: 700
+
+        easing.type: Easing.InOutElastic
+        easing.amplitude: 2.0
+        easing.period: 5
+    }
+
+    NumberAnimation on Layout.preferredWidth {
+        id: idPanelOpenAnim
+        running: false
+        from: idPanelCloseAnim.to
+        to: idPanelCloseAnim.from
+        duration: 700
+
+        easing.type: Easing.InOutElastic
+        easing.amplitude: 2.0
+        easing.period: 5
+    }
+
+    NumberAnimation on opacityLbl {
+        id: idHideLbl
+        running: false
+        from: 1
+        to: 0
+        duration: 800
+
+        easing.type: Easing.InOutElastic
+        easing.amplitude: 2.0;
+        easing.period: 5
+    }
+
+    NumberAnimation on opacityLbl {
+        id: idShowLbl
+        running: false
+        from: idHideLbl.to
+        to: idHideLbl.from
+        duration: 800
+
+        easing.type: Easing.InOutElastic
+        easing.amplitude: 2.0;
+        easing.period: 5
+    }
+
 }
