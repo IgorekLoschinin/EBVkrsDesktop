@@ -17,13 +17,13 @@ Control {
         property int lrMargin: 8
 
         property int shapeImg: 25
-        property string colorImg: "#F5EDED"
+        property color colorImg: "#F5EDED"
 
         property bool visibleText: true
-        property string colorText: "#FFFAFA"
+        property color colorText: "#FFFAFA"
 
-        property string bgBtnColor: "#5d6575"
-        property string borderColorPressed: "#B3C4E0"
+        property color bgBtnColor: "#5d6575"
+        property color borderColorPressed: "#B3C4E0"
     }
 
     contentItem: ColumnLayout {
@@ -203,7 +203,7 @@ Control {
                 Layout.topMargin: 50
 
                 height: 2
-                color: 'white'                
+                color: 'white'
             }
 
             Button {
@@ -225,7 +225,7 @@ Control {
                         sourceSize.height: panelSett.shapeImg
                     }
 
-                    Label {                        
+                    Label {
                         Layout.fillWidth: true
 
                         color: panelSett.colorText
@@ -312,6 +312,7 @@ Control {
 
                 onClicked: {
                     console.log("Help")
+                    // bgBtnHelp.visible = true
                 }
             }
         }

@@ -15,22 +15,18 @@ Control {
         color: '#1f2b43'
         radius: bgRadius
 
-        Control {
-            id: appLogo
+        Image {
+            id: imgLogo
 
             anchors.fill: parent
             anchors.leftMargin: 15
 
-            contentItem: Image {
-                id: imgLogo
-                source: "../icons/logo_app.png"
+            source: "../icons/logo_app.png"
 
-                fillMode: Image.PreserveAspectFit
+            fillMode: Image.PreserveAspectFit
 
-                horizontalAlignment: Qt.AlignLeft
-                verticalAlignment: Qt.AlignVCenter
-            }
-
+            horizontalAlignment: Qt.AlignLeft
+            verticalAlignment: Qt.AlignVCenter
         }
 
         WindowCtrlBtn { id: idPnlWinCtrlBtn }

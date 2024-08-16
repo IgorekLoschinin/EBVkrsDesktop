@@ -3,13 +3,16 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 Control {
-    id: idSideBar
+    id: idSideBar    
 
-    Layout.fillHeight: true
-    Layout.preferredWidth: 200 / coefScale  // 69 / 1.4
-
+    property double sizeCloseSB: 69 / 1.4
+    property double sizeOpenSb: 200 / coefScale
     property bool checkerOpnCls: true  // Проверка на раскрытие закрытие
     property double opacityLbl: 1
+
+    Layout.fillHeight: true
+    Layout.preferredWidth: sizeOpenSb
+
 
     function sidingMenu () {
 
@@ -41,12 +44,12 @@ Control {
     NumberAnimation on Layout.preferredWidth {
         id: idPanelCloseAnim
         running: false
-        from: 200 / coefScale
-        to: 69 / 1.4
+        from: sizeOpenSb
+        to: sizeCloseSB
         duration: 700
 
         easing.type: Easing.InOutElastic
-        easing.amplitude: 2.0;
+        easing.amplitude: 2.0
         easing.period: 5
     }
 
@@ -58,7 +61,7 @@ Control {
         duration: 700
 
         easing.type: Easing.InOutElastic
-        easing.amplitude: 2.0;
+        easing.amplitude: 2.0
         easing.period: 5
     }
 
