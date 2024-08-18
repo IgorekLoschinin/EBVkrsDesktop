@@ -9,11 +9,15 @@ Control {
     anchors.rightMargin: 15
     anchors.verticalCenter: parent.verticalCenter
 
+    // property color colorDef: "#55aaff"
+    // property color colorMouseOver: "#cccccc"
+    // property color colorPressed: "#333333"
+
     QtObject {
         id: propCtrlBtns
 
-        property string colorBgBtn: "#B3C4E0"
-        property string borderColorPress: "#3D629F"
+        property color colorBgBtn: "#B3C4E0"
+        property color borderColorPress: "#3D629F"
         property int sourceSizeH: 15
         property int sourceSizeW: 15
         property int radiusBg: 5
@@ -69,7 +73,13 @@ Control {
                         return
 
                     case "fullSize":
+                        if (appWindow.visibility === Window.Maximized) {
+                            appWindow.showNormal()
+                            model.sourceImg = "../../icons/expanding.svg"
+                            return
+                        }
                         appWindow.showMaximized()
+                        model.sourceImg = "../../icons/reduceW.svg"
                         return
 
                     case "close":

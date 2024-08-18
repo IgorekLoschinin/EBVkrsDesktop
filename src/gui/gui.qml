@@ -12,9 +12,9 @@ ApplicationWindow {
 
     // flags: Qt.Window | Qt.FramelessWindowHint
 
-    property double coefScale: 1.2
-    property double bgWidth: 1291 / coefScale
-    property double bgHeight: 1054 / coefScale
+    // property double coefScale: 1.2
+    property double bgWidth: 1076  // 1291 / coefScale
+    property double bgHeight: 878  // 1054 / coefScale
     property color bgColor: "#0A1832"
     property int bgRadius: 10
 
@@ -22,8 +22,8 @@ ApplicationWindow {
 
     width: bgWidth
     height: bgHeight
-    minimumHeight: bgHeight / 2
-    minimumWidth: bgWidth / 2
+    minimumHeight: 600
+    minimumWidth: 600
 
     background: Rectangle {
         id: bgApp
@@ -31,9 +31,7 @@ ApplicationWindow {
         radius: bgRadius
 
         MouseArea {
-            id: dragArea
             anchors.fill: parent
-
             onPressed: { appWindow.startSystemMove() }
         }
     }
@@ -42,6 +40,3 @@ ApplicationWindow {
         id: idAppContentArea
     }
 }
-
-
-

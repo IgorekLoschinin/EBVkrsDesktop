@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+import "sidebar"
 
 Control {
     id: idAppContentArea
@@ -22,5 +23,5 @@ Control {
             PageContent { id: idContent }
             BottomBar { id: idBottomBar }
         }
-    }
+    }        
 }

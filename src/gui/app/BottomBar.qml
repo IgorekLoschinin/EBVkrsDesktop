@@ -8,7 +8,7 @@ Control {
 
     Layout.fillWidth: true
     Layout.fillHeight: true
-    Layout.preferredHeight: 35 / coefScale - 4
+    Layout.preferredHeight: 25  // 35 / coefScale - 4
 
     QtObject {
         id: proBotBar
