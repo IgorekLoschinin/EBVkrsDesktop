@@ -6,178 +6,41 @@ Control {
     id: idSetAccHelp
 
     contentItem: ColumnLayout {
-        spacing: 5    
+        spacing: 5
 
-        Button {
+        CustomBtnSb {
             id: idBtnAccount
-            hoverEnabled: false
-
             Layout.fillWidth: true
 
-            leftPadding: panelSett.lrMargin + 3
-            contentItem: RowLayout {
-                spacing: 10
-
-                ColorImage {
-                    source: "../../icons/user.svg"
-                    color: panelSett.colorImg
-
-                    fillMode: Image.PreserveAspectFit
-                    sourceSize.width: panelSett.shapeImg
-                    sourceSize.height: panelSett.shapeImg
-                }
-
-                Label {
-                    Layout.fillWidth: true
-
-                    color: panelSett.colorText
-                    text: "Account"
-                    opacity: opacityLblP
-
-                    horizontalAlignment: Qt.AlignLeft
-                    verticalAlignment: Qt.AlignVCenter
-                }
-            }
-
-            background: Rectangle {
-                id: bgBtnAccount
-
-                implicitHeight: 20
-                implicitWidth: 20
-
-                color: panelSett.bgBtnColor
-
-                Rectangle {
-                    color: '#2CEF00'
-                    width: 4
-                    height: idBtnAccount.height
-                }
-
-                border.color: idBtnAccount.down ? panelSett.borderColorPressed : bgBtnAccount.color
-                border.width: 1
-            }
-
-            onClicked: {
-                console.log("Account")
-            }
+            nameBtn: "Account"
+            sourceImg: "../../icons/user.svg"
         }
 
         Rectangle {
             Layout.fillWidth: true
+
             Layout.topMargin: 50
+            Layout.leftMargin: panelSett.lrMargin
+            Layout.rightMargin: panelSett.lrMargin
 
             height: 2
             color: 'white'
         }
 
-        Button {
+        CustomBtnSb {
             id: idBtnSettings
-            hoverEnabled: false
-
             Layout.fillWidth: true
 
-            leftPadding: panelSett.lrMargin + 3
-            contentItem: RowLayout {
-                spacing: 10
-
-                ColorImage {
-                    source: "../../icons/setting.svg"
-                    color: panelSett.colorImg
-
-                    fillMode: Image.PreserveAspectFit
-                    sourceSize.width: panelSett.shapeImg
-                    sourceSize.height: panelSett.shapeImg
-                }
-
-                Label {
-                    Layout.fillWidth: true
-
-                    color: panelSett.colorText
-                    text: "Settings"
-                    opacity: opacityLblP
-
-                    horizontalAlignment: Qt.AlignLeft
-                    verticalAlignment: Qt.AlignVCenter
-                }
-            }
-
-            background: Rectangle {
-                id: bgBtnSettings
-
-                implicitHeight: 20
-                implicitWidth: 20
-
-                color: panelSett.bgBtnColor
-
-                Rectangle {
-                    color: '#2CEF00'
-                    width: 4
-                    height: idBtnSettings.height
-                }
-
-                border.color: idBtnSettings.down ? panelSett.borderColorPressed : bgBtnSettings.color
-                border.width: 1
-            }
-
-            onClicked: {
-                console.log("Settings")
-            }
+            nameBtn: "Settings"
+            sourceImg: "../../icons/setting.svg"
         }
 
-        Button {
+        CustomBtnSb {
             id: idBtnHelp
-            hoverEnabled: false
-
             Layout.fillWidth: true
 
-            leftPadding: panelSett.lrMargin + 3
-            contentItem: RowLayout {
-                spacing: 10
-
-                ColorImage {
-                    source: "../../icons/help.svg"
-                    color: panelSett.colorImg
-
-                    fillMode: Image.PreserveAspectFit
-                    sourceSize.width: panelSett.shapeImg
-                    sourceSize.height: panelSett.shapeImg
-                }
-
-                Label {
-                    Layout.fillWidth: true
-
-                    color: panelSett.colorText
-                    text: "Help"
-                    opacity: opacityLblP
-
-                    horizontalAlignment: Qt.AlignLeft
-                    verticalAlignment: Qt.AlignVCenter
-                }
-            }
-
-            background: Rectangle {
-                id: bgBtnHelp
-
-                implicitHeight: 30
-                implicitWidth: 30
-
-                color: panelSett.bgBtnColor
-                visible: true
-
-                Rectangle {
-                    color: '#2CEF00'
-                    width: 4
-                    height: idBtnHelp.height
-                }
-
-                border.color: idBtnHelp.down ? panelSett.borderColorPressed : bgBtnHelp.color
-                border.width: 1
-            }
-
-            onClicked: {
-                console.log("Help")
-                // bgBtnHelp.visible = true
-            }
+            nameBtn: "Help"
+            sourceImg: "../../icons/help.svg"
         }
     }
 }

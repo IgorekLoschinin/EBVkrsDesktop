@@ -7,59 +7,14 @@ Control {
     id: idAreaProcMethods
 
     contentItem: ColumnLayout {
-        spacing: 5        
+        spacing: 5
 
-        Button {
+        CustomBtnSb {
             id: idBtnHome
-            hoverEnabled: false
-
             Layout.fillWidth: true
 
-            leftPadding: panelSett.lrMargin + 3
-            contentItem: RowLayout {
-                spacing: 10
-                ColorImage {
-                    source: "../../icons/home.svg"
-                    color: panelSett.colorImg
-
-                    fillMode: Image.PreserveAspectFit
-                    sourceSize.width: panelSett.shapeImg
-                    sourceSize.height: panelSett.shapeImg
-                }
-
-                Label {
-                    Layout.fillWidth: true
-
-                    text: "Home"
-                    color: panelSett.colorText
-                    opacity: opacityLblP
-
-                    horizontalAlignment: Qt.AlignLeft
-                    verticalAlignment: Qt.AlignVCenter
-                }
-            }
-
-            background: Rectangle {
-                id: bgBtnHome
-                opacity: 1
-                implicitHeight: 20
-                implicitWidth: 20
-
-                color: panelSett.bgBtnColor
-
-                Rectangle {
-                    color: '#2CEF00'
-                    width: 4
-                    height: idBtnHome.height
-                }
-
-                border.color: idBtnHome.down ? panelSett.borderColorPressed : bgBtnHome.color
-                border.width: 1
-            }
-
-            onClicked: {
-                console.log("Home")
-            }
+            nameBtn: "Home"
+            sourceImg: "../../icons/home.svg"
         }
 
         ProcessingComboBox {
@@ -88,57 +43,11 @@ Control {
                 }
             }
 
-            delegate: Button {
-                id: idBtnMethods
-                hoverEnabled: false
-
+            delegate: CustomBtnSb {
                 Layout.fillWidth: true
 
-                leftPadding: panelSett.lrMargin + 3
-                contentItem: RowLayout {
-                    spacing: 10
-                    ColorImage {
-                        source: model.sourceImg
-                        color: panelSett.colorImg
-
-                        fillMode: Image.PreserveAspectFit
-                        sourceSize.width: panelSett.shapeImg
-                        sourceSize.height: panelSett.shapeImg
-                    }
-
-                    Label {
-                        Layout.fillWidth: true
-
-                        text: model.name
-                        color: panelSett.colorText
-                        opacity: opacityLblP
-
-                        horizontalAlignment: Qt.AlignLeft
-                        verticalAlignment: Qt.AlignVCenter
-                    }
-                }
-
-                background: Rectangle {
-                    id: bgBtnMethod
-                    opacity: 1
-                    implicitHeight: 20
-                    implicitWidth: 20
-
-                    color: panelSett.bgBtnColor
-
-                    Rectangle {
-                        color: '#2CEF00'
-                        width: 4
-                        height: idBtnMethods.height
-                    }
-
-                    border.color: idBtnMethods.down ? panelSett.borderColorPressed : bgBtnMethod.color
-                    border.width: 1
-                }
-
-                onClicked: {
-                    console.log(model.name)
-                }
+                nameBtn: model.name
+                sourceImg: model.sourceImg
             }
 
         }

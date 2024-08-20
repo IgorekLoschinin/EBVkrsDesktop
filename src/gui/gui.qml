@@ -8,13 +8,12 @@ ApplicationWindow {
     id: appWindow
     title: qsTr("EBVkrsGUI")
     visible: true
-    color: "#00000000"
+    color: "transparent"
 
     // flags: Qt.Window | Qt.FramelessWindowHint
 
-    // property double coefScale: 1.2
-    property double bgWidth: 1076  // 1291 / coefScale
-    property double bgHeight: 878  // 1054 / coefScale
+    property double bgWidth: 1076
+    property double bgHeight: 878
     property color bgColor: "#0A1832"
     property int bgRadius: 10
 

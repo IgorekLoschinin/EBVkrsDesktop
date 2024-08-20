@@ -8,28 +8,44 @@ Control {
     QtObject {
         id: panelSett
 
+        // Sidebar properties
+        property int sizeCloseSB: 49
+        property int sizeOpenSb: 167
+
+        // DYNAMIC COLOR
+        property color colorDef: "transparent" //"#5d6575"
+        property color colorMouseOver: "#8792A8"  // 4891d9
+        property color colorPressed: "#4A515E"
+
+        function dynamicColor (idBtn) {
+            if (idBtn.down) {
+                return colorPressed
+            } else {
+                if (idBtn.hovered) {
+                    return colorMouseOver
+                }
+            }
+
+            return colorDef
+        }
+
+        // Settings for buttons
         property int tbMargin: 10
         property int lrMargin: 8
-
         property int shapeImg: 25
         property color colorImg: "#F5EDED"
-
-        property bool visibleText: true
         property color colorText: "#FFFAFA"
 
         property color bgBtnColor: "#5d6575"
-        property color borderColorPressed: "#B3C4E0"
+        property color borderColorPressed: "#4A515E"
     }
 
-    property double sizeCloseSB: 49
-    property double sizeOpenSb: 167
-
+    // Properties for animation controls
     property bool checkerOpnCls: true  // Проверка на раскрытие закрытие
-
-    property double opacityLblP: 1
+    property double opacityLblP: 1  // Opacity для текста на панели sidebar
 
     Layout.fillHeight: true
-    Layout.preferredWidth: sizeOpenSb    
+    Layout.preferredWidth: panelSett.sizeOpenSb
 
 
     function sidingMenu () {
@@ -50,6 +66,7 @@ Control {
     }
 
     contentItem: ColumnLayout {
+        Layout.fillWidth: parent.width
 
         // Button for expanding menu
         MenuExpanding {
@@ -67,15 +84,18 @@ Control {
         // Panel with modeling processing methods
         ScrollView {
             id: flickableContent
+            clip: true
 
             Layout.fillWidth: parent.width
             Layout.preferredHeight: 223
 
             contentData: PanelProcMethods {
                 id: idAreaProcMethods
-
                 width: flickableContent.width
             }
+
+            ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+            ScrollBar.vertical.policy: ScrollBar.AlwaysOff
         }
 
         // Panel with settings, logging and help
@@ -97,11 +117,12 @@ Control {
         radius: bgRadius
     }
 
+    // Animation for hiding/opening sidebar, and hiding button names
     NumberAnimation on Layout.preferredWidth {
         id: idPanelCloseAnim
         running: false
-        from: sizeOpenSb
-        to: sizeCloseSB
+        from: panelSett.sizeOpenSb
+        to: panelSett.sizeCloseSB
         duration: 700
 
         easing.type: Easing.InOutElastic

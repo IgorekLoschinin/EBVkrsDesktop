@@ -10,7 +10,7 @@ Control {
 
         Button {
             id: idBtnMenu
-            hoverEnabled: false
+            // hoverEnabled: false
 
             contentItem: ColorImage {
                 source: "../../icons/hamburger.svg"
@@ -27,7 +27,7 @@ Control {
                 implicitHeight: 20
                 implicitWidth: 20
 
-                color: panelSett.bgBtnColor
+                color: panelSett.dynamicColor(idBtnMenu)  // panelSett.bgBtnColor
 
                 radius: bgRadius
 

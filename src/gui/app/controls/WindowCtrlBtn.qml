@@ -9,12 +9,13 @@ Control {
     anchors.rightMargin: 15
     anchors.verticalCenter: parent.verticalCenter
 
-    // property color colorDef: "#55aaff"
-    // property color colorMouseOver: "#cccccc"
-    // property color colorPressed: "#333333"
-
     QtObject {
         id: propCtrlBtns
+
+        // Dynamic color
+        property color colorDef: "#B3C4E0"
+        property color colorMouseOver: "#C6B8B8"
+        property color colorPressed: "#E0C3C3"
 
         property color colorBgBtn: "#B3C4E0"
         property color borderColorPress: "#3D629F"
@@ -22,6 +23,17 @@ Control {
         property int sourceSizeW: 15
         property int radiusBg: 5
 
+        function dynamicColor (idBtn) {
+            if (idBtn.down) {
+                return colorPressed
+            } else {
+                if (idBtn.hovered) {
+                    return colorMouseOver
+                }
+            }
+
+            return colorDef
+        }
     }
 
     contentItem: RowLayout {
@@ -45,7 +57,7 @@ Control {
 
             delegate: Button {
                 id: idBtnWC
-                hoverEnabled: false
+                // hoverEnabled: false
 
                 contentItem: Image {
                     source: model.sourceImg
@@ -56,7 +68,7 @@ Control {
                 }
 
                 background: Rectangle {
-                    color: propCtrlBtns.colorBgBtn
+                    color: propCtrlBtns.dynamicColor(idBtnWC)
 
                     implicitHeight: 20
                     implicitWidth: 20
