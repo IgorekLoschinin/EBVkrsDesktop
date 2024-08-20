@@ -2,24 +2,17 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+import "pages"
 
 Control {
     id: idContent
 
     Layout.fillWidth: true
     Layout.fillHeight: true
-    Layout.preferredHeight: 916 / coefScale
+    Layout.preferredHeight: 763  // 916 / coefScale
 
-    contentItem: Rectangle {
-        color: '#2E3350'
-        radius: bgRadius
-
-        Label {
-            text: "height"
-
-            anchors.centerIn: parent
-
-            horizontalAlignment: Qt.AlignHCenter
+    contentItem: StackView {
+        initialItem: HomePage {
 
         }
     }

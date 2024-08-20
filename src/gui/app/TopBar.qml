@@ -9,7 +9,7 @@ Control {
 
     Layout.fillWidth: true
     Layout.fillHeight: true
-    Layout.preferredHeight: 63 / coefScale
+    Layout.preferredHeight: 52
 
     contentItem: Rectangle {
         color: '#1f2b43'
