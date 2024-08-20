@@ -43,6 +43,7 @@ Control {
     // Properties for animation controls
     property bool checkerOpnCls: true  // Проверка на раскрытие закрытие
     property double opacityLblP: 1  // Opacity для текста на панели sidebar
+    property bool checkVisibleProcCB: false
 
     Layout.fillHeight: true
     Layout.preferredWidth: panelSett.sizeOpenSb
@@ -53,6 +54,10 @@ Control {
         if (idSideBar.checkerOpnCls) {
             idPanelCloseAnim.running = true
             idHideLbl.running = true
+
+            if (checkVisibleProcCB) {
+                checkVisibleProcCB = false
+            }
 
             idSideBar.checkerOpnCls = false
 

@@ -15,14 +15,16 @@ ColumnLayout {
         sourceImg: "../../icons/processing.svg"
 
         onClicked: {
-            idLstMethProcessing.visible = !idLstMethProcessing.visible
+            if (idSideBar.checkerOpnCls) {
+                checkVisibleProcCB = !checkVisibleProcCB
+            }
         }
     }
 
     ColumnLayout {
         id: idLstMethProcessing
         spacing: 0
-        visible: false
+        visible: checkVisibleProcCB
 
         Layout.fillWidth: true
 
