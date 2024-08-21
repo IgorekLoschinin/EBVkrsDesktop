@@ -10,7 +10,8 @@ Page {
     }
 
     Label {
-        text: "height"
+        text: "Template page"
+        color: "plum"
 
         anchors.centerIn: parent
 
@@ -18,12 +19,12 @@ Page {
 
     }
 
+    background: Rectangle {
+        color: "transparent"
+    }
+
     MouseArea {
         anchors.fill: parent
         onPressed: { appWindow.startSystemMove() }
-    }
-
-    background: Rectangle {
-        color: "transparent"
     }
 }

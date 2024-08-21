@@ -10,7 +10,8 @@ Page {
     }
 
     Label {
-        text: "height"
+        text: "Home page"
+        color: "plum"
 
         anchors.centerIn: parent
 

@@ -12,8 +12,41 @@ Control {
     Layout.preferredHeight: 763  // 916 / coefScale
 
     contentItem: StackView {
-        initialItem: HomePage {
+        // initialItem: HomePage {
+
+        // }
+
+        initialItem: ProcessingPage {
 
         }
+
+        // initialItem: EstimationPage {
+
+        // }
+
+        // initialItem: IndexingPage {
+
+        // }
+
+        // initialItem: ModelingPage {
+
+        // }
+
+        // initialItem: PipelinePage {
+
+        // }
+
+        // initialItem: ProcPhenoPage {
+
+        // }
+
+        // initialItem: ProcSnpPage {
+
+        // }
+
+        // initialItem: SettingsPage {
+
+        // }
+
     }
 }
