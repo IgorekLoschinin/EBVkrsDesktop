@@ -43,21 +43,20 @@ Control {
             model: ListModel {
                 ListElement{
                     name: "roll"
-                    sourceImg: "../../icons/collapse.svg"
+                    sourceImg: "../icons/collapse.svg"
                 }
                 ListElement{
                     name: "fullSize"
-                    sourceImg: "../../icons/expanding.svg"
+                    sourceImg: "../icons/expanding.svg"
                 }
                 ListElement{
                     name: "close"
-                    sourceImg: "../../icons/close.svg"
+                    sourceImg: "../icons/close.svg"
                 }
             }
 
             delegate: Button {
-                id: idBtnWC
-                // hoverEnabled: false
+                id: idBtnWC                
 
                 contentItem: Image {
                     source: model.sourceImg
@@ -87,11 +86,11 @@ Control {
                     case "fullSize":
                         if (appWindow.visibility === Window.Maximized) {
                             appWindow.showNormal()
-                            model.sourceImg = "../../icons/expanding.svg"
+                            model.sourceImg = "../icons/expanding.svg"
                             return
                         }
                         appWindow.showMaximized()
-                        model.sourceImg = "../../icons/reduceW.svg"
+                        model.sourceImg = "../icons/reduceW.svg"
                         return
 
                     case "close":

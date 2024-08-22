@@ -6,26 +6,6 @@ Control {
     id: idCustomDialogBtn
     height: 50
 
-    QtObject {
-        id: idSettingDlgBtn
-        // DYNAMIC COLOR
-        property color colorDef: "#FABE39"
-        property color colorMouseOver: "#CFAF68"  // 4891d9
-        property color colorPressed: "#C79831"
-
-        function dynamicColor (idBtn) {
-            if (idBtn.down) {
-                return colorPressed
-            } else {
-                if (idBtn.hovered) {
-                    return colorMouseOver
-                }
-            }
-
-            return colorDef
-        }
-    }
-
     contentItem: RowLayout {
         spacing: 3
 
@@ -40,7 +20,7 @@ Control {
                 }
                 ListElement {
                     name: qsTr("Cancel")
-                    rightMargin: 15
+                    rightMargin: true
                 }
             }
 
@@ -49,7 +29,7 @@ Control {
 
                 Layout.rightMargin: {
                     if (model.rightMargin) {
-                        return 15
+                        return commonSettingPage.leftRightMargin
                     }
                     return true
                 }
@@ -62,7 +42,12 @@ Control {
                 }
 
                 background: Rectangle {
-                    color: idSettingDlgBtn.dynamicColor(idBtnDlgPage)
+                    color: commonSettingPage.dynamicColor(
+                               idBtnDlgPage,
+                               commonSettingPage.dlgColorDef,
+                               commonSettingPage.dlgColorMouseOver,
+                               commonSettingPage.dlgColorPressed
+                    )
 
                     implicitHeight: 30
                     implicitWidth: 80

@@ -2,7 +2,6 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-import "controls"
 
 Control {
     id: idTopBar
@@ -20,8 +19,10 @@ Control {
 
             anchors.fill: parent
             anchors.leftMargin: 15
+            anchors.topMargin: 7
+            anchors.bottomMargin: 7
 
-            source: "../icons/logo_app.png"
+            source: "../icons/logo_app.svg"
 
             fillMode: Image.PreserveAspectFit
 
