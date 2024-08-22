@@ -22,7 +22,7 @@ Control {
             anchors.topMargin: 7
             anchors.bottomMargin: 7
 
-            source: "../icons/logo_app.svg"
+            source: "../icons/logo_app.png"
 
             fillMode: Image.PreserveAspectFit
 

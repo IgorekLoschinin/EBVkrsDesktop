@@ -12,13 +12,13 @@ Control {
     Layout.preferredHeight: 763  // 916 / coefScale
 
     contentItem: StackView {
-        // initialItem: HomePage {
-
-        // }
-
-        initialItem: ProcessingPage {
+        initialItem: HomePage {
 
         }
+
+        // initialItem: ProcessingPage {
+
+        // }
 
         // initialItem: EstimationPage {
 
