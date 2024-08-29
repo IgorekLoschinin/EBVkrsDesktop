@@ -8,13 +8,19 @@ Page {
 
     property string urlPage: ""
 
+    readonly property int marginContentD: 30
+    readonly property int marginContentSect: 15
+
+    readonly property int sizeTextLblSect: 17  // размер текста у названий секций
+    readonly property int sizeTextInSect: 16  // размер текста внутри секций
+
+    readonly property color sectionColor: "#FFFAFA"
+    readonly property color txtSection: "#D1E37D"
+
     QtObject {
         id: commonSettingPage
 
         property int leftRightMargin: 29
-        property color sectionColor: "#D9D9D9"
-        property color txtSection: "#D1E37D"
-
 
         // Dynamic color button arrow
         property color arrColorImg: "#F5EDED"
@@ -44,10 +50,9 @@ Page {
         id: idHeaderPage
         height: 50
 
-        contentItem: RowLayout {
-            spacing: 3
+        contentItem: RowLayout {            
             Layout.fillWidth: true
-            Layout.fillHeight: true            
+            Layout.fillHeight: true
 
             Text {
                 text: qsTr(urlPage)
@@ -56,7 +61,7 @@ Page {
                 color: "#FFFEF0"
 
                 Layout.fillWidth: true
-                Layout.topMargin: 30
+                Layout.topMargin: 15
                 Layout.leftMargin: commonSettingPage.leftRightMargin                
 
                 horizontalAlignment: Qt.AlignLeft
@@ -77,7 +82,7 @@ Page {
                 }
 
                 delegate: ArrowBtn {
-                    id: idBtnArrow
+                    id: idBtnArrow                    
 
                     Layout.rightMargin: {
                         if (model.rightMargin) {

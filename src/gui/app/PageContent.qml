@@ -20,22 +20,6 @@ Control {
 
         // }
 
-        // initialItem: EstimationPage {
-
-        // }
-
-        // initialItem: IndexingPage {
-
-        // }
-
-        // initialItem: ModelingPage {
-
-        // }
-
-        // initialItem: PipelinePage {
-
-        // }
-
         // initialItem: ProcPhenoPage {
 
         // }
@@ -44,7 +28,11 @@ Control {
 
         // }
 
-        // initialItem: SettingsPage {
+        // initialItem: EstimationPage {
+
+        // }
+
+        // initialItem: IndexingPage {
 
         // }
 

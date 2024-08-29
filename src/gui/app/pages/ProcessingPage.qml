@@ -12,8 +12,8 @@ TemplatePage {
 
     contentData: Control {
         anchors.fill: parent
-        anchors.leftMargin: 30
-        anchors.rightMargin: 30
+        anchors.leftMargin: marginContentD
+        anchors.rightMargin: marginContentD
 
         contentItem: ColumnLayout {
             spacing: 10
@@ -24,9 +24,9 @@ TemplatePage {
                 Layout.topMargin: 20
                 Layout.bottomMargin: 30
 
-                text: "Configuration of primary data processing for calculations"
+                text: qsTr("Configuration of primary data processing for calculations")
                 font.pixelSize: 17
-                color: "#FFFAFA"  // commonSettingPage.sectionColor
+                color: sectionColor
             }
 
             Repeater {
@@ -45,13 +45,13 @@ TemplatePage {
                 delegate: Button {
                     id: idUrlProcessing
                     padding: 0
-                    leftPadding: 30
+                    leftPadding: 30                    
 
                     contentItem: Text {
                         text: qsTr(model.textBtn)
                         font.pixelSize: 16
                         font.underline: idUrlProcessing.hovered
-                        color: "#FFFAFA"
+                        color: sectionColor
                     }
 
                     background: Rectangle {

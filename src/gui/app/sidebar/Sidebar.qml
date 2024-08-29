@@ -10,7 +10,7 @@ Control {
 
         // Sidebar properties
         property int sizeCloseSB: 49
-        property int sizeOpenSb: 167
+        property int sizeOpenSb: 150
 
         // DYNAMIC COLOR
         property color colorDef: "transparent" //"#5d6575"

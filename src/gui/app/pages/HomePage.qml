@@ -12,8 +12,8 @@ TemplatePage {
 
     contentData: Control {
         anchors.fill: parent
-        anchors.leftMargin: 30
-        anchors.rightMargin: 30
+        anchors.leftMargin: marginContentD
+        anchors.rightMargin: marginContentD
 
         contentItem: ColumnLayout {
             spacing: 10
@@ -24,9 +24,13 @@ TemplatePage {
                 Layout.topMargin: 20
                 Layout.bottomMargin: 30
 
-                // text: "Configuration of primary data processing for calculations"
+//                 text: qsTr("    Программное обеспечение для оценки племенной ценности крупнорогатого скота, которая предлогает
+// следующие методы для обработки, оценки и формирования отчетов: ")
+                text: qsTr("    Software for assessing the breeding value of cattle, which offers the following methods for processing, assessing and generating reports:")
                 font.pixelSize: 17
-                color: "#FFFAFA"  // commonSettingPage.sectionColor
+                color: sectionColor
+
+                wrapMode: Text.WordWrap
             }
 
             Repeater {
@@ -66,7 +70,7 @@ TemplatePage {
                         text: qsTr(model.textBtn)
                         font.pixelSize: 16
                         font.underline: idUrlProcessing.hovered
-                        color: "#FFFAFA"
+                        color: sectionColor
                     }
 
                     background: Rectangle {

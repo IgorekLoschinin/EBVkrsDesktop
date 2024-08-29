@@ -55,6 +55,11 @@ Control {
                 }
 
                 onClicked: {
+                    switch (model.name) {
+                    case "Cancel":
+                        close()
+                    }
+
                     console.log(model.name)
                 }
             }
