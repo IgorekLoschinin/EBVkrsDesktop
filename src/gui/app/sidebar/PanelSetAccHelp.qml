@@ -14,6 +14,11 @@ Control {
 
             nameBtn: "Account"
             sourceImg: "../../icons/user.svg"
+
+            sideLightBtn: activityLightBtn(nameBtn)
+            bgTargetColor: activityTargetBtn(idBtnAccount, nameBtn)
+
+            onClicked: idSideBar.activeButton = nameBtn
         }
 
         Rectangle {
@@ -33,6 +38,14 @@ Control {
 
             nameBtn: "Settings"
             sourceImg: "../../icons/setting.svg"
+
+            sideLightBtn: activityLightBtn(nameBtn)
+            bgTargetColor: activityTargetBtn(idBtnSettings, nameBtn)
+
+            onClicked: {
+                idSideBar.activeButton = nameBtn
+                idContent.newActivity("../pages/SettingsPage.qml")
+            }
         }
 
         CustomBtnSb {
@@ -41,6 +54,11 @@ Control {
 
             nameBtn: "Help"
             sourceImg: "../../icons/help.svg"
+
+            sideLightBtn: activityLightBtn(nameBtn)
+            bgTargetColor: activityTargetBtn(idBtnHelp, nameBtn)
+
+            onClicked: idSideBar.activeButton = nameBtn
         }
     }
 }

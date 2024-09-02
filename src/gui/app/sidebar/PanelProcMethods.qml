@@ -15,6 +15,14 @@ Control {
 
             nameBtn: "Home"
             sourceImg: "../../icons/home.svg"
+
+            sideLightBtn: activityLightBtn(nameBtn)
+            bgTargetColor: activityTargetBtn(idBtnHome, nameBtn)
+
+            onClicked: {
+                idSideBar.activeButton = nameBtn
+                idContent.newActivity("../pages/HomePage.qml")
+            }
         }
 
         ProcessingComboBox {
@@ -28,26 +36,39 @@ Control {
                 ListElement {
                     name: "Estimate"
                     sourceImg: "../../icons/estimate.svg"
+                    pathToPage: "../pages/EstimationPage.qml"
                 }
                 ListElement {
                     name: "Index"
                     sourceImg: "../../icons/index.svg"
+                    pathToPage: "../pages/IndexingPage.qml"
                 }
                 ListElement {
                     name: "Pipeline"
                     sourceImg: "../../icons/pipeline.svg"
+                    pathToPage: "../pages/PipelinePage.qml"
                 }
                 ListElement {
                     name: "Modeling"
                     sourceImg: "../../icons/modelling.svg"
+                    pathToPage: "../pages/ModelingPage.qml"
                 }
             }
 
             delegate: CustomBtnSb {
+                id: idBtnMeth
                 Layout.fillWidth: true
 
                 nameBtn: model.name
                 sourceImg: model.sourceImg
+
+                sideLightBtn: activityLightBtn(nameBtn)
+                bgTargetColor: activityTargetBtn(idBtnMeth, nameBtn)
+
+                onClicked: {
+                    idSideBar.activeButton = nameBtn
+                    idContent.newActivity(model.pathToPage)
+                }
             }
 
         }

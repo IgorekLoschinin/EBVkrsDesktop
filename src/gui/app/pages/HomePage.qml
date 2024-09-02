@@ -5,8 +5,7 @@ import "controls"
 
 
 TemplatePage {
-    id: idPageProcessing
-    anchors.fill: parent
+    id: idHomePage
 
     urlPage: "Home:"
 
@@ -81,6 +80,10 @@ TemplatePage {
                         switch (model.name) {
                         case "proc":
                             console.log(model.textBtn)
+
+                            // idSideBar.activeButton = nameBtn
+                            // idContent.newActivity("./ProcessingPage.qml")
+
                             return
 
                         case "est":

@@ -43,14 +43,15 @@ Control {
     // Properties for animation controls
     property bool checkerOpnCls: true  // Проверка на раскрытие закрытие
     property double opacityLblP: 1  // Opacity для текста на панели sidebar
-    property bool checkVisibleProcCB: false
+
+    property bool checkVisibleProcCB: false  // The flag that hides the Processing panel at startup
+    property string activeButton: "-1"  // Свойство для хранения идентификатора активной кнопки    
 
     Layout.fillHeight: true
     Layout.preferredWidth: panelSett.sizeOpenSb
 
 
-    function sidingMenu () {
-
+    function sidingMenu() {
         if (idSideBar.checkerOpnCls) {
             idPanelCloseAnim.running = true
             idHideLbl.running = true
@@ -68,6 +69,22 @@ Control {
             idSideBar.checkerOpnCls = true
         }
 
+    }
+
+    function activityLightBtn(lightFlag) {
+        if (idSideBar.activeButton === lightFlag) {
+            return true
+        }
+
+        return false
+    }
+
+    function activityTargetBtn(idControl, targFlag) {
+        if (idSideBar.activeButton === targFlag) {
+            return panelSett.colorMouseOver
+        }
+
+        return panelSett.dynamicColor(idControl)
     }
 
     contentItem: ColumnLayout {
@@ -99,6 +116,13 @@ Control {
                 width: flickableContent.width
             }
 
+            background: Rectangle {
+                color: "transparent"
+                border.color: panelSett.colorMouseOver
+                visible: checkVisibleProcCB
+                opacity: 0.3
+            }
+
             ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
             ScrollBar.vertical.policy: ScrollBar.AlwaysOff
         }
@@ -112,7 +136,6 @@ Control {
 
             Layout.alignment: Qt.AlignBottom
             Layout.bottomMargin: panelSett.tbMargin + 20
-
         }
 
     }
@@ -170,5 +193,4 @@ Control {
         easing.amplitude: 2.0;
         easing.period: 5
     }
-
 }

@@ -6,9 +6,8 @@ import "controls"
 
 TemplatePage {
     id: idPageProcessing
-    anchors.fill: parent
 
-    urlPage: "Processing -> phenotype"
+    urlPage: "Indexing"
 
     contentData: Control {
         anchors.fill: parent

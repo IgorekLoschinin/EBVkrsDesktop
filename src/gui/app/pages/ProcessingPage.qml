@@ -6,7 +6,6 @@ import "controls"
 
 TemplatePage {
     id: idPageProcessing
-    anchors.fill: parent    
 
     urlPage: "Processing:"
 
