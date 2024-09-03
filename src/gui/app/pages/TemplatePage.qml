@@ -67,37 +67,6 @@ Page {
                 horizontalAlignment: Qt.AlignLeft
                 verticalAlignment: Qt.AlignVCenter
             }
-
-            Repeater {
-                model: ListModel {
-                    ListElement {
-                        name: "left-arrow"
-                        sourceImg: "../../../icons/left-arrow.svg"
-                    }
-                    ListElement {
-                        name: "right-arrow"
-                        sourceImg: "../../../icons/right-arrow.svg"
-                        rightMargin: true
-                    }
-                }
-
-                delegate: ArrowBtn {
-                    id: idBtnArrow                    
-
-                    Layout.rightMargin: {
-                        if (model.rightMargin) {
-                            return commonSettingPage.leftRightMargin
-                        }
-                        return true
-                    }
-
-                    arrSourceImg: model.sourceImg
-
-                    onClicked: {
-                        console.log(model.name)
-                    }
-                }
-            }
         }
 
         background: Rectangle {

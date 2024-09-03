@@ -99,6 +99,7 @@ Control {
 
             Layout.alignment: Qt.AlignTop
             Layout.topMargin: panelSett.tbMargin
+            Layout.bottomMargin: 100
             Layout.leftMargin: panelSett.lrMargin
             Layout.rightMargin: panelSett.lrMargin
         }
@@ -108,19 +109,12 @@ Control {
             id: flickableContent
             clip: true
 
-            Layout.fillWidth: parent.width
-            Layout.preferredHeight: 223
+            Layout.fillWidth: true
+            Layout.fillHeight: true
 
             contentData: PanelProcMethods {
                 id: idAreaProcMethods
                 width: flickableContent.width
-            }
-
-            background: Rectangle {
-                color: "transparent"
-                border.color: panelSett.colorMouseOver
-                visible: checkVisibleProcCB
-                opacity: 0.3
             }
 
             ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
