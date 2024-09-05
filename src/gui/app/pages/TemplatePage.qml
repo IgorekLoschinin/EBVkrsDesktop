@@ -8,6 +8,7 @@ Page {
 
     property string urlPage: ""
 
+    readonly property int leftRightMargin: 29
     readonly property int marginContentD: 30
     readonly property int marginContentSect: 15
 
@@ -16,29 +17,6 @@ Page {
 
     readonly property color sectionColor: "#FFFAFA"
     readonly property color txtSection: "#D1E37D"
-
-    QtObject {
-        id: commonSettingPage
-
-        property int leftRightMargin: 29
-
-        // Dynamic color dialog button - apply and cancel
-        property color dlgColorDef: "#FABE39"
-        property color dlgColorMouseOver: "#CFAF68"
-        property color dlgColorPressed: "#C79831"
-
-        function dynamicColor (idBtn, cDef, cMO, cP) {
-            if (idBtn.down) {
-                return cP
-            } else {
-                if (idBtn.hovered) {
-                    return cMO
-                }
-            }
-
-            return cDef
-        }
-    }
 
     header: Control {
         id: idHeaderPage
@@ -56,7 +34,7 @@ Page {
 
                 Layout.fillWidth: true
                 Layout.topMargin: 15
-                Layout.leftMargin: commonSettingPage.leftRightMargin                
+                Layout.leftMargin: leftRightMargin
 
                 horizontalAlignment: Qt.AlignLeft
                 verticalAlignment: Qt.AlignVCenter
