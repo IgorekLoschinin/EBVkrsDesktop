@@ -11,35 +11,34 @@ Control {
     property string nameField: ""
 
     contentItem: RowLayout {
+        spacing: 2
         Layout.fillHeight: true
         Layout.fillWidth: true
+        Layout.alignment: Qt.AlignHCenter
 
         Text {
-            text: qsTr(nameField)
-            font.pixelSize: sizeTextInSect
+            id: idLblTextField
+            Layout.rightMargin: 15
+
             color: txtSection
 
+            text: qsTr(nameField)
+            font.pixelSize: sizeTextInSect            
             clip: true
-            // Layout.fillWidth: true
             wrapMode: Text.WordWrap
         }
 
-        TextField {
+        CustormTextField {
             id: idTextInput
-            placeholderText: qsTr("path to dir")
-            font.pixelSize: sizeTextInSect
-
-            implicitHeight: 22
-
             Layout.fillWidth: true
+
+            phText: "Enter file path..."
         }
 
-        Button {
-            id: idBtnBrowser
-            text: qsTr("browser")
-            onClicked: fileDialog.open()
+        ButtonFileOpen {
+            id: idBtnFileOpen            
 
-            implicitHeight: 22
+            onClicked: fileDialog.open()
         }
 
         FileDialog {

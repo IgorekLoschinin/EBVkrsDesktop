@@ -80,26 +80,28 @@ TemplatePage {
                         switch (model.name) {
                         case "proc":
                             console.log(model.textBtn)
-
-                            // idSideBar.activeButton = nameBtn
-                            // idContent.newActivity("./ProcessingPage.qml")
+                            idContent.currentIndex = 1
 
                             return
 
                         case "est":
                             console.log(model.textBtn)
+                            idContent.currentIndex = 4
                             return
 
                         case "ind":
                             console.log(model.textBtn)
+                            idContent.currentIndex = 5
                             return
 
                         case "pipe":
                             console.log(model.textBtn)
+                            idContent.currentIndex = 6
                             return
 
                         case "mod":
                             console.log(model.textBtn)
+                            idContent.currentIndex = 7
                             return
                         }
                     }

@@ -66,16 +66,16 @@ TemplatePage {
                             Layout.fillWidth: true
 
                             Text {
+                                Layout.rightMargin: 15
+
                                 text: qsTr("Select of Feature:")
                                 font.pixelSize: sizeTextInSect
-                                color: txtSection
-
-                                Layout.rightMargin: 30
+                                color: txtSection                                
                             }
 
-                            ComboBox {
-                                // currentIndex: 0
-                                displayText: "Type: " + currentText
+                            CustomComboBox {
+                                currentIndex: 0
+                                displayText: currentText
                                 model: ['milk', 'conform', 'reprod', 'scs']
                             }
                         }
@@ -99,9 +99,7 @@ TemplatePage {
 
                     // Header section
                     HeaderSectionContent {
-                        id: idHeadSectProper
-
-                        // Layout.fillHeight: true
+                        id: idHeadSectProper                        
                         Layout.fillWidth: true
 
                         nameSection: "Properties"
@@ -115,12 +113,14 @@ TemplatePage {
                             Layout.fillWidth: true
 
                             Text {
+                                Layout.rightMargin: 15
+
                                 text: qsTr("Variance calculation method:")
                                 font.pixelSize: sizeTextInSect
                                 color: txtSection
                             }
 
-                            ComboBox {
+                            CustomComboBox {
                                 model: ["all", "conf"]
                             }
                         }
@@ -140,17 +140,18 @@ TemplatePage {
                                 anchors.leftMargin: 30
 
                                 Label {
+                                    Layout.rightMargin: 15
+
                                     text: qsTr("Number of threads:")
                                     font.pixelSize: sizeTextInSect
                                     color: txtSection
                                 }
 
-                                TextField {
-                                    id: idTextInput
-                                    placeholderText: qsTr("path to dir")
-                                    font.pixelSize: sizeTextInSect
+                                CustormTextField {
+                                    id: idInputnumThred
+                                    phText: qsTr("Enter...")
 
-                                    implicitHeight: 22
+                                    implicitWidth: 80
                                 }
                                 Item { Layout.fillWidth: true }
                             }

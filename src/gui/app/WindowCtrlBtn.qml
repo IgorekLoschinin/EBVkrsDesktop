@@ -13,14 +13,14 @@ Control {
         id: propCtrlBtns
 
         // Dynamic color
-        property color colorDef: "#B3C4E0"
-        property color colorMouseOver: "#C6B8B8"
-        property color colorPressed: "#E0C3C3"
+        property color colorDef: "transparent"
+        property color colorMouseOver: "#8792A8"
+        property color colorPressed: "#4A515E"
 
         property color colorBgBtn: "#B3C4E0"
         property color borderColorPress: "#3D629F"
-        property int sourceSizeH: 15
-        property int sourceSizeW: 15
+        property int sourceSizeH: 13
+        property int sourceSizeW: 13
         property int radiusBg: 5
 
         function dynamicColor (idBtn) {
@@ -43,11 +43,11 @@ Control {
             model: ListModel {
                 ListElement{
                     name: "roll"
-                    sourceImg: "../icons/collapse.svg"
+                    sourceImg: "../icons/minus.svg"
                 }
                 ListElement{
                     name: "fullSize"
-                    sourceImg: "../icons/expanding.svg"
+                    sourceImg: "../icons/maximize.svg"
                 }
                 ListElement{
                     name: "close"
@@ -58,8 +58,9 @@ Control {
             delegate: Button {
                 id: idBtnWC                
 
-                contentItem: Image {
+                contentItem: ColorImage {
                     source: model.sourceImg
+                    color: "white"
 
                     fillMode: Image.PreserveAspectFit
                     sourceSize.height: propCtrlBtns.sourceSizeH
@@ -67,14 +68,23 @@ Control {
                 }
 
                 background: Rectangle {
-                    color: propCtrlBtns.dynamicColor(idBtnWC)
+                    color: {
+                        if (model.name === "close") {
+                            if (idBtnWC.down) {
+                                return Qt.darker("red", 1.2)
+                            } else {
+                                if (idBtnWC.hovered) {
+                                    return "red"
+                                }
+                            }
+                        }
+
+                        propCtrlBtns.dynamicColor(idBtnWC)
+                    }
 
                     implicitHeight: 20
                     implicitWidth: 20
                     radius: propCtrlBtns.radiusBg
-
-                    border.color: idBtnWC.down ? propCtrlBtns.borderColorPress : propCtrlBtns.colorBgBtn
-                    border.width: 1
                 }
 
                 onClicked: {
@@ -86,11 +96,11 @@ Control {
                     case "fullSize":
                         if (appWindow.visibility === Window.Maximized) {
                             appWindow.showNormal()
-                            model.sourceImg = "../icons/expanding.svg"
+                            model.sourceImg = "../icons/maximize.svg"
                             return
                         }
                         appWindow.showMaximized()
-                        model.sourceImg = "../icons/reduceW.svg"
+                        model.sourceImg = "../icons/squares.svg"
                         return
 
                     case "close":

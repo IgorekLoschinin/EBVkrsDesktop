@@ -66,21 +66,23 @@ TemplatePage {
                             Layout.fillWidth: true
 
                             Text {
+                                Layout.rightMargin: 15
+
                                 text: qsTr("Select of Feature:")
                                 font.pixelSize: sizeTextInSect
-                                color: txtSection
-
-                                Layout.rightMargin: 30
+                                color: txtSection                                
                             }
 
-                            ComboBox {
-                                // currentIndex: 0
-                                displayText: "Type: " + currentText
+                            CustomComboBox {
+                                currentIndex: 0
+                                displayText: currentText
                                 model: ['milk', 'conform', 'reprod', 'scs']
                             }
+
                         }
 
                     }
+
                 }
 
                 background: null
@@ -99,9 +101,7 @@ TemplatePage {
 
                     // Header section
                     HeaderSectionContent {
-                        id: idHeadSectProper
-
-                        // Layout.fillHeight: true
+                        id: idHeadSectProper                        
                         Layout.fillWidth: true
 
                         nameSection: "Properties"
@@ -143,12 +143,14 @@ TemplatePage {
                             Layout.fillWidth: true
 
                             Text {
+                                Layout.rightMargin: 15
+
                                 text: qsTr("Number lactation: ")
                                 font.pixelSize: sizeTextInSect
                                 color: txtSection
                             }
 
-                            ComboBox {
+                            CustomComboBox {
                                 currentIndex: 1
                                 model: [0, 1, 2, 3]
                             }

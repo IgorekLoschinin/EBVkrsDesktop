@@ -10,7 +10,6 @@ Control {
 
         Button {
             id: idBtnMenu
-            // hoverEnabled: false
 
             contentItem: ColorImage {
                 source: "../../icons/hamburger.svg"

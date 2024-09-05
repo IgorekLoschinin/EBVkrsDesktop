@@ -136,7 +136,7 @@ Control {
 
     background: Rectangle {
         color: "#3e485c"
-        radius: bgRadius
+        radius: bgRadius - 3
     }
 
     // Animation for hiding/opening sidebar, and hiding button names

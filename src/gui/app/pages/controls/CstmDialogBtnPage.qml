@@ -57,10 +57,13 @@ Control {
                 onClicked: {
                     switch (model.name) {
                     case "Cancel":
-                        close()
+                        console.log(urlPage)
+
+                    case "Apply":
+                        console.log(urlPage)
                     }
 
-                    console.log(model.name)
+                    // console.log(model.name)
                 }
             }
         }

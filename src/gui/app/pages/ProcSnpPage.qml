@@ -120,17 +120,18 @@ TemplatePage {
 
                         RowLayout {
                             Label {
+                                Layout.rightMargin: 15
+
                                 text: qsTr("Call rate:")
                                 font.pixelSize: sizeTextInSect
                                 color: txtSection
                             }
 
-                            TextField {
-                                id: idTextInput
-                                placeholderText: "0.90"
-                                font.pixelSize: sizeTextInSect
+                            CustormTextField {
+                                id: idInputCR
+                                implicitWidth: 80
 
-                                implicitHeight: 22
+                                phText: "0.90"
                             }
 
                             Label {

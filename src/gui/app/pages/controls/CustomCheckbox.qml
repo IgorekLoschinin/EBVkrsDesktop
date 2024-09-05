@@ -20,16 +20,22 @@ CheckBox {
         implicitWidth: 20
         implicitHeight: 20
         radius: 5
-        border.color: "#800000"
-        Rectangle {
+        color: "#8792A8"
+
+        ColorImage {
+            id: idImgTick
             visible: idCustomCheckBox.checked
-            width: parent.width / 2
-            height: parent.height / 2
+            source: "../../../icons/tick.svg"
+
+            color: idCustomCheckBox.down ? "#E9D6D6" : "#FFFFFF"
             x: parent.width / 2 - width / 2
             y: parent.height / 2 - height / 2
-            radius: 2
-            color: idCustomCheckBox.down ? "#CD5C5C" : "#B22222"
+
+            fillMode: Image.PreserveAspectFit
+            sourceSize.width: 17
+            sourceSize.height: 17
         }
+
     }
 
     background: Rectangle {

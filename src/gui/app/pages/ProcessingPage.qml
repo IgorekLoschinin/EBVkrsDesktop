@@ -33,11 +33,13 @@ TemplatePage {
                     ListElement {
                         name: "ProcPheno"
                         textBtn: "Processing phenotype"
+                        currInd: 2
                     }
 
                     ListElement {
                         name: "ProcSnp"
                         textBtn: "Processing SNP"
+                        currInd: 3
                     }
                 }
 
@@ -61,10 +63,12 @@ TemplatePage {
                         switch (model.name) {
                         case "ProcPheno":
                             console.log(model.textBtn)
+                            idContent.currentIndex = model.currInd
                             return
 
                         case "ProcSnp":
                             console.log(model.textBtn)
+                            idContent.currentIndex = model.currInd
                             return
 
                         }

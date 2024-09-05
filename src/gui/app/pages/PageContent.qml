@@ -2,47 +2,78 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-StackView {
+StackLayout {
     id: idStackPagesCont
-
-    property bool activStartPageBtn: true
 
     Layout.fillWidth: true
     Layout.fillHeight: true
     Layout.preferredHeight: 763
 
-    initialItem: compHomePage
+    currentIndex: 0
 
-    function newActivity(viewFile, activityModel = null) {
+    Repeater {
+        model: [
+            compHomePage,
+            compProcPage,
+            compProcPhenPage,
+            compProcSnpPage,
+            compEstPage,
+            compIndPage,
+            compPlPage,
+            compModlPage
+        ]
 
-        if (!viewFile || !viewFile.length) {
-            console.error("Failed to create activity. view object is invalid");
-            return;
+        delegate: Loader {
+            sourceComponent: modelData
         }
+    }
 
-        var component = Qt.createComponent(viewFile);
+    Component {
+        id: compHomePage
 
-        if (component.status === Component.Ready) {
-            var activity = component.createObject(idStackPagesCont);
-            if (activity === null) {
-                // Error Handling
-                console.error("Error creating Activity object");
-                return;
-            }
+        HomePage {}
+    }
 
-            // if (activityModel) {
-            //     activity.model = activityModel;
-            // }
+    Component {
+        id: compProcPage
 
-            push(activity);
+        ProcessingPage {}
+    }
 
-            return activity;
+    Component {
+        id: compProcPhenPage
 
-        } else if (component.status === Component.Error) {
-            // Error Handling
-            console.log("Error loading component:", component.errorString());
-        }
+        ProcPhenoPage {}
+    }
 
+    Component {
+        id: compProcSnpPage
+
+        ProcSnpPage {}
+    }
+
+    Component {
+        id: compEstPage
+
+        EstimationPage {}
+    }
+
+    Component {
+        id: compIndPage
+
+        IndexingPage {}
+    }
+
+    Component {
+        id: compPlPage
+
+        PipelinePage {}
+    }
+
+    Component {
+        id: compModlPage
+
+        ModelingPage {}
     }
 
 }

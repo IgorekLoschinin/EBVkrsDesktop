@@ -42,10 +42,7 @@ Control {
             sideLightBtn: activityLightBtn(nameBtn)
             bgTargetColor: activityTargetBtn(idBtnSettings, nameBtn)
 
-            onClicked: {
-                idSideBar.activeButton = nameBtn
-                idContent.newActivity("../pages/SettingsPage.qml")
-            }
+            onClicked: idSideBar.activeButton = nameBtn
         }
 
         CustomBtnSb {

@@ -23,7 +23,7 @@ ColumnLayout {
             }
 
             idSideBar.activeButton = nameBtn
-            idContent.newActivity("../pages/ProcessingPage.qml")
+            idContent.currentIndex = 1
         }
     }
 
@@ -40,12 +40,12 @@ ColumnLayout {
                 model: ListModel {
                     ListElement {
                         name: "- Phenotype"
-                        pathToPage: "../pages/ProcPhenoPage.qml"
+                        currInd: 2
                     }
 
                     ListElement {
                         name: "- SNP"
-                        pathToPage: "../pages/ProcSnpPage.qml"
+                        currInd: 3
                     }
                 }
 
@@ -55,12 +55,12 @@ ColumnLayout {
 
                     nameBtn: model.name
 
-                    sideLightBtn: activityLightBtn(nameBtn)
-                    bgTargetColor: activityTargetBtn(idBtnSubMethProc, nameBtn)
+                    sideLightBtn: activityLightBtn(model.name)
+                    bgTargetColor: activityTargetBtn(idBtnSubMethProc, model.name)
 
                     onClicked: {
                         idSideBar.activeButton = nameBtn
-                        idContent.newActivity(model.pathToPage)
+                        idContent.currentIndex = model.currInd
                     }
                 }
             }

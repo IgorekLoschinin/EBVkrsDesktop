@@ -22,12 +22,6 @@ Page {
 
         property int leftRightMargin: 29
 
-        // Dynamic color button arrow
-        property color arrColorImg: "#F5EDED"
-        property color arrColorDef: "transparent"
-        property color arrColorMouseOver: "#8792A8"
-        property color arrColorPressed: "#4A515E"
-
         // Dynamic color dialog button - apply and cancel
         property color dlgColorDef: "#FABE39"
         property color dlgColorMouseOver: "#CFAF68"
@@ -82,8 +76,8 @@ Page {
 
     // Background page
     background: Rectangle {
-        color: "#2E3350"
-        radius: bgRadius
+        color: '#1f2b43' //"#2E3350"
+        radius: bgRadius - 3
     }
 
 }

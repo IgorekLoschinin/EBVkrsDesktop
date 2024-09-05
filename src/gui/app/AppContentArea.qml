@@ -13,12 +13,12 @@ Control {
 
     contentItem: RowLayout {
         id: contentLayout
-        spacing: spacingPanel
+        spacing: spacingPanel - 2
 
         Sidebar { id: idSideBar }
 
         ColumnLayout {
-            spacing: spacingPanel
+            spacing: spacingPanel - 2
             clip: true
 
             TopBar { id: idTopBar }
@@ -26,52 +26,4 @@ Control {
             BottomBar { id: idBottomBar }
         }
     }
-
-    Component {
-        id: compHomePage
-
-        HomePage {}
-    }
-
-    // Component {
-    //     id: compProcPage
-
-    //     ProcessingPage {}
-    // }
-
-    // Component {
-    //     id: compProcPhenPage
-
-    //     ProcPhenoPage {}
-    // }
-
-    // Component {
-    //     id: compProcSnpPage
-
-    //     ProcSnpPage {}
-    // }
-
-    // Component {
-    //     id: compEstPage
-
-    //     EstimationPage {}
-    // }
-
-    // Component {
-    //     id: compIndPage
-
-    //     IndexingPage {}
-    // }
-
-    // Component {
-    //     id: compPlPage
-
-    //     PipelinePage {}
-    // }
-
-    // Component {
-    //     id: compModlPage
-
-    //     ModelingPage {}
-    // }
 }

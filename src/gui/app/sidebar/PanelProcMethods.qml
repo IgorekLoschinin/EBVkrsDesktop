@@ -21,7 +21,7 @@ Control {
 
             onClicked: {
                 idSideBar.activeButton = nameBtn
-                idContent.newActivity("../pages/HomePage.qml")
+                idContent.currentIndex = 0
             }
         }
 
@@ -36,22 +36,22 @@ Control {
                 ListElement {
                     name: "Estimate"
                     sourceImg: "../../icons/estimate.svg"
-                    pathToPage: "../pages/EstimationPage.qml"
+                    currInd: 4
                 }
                 ListElement {
                     name: "Index"
                     sourceImg: "../../icons/index.svg"
-                    pathToPage: "../pages/IndexingPage.qml"
+                    currInd: 5
                 }
                 ListElement {
                     name: "Pipeline"
                     sourceImg: "../../icons/pipeline.svg"
-                    pathToPage: "../pages/PipelinePage.qml"
+                    currInd: 6
                 }
                 ListElement {
                     name: "Modeling"
                     sourceImg: "../../icons/modelling.svg"
-                    pathToPage: "../pages/ModelingPage.qml"
+                    currInd: 7
                 }
             }
 
@@ -67,7 +67,7 @@ Control {
 
                 onClicked: {
                     idSideBar.activeButton = nameBtn
-                    idContent.newActivity(model.pathToPage)
+                    idContent.currentIndex = model.currInd
                 }
             }
 
