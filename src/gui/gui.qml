@@ -1,8 +1,8 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-
 import "app"
+
 
 ApplicationWindow {
     id: appWindow
@@ -10,14 +10,14 @@ ApplicationWindow {
     visible: true
     color: "transparent"
 
-    // flags: Qt.Window | Qt.FramelessWindowHint
+    flags: Qt.Window | Qt.FramelessWindowHint
 
     property double bgWidth: 1076
-    property double bgHeight: 878
-    property color bgColor: "#0A1832"
+    property double bgHeight: 778
+    property color bgColor: "#F3FBF7" //"#0A1832"
     property int bgRadius: 10
 
-    property int spacingPanel: 8
+    property int spacingPanel: 5
 
     width: bgWidth
     height: bgHeight
@@ -28,6 +28,9 @@ ApplicationWindow {
         id: bgApp
         color: bgColor
         radius: bgRadius
+
+        border.color: "#0A1832"
+        border.width: 2
 
         MouseArea {
             anchors.fill: parent

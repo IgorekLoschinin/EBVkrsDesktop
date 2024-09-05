@@ -2,7 +2,6 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-import "controls"
 
 Control {
     id: idTopBar
@@ -13,13 +12,15 @@ Control {
 
     contentItem: Rectangle {
         color: '#1f2b43'
-        radius: bgRadius
+        radius: bgRadius - 3
 
         Image {
             id: imgLogo
 
             anchors.fill: parent
             anchors.leftMargin: 15
+            anchors.topMargin: 7
+            anchors.bottomMargin: 7
 
             source: "../icons/logo_app.png"
 

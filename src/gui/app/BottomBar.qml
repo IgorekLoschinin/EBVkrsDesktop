@@ -18,7 +18,7 @@ Control {
 
     contentItem: Rectangle {
         color: '#1f2b43'
-        radius: bgRadius
+        radius: bgRadius - 4
         anchors.fill: parent
 
         Label {

@@ -10,7 +10,7 @@ Control {
 
         // Sidebar properties
         property int sizeCloseSB: 49
-        property int sizeOpenSb: 167
+        property int sizeOpenSb: 150
 
         // DYNAMIC COLOR
         property color colorDef: "transparent" //"#5d6575"
@@ -43,14 +43,15 @@ Control {
     // Properties for animation controls
     property bool checkerOpnCls: true  // Проверка на раскрытие закрытие
     property double opacityLblP: 1  // Opacity для текста на панели sidebar
-    property bool checkVisibleProcCB: false
+
+    property bool checkVisibleProcCB: false  // The flag that hides the Processing panel at startup
+    property string activeButton: "-1"  // Свойство для хранения идентификатора активной кнопки    
 
     Layout.fillHeight: true
     Layout.preferredWidth: panelSett.sizeOpenSb
 
 
-    function sidingMenu () {
-
+    function sidingMenu() {
         if (idSideBar.checkerOpnCls) {
             idPanelCloseAnim.running = true
             idHideLbl.running = true
@@ -70,6 +71,22 @@ Control {
 
     }
 
+    function activityLightBtn(lightFlag) {
+        if (idSideBar.activeButton === lightFlag) {
+            return true
+        }
+
+        return false
+    }
+
+    function activityTargetBtn(idControl, targFlag) {
+        if (idSideBar.activeButton === targFlag) {
+            return panelSett.colorMouseOver
+        }
+
+        return panelSett.dynamicColor(idControl)
+    }
+
     contentItem: ColumnLayout {
         Layout.fillWidth: parent.width
 
@@ -82,6 +99,7 @@ Control {
 
             Layout.alignment: Qt.AlignTop
             Layout.topMargin: panelSett.tbMargin
+            Layout.bottomMargin: 100
             Layout.leftMargin: panelSett.lrMargin
             Layout.rightMargin: panelSett.lrMargin
         }
@@ -91,8 +109,8 @@ Control {
             id: flickableContent
             clip: true
 
-            Layout.fillWidth: parent.width
-            Layout.preferredHeight: 223
+            Layout.fillWidth: true
+            Layout.fillHeight: true
 
             contentData: PanelProcMethods {
                 id: idAreaProcMethods
@@ -112,14 +130,13 @@ Control {
 
             Layout.alignment: Qt.AlignBottom
             Layout.bottomMargin: panelSett.tbMargin + 20
-
         }
 
     }
 
     background: Rectangle {
         color: "#3e485c"
-        radius: bgRadius
+        radius: bgRadius - 3
     }
 
     // Animation for hiding/opening sidebar, and hiding button names
@@ -170,5 +187,4 @@ Control {
         easing.amplitude: 2.0;
         easing.period: 5
     }
-
 }

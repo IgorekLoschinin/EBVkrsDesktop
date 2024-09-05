@@ -14,32 +14,58 @@ ColumnLayout {
         nameBtn: "Processing"
         sourceImg: "../../icons/processing.svg"
 
+        sideLightBtn: activityLightBtn(nameBtn)
+        bgTargetColor: activityTargetBtn(idProcessing, nameBtn)
+
         onClicked: {
             if (idSideBar.checkerOpnCls) {
                 checkVisibleProcCB = !checkVisibleProcCB
             }
+
+            idSideBar.activeButton = nameBtn
+            idContent.currentIndex = 1
         }
     }
 
-    ColumnLayout {
+    Control {
         id: idLstMethProcessing
-        spacing: 0
         visible: checkVisibleProcCB
 
         Layout.fillWidth: true
 
-        CustomBtnSb {
-            id: idBtnProcPheno
-            Layout.fillWidth: true
+        contentItem: ColumnLayout {
+            spacing: 0
 
-            nameBtn: "- Phenotype"
+            Repeater {
+                model: ListModel {
+                    ListElement {
+                        name: "- Phenotype"
+                        currInd: 2
+                    }
+
+                    ListElement {
+                        name: "- SNP"
+                        currInd: 3
+                    }
+                }
+
+                delegate: CustomBtnSb {
+                    id: idBtnSubMethProc
+                    Layout.fillWidth: true
+
+                    nameBtn: model.name
+
+                    sideLightBtn: activityLightBtn(model.name)
+                    bgTargetColor: activityTargetBtn(idBtnSubMethProc, model.name)
+
+                    onClicked: {
+                        idSideBar.activeButton = nameBtn
+                        idContent.currentIndex = model.currInd
+                    }
+                }
+            }
         }
 
-        CustomBtnSb {
-            id: iBtnProcSNP
-            Layout.fillWidth: true
+    }
 
-            nameBtn: "- SNP"
-        }
-    }        
 }
