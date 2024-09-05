@@ -5,7 +5,7 @@ import "controls"
 
 
 TemplatePage {
-    id: idPageProcessing
+    id: idPageProcessingSnp
 
     urlPage: "Processing -> SNP"
 
@@ -53,7 +53,7 @@ TemplatePage {
                             Layout.bottomMargin: 10
 
                             label: CustomCheckbox {
-                                id: idCheckBoxFarm
+                                id: idCheckBoxSNPAddProc
                                 nameChb: "Additional processing"
                             }
 
@@ -61,12 +61,15 @@ TemplatePage {
                                 anchors.fill: parent
                                 anchors.leftMargin: 30
 
+                                enabled: idCheckBoxSNPAddProc.checked
+                                opacity: idCheckBoxSNPAddProc.checked ? 1 : 0.3
+
                                 InputGroup {
                                     id: idInputSampleD
                                     Layout.fillWidth: true
 
                                     nameField: "Sample animals by id:"
-                                    enabled: idCheckBoxFarm.checked
+                                    enabled: idCheckBoxSNPAddProc.checked
                                 }
 
                                 InputGroup {
@@ -74,7 +77,7 @@ TemplatePage {
                                     Layout.fillWidth: true
 
                                     nameField: "Update file snp:"
-                                    enabled: idCheckBoxFarm.checked
+                                    enabled: idCheckBoxSNPAddProc.checked
                                 }
                             }
 
@@ -141,6 +144,49 @@ TemplatePage {
                             }
                         }
 
+                        GroupBox {
+                            padding: 0
+                            Layout.fillWidth: true
+                            Layout.bottomMargin: 10
+
+                            label: CustomCheckbox {
+                                id: idCheckBoxSaveCrFile
+                                nameChb: "Save call rate in file"
+                            }
+
+                            contentData: RowLayout {
+                                anchors.fill: parent
+                                anchors.leftMargin: 30
+
+                                enabled: idCheckBoxSaveCrFile.checked
+                                opacity: idCheckBoxSaveCrFile.checked ? 1 : 0.3
+
+                                Label {
+                                    Layout.rightMargin: 15
+
+                                    text: qsTr("File name:")
+                                    font.pixelSize: sizeTextInSect
+                                    color: txtSection
+                                }
+
+                                CustormTextField {
+                                    id: idInputnumThred
+                                    phText: qsTr("Name ...")
+
+                                    implicitWidth: 200
+                                }
+
+                                Label {
+                                    text: qsTr(".xlsx")
+                                    font.pixelSize: sizeTextInSect
+                                    color: txtSection
+                                }
+                                Item { Layout.fillWidth: true }
+                            }
+
+                            background: null
+                        }
+
                         CustomCheckbox {
                             id: idCBSaveFileCr
                             nameChb: "Save animals with low call rate"
@@ -156,13 +202,27 @@ TemplatePage {
                                 nameChb: "Add suffix sex"
                             }
 
-                            contentData: InputGroup {
-                                id: idInputFarm
+                            contentData: ColumnLayout {
                                 anchors.fill: parent
                                 anchors.leftMargin: 30
 
-                                nameField: "Choose the file with the sex of the animals:"
-                                enabled: idCheckBoxFarm.checked
+                                enabled: idCBAddSuffSex.checked
+                                opacity: idCBAddSuffSex.checked ? 1 : 0.6
+
+                                CustomCheckbox {
+                                    id: idCBAddSuff
+                                    nameChb: "Add suffix"
+                                }
+
+                                InputGroup {
+                                    id: idInputFarm
+                                    Layout.fillWidth: true
+
+                                    enabled: !idCBAddSuff.checked
+                                    opacity: !idCBAddSuff.checked ? 1 : 0.3
+
+                                    nameField: "Choose the file with the sex of the animals:"
+                                }
                             }
 
                             background: null

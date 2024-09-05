@@ -126,7 +126,7 @@ Control {
             id: idSetAccHelp
 
             Layout.fillWidth: true
-            Layout.preferredHeight: 166
+            // Layout.preferredHeight: 166
 
             Layout.alignment: Qt.AlignBottom
             Layout.bottomMargin: panelSett.tbMargin + 20

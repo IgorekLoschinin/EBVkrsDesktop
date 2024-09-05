@@ -4,7 +4,7 @@ import QtQuick.Controls
 Page {
 
     contentItem: Rectangle {
-        color: '#2E3350'
+        color: '#1f2b43'
         radius: bgRadius
     }
 

@@ -84,4 +84,6 @@ TemplatePage {
             color: "transparent"
         }
     }
+
+    footer: null
 }

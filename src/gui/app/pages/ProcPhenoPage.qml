@@ -5,7 +5,7 @@ import "controls"
 
 
 TemplatePage {
-    id: idPageProcessing
+    id: idPageProcessingPheno
 
     urlPage: "Processing -> phenotype"
 
@@ -132,8 +132,10 @@ TemplatePage {
                                 anchors.fill: parent
                                 anchors.leftMargin: 30
 
-                                nameField: "File with code farm:"
                                 enabled: idCheckBoxFarm.checked
+                                opacity: idCheckBoxFarm.checked ? 1 : 0.3
+
+                                nameField: "File with code farm:"                                
                             }
 
                             background: null
@@ -205,19 +207,28 @@ TemplatePage {
                         Layout.fillWidth: true
                         Layout.leftMargin: marginContentSect
 
+                        CustomCheckbox {
+                            id: idCheckBoxAccumD
+
+                            nameChb: "Accumulate data"
+                        }
+
                         GroupBox {
                             padding: 0
                             Layout.fillWidth: true
 
                             label: CustomCheckbox {
-                                id: idCheckBoxAccumD
+                                id: idCheckBoxUpdataDB
 
-                                nameChb: "Accumulate data"
+                                nameChb: "Updata data base"
                             }
 
                             contentData: RowLayout {
                                 anchors.fill: parent
                                 anchors.leftMargin: 30
+
+                                enabled: idCheckBoxUpdataDB.checked
+                                opacity: idCheckBoxUpdataDB.checked ? 1 : 0.3
 
                                 Text {
                                     text: qsTr("Update data:")

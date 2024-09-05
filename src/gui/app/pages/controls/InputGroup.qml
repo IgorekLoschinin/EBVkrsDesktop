@@ -9,6 +9,7 @@ Control {
     id: idInputGroup
 
     property string nameField: ""
+    property string placeholderText: "Enter file path..."
 
     contentItem: RowLayout {
         spacing: 2
@@ -32,7 +33,7 @@ Control {
             id: idTextInput
             Layout.fillWidth: true
 
-            phText: "Enter file path..."
+            phText: idInputGroup.placeholderText
         }
 
         ButtonFileOpen {

@@ -131,13 +131,16 @@ TemplatePage {
                             Layout.bottomMargin: 10
 
                             label: CustomCheckbox {
-                                id: idCheckBoxFarm
+                                id: idCheckBoxParallelEst
                                 nameChb: "Parallel computing"
                             }
 
                             contentData: RowLayout {
                                 anchors.fill: parent
                                 anchors.leftMargin: 30
+
+                                enabled: idCheckBoxParallelEst.checked
+                                opacity: idCheckBoxParallelEst.checked ? 1 : 0.3
 
                                 Label {
                                     Layout.rightMargin: 15

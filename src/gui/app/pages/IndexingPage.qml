@@ -188,13 +188,16 @@ TemplatePage {
                             Layout.bottomMargin: 10
 
                             label: CustomCheckbox {
-                                id: idCheckBoxFarm
+                                id: idCheckBoxParallelInd
                                 nameChb: "Parallel computing"
                             }
 
                             contentData: RowLayout {
                                 anchors.fill: parent
                                 anchors.leftMargin: 30
+
+                                enabled: idCheckBoxParallelInd.checked
+                                opacity: idCheckBoxParallelInd.checked ? 1 : 0.3
 
                                 Label {
                                     Layout.rightMargin: 15
@@ -216,18 +219,24 @@ TemplatePage {
                             background: null
                         }
 
+                        CustomCheckbox {
+                            id: idCheckBoxGivc
+
+                            nameChb: "Generating files for givc"
+                        }
                     }
 
                 }
 
                 background: null
-
             }
 
             // Section Sample for givc
             GroupBox {
                 id: idGivc
                 padding: 0
+
+                visible: idCheckBoxGivc.checked
 
                 Layout.topMargin: 10
                 Layout.fillWidth: true
@@ -242,6 +251,14 @@ TemplatePage {
                         Layout.fillWidth: true
 
                         nameSection: "Sample for givc"
+                    }
+
+                    InputGroup {
+                        nameField: "Directory with reports:"
+                        placeholderText: "Enter dir... "
+
+                        Layout.fillWidth: true
+                        Layout.leftMargin: marginContentSect
                     }
 
                     RowLayout {

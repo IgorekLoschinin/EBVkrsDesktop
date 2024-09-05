@@ -4,12 +4,12 @@ import QtQuick.Controls.Material
 Page {
 
     contentItem: Rectangle {
-        color: '#2E3350'
+        color: '#1f2b43'
         radius: bgRadius
     }
 
     Label {
-        text: "Modeling page"
+        text: "Modeling page. \nThis page is under construction."
         color: "plum"
 
         anchors.centerIn: parent
