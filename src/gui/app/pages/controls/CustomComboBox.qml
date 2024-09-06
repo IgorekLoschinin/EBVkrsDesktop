@@ -25,6 +25,8 @@ ComboBox {
         font.pixelSize: 18
 
         color: root.textColor
+
+        verticalAlignment: Qt.AlignVCenter
     }
 
     background: Rectangle {
@@ -49,6 +51,8 @@ ComboBox {
             text: modelData
             font.pixelSize: 18
             color: textColor
+
+            verticalAlignment: Qt.AlignVCenter
         }
 
         background: Rectangle {
