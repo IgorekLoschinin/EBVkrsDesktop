@@ -6,13 +6,20 @@ CheckBox {
 
     property string nameChb: ""
 
+    rightPadding: 0
+    topPadding: 0
+    bottomPadding: 4
+
     contentItem: Text {
+        topPadding: 4
+        leftPadding: idCustomCheckBox.indicator.width
+
         text: qsTr(nameChb)
+        font.pixelSize: sizeTextInSect
         color: txtSection
 
         verticalAlignment: Text.AlignVCenter
-        leftPadding: idCustomCheckBox.indicator.width
-        font.pixelSize: sizeTextInSect
+        horizontalAlignment: Text.AlignHCenter
     }
 
     indicator: Rectangle {
@@ -35,7 +42,6 @@ CheckBox {
             sourceSize.width: 17
             sourceSize.height: 17
         }
-
     }
 
     background: Rectangle {

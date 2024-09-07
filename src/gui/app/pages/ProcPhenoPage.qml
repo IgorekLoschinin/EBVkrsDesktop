@@ -203,7 +203,8 @@ TemplatePage {
                         nameSection: "Addition properties"
                     }
 
-                    ColumnLayout {                        
+                    ColumnLayout {
+                        // spacing: 3
                         Layout.fillWidth: true
                         Layout.leftMargin: marginContentSect
 

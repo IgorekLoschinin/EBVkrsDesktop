@@ -189,7 +189,7 @@ TemplatePage {
 
                         CustomCheckbox {
                             id: idCBSaveFileCr
-                            nameChb: "Save animals with low call rate"
+                            nameChb: "Save call rate in file"
                         }
 
                         GroupBox {
