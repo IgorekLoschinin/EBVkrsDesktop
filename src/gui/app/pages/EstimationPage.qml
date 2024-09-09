@@ -31,7 +31,6 @@ TemplatePage {
                     // Header section
                     HeaderSectionContent {
                         id: idHeadSectComm
-
                         Layout.fillWidth: true
 
                         nameSection: "Common"
@@ -121,7 +120,44 @@ TemplatePage {
                             }
 
                             CustomComboBox {
+                                id: idSelectTypeCalVar
                                 model: ["all", "conf"]
+                            }
+                        }
+
+                        Label {
+                            text: qsTr("Manually set variations for calculations:")
+                            Layout.fillWidth: true
+
+                            color: "plum"
+
+                            horizontalAlignment: Qt.AlignHCenter
+                        }
+
+                        TableInputVar {
+                            id: tableInVariance
+                            Layout.fillWidth: true
+
+                            visible: idSelectTypeCalVar.displayText === "conf" ? true : false
+                        }
+
+                        Button {
+                            text: "Собрать данные"
+                            // anchors.bottom: parent.bottom
+                            // anchors.horizontalCenter: parent.horizontalCenter
+                            onClicked: {
+                                var allData = {};
+                                for (var i = 0; i < tableInVariance.modFtVar.count; i++) {
+                                    var item = tableInVariance.modFtVar.get(i);
+
+                                    allData[item.name] = {
+                                        "varE": item.varE,
+                                        "varG": item.varG
+                                    };
+                                }
+
+                                // Можем передать собранные данные для дальнейшего использования
+                                console.log(allData['tip']['varE'], allData['tip']['varG']);  // Вывод массива всех элементов
                             }
                         }
 
