@@ -8,19 +8,6 @@ Control {
     contentItem: ColumnLayout {
         spacing: 5
 
-        // CustomBtnSb {
-        //     id: idBtnAccount
-        //     Layout.fillWidth: true
-
-        //     nameBtn: "Account"
-        //     sourceImg: "../../icons/user.svg"
-
-        //     sideLightBtn: activityLightBtn(nameBtn)
-        //     bgTargetColor: activityTargetBtn(idBtnAccount, nameBtn)
-
-        //     onClicked: idSideBar.activeButton = nameBtn
-        // }
-
         Rectangle {
             Layout.fillWidth: true
 

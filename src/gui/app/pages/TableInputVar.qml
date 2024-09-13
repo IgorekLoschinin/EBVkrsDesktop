@@ -19,7 +19,7 @@ Control {
             }
 
             Item {
-                implicitWidth: 40
+                width: 73
             }
 
             Control {
@@ -27,8 +27,9 @@ Control {
                 contentItem: Label {
                     text: "VarE"
                     color: "plum"
-                }
 
+                    leftPadding: 13
+                }
             }
 
             Control {
@@ -36,6 +37,8 @@ Control {
                 contentItem: Label {
                     text: "VarG"
                     color: "plum"
+
+                    leftPadding: 13
                 }
             }
 
@@ -44,6 +47,7 @@ Control {
             }
         }
 
+        // Body - row and col
         RowLayout {
             Item {
                 Layout.fillWidth: true
@@ -65,10 +69,12 @@ Control {
                     spacing: 10
 
                     Control {
-                        implicitWidth: 40
+                        implicitWidth: 80
                         contentItem: Label {
                             text: name
                             color: "plum"
+
+                            horizontalAlignment: Qt.AlignRight
                         }
                     }
 
@@ -81,10 +87,13 @@ Control {
 
                         inputMethodHints: Qt.ImhFormattedNumbersOnly
                         onEditingFinished: {
-                            modelFeatureVar.set(
-                                index,
-                                {"varE": idInVarE.text}
-                            )
+                            if (idInVarE.text.length) {
+                                modelFeatureVar.set(
+                                    index,
+                                    {"varE": idInVarE.text}
+                                )
+                                return
+                            }
                         }
                     }
 
@@ -97,17 +106,20 @@ Control {
 
                         inputMethodHints: Qt.ImhFormattedNumbersOnly
                         onEditingFinished: {
-                            modelFeatureVar.set(
-                                index,
-                                {"varG": idInVarG.text}
-                            )
+                            if (idInVarG.text.length) {
+                                modelFeatureVar.set(
+                                    index,
+                                    {"varG": idInVarG.text}
+                                )
+                                return
+                            }
                         }
                     }
                 }
 
                 Component.onCompleted: {
                     // Сюда с бэкенда отправляется список признаков
-                    var featureNames = ["tip", "kt", "rost", "gt", "pz"];
+                    var featureNames = ["tip", "kt", "rost", "gt", "pz", "conform"];
 
                     for (var i = 0; i < featureNames.length; i++) {
                         modelFeatureVar.append({
@@ -120,16 +132,24 @@ Control {
                 }
             }
 
+            // Control {
+            //     Layout.fillWidth: true
+
+            //     contentItem: ColumnLayout {
+            //         Layout.fillWidth: true
+            //         Button {
+
+            //         }
+
+            //         Button {
+
+            //         }
+            //     }
+
+            // }
             Item {
                 Layout.fillWidth: true
             }
         }
     }
-
-    background: Rectangle {
-        color: "transparent"
-        border.color: "plum"
-    }
-
-
 }

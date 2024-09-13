@@ -37,7 +37,7 @@ Control {
             anchors.fill: parent
             anchors.rightMargin: proBotBar.sideMargins
 
-            text: "| @2024"
+            text: "| @ 2024"
             font.pixelSize: 12
             color: proBotBar.colorTxt
 

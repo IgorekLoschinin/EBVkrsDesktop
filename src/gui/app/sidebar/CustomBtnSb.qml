@@ -57,8 +57,4 @@ Button {
         border.color: idCustomBtnSb.down ? panelSett.borderColorPressed : bgCustBtSb.color
         border.width: 1
     }
-
-    onClicked: {
-        console.log(nameBtn)
-    }
 }
