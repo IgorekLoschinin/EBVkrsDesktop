@@ -3,7 +3,6 @@ import QtQuick.Layouts
 import QtQuick.Controls.Fusion
 
 import "app"
-import "app/loginform"
 
 
 ApplicationWindow {
@@ -39,7 +38,6 @@ ApplicationWindow {
             onPressed: { appWindow.startSystemMove() }
         }
     }
-
 
     contentData: AppContentArea {
         id: idAppContentArea
