@@ -74,6 +74,7 @@ TemplatePage {
                             }
 
                             CustomComboBox {
+                                id: idSelectFeatureForInd
                                 currentIndex: 0
                                 displayText: currentText
                                 model: ['milk', 'conform', 'reprod', 'scs']
@@ -217,6 +218,14 @@ TemplatePage {
                             }
 
                             background: null
+                        }
+
+                        CustomCheckbox {
+                            id: idCheckBoxPrivDisOpt
+                            nameChb: "Disabled optimal value"
+
+                            enabled: idSelectFeatureForInd.displayText === "conform"
+                            opacity: idSelectFeatureForInd.displayText === "conform" ? 1 : 0.3
                         }
 
                         CustomCheckbox {
