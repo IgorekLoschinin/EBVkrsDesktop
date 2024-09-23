@@ -18,11 +18,9 @@ Control {
                 Layout.fillWidth: true
             }
 
-            Item {
-                width: 73
-            }
-
             Control {
+                Layout.leftMargin: 73
+
                 implicitWidth: 80
                 contentItem: Label {
                     text: "VarE"

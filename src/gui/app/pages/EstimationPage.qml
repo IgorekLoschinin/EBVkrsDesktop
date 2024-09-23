@@ -1,6 +1,8 @@
+import QtCore
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick.Dialogs
 import "controls"
 
 
@@ -125,11 +127,49 @@ TemplatePage {
                             }
                         }
 
-                        TableInputVar {
-                            id: tableInVariance
-                            Layout.fillWidth: true
-
+                        RowLayout {
+                            spacing: 0
                             visible: idSelectTypeCalVar.displayText === "conf" ? true : false
+                            Layout.alignment: Qt.AlignCenter
+
+                            TableInputVar {
+                                id: tableInVariance
+                                Layout.alignment: Qt.AlignRight
+                            }
+
+                            ColumnLayout {
+                                Layout.alignment: Qt.AlignLeft
+
+                                CustomBtn {
+                                    nameBtn: qsTr("load")
+
+                                    implicitWidth: 100
+
+                                    onClicked: idLoadFileConf.open()
+
+                                    FileDialog {
+                                        id: idLoadFileConf
+                                        currentFolder: StandardPaths.standardLocations(StandardPaths.DocumentsLocation)[0]
+                                        onAccepted: console.log(selectedFile)
+                                    }
+                                }
+
+                                CustomBtn {
+                                    nameBtn: qsTr("save")
+
+                                    implicitWidth: 100
+
+                                    onClicked: idSaveFileConf.open()
+
+                                    FileDialog {
+                                        id: idSaveFileConf
+                                        fileMode: FileDialog.SaveFile
+                                        currentFolder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
+                                        onAccepted: console.log(selectedFile)
+                                    }
+                                }
+
+                            }
                         }
 
                         // Button {
