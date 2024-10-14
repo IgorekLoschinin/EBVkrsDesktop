@@ -79,13 +79,12 @@ Control {
 
                 onClicked: {
                     switch (model.name) {
-                    case "run":
-                        console.log(urlPage)
+                    case "run":                        
                         return
 
                     case "stop":
-                        console.log(urlPage)
                         return
+
                     default:
                         return
                     }

@@ -7,7 +7,7 @@ import "controls"
 TemplatePage {
     id: idPageProcessing
 
-    urlPage: "Indexing"
+    urlPage: qsTr("Indexing")
 
     contentData: Control {
         anchors.fill: parent
@@ -34,7 +34,7 @@ TemplatePage {
 
                         Layout.fillWidth: true
 
-                        nameSection: "Common"
+                        nameSection: qsTr("Common")
                     }
 
                     // Content and settings section common
@@ -48,6 +48,7 @@ TemplatePage {
 
                             Text {
                                 text: qsTr("Estimation method:")
+                                font.family: "Segoe UI"
                                 font.pixelSize: sizeTextInSect
                                 color: txtSection
                             }
@@ -69,6 +70,7 @@ TemplatePage {
                                 Layout.rightMargin: 15
 
                                 text: qsTr("Select of Feature:")
+                                font.family: "Segoe UI"
                                 font.pixelSize: sizeTextInSect
                                 color: txtSection                                
                             }
@@ -101,10 +103,9 @@ TemplatePage {
                     // Header section
                     HeaderSectionContent {
                         id: idHeadSectProper
-
                         Layout.fillWidth: true
 
-                        nameSection: "Properties"
+                        nameSection: qsTr("Properties")
                     }
 
                     RowLayout {
@@ -119,6 +120,7 @@ TemplatePage {
                                 Layout.rightMargin: 15
 
                                 text: qsTr("Choose animal:")
+                                font.family: "Segoe UI"
                                 font.pixelSize: sizeTextInSect
                                 color: txtSection
                             }
@@ -136,6 +138,7 @@ TemplatePage {
                                 Layout.rightMargin: 15
 
                                 text: qsTr("Type index:")
+                                font.family: "Segoe UI"
                                 font.pixelSize: sizeTextInSect
                                 color: txtSection
                             }
@@ -167,10 +170,9 @@ TemplatePage {
                     // Header section
                     HeaderSectionContent {
                         id: idHeadSectAddProp
-
                         Layout.fillWidth: true
 
-                        nameSection: "Addition properties"
+                        nameSection: qsTr("Addition properties")
                     }
 
                     ColumnLayout {
@@ -180,7 +182,7 @@ TemplatePage {
                         CustomCheckbox {
                             id: idCheckBoxAccumD
 
-                            nameChb: "Divide data into bulls and cows."
+                            nameChb: qsTr("Divide data into bulls and cows.")
                         }
 
                         GroupBox {
@@ -190,7 +192,8 @@ TemplatePage {
 
                             label: CustomCheckbox {
                                 id: idCheckBoxParallelInd
-                                nameChb: "Parallel computing"
+
+                                nameChb: qsTr("Parallel computing")
                             }
 
                             contentData: RowLayout {
@@ -204,6 +207,7 @@ TemplatePage {
                                     Layout.rightMargin: 15
 
                                     text: qsTr("Number of threads:")
+                                    font.family: "Segoe UI"
                                     font.pixelSize: sizeTextInSect
                                     color: txtSection
                                 }
@@ -222,7 +226,7 @@ TemplatePage {
 
                         CustomCheckbox {
                             id: idCheckBoxPrivDisOpt
-                            nameChb: "Disabled optimal value"
+                            nameChb: qsTr("Disabled optimal value")
 
                             enabled: idSelectFeatureForInd.displayText === "conform"
                             opacity: idSelectFeatureForInd.displayText === "conform" ? 1 : 0.3
@@ -231,7 +235,7 @@ TemplatePage {
                         CustomCheckbox {
                             id: idCheckBoxGivc
 
-                            nameChb: "Generating files for givc"
+                            nameChb: qsTr("Generating files for givc")
                         }
                     }
 
@@ -256,15 +260,14 @@ TemplatePage {
                     // Header section
                     HeaderSectionContent {
                         id: idHeadSectGivc
-
                         Layout.fillWidth: true
 
-                        nameSection: "Sample for givc"
+                        nameSection: qsTr("Sample for givc")
                     }
 
                     InputGroup {
-                        nameField: "Directory with reports:"
-                        placeholderText: "Enter dir... "
+                        nameField: qsTr("Directory with reports:")
+                        placeholderText: qsTr("Enter dir... ")
 
                         Layout.fillWidth: true
                         Layout.leftMargin: marginContentSect
@@ -278,6 +281,7 @@ TemplatePage {
                             Layout.rightMargin: 15
 
                             text: qsTr("Choose animal:")
+                            font.family: "Segoe UI"
                             font.pixelSize: sizeTextInSect
                             color: txtSection
                         }

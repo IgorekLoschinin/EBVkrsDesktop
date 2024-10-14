@@ -9,7 +9,7 @@ import "controls"
 TemplatePage {
     id: idPageProcessing
 
-    urlPage: "Estimate breeding value"
+    urlPage: qsTr("Estimate breeding value")
 
     contentData: Control {
         anchors.fill: parent
@@ -35,7 +35,7 @@ TemplatePage {
                         id: idHeadSectComm
                         Layout.fillWidth: true
 
-                        nameSection: "Common"
+                        nameSection: qsTr("Common")
                     }
 
                     // Content and settings section common
@@ -49,6 +49,7 @@ TemplatePage {
 
                             Text {
                                 text: qsTr("Estimation method:")
+                                font.family: "Segoe UI"
                                 font.pixelSize: sizeTextInSect
                                 color: txtSection
                             }
@@ -70,6 +71,7 @@ TemplatePage {
                                 Layout.rightMargin: 15
 
                                 text: qsTr("Select of Feature:")
+                                font.family: "Segoe UI"
                                 font.pixelSize: sizeTextInSect
                                 color: txtSection                                
                             }
@@ -103,7 +105,7 @@ TemplatePage {
                         id: idHeadSectProper                        
                         Layout.fillWidth: true
 
-                        nameSection: "Properties"
+                        nameSection: qsTr("Properties")
                     }
 
                     ColumnLayout {
@@ -117,6 +119,7 @@ TemplatePage {
                                 Layout.rightMargin: 15
 
                                 text: qsTr("Variance calculation method:")
+                                font.family: "Segoe UI"
                                 font.pixelSize: sizeTextInSect
                                 color: txtSection
                             }
@@ -199,7 +202,8 @@ TemplatePage {
 
                             label: CustomCheckbox {
                                 id: idCheckBoxParallelEst
-                                nameChb: "Parallel computing"
+
+                                nameChb: qsTr("Parallel computing")
                             }
 
                             contentData: RowLayout {
@@ -213,6 +217,7 @@ TemplatePage {
                                     Layout.rightMargin: 15
 
                                     text: qsTr("Number of threads:")
+                                    font.family: "Segoe UI"
                                     font.pixelSize: sizeTextInSect
                                     color: txtSection
                                 }

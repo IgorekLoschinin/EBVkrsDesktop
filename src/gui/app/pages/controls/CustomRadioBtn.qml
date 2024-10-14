@@ -6,7 +6,8 @@ RadioButton {
     checked: false
 
     contentItem: Text {
-        text: idRadioBtn.text
+        text: qsTr(idRadioBtn.text)
+        font.family: "Segoe UI"
         font.pixelSize: sizeTextInSect
         color: txtSection
         opacity: enabled ? 1.0 : 0.3

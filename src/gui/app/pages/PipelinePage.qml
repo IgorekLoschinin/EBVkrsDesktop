@@ -9,7 +9,8 @@ Page {
     }
 
     Label {
-        text: "Pipline page"
+        text: qsTr("Pipline page")
+        font.family: "Segoe UI"
         color: "plum"
 
         anchors.centerIn: parent

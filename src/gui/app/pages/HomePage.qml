@@ -7,7 +7,7 @@ import "controls"
 TemplatePage {
     id: idHomePage
 
-    urlPage: "Home:"
+    urlPage: qsTr("Home:")
 
     contentData: Control {
         anchors.fill: parent
@@ -27,6 +27,7 @@ TemplatePage {
 // следующие методы для обработки, оценки и формирования отчетов: ")
                 text: qsTr("    Software for assessing the breeding value of cattle, which offers the following methods for processing, assessing and generating reports:")
                 font.pixelSize: 17
+                font.family: "Segoe UI"
                 color: sectionColor
 
                 wrapMode: Text.WordWrap
@@ -68,6 +69,7 @@ TemplatePage {
                     contentItem: Text {
                         text: qsTr(model.textBtn)
                         font.pixelSize: 16
+                        font.family: "Segoe UI"
                         font.underline: idUrlProcessing.hovered
                         color: sectionColor
                     }
@@ -79,28 +81,22 @@ TemplatePage {
                     onClicked: {
                         switch (model.name) {
                         case "proc":
-                            console.log(model.textBtn)
                             idContent.currentIndex = 1
-
                             return
 
                         case "est":
-                            console.log(model.textBtn)
                             idContent.currentIndex = 4
                             return
 
                         case "ind":
-                            console.log(model.textBtn)
                             idContent.currentIndex = 5
                             return
 
                         case "pipe":
-                            console.log(model.textBtn)
                             idContent.currentIndex = 6
                             return
 
                         case "mod":
-                            console.log(model.textBtn)
                             idContent.currentIndex = 7
                             return
                         }

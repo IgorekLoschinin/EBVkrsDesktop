@@ -4,7 +4,7 @@ import QtQuick.Controls
 CheckBox {
     id: idCustomCheckBox
 
-    property string nameChb: ""
+    property string nameChb: qsTr("")
 
     rightPadding: 0
     topPadding: 0
@@ -15,6 +15,7 @@ CheckBox {
         leftPadding: idCustomCheckBox.indicator.width
 
         text: qsTr(nameChb)
+        font.family: "Segoe UI"
         font.pixelSize: sizeTextInSect
         color: txtSection
 

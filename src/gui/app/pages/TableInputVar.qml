@@ -130,21 +130,6 @@ Control {
                 }
             }
 
-            // Control {
-            //     Layout.fillWidth: true
-
-            //     contentItem: ColumnLayout {
-            //         Layout.fillWidth: true
-            //         Button {
-
-            //         }
-
-            //         Button {
-
-            //         }
-            //     }
-
-            // }
             Item {
                 Layout.fillWidth: true
             }

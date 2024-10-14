@@ -7,7 +7,7 @@ import "controls"
 TemplatePage {
     id: idPageProcessingPheno
 
-    urlPage: "Processing -> phenotype"
+    urlPage: qsTr("Processing -> phenotype")
 
     contentData: Control {
         anchors.fill: parent
@@ -34,7 +34,7 @@ TemplatePage {
 
                         Layout.fillWidth: true
 
-                        nameSection: "Common"
+                        nameSection: qsTr("Common")
                     }
 
                     // Content and settings section common
@@ -49,6 +49,7 @@ TemplatePage {
                             Text {
                                 text: qsTr("Estimation method:")
                                 font.pixelSize: sizeTextInSect
+                                font.family: "Segoe UI"
                                 color: txtSection
                             }
 
@@ -70,6 +71,7 @@ TemplatePage {
 
                                 text: qsTr("Select of Feature:")
                                 font.pixelSize: sizeTextInSect
+                                font.family: "Segoe UI"
                                 color: txtSection                                
                             }
 
@@ -104,7 +106,7 @@ TemplatePage {
                         id: idHeadSectProper                        
                         Layout.fillWidth: true
 
-                        nameSection: "Properties"
+                        nameSection: qsTr("Properties")
                     }
 
                     ColumnLayout {
@@ -112,7 +114,7 @@ TemplatePage {
                         Layout.leftMargin: marginContentSect
 
                         InputGroup {
-                            nameField: "Directory data files:"
+                            nameField: qsTr("Directory data files:")
 
                             Layout.fillWidth: true
                         }
@@ -124,7 +126,7 @@ TemplatePage {
 
                             label: CustomCheckbox {
                                 id: idCheckBoxFarm
-                                nameChb: "Selection code farm"
+                                nameChb: qsTr("Selection code farm")
                             }
 
                             contentData: InputGroup {
@@ -135,7 +137,7 @@ TemplatePage {
                                 enabled: idCheckBoxFarm.checked
                                 opacity: idCheckBoxFarm.checked ? 1 : 0.3
 
-                                nameField: "File with code farm:"                                
+                                nameField: qsTr("File with code farm:")
                             }
 
                             background: null
@@ -165,13 +167,13 @@ TemplatePage {
                             CustomCheckbox {
                                 id: idCheckBoxPed
 
-                                nameChb: "Pedigree"
+                                nameChb: qsTr("Pedigree")
                             }
 
                             CustomCheckbox {
                                 id: idCheckBoxDaug
 
-                                nameChb: "Daughters"
+                                nameChb: qsTr("Daughters")
                             }
 
                         }
@@ -200,7 +202,7 @@ TemplatePage {
 
                         Layout.fillWidth: true
 
-                        nameSection: "Addition properties"
+                        nameSection: qsTr("Addition properties")
                     }
 
                     ColumnLayout {
@@ -211,7 +213,7 @@ TemplatePage {
                         CustomCheckbox {
                             id: idCheckBoxAccumD
 
-                            nameChb: "Accumulate data"
+                            nameChb: qsTr("Accumulate data")
                         }
 
                         GroupBox {
@@ -221,7 +223,7 @@ TemplatePage {
                             label: CustomCheckbox {
                                 id: idCheckBoxUpdataDB
 
-                                nameChb: "Updata data base"
+                                nameChb: qsTr("Updata data base")
                             }
 
                             contentData: RowLayout {
@@ -233,20 +235,21 @@ TemplatePage {
 
                                 Text {
                                     text: qsTr("Update data:")
+                                    font.family: "Segoe UI"
                                     font.pixelSize: sizeTextInSect
                                     color: txtSection
                                 }
 
                                 InputGroup {
                                     id: idInputUpdateTo
-                                    nameField: "to"
+                                    nameField: qsTr("to")
 
                                     Layout.fillWidth: true
                                 }
 
                                 InputGroup {
                                     id: idInputUpdateFrom
-                                    nameField: "from"
+                                    nameField: qsTr("from")
 
                                     Layout.fillWidth: true
                                     Layout.leftMargin: 30
@@ -259,14 +262,14 @@ TemplatePage {
 
                         InputGroup {
                             id: idInputSearchDaug
-                            nameField: "Search daughters:"
+                            nameField: qsTr("Search daughters:")
 
                             Layout.fillWidth: true
                         }
 
                         InputGroup {
                             id: idInputRemoveDaug
-                            nameField: "Remove daughters:"
+                            nameField: qsTr("Remove daughters:")
 
                             Layout.fillWidth: true
                         }

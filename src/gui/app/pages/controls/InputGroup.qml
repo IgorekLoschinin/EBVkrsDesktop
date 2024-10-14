@@ -9,7 +9,7 @@ Control {
     id: idInputGroup
 
     property string nameField: ""
-    property string placeholderText: "Enter file path..."
+    property string placeholderText: qsTr("Enter file path...")
 
     contentItem: RowLayout {
         spacing: 2
@@ -24,7 +24,8 @@ Control {
             color: txtSection
 
             text: qsTr(nameField)
-            font.pixelSize: sizeTextInSect            
+            font.pixelSize: sizeTextInSect
+            font.family: "Segoe UI"
             clip: true
             wrapMode: Text.WordWrap
         }
