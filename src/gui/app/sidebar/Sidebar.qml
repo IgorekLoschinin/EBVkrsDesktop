@@ -13,8 +13,8 @@ Control {
         property int sizeOpenSb: 150
 
         // DYNAMIC COLOR
-        property color colorDef: "transparent" //"#5d6575"
-        property color colorMouseOver: "#8792A8"  // 4891d9
+        property color colorDef: "transparent"
+        property color colorMouseOver: "#8792A8"
         property color colorPressed: "#4A515E"
 
         function dynamicColor (idBtn) {
@@ -41,15 +41,14 @@ Control {
     }
 
     // Properties for animation controls
-    property bool checkerOpnCls: true  // Проверка на раскрытие закрытие
-    property double opacityLblP: 1  // Opacity для текста на панели sidebar
+    property bool checkerOpnCls: true  // Check for opening and closing
+    property double opacityLblP: 1  // Opacity for text on the sidebar
 
     property bool checkVisibleProcCB: false  // The flag that hides the Processing panel at startup
-    property string activeButton: "-1"  // Свойство для хранения идентификатора активной кнопки    
+    property string activeButton: "-1"  // Property to store the identifier of the active button
 
     Layout.fillHeight: true
     Layout.preferredWidth: panelSett.sizeOpenSb
-
 
     function sidingMenu() {
         if (idSideBar.checkerOpnCls) {
@@ -68,7 +67,6 @@ Control {
 
             idSideBar.checkerOpnCls = true
         }
-
     }
 
     function activityLightBtn(lightFlag) {
@@ -126,7 +124,6 @@ Control {
             id: idSetAccHelp
 
             Layout.fillWidth: true
-            // Layout.preferredHeight: 166
 
             Layout.alignment: Qt.AlignBottom
             Layout.bottomMargin: panelSett.tbMargin + 20

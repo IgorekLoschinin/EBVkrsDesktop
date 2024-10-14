@@ -6,7 +6,7 @@ Button {
     id: idCustomBtnSb
 
     property url sourceImg: ""
-    property string nameBtn: ""
+    property string nameBtn: qsTr("")
 
     property bool sideLightBtn: false
     property string bgTargetColor: ""
@@ -30,6 +30,8 @@ Button {
 
             color: panelSett.colorText
             text: nameBtn
+            font.pixelSize: 15
+            font.family: "Segoe UI"
             opacity: opacityLblP
 
             horizontalAlignment: Qt.AlignLeft
