@@ -15,7 +15,7 @@ Control {
     x: parent.width/2 - width/2
     y: parent.height/2 - height/2
 
-    property bool unlockApp: false
+    // property bool unlockApp: false
 
     // Internal Functions
     QtObject{
@@ -157,7 +157,7 @@ Control {
                 implicitWidth: textUsername.implicitWidth
                 implicitHeight: textUsername.implicitHeight
 
-                nameBtn: "Sign in"
+                nameBtn: qsTr("Sign in")
                 fontPointSize: 11
 
                 colorPressed: "#558b1f"
@@ -299,25 +299,6 @@ Control {
             }
         }
 
-        // KeyframeGroup {
-        //     target: idLogingApp
-        //     property: "height"
-        //     Keyframe {
-        //         frame: 1301
-        //         value: 360
-        //     }
-
-        //     Keyframe {
-        //         easing.bezierCurve: [0.221,-0.00103,0.222,0.997,1,1]
-        //         frame: 1899
-        //         value: 560
-        //     }
-
-        //     Keyframe {
-        //         frame: 0
-        //         value: 360
-        //     }
-        // }
     }
 
 }
