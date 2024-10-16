@@ -8,37 +8,15 @@ Page {
 
     property string urlPage: ""
 
+    readonly property int leftRightMargin: 29
     readonly property int marginContentD: 30
     readonly property int marginContentSect: 15
 
-    readonly property int sizeTextLblSect: 17  // размер текста у названий секций
-    readonly property int sizeTextInSect: 16  // размер текста внутри секций
+    readonly property int sizeTextLblSect: 17  // text size for section titles
+    readonly property int sizeTextInSect: 16  // text size inside sections
 
     readonly property color sectionColor: "#FFFAFA"
     readonly property color txtSection: "#D1E37D"
-
-    QtObject {
-        id: commonSettingPage
-
-        property int leftRightMargin: 29
-
-        // Dynamic color dialog button - apply and cancel
-        property color dlgColorDef: "#FABE39"
-        property color dlgColorMouseOver: "#CFAF68"
-        property color dlgColorPressed: "#C79831"
-
-        function dynamicColor (idBtn, cDef, cMO, cP) {
-            if (idBtn.down) {
-                return cP
-            } else {
-                if (idBtn.hovered) {
-                    return cMO
-                }
-            }
-
-            return cDef
-        }
-    }
 
     header: Control {
         id: idHeaderPage
@@ -50,13 +28,14 @@ Page {
 
             Text {
                 text: qsTr(urlPage)
+                font.family: "Segoe UI"
                 font.pixelSize: 18
                 font.bold: true
                 color: "#FFFEF0"
 
                 Layout.fillWidth: true
                 Layout.topMargin: 15
-                Layout.leftMargin: commonSettingPage.leftRightMargin                
+                Layout.leftMargin: leftRightMargin
 
                 horizontalAlignment: Qt.AlignLeft
                 verticalAlignment: Qt.AlignVCenter
@@ -76,7 +55,7 @@ Page {
 
     // Background page
     background: Rectangle {
-        color: '#1f2b43' //"#2E3350"
+        color: '#1f2b43'
         radius: bgRadius - 3
     }
 

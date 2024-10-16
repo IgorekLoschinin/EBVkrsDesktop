@@ -56,7 +56,7 @@ Control {
             }
 
             delegate: Button {
-                id: idBtnWC                
+                id: idBtnWC
 
                 contentItem: ColorImage {
                     source: model.sourceImg

@@ -4,12 +4,13 @@ import QtQuick.Controls
 Page {
 
     contentItem: Rectangle {
-        color: '#2E3350'
+        color: '#1f2b43'
         radius: bgRadius
     }
 
     Label {
-        text: "Pipline page"
+        text: qsTr("Pipline page")
+        font.family: "Segoe UI"
         color: "plum"
 
         anchors.centerIn: parent

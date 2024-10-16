@@ -6,6 +6,23 @@ Control {
     id: idCustomDialogBtn
     height: 50
 
+    // Dynamic color dialog button - apply and cancel
+    readonly property color dlgColorDef: "transparent"
+    readonly property color dlgColorMouseOver: "#CFAF68"
+    readonly property color dlgColorPressed: "#C79831"
+
+    function dynamicColor (idBtn, cDef, cMO, cP) {
+        if (idBtn.down) {
+            return cP
+        } else {
+            if (idBtn.hovered) {
+                return cMO
+            }
+        }
+
+        return cDef
+    }
+
     contentItem: RowLayout {
         spacing: 3
 
@@ -16,10 +33,14 @@ Control {
         Repeater {
             model: ListModel {
                 ListElement {
-                    name: qsTr("Apply")
+                    name: qsTr("run")
+                    srcImage: "../../../icons/play.svg"
+                    colorImg: "green"
                 }
                 ListElement {
-                    name: qsTr("Cancel")
+                    name: qsTr("stop")
+                    srcImage: "../../../icons/stop.svg"
+                    colorImg: "red"
                     rightMargin: true
                 }
             }
@@ -29,41 +50,44 @@ Control {
 
                 Layout.rightMargin: {
                     if (model.rightMargin) {
-                        return commonSettingPage.leftRightMargin
+                        return leftRightMargin
                     }
                     return true
                 }
 
-                contentItem: Text {
-                    text: qsTr(model.name)
+                contentItem: ColorImage {
+                    source: model.srcImage
+                    color: model.colorImg
 
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
+                    fillMode: Image.PreserveAspectFit
+                    sourceSize.height: 25
+                    sourceSize.width: 25
                 }
 
                 background: Rectangle {
-                    color: commonSettingPage.dynamicColor(
+                    color: dynamicColor(
                                idBtnDlgPage,
-                               commonSettingPage.dlgColorDef,
-                               commonSettingPage.dlgColorMouseOver,
-                               commonSettingPage.dlgColorPressed
+                               dlgColorDef,
+                               dlgColorMouseOver,
+                               dlgColorPressed
                     )
 
                     implicitHeight: 30
-                    implicitWidth: 80
+                    implicitWidth: 30
                     radius: 10
                 }
 
                 onClicked: {
                     switch (model.name) {
-                    case "Cancel":
-                        console.log(urlPage)
+                    case "run":                        
+                        return
 
-                    case "Apply":
-                        console.log(urlPage)
+                    case "stop":
+                        return
+
+                    default:
+                        return
                     }
-
-                    // console.log(model.name)
                 }
             }
         }

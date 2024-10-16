@@ -1,13 +1,15 @@
+import QtCore
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick.Dialogs
 import "controls"
 
 
 TemplatePage {
     id: idPageProcessing
 
-    urlPage: "Estimate breeding value"
+    urlPage: qsTr("Estimate breeding value")
 
     contentData: Control {
         anchors.fill: parent
@@ -31,10 +33,9 @@ TemplatePage {
                     // Header section
                     HeaderSectionContent {
                         id: idHeadSectComm
-
                         Layout.fillWidth: true
 
-                        nameSection: "Common"
+                        nameSection: qsTr("Common")
                     }
 
                     // Content and settings section common
@@ -48,6 +49,7 @@ TemplatePage {
 
                             Text {
                                 text: qsTr("Estimation method:")
+                                font.family: "Segoe UI"
                                 font.pixelSize: sizeTextInSect
                                 color: txtSection
                             }
@@ -69,6 +71,7 @@ TemplatePage {
                                 Layout.rightMargin: 15
 
                                 text: qsTr("Select of Feature:")
+                                font.family: "Segoe UI"
                                 font.pixelSize: sizeTextInSect
                                 color: txtSection                                
                             }
@@ -102,7 +105,7 @@ TemplatePage {
                         id: idHeadSectProper                        
                         Layout.fillWidth: true
 
-                        nameSection: "Properties"
+                        nameSection: qsTr("Properties")
                     }
 
                     ColumnLayout {
@@ -116,14 +119,81 @@ TemplatePage {
                                 Layout.rightMargin: 15
 
                                 text: qsTr("Variance calculation method:")
+                                font.family: "Segoe UI"
                                 font.pixelSize: sizeTextInSect
                                 color: txtSection
                             }
 
                             CustomComboBox {
+                                id: idSelectTypeCalVar
                                 model: ["all", "conf"]
                             }
                         }
+
+                        RowLayout {
+                            spacing: 0
+                            visible: idSelectTypeCalVar.displayText === "conf" ? true : false
+                            Layout.alignment: Qt.AlignCenter
+
+                            TableInputVar {
+                                id: tableInVariance
+                                Layout.alignment: Qt.AlignRight
+                            }
+
+                            ColumnLayout {
+                                Layout.alignment: Qt.AlignLeft
+
+                                CustomBtn {
+                                    nameBtn: qsTr("load")
+
+                                    implicitWidth: 100
+
+                                    onClicked: idLoadFileConf.open()
+
+                                    FileDialog {
+                                        id: idLoadFileConf
+                                        currentFolder: StandardPaths.standardLocations(StandardPaths.DocumentsLocation)[0]
+                                        onAccepted: console.log(selectedFile)
+                                    }
+                                }
+
+                                CustomBtn {
+                                    nameBtn: qsTr("save")
+
+                                    implicitWidth: 100
+
+                                    onClicked: idSaveFileConf.open()
+
+                                    FileDialog {
+                                        id: idSaveFileConf
+                                        fileMode: FileDialog.SaveFile
+                                        currentFolder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
+                                        onAccepted: console.log(selectedFile)
+                                    }
+                                }
+
+                            }
+                        }
+
+                        // Button {
+                        //     text: "Собрать данные"
+                        //     // anchors.bottom: parent.bottom
+                        //     // anchors.horizontalCenter: parent.horizontalCenter
+                        //     onClicked: {
+                        //         var allData = {};
+                        //         for (var i = 0; i < tableInVariance.modFtVar.count; i++) {
+                        //             var item = tableInVariance.modFtVar.get(i);
+
+                        //             allData[item.name] = {
+                        //                 "varE": item.varE,
+                        //                 "varG": item.varG
+                        //             };
+                        //         }
+
+                        //         // Можем передать собранные данные для дальнейшего использования
+                        //         console.log(allData['tip']['varE'], allData['tip']['varG']);  // Вывод массива всех элементов
+                        //     }
+                        // }
 
                         GroupBox {
                             padding: 0
@@ -131,18 +201,23 @@ TemplatePage {
                             Layout.bottomMargin: 10
 
                             label: CustomCheckbox {
-                                id: idCheckBoxFarm
-                                nameChb: "Parallel computing"
+                                id: idCheckBoxParallelEst
+
+                                nameChb: qsTr("Parallel computing")
                             }
 
                             contentData: RowLayout {
                                 anchors.fill: parent
                                 anchors.leftMargin: 30
 
+                                enabled: idCheckBoxParallelEst.checked
+                                opacity: idCheckBoxParallelEst.checked ? 1 : 0.3
+
                                 Label {
                                     Layout.rightMargin: 15
 
                                     text: qsTr("Number of threads:")
+                                    font.family: "Segoe UI"
                                     font.pixelSize: sizeTextInSect
                                     color: txtSection
                                 }

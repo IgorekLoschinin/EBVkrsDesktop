@@ -5,9 +5,9 @@ import "controls"
 
 
 TemplatePage {
-    id: idPageProcessing
+    id: idPageProcessingSnp
 
-    urlPage: "Processing -> SNP"
+    urlPage: qsTr("Processing -> SNP")
 
     contentData: Control {
         anchors.fill: parent
@@ -34,7 +34,7 @@ TemplatePage {
 
                         Layout.fillWidth: true
 
-                        nameSection: "Properties"
+                        nameSection: qsTr("Properties")
                     }
 
                     ColumnLayout {
@@ -42,7 +42,7 @@ TemplatePage {
                         Layout.leftMargin: marginContentSect
 
                         InputGroup {
-                            nameField: "Path to file snp:"
+                            nameField: qsTr("Path to file snp:")
 
                             Layout.fillWidth: true
                         }
@@ -53,28 +53,32 @@ TemplatePage {
                             Layout.bottomMargin: 10
 
                             label: CustomCheckbox {
-                                id: idCheckBoxFarm
-                                nameChb: "Additional processing"
+                                id: idCheckBoxSNPAddProc
+
+                                nameChb: qsTr("Additional processing")
                             }
 
                             contentData: ColumnLayout {
                                 anchors.fill: parent
                                 anchors.leftMargin: 30
 
+                                enabled: idCheckBoxSNPAddProc.checked
+                                opacity: idCheckBoxSNPAddProc.checked ? 1 : 0.3
+
                                 InputGroup {
                                     id: idInputSampleD
                                     Layout.fillWidth: true
 
-                                    nameField: "Sample animals by id:"
-                                    enabled: idCheckBoxFarm.checked
+                                    nameField: qsTr("Sample animals by id:")
+                                    enabled: idCheckBoxSNPAddProc.checked
                                 }
 
                                 InputGroup {
                                     id: idInputUpdataD
                                     Layout.fillWidth: true
 
-                                    nameField: "Update file snp:"
-                                    enabled: idCheckBoxFarm.checked
+                                    nameField: qsTr("Update file snp:")
+                                    enabled: idCheckBoxSNPAddProc.checked
                                 }
                             }
 
@@ -102,10 +106,9 @@ TemplatePage {
                     // Header section
                     HeaderSectionContent {
                         id: idHeadSectProperFR
-
                         Layout.fillWidth: true
 
-                        nameSection: "Final reports"
+                        nameSection: qsTr("Final reports")
                     }
 
                     ColumnLayout {
@@ -113,7 +116,7 @@ TemplatePage {
                         Layout.leftMargin: marginContentSect
 
                         InputGroup {
-                            nameField: "Directory with finalreports files:"
+                            nameField: qsTr("Directory with finalreports files:")
 
                             Layout.fillWidth: true
                         }
@@ -123,6 +126,7 @@ TemplatePage {
                                 Layout.rightMargin: 15
 
                                 text: qsTr("Call rate:")
+                                font.family: "Segoe UI"
                                 font.pixelSize: sizeTextInSect
                                 color: txtSection
                             }
@@ -131,19 +135,67 @@ TemplatePage {
                                 id: idInputCR
                                 implicitWidth: 80
 
-                                phText: "0.90"
+                                phText: qsTr("0.90")
                             }
 
                             Label {
                                 text: qsTr(", %")
+                                font.family: "Segoe UI"
                                 font.pixelSize: sizeTextInSect
                                 color: txtSection
                             }
                         }
 
+                        GroupBox {
+                            padding: 0
+                            Layout.fillWidth: true
+                            Layout.bottomMargin: 10
+
+                            label: CustomCheckbox {
+                                id: idCheckBoxSaveCrFile
+
+                                nameChb: qsTr("Save call rate in file")
+                            }
+
+                            contentData: RowLayout {
+                                anchors.fill: parent
+                                anchors.leftMargin: 30
+
+                                enabled: idCheckBoxSaveCrFile.checked
+                                opacity: idCheckBoxSaveCrFile.checked ? 1 : 0.3
+
+                                Label {
+                                    Layout.rightMargin: 15
+
+                                    text: qsTr("File name:")
+                                    font.family: "Segoe UI"
+                                    font.pixelSize: sizeTextInSect
+                                    color: txtSection
+                                }
+
+                                CustormTextField {
+                                    id: idInputnumThred
+                                    phText: qsTr("Name ...")
+
+                                    implicitWidth: 200
+                                }
+
+                                Label {
+                                    text: qsTr(".xlsx")
+                                    font.family: "Segoe UI"
+                                    font.pixelSize: sizeTextInSect
+                                    color: txtSection
+                                }
+                                Item { Layout.fillWidth: true }
+                            }
+
+                            background: null
+                        }
+
                         CustomCheckbox {
                             id: idCBSaveFileCr
-                            nameChb: "Save animals with low call rate"
+
+                            nameChb: qsTr("Save call rate in file")
                         }
 
                         GroupBox {
@@ -153,16 +205,32 @@ TemplatePage {
 
                             label: CustomCheckbox {
                                 id: idCBAddSuffSex
-                                nameChb: "Add suffix sex"
+
+                                nameChb: qsTr("Add suffix sex")
                             }
 
-                            contentData: InputGroup {
-                                id: idInputFarm
+                            contentData: ColumnLayout {
                                 anchors.fill: parent
                                 anchors.leftMargin: 30
 
-                                nameField: "Choose the file with the sex of the animals:"
-                                enabled: idCheckBoxFarm.checked
+                                enabled: idCBAddSuffSex.checked
+                                opacity: idCBAddSuffSex.checked ? 1 : 0.6
+
+                                CustomCheckbox {
+                                    id: idCBAddSuff
+
+                                    nameChb: qsTr("Add suffix")
+                                }
+
+                                InputGroup {
+                                    id: idInputFarm
+                                    Layout.fillWidth: true
+
+                                    enabled: !idCBAddSuff.checked
+                                    opacity: !idCBAddSuff.checked ? 1 : 0.3
+
+                                    nameField: qsTr("Choose the file with the sex of the animals:")
+                                }
                             }
 
                             background: null

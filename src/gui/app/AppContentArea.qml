@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+import "loginform"
 import "sidebar"
 import "pages"
 
@@ -11,19 +12,29 @@ Control {
 
     padding: spacingPanel
 
-    contentItem: RowLayout {
-        id: contentLayout
-        spacing: spacingPanel - 2
+    contentItem: Item {
 
-        Sidebar { id: idSideBar }
+        LoginForm {
+            id: idLoginForm
+        }
 
-        ColumnLayout {
+        RowLayout {
+            id: idMainContent
+            anchors.fill: parent
+            visible: false
+
             spacing: spacingPanel - 2
-            clip: true
 
-            TopBar { id: idTopBar }
-            PageContent { id: idContent }
-            BottomBar { id: idBottomBar }
+            Sidebar { id: idSideBar }
+
+            ColumnLayout {
+                spacing: spacingPanel - 2
+                clip: true
+
+                TopBar { id: idTopBar }
+                PageContent { id: idContent }
+                BottomBar { id: idBottomBar }
+            }
         }
     }
 }

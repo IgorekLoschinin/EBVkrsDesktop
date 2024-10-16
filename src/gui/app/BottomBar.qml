@@ -8,7 +8,7 @@ Control {
 
     Layout.fillWidth: true
     Layout.fillHeight: true
-    Layout.preferredHeight: 25  // 35 / coefScale - 4
+    Layout.preferredHeight: 25
 
     QtObject {
         id: proBotBar
@@ -27,6 +27,7 @@ Control {
 
             text: "By igor.loschinin@gmail.com |"
             font.pixelSize: 12
+            font.family: "Segoe UI"
             color: proBotBar.colorTxt
 
             horizontalAlignment: Qt.AlignLeft
@@ -37,8 +38,9 @@ Control {
             anchors.fill: parent
             anchors.rightMargin: proBotBar.sideMargins
 
-            text: "| v.1.0.0"
+            text: "| @ 2024"
             font.pixelSize: 12
+            font.family: "Segoe UI"
             color: proBotBar.colorTxt
 
             horizontalAlignment: Qt.AlignRight

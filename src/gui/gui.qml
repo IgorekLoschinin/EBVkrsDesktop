@@ -1,6 +1,7 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick.Controls.Fusion
+
 import "app"
 
 
@@ -14,7 +15,7 @@ ApplicationWindow {
 
     property double bgWidth: 1076
     property double bgHeight: 778
-    property color bgColor: "#F3FBF7" //"#0A1832"
+    property color bgColor: "#F3FBF7"
     property int bgRadius: 10
 
     property int spacingPanel: 5
@@ -41,4 +42,5 @@ ApplicationWindow {
     contentData: AppContentArea {
         id: idAppContentArea
     }
+
 }

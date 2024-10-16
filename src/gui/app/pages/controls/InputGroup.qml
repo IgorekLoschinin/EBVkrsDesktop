@@ -9,6 +9,7 @@ Control {
     id: idInputGroup
 
     property string nameField: ""
+    property string placeholderText: qsTr("Enter file path...")
 
     contentItem: RowLayout {
         spacing: 2
@@ -23,7 +24,8 @@ Control {
             color: txtSection
 
             text: qsTr(nameField)
-            font.pixelSize: sizeTextInSect            
+            font.pixelSize: sizeTextInSect
+            font.family: "Segoe UI"
             clip: true
             wrapMode: Text.WordWrap
         }
@@ -32,7 +34,7 @@ Control {
             id: idTextInput
             Layout.fillWidth: true
 
-            phText: "Enter file path..."
+            phText: idInputGroup.placeholderText
         }
 
         ButtonFileOpen {

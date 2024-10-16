@@ -8,19 +8,6 @@ Control {
     contentItem: ColumnLayout {
         spacing: 5
 
-        CustomBtnSb {
-            id: idBtnAccount
-            Layout.fillWidth: true
-
-            nameBtn: "Account"
-            sourceImg: "../../icons/user.svg"
-
-            sideLightBtn: activityLightBtn(nameBtn)
-            bgTargetColor: activityTargetBtn(idBtnAccount, nameBtn)
-
-            onClicked: idSideBar.activeButton = nameBtn
-        }
-
         Rectangle {
             Layout.fillWidth: true
 
@@ -29,14 +16,14 @@ Control {
             Layout.rightMargin: panelSett.lrMargin
 
             height: 2
-            color: 'white'
+            color: '#ffffff'
         }
 
         CustomBtnSb {
             id: idBtnSettings
             Layout.fillWidth: true
 
-            nameBtn: "Settings"
+            nameBtn: qsTr("Settings")
             sourceImg: "../../icons/setting.svg"
 
             sideLightBtn: activityLightBtn(nameBtn)
@@ -49,7 +36,7 @@ Control {
             id: idBtnHelp
             Layout.fillWidth: true
 
-            nameBtn: "Help"
+            nameBtn: qsTr("Help")
             sourceImg: "../../icons/help.svg"
 
             sideLightBtn: activityLightBtn(nameBtn)
@@ -57,5 +44,6 @@ Control {
 
             onClicked: idSideBar.activeButton = nameBtn
         }
+
     }
 }
