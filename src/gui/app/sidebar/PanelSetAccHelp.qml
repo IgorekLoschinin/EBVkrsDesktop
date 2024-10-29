@@ -16,14 +16,14 @@ Control {
             Layout.rightMargin: panelSett.lrMargin
 
             height: 2
-            color: 'white'
+            color: '#ffffff'
         }
 
         CustomBtnSb {
             id: idBtnSettings
             Layout.fillWidth: true
 
-            nameBtn: "Settings"
+            nameBtn: qsTr("Settings")
             sourceImg: "../../icons/setting.svg"
 
             sideLightBtn: activityLightBtn(nameBtn)
@@ -36,7 +36,7 @@ Control {
             id: idBtnHelp
             Layout.fillWidth: true
 
-            nameBtn: "Help"
+            nameBtn: qsTr("Help")
             sourceImg: "../../icons/help.svg"
 
             sideLightBtn: activityLightBtn(nameBtn)

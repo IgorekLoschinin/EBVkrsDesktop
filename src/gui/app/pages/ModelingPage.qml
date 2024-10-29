@@ -9,7 +9,8 @@ Page {
     }
 
     Label {
-        text: "Modeling page. \nThis page is under construction."
+        text: qsTr("Modeling page. \nThis page is under construction.")
+        font.family: "Segoe UI"
         color: "plum"
 
         anchors.centerIn: parent

@@ -7,7 +7,7 @@ import "controls"
 TemplatePage {
     id: idPageProcessing
 
-    urlPage: "Processing:"
+    urlPage: qsTr("Processing:")
 
     contentData: Control {
         anchors.fill: parent
@@ -24,6 +24,7 @@ TemplatePage {
                 Layout.bottomMargin: 30
 
                 text: qsTr("Configuration of primary data processing for calculations")
+                font.family: "Segoe UI"
                 font.pixelSize: 17
                 color: sectionColor
             }
@@ -32,13 +33,13 @@ TemplatePage {
                 model: ListModel {
                     ListElement {
                         name: "ProcPheno"
-                        textBtn: "Processing phenotype"
+                        textBtn: qsTr("Processing phenotype")
                         currInd: 2
                     }
 
                     ListElement {
                         name: "ProcSnp"
-                        textBtn: "Processing SNP"
+                        textBtn: qsTr("Processing SNP")
                         currInd: 3
                     }
                 }
@@ -51,6 +52,7 @@ TemplatePage {
                     contentItem: Text {
                         text: qsTr(model.textBtn)
                         font.pixelSize: 16
+                        font.family: "Segoe UI"
                         font.underline: idUrlProcessing.hovered
                         color: sectionColor
                     }
@@ -62,12 +64,10 @@ TemplatePage {
                     onClicked: {
                         switch (model.name) {
                         case "ProcPheno":
-                            console.log(model.textBtn)
                             idContent.currentIndex = model.currInd
                             return
 
                         case "ProcSnp":
-                            console.log(model.textBtn)
                             idContent.currentIndex = model.currInd
                             return
 

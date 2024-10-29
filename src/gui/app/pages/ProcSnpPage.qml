@@ -7,7 +7,7 @@ import "controls"
 TemplatePage {
     id: idPageProcessingSnp
 
-    urlPage: "Processing -> SNP"
+    urlPage: qsTr("Processing -> SNP")
 
     contentData: Control {
         anchors.fill: parent
@@ -34,7 +34,7 @@ TemplatePage {
 
                         Layout.fillWidth: true
 
-                        nameSection: "Properties"
+                        nameSection: qsTr("Properties")
                     }
 
                     ColumnLayout {
@@ -42,7 +42,7 @@ TemplatePage {
                         Layout.leftMargin: marginContentSect
 
                         InputGroup {
-                            nameField: "Path to file snp:"
+                            nameField: qsTr("Path to file snp:")
 
                             Layout.fillWidth: true
                         }
@@ -54,7 +54,8 @@ TemplatePage {
 
                             label: CustomCheckbox {
                                 id: idCheckBoxSNPAddProc
-                                nameChb: "Additional processing"
+
+                                nameChb: qsTr("Additional processing")
                             }
 
                             contentData: ColumnLayout {
@@ -68,7 +69,7 @@ TemplatePage {
                                     id: idInputSampleD
                                     Layout.fillWidth: true
 
-                                    nameField: "Sample animals by id:"
+                                    nameField: qsTr("Sample animals by id:")
                                     enabled: idCheckBoxSNPAddProc.checked
                                 }
 
@@ -76,7 +77,7 @@ TemplatePage {
                                     id: idInputUpdataD
                                     Layout.fillWidth: true
 
-                                    nameField: "Update file snp:"
+                                    nameField: qsTr("Update file snp:")
                                     enabled: idCheckBoxSNPAddProc.checked
                                 }
                             }
@@ -105,10 +106,9 @@ TemplatePage {
                     // Header section
                     HeaderSectionContent {
                         id: idHeadSectProperFR
-
                         Layout.fillWidth: true
 
-                        nameSection: "Final reports"
+                        nameSection: qsTr("Final reports")
                     }
 
                     ColumnLayout {
@@ -116,7 +116,7 @@ TemplatePage {
                         Layout.leftMargin: marginContentSect
 
                         InputGroup {
-                            nameField: "Directory with finalreports files:"
+                            nameField: qsTr("Directory with finalreports files:")
 
                             Layout.fillWidth: true
                         }
@@ -126,6 +126,7 @@ TemplatePage {
                                 Layout.rightMargin: 15
 
                                 text: qsTr("Call rate:")
+                                font.family: "Segoe UI"
                                 font.pixelSize: sizeTextInSect
                                 color: txtSection
                             }
@@ -134,11 +135,12 @@ TemplatePage {
                                 id: idInputCR
                                 implicitWidth: 80
 
-                                phText: "0.90"
+                                phText: qsTr("0.90")
                             }
 
                             Label {
                                 text: qsTr(", %")
+                                font.family: "Segoe UI"
                                 font.pixelSize: sizeTextInSect
                                 color: txtSection
                             }
@@ -151,7 +153,8 @@ TemplatePage {
 
                             label: CustomCheckbox {
                                 id: idCheckBoxSaveCrFile
-                                nameChb: "Save call rate in file"
+
+                                nameChb: qsTr("Save call rate in file")
                             }
 
                             contentData: RowLayout {
@@ -165,6 +168,7 @@ TemplatePage {
                                     Layout.rightMargin: 15
 
                                     text: qsTr("File name:")
+                                    font.family: "Segoe UI"
                                     font.pixelSize: sizeTextInSect
                                     color: txtSection
                                 }
@@ -178,6 +182,7 @@ TemplatePage {
 
                                 Label {
                                     text: qsTr(".xlsx")
+                                    font.family: "Segoe UI"
                                     font.pixelSize: sizeTextInSect
                                     color: txtSection
                                 }
@@ -189,7 +194,8 @@ TemplatePage {
 
                         CustomCheckbox {
                             id: idCBSaveFileCr
-                            nameChb: "Save call rate in file"
+
+                            nameChb: qsTr("Save call rate in file")
                         }
 
                         GroupBox {
@@ -199,7 +205,8 @@ TemplatePage {
 
                             label: CustomCheckbox {
                                 id: idCBAddSuffSex
-                                nameChb: "Add suffix sex"
+
+                                nameChb: qsTr("Add suffix sex")
                             }
 
                             contentData: ColumnLayout {
@@ -211,7 +218,8 @@ TemplatePage {
 
                                 CustomCheckbox {
                                     id: idCBAddSuff
-                                    nameChb: "Add suffix"
+
+                                    nameChb: qsTr("Add suffix")
                                 }
 
                                 InputGroup {
@@ -221,7 +229,7 @@ TemplatePage {
                                     enabled: !idCBAddSuff.checked
                                     opacity: !idCBAddSuff.checked ? 1 : 0.3
 
-                                    nameField: "Choose the file with the sex of the animals:"
+                                    nameField: qsTr("Choose the file with the sex of the animals:")
                                 }
                             }
 

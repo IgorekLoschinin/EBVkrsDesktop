@@ -13,7 +13,7 @@ Control {
             id: idBtnHome
             Layout.fillWidth: true
 
-            nameBtn: "Home"
+            nameBtn: qsTr("Home")
             sourceImg: "../../icons/home.svg"
 
             sideLightBtn: activityLightBtn(nameBtn)
@@ -59,7 +59,7 @@ Control {
                 id: idBtnMeth
                 Layout.fillWidth: true
 
-                nameBtn: model.name
+                nameBtn: qsTr(model.name)
                 sourceImg: model.sourceImg
 
                 sideLightBtn: activityLightBtn(nameBtn)

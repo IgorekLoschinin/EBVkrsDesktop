@@ -11,7 +11,7 @@ ColumnLayout {
         id: idProcessing
         Layout.fillWidth: true
 
-        nameBtn: "Processing"
+        nameBtn: qsTr("Processing")
         sourceImg: "../../icons/processing.svg"
 
         sideLightBtn: activityLightBtn(nameBtn)
@@ -53,7 +53,7 @@ ColumnLayout {
                     id: idBtnSubMethProc
                     Layout.fillWidth: true
 
-                    nameBtn: model.name
+                    nameBtn: qsTr(model.name)
 
                     sideLightBtn: activityLightBtn(model.name)
                     bgTargetColor: activityTargetBtn(idBtnSubMethProc, model.name)

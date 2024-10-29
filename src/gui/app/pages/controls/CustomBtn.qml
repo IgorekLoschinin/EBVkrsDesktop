@@ -26,7 +26,7 @@ Button {
     implicitHeight: 30
 
     contentItem: Text {
-        text: nameBtn
+        text: qsTr(nameBtn)
 
         font.family: "Segoe UI"
         font.pointSize: fontPointSize

@@ -15,6 +15,7 @@ Control {
             id: idNameSectionProp
             text: qsTr(nameSection)
             font.pixelSize: sizeTextLblSect
+            font.family: "Segoe UI"
             font.bold: true
             color: sectionColor
         }

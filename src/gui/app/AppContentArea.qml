@@ -19,10 +19,10 @@ Control {
         }
 
         RowLayout {
+            id: idMainContent
             anchors.fill: parent
             visible: false
 
-            id: idMainContent
             spacing: spacingPanel - 2
 
             Sidebar { id: idSideBar }

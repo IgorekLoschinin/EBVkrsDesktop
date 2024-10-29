@@ -12,8 +12,8 @@ Page {
     readonly property int marginContentD: 30
     readonly property int marginContentSect: 15
 
-    readonly property int sizeTextLblSect: 17  // размер текста у названий секций
-    readonly property int sizeTextInSect: 16  // размер текста внутри секций
+    readonly property int sizeTextLblSect: 17  // text size for section titles
+    readonly property int sizeTextInSect: 16  // text size inside sections
 
     readonly property color sectionColor: "#FFFAFA"
     readonly property color txtSection: "#D1E37D"
@@ -28,6 +28,7 @@ Page {
 
             Text {
                 text: qsTr(urlPage)
+                font.family: "Segoe UI"
                 font.pixelSize: 18
                 font.bold: true
                 color: "#FFFEF0"
@@ -54,7 +55,7 @@ Page {
 
     // Background page
     background: Rectangle {
-        color: '#1f2b43' //"#2E3350"
+        color: '#1f2b43'
         radius: bgRadius - 3
     }
 
