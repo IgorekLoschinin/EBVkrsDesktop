@@ -83,6 +83,12 @@ TemplatePage {
 
                         }
 
+                        CustomCheckbox {
+                            id: idCheckBoxAccumD
+
+                            nameChb: qsTr("Accumulate data")
+                        }
+
                     }
 
                 }
@@ -209,12 +215,6 @@ TemplatePage {
                         // spacing: 3
                         Layout.fillWidth: true
                         Layout.leftMargin: marginContentSect
-
-                        CustomCheckbox {
-                            id: idCheckBoxAccumD
-
-                            nameChb: qsTr("Accumulate data")
-                        }
 
                         GroupBox {
                             padding: 0
