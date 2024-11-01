@@ -9,6 +9,30 @@ TemplatePage {
 
     urlPage: qsTr("Processing -> phenotype")
 
+    sendForm: {
+        'id': 'procPheno',
+        'preparation': {
+            'checked': idPreparationDp.checked,
+            'updatabd': {
+                'checked': idCheckBoxUpdataDB.checked,
+                'pathTo': idInputUpdateTo.inputText.length ? idInputUpdateTo.inputText : null,
+                'pathFrom': idInputUpdateFrom.inputText.length ? idInputUpdateFrom.inputText : null,
+            },
+            'searchDaug': idInputSearchDaug.inputText.length ? idInputSearchDaug.inputText : null,
+        },
+        'phendata': idDirDataFiles.inputText.length ? idDirDataFiles.inputText : null,
+        'feature': idSelectFeatureDp.displayText,
+        'accummeth': idAccumulateDp.checked,
+        'numlact': idNumLactation.currentIndex,
+        'ped': idCheckBoxPed.checked,
+        'daughters': idCheckBoxDaug.checked,
+        'selectdata': {
+            'checked': idCBSelectData.checked,
+            'filefarm': idInputFarm.inputText.length ? idInputFarm.inputText : null,
+            'removedaug': idInputRemoveDaug.inputText.length ? idInputRemoveDaug.inputText : null,
+        }
+    }
+
     contentData: Control {
         anchors.fill: parent
         anchors.leftMargin: marginContentD
@@ -16,85 +40,6 @@ TemplatePage {
 
         contentItem: ColumnLayout {
             spacing: 10
-
-            // Section Common
-            GroupBox {
-                id: idCommonSection
-                padding: 0
-
-                Layout.fillWidth: true
-                Layout.topMargin: 20
-
-                contentItem: ColumnLayout {
-                    anchors.fill: parent
-
-                    // Header section
-                    HeaderSectionContent {
-                        id: idHeadSectComm
-
-                        Layout.fillWidth: true
-
-                        nameSection: qsTr("Common")
-                    }
-
-                    // Content and settings section common
-                    ColumnLayout {
-                        Layout.fillWidth: true
-                        Layout.leftMargin: marginContentSect
-
-                        RowLayout {
-                            spacing: 10
-                            Layout.fillWidth: true
-
-                            Text {
-                                text: qsTr("Estimation method:")
-                                font.pixelSize: sizeTextInSect
-                                font.family: "Segoe UI"
-                                color: txtSection
-                            }
-
-                            CustomRadioBtn {
-                                text: qsTr("blup")
-                                checked: true
-                            }
-
-                            CustomRadioBtn {
-                                text: qsTr("gblup")
-                            }
-                        }
-
-                        RowLayout {
-                            Layout.fillWidth: true
-
-                            Text {
-                                Layout.rightMargin: 15
-
-                                text: qsTr("Select of Feature:")
-                                font.pixelSize: sizeTextInSect
-                                font.family: "Segoe UI"
-                                color: txtSection                                
-                            }
-
-                            CustomComboBox {
-                                currentIndex: 0
-                                displayText: currentText
-                                model: ['milk', 'conform', 'reprod', 'scs']
-                            }
-
-                        }
-
-                        CustomCheckbox {
-                            id: idCheckBoxAccumD
-
-                            nameChb: qsTr("Accumulate data")
-                        }
-
-                    }
-
-                }
-
-                background: null
-            }
 
             // Section Properties
             GroupBox {
@@ -115,41 +60,52 @@ TemplatePage {
                         nameSection: qsTr("Properties")
                     }
 
+                    CustomCheckbox {
+                        id: idPreparationDp
+                        Layout.leftMargin: marginContentSect
+
+                        nameChb: qsTr("Preparation data")
+
+                        onCheckStateChanged: idPageProcessingPheno.sendForm['preparation']['checked'] = checked
+                    }
+
                     ColumnLayout {
+                        spacing: 5
                         Layout.fillWidth: true
                         Layout.leftMargin: marginContentSect
 
-                        InputGroup {
+                        enabled: !idPreparationDp.checked
+                        opacity: !idPreparationDp.checked ? 1 : 0.5
+
+                        InputGroupFolder {
+                            id: idDirDataFiles
                             nameField: qsTr("Directory data files:")
 
                             Layout.fillWidth: true
                         }
 
-                        GroupBox {
-                            padding: 0
+                        RowLayout {
                             Layout.fillWidth: true
-                            Layout.bottomMargin: 10
 
-                            label: CustomCheckbox {
-                                id: idCheckBoxFarm
-                                nameChb: qsTr("Selection code farm")
+                            Text {
+                                Layout.rightMargin: 15
+
+                                text: qsTr("Select of Feature:")
+                                font.pixelSize: sizeTextInSect
+                                font.family: "Segoe UI"
+                                color: txtSection
                             }
 
-                            contentData: InputGroup {
-                                id: idInputFarm
-                                anchors.fill: parent
-                                anchors.leftMargin: 30
-
-                                enabled: idCheckBoxFarm.checked
-                                opacity: idCheckBoxFarm.checked ? 1 : 0.3
-
-                                nameField: qsTr("File with code farm:")
+                            CustomComboBox {
+                                id: idSelectFeatureDp
+                                currentIndex: 0
+                                displayText: currentText
+                                model: ['milk', 'conform', 'reprod', 'scs']
                             }
 
-                            background: null
                         }
 
-                        RowLayout {                            
+                        RowLayout {
                             Layout.fillWidth: true
 
                             Text {
@@ -161,9 +117,59 @@ TemplatePage {
                             }
 
                             CustomComboBox {
+                                id: idNumLactation
                                 currentIndex: 1
                                 model: [0, 1, 2, 3]
                             }
+                        }
+
+                        CustomCheckbox {
+                            id: idAccumulateDp
+
+                            nameChb: qsTr("Accumulate data")
+                        }
+
+                        GroupBox {
+                            padding: 0
+                            Layout.fillWidth: true
+                            Layout.bottomMargin: 10
+
+                            label: CustomCheckbox {
+                                id: idCBSelectData
+                                nameChb: qsTr("Selection data:")
+
+                                onCheckStateChanged: {
+                                    idPageProcessingPheno.sendForm['selectdata']['checked'] = checked
+                                }
+                            }
+
+                            contentData: ColumnLayout {
+                                anchors.fill: parent
+
+                                InputGroupFile {
+                                    id: idInputFarm
+                                    Layout.fillWidth: true
+                                    Layout.leftMargin: 30
+
+                                    enabled: idCBSelectData.checked
+                                    opacity: idCBSelectData.checked ? 1 : 0.5
+
+                                    nameField: qsTr("File with code farm:")
+                                }
+
+                                InputGroupFile {
+                                    id: idInputRemoveDaug
+                                    Layout.fillWidth: true
+                                    Layout.leftMargin: 30
+
+                                    enabled: idCBSelectData.checked
+                                    opacity: idCBSelectData.checked ? 1 : 0.5
+
+                                    nameField: qsTr("Remove daughters:")
+                                }
+                            }
+
+                            background: null
                         }
 
                         ColumnLayout {
@@ -191,7 +197,7 @@ TemplatePage {
                 background: null
             }
 
-            // Section AddiProperties
+            // Section preparation data
             GroupBox {
                 id: idAdditPropSection
                 padding: 0                
@@ -208,13 +214,16 @@ TemplatePage {
 
                         Layout.fillWidth: true
 
-                        nameSection: qsTr("Addition properties")
+                        nameSection: qsTr("Preparation data")
                     }
 
                     ColumnLayout {
                         // spacing: 3
                         Layout.fillWidth: true
                         Layout.leftMargin: marginContentSect
+
+                        enabled: idPreparationDp.checked
+                        opacity: idPreparationDp.checked ? 1 : 0.5
 
                         GroupBox {
                             padding: 0
@@ -224,6 +233,10 @@ TemplatePage {
                                 id: idCheckBoxUpdataDB
 
                                 nameChb: qsTr("Updata data base")
+
+                                onCheckStateChanged: {
+                                    idPageProcessingPheno.sendForm['preparation']['updatabd']['checked'] = checked
+                                }
                             }
 
                             contentData: RowLayout {
@@ -231,7 +244,7 @@ TemplatePage {
                                 anchors.leftMargin: 30
 
                                 enabled: idCheckBoxUpdataDB.checked
-                                opacity: idCheckBoxUpdataDB.checked ? 1 : 0.3
+                                opacity: idCheckBoxUpdataDB.checked ? 1 : 0.5
 
                                 Text {
                                     text: qsTr("Update data:")
@@ -240,14 +253,14 @@ TemplatePage {
                                     color: txtSection
                                 }
 
-                                InputGroup {
+                                InputGroupFolder {
                                     id: idInputUpdateTo
                                     nameField: qsTr("to")
 
                                     Layout.fillWidth: true
                                 }
 
-                                InputGroup {
+                                InputGroupFolder {
                                     id: idInputUpdateFrom
                                     nameField: qsTr("from")
 
@@ -260,19 +273,16 @@ TemplatePage {
                             background: null
                         }
 
-                        InputGroup {
+                        InputGroupFile {
                             id: idInputSearchDaug
                             nameField: qsTr("Search daughters:")
 
-                            Layout.fillWidth: true
-                        }
-
-                        InputGroup {
-                            id: idInputRemoveDaug
-                            nameField: qsTr("Remove daughters:")
+                            enabled: !idCheckBoxUpdataDB.checked
+                            opacity: !idCheckBoxUpdataDB.checked ? 1 : 0.5
 
                             Layout.fillWidth: true
                         }
+
                     }
 
                 }

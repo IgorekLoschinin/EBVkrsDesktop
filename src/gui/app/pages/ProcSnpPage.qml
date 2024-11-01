@@ -41,7 +41,7 @@ TemplatePage {
                         Layout.fillWidth: true
                         Layout.leftMargin: marginContentSect
 
-                        InputGroup {
+                        InputGroupFile {
                             nameField: qsTr("Path to file snp:")
 
                             Layout.fillWidth: true
@@ -65,7 +65,7 @@ TemplatePage {
                                 enabled: idCheckBoxSNPAddProc.checked
                                 opacity: idCheckBoxSNPAddProc.checked ? 1 : 0.3
 
-                                InputGroup {
+                                InputGroupFile {
                                     id: idInputSampleD
                                     Layout.fillWidth: true
 
@@ -73,7 +73,7 @@ TemplatePage {
                                     enabled: idCheckBoxSNPAddProc.checked
                                 }
 
-                                InputGroup {
+                                InputGroupFile {
                                     id: idInputUpdataD
                                     Layout.fillWidth: true
 
@@ -115,7 +115,7 @@ TemplatePage {
                         Layout.fillWidth: true
                         Layout.leftMargin: marginContentSect
 
-                        InputGroup {
+                        InputGroupFolder {
                             nameField: qsTr("Directory with finalreports files:")
 
                             Layout.fillWidth: true
@@ -222,7 +222,7 @@ TemplatePage {
                                     nameChb: qsTr("Add suffix")
                                 }
 
-                                InputGroup {
+                                InputGroupFile {
                                     id: idInputFarm
                                     Layout.fillWidth: true
 

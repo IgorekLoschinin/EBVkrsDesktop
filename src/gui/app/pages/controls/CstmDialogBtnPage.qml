@@ -79,7 +79,8 @@ Control {
 
                 onClicked: {
                     switch (model.name) {
-                    case "run":                        
+                    case "run":
+                        backend.printFormProc(sendForm)
                         return
 
                     case "stop":
