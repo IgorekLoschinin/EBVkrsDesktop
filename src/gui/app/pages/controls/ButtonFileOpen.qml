@@ -39,7 +39,7 @@ Button {
         id: bgBtnFO
 
         radius: 4
-        color: idInputGroup.enabled ? idBtnFileOpen.dynamicColor(idBtnFileOpen) : "transparent"
+        color: idBtnFileOpen.dynamicColor(idBtnFileOpen)
 
         border.color: idBtnFileOpen.down ? idBtnFileOpen.borderColorPressed : bgBtnFO.color
         border.width: 1

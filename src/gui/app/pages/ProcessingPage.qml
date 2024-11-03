@@ -86,4 +86,9 @@ TemplatePage {
     }
 
     footer: null
+
+    Connections {
+        target: backend
+
+    }
 }

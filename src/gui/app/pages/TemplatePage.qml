@@ -7,6 +7,7 @@ Page {
     id: idPage
 
     property string urlPage: ""
+    property var sendForm: null
 
     readonly property int leftRightMargin: 29
     readonly property int marginContentD: 30

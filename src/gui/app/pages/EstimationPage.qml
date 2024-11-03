@@ -10,6 +10,13 @@ TemplatePage {
     id: idPageProcessing
 
     urlPage: qsTr("Estimate breeding value")
+    sendForm: {
+        'estMethod': {
+            'blup': null, //radioBtnEstBlup.checked,
+            'gblup': null //radioBtnEstGblup.checked
+        },
+        'feature': null,
+    }
 
     contentData: Control {
         anchors.fill: parent

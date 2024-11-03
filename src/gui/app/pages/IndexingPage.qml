@@ -8,6 +8,13 @@ TemplatePage {
     id: idPageProcessing
 
     urlPage: qsTr("Indexing")
+    sendForm: {
+        'estMethod': {
+            'blup': null, //radioBtnEstBlup.checked,
+            'gblup': null //radioBtnEstGblup.checked
+        },
+        'feature': null,
+    }
 
     contentData: Control {
         anchors.fill: parent
@@ -265,7 +272,7 @@ TemplatePage {
                         nameSection: qsTr("Sample for givc")
                     }
 
-                    InputGroup {
+                    InputGroupFolder {
                         nameField: qsTr("Directory with reports:")
                         placeholderText: qsTr("Enter dir... ")
 

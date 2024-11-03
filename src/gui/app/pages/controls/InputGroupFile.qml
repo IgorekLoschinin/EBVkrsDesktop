@@ -6,10 +6,14 @@ import QtQuick.Dialogs
 
 
 Control {
-    id: idInputGroup
+    id: idInputGroupFile
 
     property string nameField: ""
     property string placeholderText: qsTr("Enter file path...")
+    property bool selectFile: false
+    property bool selectFolder: true
+
+    property string inputText: ''
 
     contentItem: RowLayout {
         spacing: 2
@@ -34,19 +38,24 @@ Control {
             id: idTextInput
             Layout.fillWidth: true
 
-            phText: idInputGroup.placeholderText
+            phText: idInputGroupFile.placeholderText
+            onEditingFinished: inputText = idTextInput.text
         }
 
         ButtonFileOpen {
-            id: idBtnFileOpen            
+            id: idBtnFileOpen
+            hoverEnabled: idInputGroupFile.enabled
 
-            onClicked: fileDialog.open()
+            onClicked: windowDialog.open()
         }
 
         FileDialog {
-            id: fileDialog
-            currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
-            onAccepted: idTextInput.text = selectedFile
+            id: windowDialog
+            currentFolder: StandardPaths.standardLocations(StandardPaths.LocateFile)[0]
+            onAccepted: {
+                idTextInput.text = selectedFile.toString().replace("file:///", "");
+                inputText = selectedFile.toString().replace("file:///", "");
+            }
         }
     }
 }
