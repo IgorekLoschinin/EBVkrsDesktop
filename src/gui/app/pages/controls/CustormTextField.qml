@@ -8,7 +8,6 @@ TextField {
     readonly property color colorText: "#FFFFFF"
 
     height: 22
-    color: colorText
 
     placeholderText: qsTr(phText)
     placeholderTextColor: colorText
@@ -16,6 +15,7 @@ TextField {
     font.family: "Segoe UI"
     font.pixelSize: sizeTextInSect
     clip: true
+    color: colorText
 
     background: Rectangle {
         radius: 3

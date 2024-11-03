@@ -9,6 +9,30 @@ TemplatePage {
 
     urlPage: qsTr("Processing -> SNP")
 
+    sendForm: {
+        'id': 'procSnp',
+        'snp': {
+            'checked': idControlSnpProc.checked,
+            'refSnpFile': idInputFileSnpRef.inputText.length ? idInputFileSnpRef.inputText : null,
+            'sampleFile': idInputSampleD.inputText.length ? idInputSampleD.inputText : null,
+            'updateFile': idInputUpdataD.inputText.length ? idInputUpdataD.inputText : null,
+        },
+        'fr': {
+            'checked': idControlFinalReport.checked,
+            'dirFileFr': idInputDirFrFiles.inputText.length ? idInputDirFrFiles.inputText : null,
+            'callRate': idInputCR.displayText.length ? idInputCR.displayText : null,
+            'saveCrFile': {
+                'checked': idCheckBoxSaveCrFile.checked,
+                'filename': idInputFilenameSave.displayText.length ? idInputFilenameSave.displayText : null,
+            },
+            'addsuff': {
+                'checked': idCBAddSuffSex.checked,
+                'add': idCBAddSuff.checked,
+                'fromFile': idInputSexFromFile.inputText.length ? idInputSexFromFile.inputText : null,
+            }
+        }
+    }
+
     contentData: Control {
         anchors.fill: parent
         anchors.leftMargin: marginContentD
@@ -17,9 +41,9 @@ TemplatePage {
         contentItem: ColumnLayout {
             spacing: 10
 
-            // Section FinalReports
+            // Section Snp processing
             GroupBox {
-                id: idPropertiesSection
+                id: idSnpProccSection
                 padding: 0
 
                 Layout.topMargin: 10
@@ -34,7 +58,13 @@ TemplatePage {
 
                         Layout.fillWidth: true
 
-                        nameSection: qsTr("Properties")
+                        nameSection: qsTr("Snp processing")
+                    }
+
+                    CustomCheckbox {
+                        id: idControlSnpProc
+
+                        nameChb: qsTr("SNP Control section")
                     }
 
                     ColumnLayout {
@@ -42,6 +72,7 @@ TemplatePage {
                         Layout.leftMargin: marginContentSect
 
                         InputGroupFile {
+                            id: idInputFileSnpRef
                             nameField: qsTr("Path to file snp:")
 
                             Layout.fillWidth: true
@@ -111,11 +142,18 @@ TemplatePage {
                         nameSection: qsTr("Final reports")
                     }
 
+                    CustomCheckbox {
+                        id: idControlFinalReport
+
+                        nameChb: qsTr("FR Control section")
+                    }
+
                     ColumnLayout {
                         Layout.fillWidth: true
                         Layout.leftMargin: marginContentSect
 
                         InputGroupFolder {
+                            id: idInputDirFrFiles
                             nameField: qsTr("Directory with finalreports files:")
 
                             Layout.fillWidth: true
@@ -174,7 +212,7 @@ TemplatePage {
                                 }
 
                                 CustormTextField {
-                                    id: idInputnumThred
+                                    id: idInputFilenameSave
                                     phText: qsTr("Name ...")
 
                                     implicitWidth: 200
@@ -190,12 +228,6 @@ TemplatePage {
                             }
 
                             background: null
-                        }
-
-                        CustomCheckbox {
-                            id: idCBSaveFileCr
-
-                            nameChb: qsTr("Save call rate in file")
                         }
 
                         GroupBox {
@@ -223,7 +255,7 @@ TemplatePage {
                                 }
 
                                 InputGroupFile {
-                                    id: idInputFarm
+                                    id: idInputSexFromFile
                                     Layout.fillWidth: true
 
                                     enabled: !idCBAddSuff.checked
