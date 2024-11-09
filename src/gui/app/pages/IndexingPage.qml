@@ -19,7 +19,7 @@ TemplatePage {
         'typeind': idComBoxTypeInd.displayText,
         'divdata': idCheckBoxDivData.checked,
         'parallel': idCheckBoxParallelInd.checked,
-        'numthread': idInputNumThred.text,
+        'numthread': idInputNumThred.text.length === 0 ? null : idInputNumThred.text,
         'disableoptim': idCheckBoxPrivDisOpt.checked,
         'gengivc': {
             'status': idCheckBoxGivc.checked,
@@ -58,6 +58,7 @@ TemplatePage {
 
                     // Content and settings section common
                     ColumnLayout {
+                        spacing: 10
                         Layout.fillWidth: true
                         Layout.leftMargin: marginContentSect
 

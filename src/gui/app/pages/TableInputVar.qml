@@ -9,7 +9,7 @@ Control {
 
     readonly property var modFtVar: modelFeatureVar
 
-    contentItem: ColumnLayout {
+    contentItem: ColumnLayout {        
 
         // Header table
         RowLayout {
@@ -56,7 +56,7 @@ Control {
                 clip: true
                 spacing: 10
 
-                implicitHeight: 200
+                implicitHeight: 250
                 implicitWidth: 300
 
                 model: ListModel {
@@ -81,9 +81,8 @@ Control {
                         Layout.fillWidth: true
                         implicitWidth: 80
 
-                        phText: varE
+                        phText: "0"
 
-                        inputMethodHints: Qt.ImhFormattedNumbersOnly
                         onEditingFinished: {
                             if (idInVarE.text.length) {
                                 modelFeatureVar.set(
@@ -93,6 +92,8 @@ Control {
                                 return
                             }
                         }
+
+                        validator: DoubleValidator {}
                     }
 
                     CustormTextField {
@@ -100,9 +101,8 @@ Control {
                         Layout.fillWidth: true
                         implicitWidth: 80
 
-                        phText: varG
+                        phText: "0"
 
-                        inputMethodHints: Qt.ImhFormattedNumbersOnly
                         onEditingFinished: {
                             if (idInVarG.text.length) {
                                 modelFeatureVar.set(
@@ -112,12 +112,16 @@ Control {
                                 return
                             }
                         }
+
+                        validator: DoubleValidator {}
                     }
                 }
 
                 Component.onCompleted: {
                     // Сюда с бэкенда отправляется список признаков
-                    var featureNames = ["tip", "kt", "rost", "gt", "pz", "conform"];
+                    var featureNames = ["tip", "kt", "rost", "gt", "pz", "conform",
+                                        "1tip", "1kt", "1rost", "1gt", "1pz", "1conform",
+                                        "2tip", "2kt", "2rost", "2gt", "2pz", "2conform"];
 
                     for (var i = 0; i < featureNames.length; i++) {
                         modelFeatureVar.append({

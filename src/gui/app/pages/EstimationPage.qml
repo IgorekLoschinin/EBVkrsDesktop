@@ -13,13 +13,27 @@ TemplatePage {
     sendForm: {
         'id': 'ebv',
         'estMethod': {
-            'blup': null, //radioBtnEstBlup.checked,
-            'gblup': null //radioBtnEstGblup.checked
+            'blup': idRadioBtnBlupEbv.checked,
+            'gblup': idRadioBtnGBlupEbv.checked
         },
-        'feature': null,
-        'variance': null,
-        'parallel': null,
-        'numthread': null,
+        'feature': idFeatureEbv.displayText,
+        'variance': getVariance(),
+        'parallel': idCheckBoxParallelEst.checked,
+        'numthread': idInputNumThredEst.text.length === 0 ? null : idInputNumThredEst.text,
+    }
+
+    function getVariance() {
+        var allData = {};
+        for (var i = 0; i < tableInVariance.modFtVar.count; i++) {
+            var item = tableInVariance.modFtVar.get(i);
+
+            allData[item.name] = {
+                "varE": item.varE,
+                "varG": item.varG
+            };
+        }
+
+        return allData
     }
 
     contentData: Control {
@@ -30,7 +44,7 @@ TemplatePage {
         contentItem: ColumnLayout {
             spacing: 10
 
-            // Section Common
+            // Section settings ebv
             GroupBox {
                 id: idCommonSection
                 padding: 0
@@ -46,11 +60,12 @@ TemplatePage {
                         id: idHeadSectComm
                         Layout.fillWidth: true
 
-                        nameSection: qsTr("Common")
+                        nameSection: qsTr("Ebv settings")
                     }
 
                     // Content and settings section common
                     ColumnLayout {
+                        spacing: 10
                         Layout.fillWidth: true
                         Layout.leftMargin: marginContentSect
 
@@ -66,11 +81,13 @@ TemplatePage {
                             }
 
                             CustomRadioBtn {
+                                id: idRadioBtnBlupEbv
                                 text: qsTr("blup")
                                 checked: true
                             }
 
                             CustomRadioBtn {
+                                id: idRadioBtnGBlupEbv
                                 text: qsTr("gblup")
                             }
                         }
@@ -88,128 +105,16 @@ TemplatePage {
                             }
 
                             CustomComboBox {
+                                id: idFeatureEbv
                                 currentIndex: 0
                                 displayText: currentText
                                 model: ['milk', 'conform', 'reprod', 'scs']
                             }
                         }
 
-                    }
-                }
-
-                background: null
-            }
-
-            // Section Properties
-            GroupBox {
-                id: idPropertiesSection
-                padding: 0
-
-                Layout.topMargin: 10
-                Layout.fillWidth: true
-
-                contentItem: ColumnLayout {
-                    anchors.fill: parent
-
-                    // Header section
-                    HeaderSectionContent {
-                        id: idHeadSectProper                        
-                        Layout.fillWidth: true
-
-                        nameSection: qsTr("Properties")
-                    }
-
-                    ColumnLayout {
-                        Layout.fillWidth: true
-                        Layout.leftMargin: marginContentSect
-
-                        RowLayout {
-                            Layout.fillWidth: true
-
-                            Text {
-                                Layout.rightMargin: 15
-
-                                text: qsTr("Variance calculation method:")
-                                font.family: "Segoe UI"
-                                font.pixelSize: sizeTextInSect
-                                color: txtSection
-                            }
-
-                            CustomComboBox {
-                                id: idSelectTypeCalVar
-                                model: ["all", "conf"]
-                            }
-                        }
-
-                        RowLayout {
-                            spacing: 0
-                            visible: idSelectTypeCalVar.displayText === "conf" ? true : false
-                            Layout.alignment: Qt.AlignCenter
-
-                            TableInputVar {
-                                id: tableInVariance
-                                Layout.alignment: Qt.AlignRight
-                            }
-
-                            ColumnLayout {
-                                Layout.alignment: Qt.AlignLeft
-
-                                CustomBtn {
-                                    nameBtn: qsTr("load")
-
-                                    implicitWidth: 100
-
-                                    onClicked: idLoadFileConf.open()
-
-                                    FileDialog {
-                                        id: idLoadFileConf
-                                        currentFolder: StandardPaths.standardLocations(StandardPaths.DocumentsLocation)[0]
-                                        onAccepted: console.log(selectedFile)
-                                    }
-                                }
-
-                                CustomBtn {
-                                    nameBtn: qsTr("save")
-
-                                    implicitWidth: 100
-
-                                    onClicked: idSaveFileConf.open()
-
-                                    FileDialog {
-                                        id: idSaveFileConf
-                                        fileMode: FileDialog.SaveFile
-                                        currentFolder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
-                                        onAccepted: console.log(selectedFile)
-                                    }
-                                }
-
-                            }
-                        }
-
-                        // Button {
-                        //     text: "Собрать данные"
-                        //     // anchors.bottom: parent.bottom
-                        //     // anchors.horizontalCenter: parent.horizontalCenter
-                        //     onClicked: {
-                        //         var allData = {};
-                        //         for (var i = 0; i < tableInVariance.modFtVar.count; i++) {
-                        //             var item = tableInVariance.modFtVar.get(i);
-
-                        //             allData[item.name] = {
-                        //                 "varE": item.varE,
-                        //                 "varG": item.varG
-                        //             };
-                        //         }
-
-                        //         // Можем передать собранные данные для дальнейшего использования
-                        //         console.log(allData['tip']['varE'], allData['tip']['varG']);  // Вывод массива всех элементов
-                        //     }
-                        // }
-
                         GroupBox {
                             padding: 0
                             Layout.fillWidth: true
-                            Layout.bottomMargin: 10
 
                             label: CustomCheckbox {
                                 id: idCheckBoxParallelEst
@@ -234,14 +139,14 @@ TemplatePage {
                                 }
 
                                 CustormTextField {
-                                    id: idInputnumThred
+                                    id: idInputNumThredEst
                                     phText: qsTr("Enter...")
 
                                     implicitWidth: 80
 
                                     validator: IntValidator {
                                         bottom: 1
-                                        top: 100
+                                        top: 99
                                     }
                                 }
                                 Item { Layout.fillWidth: true }
@@ -250,8 +155,76 @@ TemplatePage {
                             background: null
                         }
 
-                    }
+                        // Variance table
+                        ColumnLayout {
+                            Layout.fillWidth: true
 
+                            RowLayout {
+                                Layout.fillWidth: true
+
+                                Text {
+                                    Layout.rightMargin: 15
+
+                                    text: qsTr("Variance calculation method:")
+                                    font.family: "Segoe UI"
+                                    font.pixelSize: sizeTextInSect
+                                    color: txtSection
+                                }
+
+                                CustomComboBox {
+                                    id: idSelectTypeCalVar
+                                    model: ["all", "conf"]
+                                }
+                            }
+
+                            RowLayout {
+                                spacing: 0
+                                visible: idSelectTypeCalVar.displayText === "conf" ? true : false
+                                Layout.fillWidth: true
+
+                                TableInputVar {
+                                    id: tableInVariance
+                                    Layout.fillHeight: true
+                                }
+
+                                ColumnLayout {
+
+                                    CustomBtn {
+                                        nameBtn: qsTr("load")
+
+                                        implicitWidth: 100
+
+                                        onClicked: idLoadFileConf.open()
+
+                                        FileDialog {
+                                            id: idLoadFileConf
+                                            currentFolder: StandardPaths.standardLocations(StandardPaths.DocumentsLocation)[0]
+                                            onAccepted: console.log(selectedFile)
+                                        }
+                                    }
+
+                                    CustomBtn {
+                                        nameBtn: qsTr("save")
+
+                                        implicitWidth: 100
+
+                                        onClicked: idSaveFileConf.open()
+
+                                        FileDialog {
+                                            id: idSaveFileConf
+                                            fileMode: FileDialog.SaveFile
+                                            currentFolder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
+                                            onAccepted: console.log(selectedFile)
+                                        }
+                                    }
+
+                                }
+
+                            }
+
+                        }
+
+                    }
                 }
 
                 background: null
