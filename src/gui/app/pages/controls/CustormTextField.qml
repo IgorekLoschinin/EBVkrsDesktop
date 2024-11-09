@@ -19,6 +19,6 @@ TextField {
 
     background: Rectangle {
         radius: 3
-        color: "#8792A8"        
+        color: "#8792A8"
     }
 }

@@ -11,11 +11,15 @@ TemplatePage {
 
     urlPage: qsTr("Estimate breeding value")
     sendForm: {
+        'id': 'ebv',
         'estMethod': {
             'blup': null, //radioBtnEstBlup.checked,
             'gblup': null //radioBtnEstGblup.checked
         },
         'feature': null,
+        'variance': null,
+        'parallel': null,
+        'numthread': null,
     }
 
     contentData: Control {
@@ -234,6 +238,11 @@ TemplatePage {
                                     phText: qsTr("Enter...")
 
                                     implicitWidth: 80
+
+                                    validator: IntValidator {
+                                        bottom: 1
+                                        top: 100
+                                    }
                                 }
                                 Item { Layout.fillWidth: true }
                             }

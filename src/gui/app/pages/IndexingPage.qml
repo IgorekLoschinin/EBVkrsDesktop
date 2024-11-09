@@ -1,5 +1,5 @@
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls 2.15
 import QtQuick.Layouts
 import "controls"
 
@@ -9,11 +9,23 @@ TemplatePage {
 
     urlPage: qsTr("Indexing")
     sendForm: {
-        'estMethod': {
-            'blup': null, //radioBtnEstBlup.checked,
-            'gblup': null //radioBtnEstGblup.checked
+        'id': 'index',
+        'estmethod': {
+            'blup': idRadioBtnIndBlup.checked,
+            'gblup': idRadioBtnIndGBlup.checked
         },
-        'feature': null,
+        'feature': idSelectFeatureForInd.displayText,
+        'animal': idComBoxChooseAnimal.displayText,
+        'typeind': idComBoxTypeInd.displayText,
+        'divdata': idCheckBoxDivData.checked,
+        'parallel': idCheckBoxParallelInd.checked,
+        'numthread': idInputNumThred.text,
+        'disableoptim': idCheckBoxPrivDisOpt.checked,
+        'gengivc': {
+            'status': idCheckBoxGivc.checked,
+            'dirreport': idInputDirReports.inputText.length === 0 ? null : idInputDirReports.inputText,
+            'typereport': idGivcTypeReport.displayText
+        }
     }
 
     contentData: Control {
@@ -26,7 +38,7 @@ TemplatePage {
 
             // Section Common
             GroupBox {
-                id: idCommonSection
+                id: idSettingsIndex
                 padding: 0
 
                 Layout.fillWidth: true
@@ -41,7 +53,7 @@ TemplatePage {
 
                         Layout.fillWidth: true
 
-                        nameSection: qsTr("Common")
+                        nameSection: qsTr("Settings index")
                     }
 
                     // Content and settings section common
@@ -61,191 +73,148 @@ TemplatePage {
                             }
 
                             CustomRadioBtn {
+                                id: idRadioBtnIndBlup
                                 text: qsTr("blup")
                                 checked: true
                             }
 
                             CustomRadioBtn {
+                                id: idRadioBtnIndGBlup
                                 text: qsTr("gblup")
                             }
                         }
 
                         RowLayout {
+                            spacing: 40
                             Layout.fillWidth: true
 
-                            Text {
-                                Layout.rightMargin: 15
+                            RowLayout {
+                                Layout.fillWidth: true
 
-                                text: qsTr("Select of Feature:")
-                                font.family: "Segoe UI"
-                                font.pixelSize: sizeTextInSect
-                                color: txtSection                                
-                            }
-
-                            CustomComboBox {
-                                id: idSelectFeatureForInd
-                                currentIndex: 0
-                                displayText: currentText
-                                model: ['milk', 'conform', 'reprod', 'scs']
-                            }
-                        }
-
-                    }
-                }
-
-                background: null
-            }
-
-            // Section Properties
-            GroupBox {
-                id: idPropertiesSection
-                padding: 0
-
-                Layout.topMargin: 10
-                Layout.fillWidth: true
-
-                contentItem: ColumnLayout {
-                    anchors.fill: parent
-
-                    // Header section
-                    HeaderSectionContent {
-                        id: idHeadSectProper
-                        Layout.fillWidth: true
-
-                        nameSection: qsTr("Properties")
-                    }
-
-                    RowLayout {
-                        spacing: 40
-                        Layout.fillWidth: true
-                        Layout.leftMargin: marginContentSect
-
-                        RowLayout {
-                            Layout.fillWidth: true
-
-                            Text {
-                                Layout.rightMargin: 15
-
-                                text: qsTr("Choose animal:")
-                                font.family: "Segoe UI"
-                                font.pixelSize: sizeTextInSect
-                                color: txtSection
-                            }
-
-                            CustomComboBox {
-                                currentIndex: 0
-                                model: ['sire', 'cow', 'all']
-                            }
-                        }
-
-                        RowLayout {
-                            Layout.fillWidth: true
-
-                            Text {
-                                Layout.rightMargin: 15
-
-                                text: qsTr("Type index:")
-                                font.family: "Segoe UI"
-                                font.pixelSize: sizeTextInSect
-                                color: txtSection
-                            }
-
-                            CustomComboBox {
-                                currentIndex: 0
-                                model: ['index', 'complex']
-                            }
-                        }
-
-                    }
-
-                }
-
-                background: null
-            }
-
-            // Section AddiProperties
-            GroupBox {
-                id: idAdditPropSection
-                padding: 0
-
-                Layout.topMargin: 10
-                Layout.fillWidth: true
-
-                contentItem: ColumnLayout {
-                    anchors.fill: parent
-
-                    // Header section
-                    HeaderSectionContent {
-                        id: idHeadSectAddProp
-                        Layout.fillWidth: true
-
-                        nameSection: qsTr("Addition properties")
-                    }
-
-                    ColumnLayout {
-                        Layout.fillWidth: true
-                        Layout.leftMargin: marginContentSect
-
-                        CustomCheckbox {
-                            id: idCheckBoxAccumD
-
-                            nameChb: qsTr("Divide data into bulls and cows.")
-                        }
-
-                        GroupBox {
-                            padding: 0
-                            Layout.fillWidth: true
-                            Layout.bottomMargin: 10
-
-                            label: CustomCheckbox {
-                                id: idCheckBoxParallelInd
-
-                                nameChb: qsTr("Parallel computing")
-                            }
-
-                            contentData: RowLayout {
-                                anchors.fill: parent
-                                anchors.leftMargin: 30
-
-                                enabled: idCheckBoxParallelInd.checked
-                                opacity: idCheckBoxParallelInd.checked ? 1 : 0.3
-
-                                Label {
+                                Text {
                                     Layout.rightMargin: 15
 
-                                    text: qsTr("Number of threads:")
+                                    text: qsTr("Select of Feature:")
                                     font.family: "Segoe UI"
                                     font.pixelSize: sizeTextInSect
                                     color: txtSection
                                 }
 
-                                CustormTextField {
-                                    id: idInputnumThred
-                                    phText: qsTr("Enter...")
-
-                                    implicitWidth: 80
+                                CustomComboBox {
+                                    id: idSelectFeatureForInd
+                                    currentIndex: 0
+                                    model: ['milk', 'conform', 'reprod', 'scs']
                                 }
-                                Item { Layout.fillWidth: true }
                             }
 
-                            background: null
+                            RowLayout {
+                                Layout.fillWidth: true
+
+                                Text {
+                                    Layout.rightMargin: 15
+
+                                    text: qsTr("Choose animal:")
+                                    font.family: "Segoe UI"
+                                    font.pixelSize: sizeTextInSect
+                                    color: txtSection
+                                }
+
+                                CustomComboBox {
+                                    id: idComBoxChooseAnimal
+                                    currentIndex: 0
+                                    model: ['sire', 'cow', 'all']
+                                }
+                            }
+
+                            RowLayout {
+                                Layout.fillWidth: true
+
+                                Text {
+                                    Layout.rightMargin: 15
+
+                                    text: qsTr("Type index:")
+                                    font.family: "Segoe UI"
+                                    font.pixelSize: sizeTextInSect
+                                    color: txtSection
+                                }
+
+                                CustomComboBox {
+                                    id: idComBoxTypeInd
+                                    currentIndex: 0
+                                    model: ['index', 'complex']
+                                }
+                            }
+
                         }
 
-                        CustomCheckbox {
-                            id: idCheckBoxPrivDisOpt
-                            nameChb: qsTr("Disabled optimal value")
+                        // Additional property
+                        ColumnLayout {
+                            Layout.fillWidth: true
 
-                            enabled: idSelectFeatureForInd.displayText === "conform"
-                            opacity: idSelectFeatureForInd.displayText === "conform" ? 1 : 0.3
+                            CustomCheckbox {
+                                id: idCheckBoxDivData
+
+                                nameChb: qsTr("Divide data into bulls and cows.")
+
+                                enabled: idComBoxChooseAnimal.currentIndex === 2 ? true : false
+                                opacity: idComBoxChooseAnimal.currentIndex === 2 ? 1 : 0.5
+                            }
+
+                            GroupBox {
+                                padding: 0
+                                Layout.fillWidth: true
+                                Layout.bottomMargin: 10
+
+                                label: CustomCheckbox {
+                                    id: idCheckBoxParallelInd
+
+                                    nameChb: qsTr("Parallel computing")
+                                }
+
+                                contentData: RowLayout {
+                                    anchors.fill: parent
+                                    anchors.leftMargin: 30
+
+                                    enabled: idCheckBoxParallelInd.checked
+                                    opacity: idCheckBoxParallelInd.checked ? 1 : 0.3
+
+                                    Label {
+                                        Layout.rightMargin: 15
+
+                                        text: qsTr("Number of threads:")
+                                        font.family: "Segoe UI"
+                                        font.pixelSize: sizeTextInSect
+                                        color: txtSection
+                                    }
+
+                                    CustormTextField {
+                                        id: idInputNumThred
+                                        phText: qsTr("Enter...")
+
+                                        implicitWidth: 80
+
+                                        validator: IntValidator {
+                                            bottom: 1
+                                            top: 100
+                                        }
+                                    }
+                                    Item { Layout.fillWidth: true }
+                                }
+
+                                background: null
+                            }
+
+                            CustomCheckbox {
+                                id: idCheckBoxPrivDisOpt
+                                nameChb: qsTr("Disabled optimal value")
+
+                                enabled: idSelectFeatureForInd.displayText === "conform"
+                                opacity: idSelectFeatureForInd.displayText === "conform" ? 1 : 0.3
+                            }
+
                         }
 
-                        CustomCheckbox {
-                            id: idCheckBoxGivc
-
-                            nameChb: qsTr("Generating files for givc")
-                        }
                     }
-
                 }
 
                 background: null
@@ -255,8 +224,6 @@ TemplatePage {
             GroupBox {
                 id: idGivc
                 padding: 0
-
-                visible: idCheckBoxGivc.checked
 
                 Layout.topMargin: 10
                 Layout.fillWidth: true
@@ -272,32 +239,47 @@ TemplatePage {
                         nameSection: qsTr("Sample for givc")
                     }
 
-                    InputGroupFolder {
-                        nameField: qsTr("Directory with reports:")
-                        placeholderText: qsTr("Enter dir... ")
+                    CustomCheckbox {
+                        id: idCheckBoxGivc
 
-                        Layout.fillWidth: true
-                        Layout.leftMargin: marginContentSect
+                        nameChb: qsTr("Generating files for givc")
                     }
 
-                    RowLayout {
-                        Layout.fillWidth: true
-                        Layout.leftMargin: marginContentSect
+                    ColumnLayout {
+                        enabled: idCheckBoxGivc.checked
+                        opacity: idCheckBoxGivc.checked ? 1 : 0.5
 
-                        Text {
-                            Layout.rightMargin: 15
+                        InputGroupFolder {
+                            id: idInputDirReports
+                            nameField: qsTr("Directory with reports:")
+                            placeholderText: qsTr("Enter dir... ")
 
-                            text: qsTr("Choose animal:")
-                            font.family: "Segoe UI"
-                            font.pixelSize: sizeTextInSect
-                            color: txtSection
+                            Layout.fillWidth: true
+                            Layout.leftMargin: marginContentSect
                         }
 
-                        CustomComboBox {
-                            currentIndex: 0
-                            model: ['bull', 'cow', 'full']
+                        RowLayout {
+                            Layout.fillWidth: true
+                            Layout.leftMargin: marginContentSect
+
+                            Text {
+                                Layout.rightMargin: 15
+
+                                text: qsTr("Type reports:")
+                                font.family: "Segoe UI"
+                                font.pixelSize: sizeTextInSect
+                                color: txtSection
+                            }
+
+                            CustomComboBox {
+                                id: idGivcTypeReport
+                                currentIndex: 0
+                                model: ['bull', 'cow', 'full']
+                            }
                         }
+
                     }
+
                 }
 
                 background: null

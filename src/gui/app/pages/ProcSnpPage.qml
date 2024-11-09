@@ -71,6 +71,9 @@ TemplatePage {
                         Layout.fillWidth: true
                         Layout.leftMargin: marginContentSect
 
+                        enabled: idControlSnpProc.checked
+                        opacity: idControlSnpProc.checked ? 1 : 0.5
+
                         InputGroupFile {
                             id: idInputFileSnpRef
                             nameField: qsTr("Path to file snp:")
@@ -151,6 +154,9 @@ TemplatePage {
                     ColumnLayout {
                         Layout.fillWidth: true
                         Layout.leftMargin: marginContentSect
+
+                        enabled: idControlFinalReport.checked
+                        opacity: idControlFinalReport.checked ? 1 : 0.5
 
                         InputGroupFolder {
                             id: idInputDirFrFiles
