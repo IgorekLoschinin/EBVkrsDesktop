@@ -12,7 +12,7 @@ TemplatePage {
     sendForm: {
         'id': 'procPheno',
         'preparation': {
-            'checked': idPreparationDp.checked,
+            'checked': idSHeadSectAddProp.checked,
             'updatabd': {
                 'checked': idCheckBoxUpdataDB.checked,
                 'pathTo': idInputUpdateTo.inputText.length === 0 ? null : idInputUpdateTo.inputText,
@@ -39,7 +39,7 @@ TemplatePage {
         anchors.rightMargin: marginContentD
 
         contentItem: ColumnLayout {
-            spacing: 10
+            spacing: comSpacing
 
             // Section preparation data
             GroupBox {
@@ -53,30 +53,22 @@ TemplatePage {
                     anchors.fill: parent
 
                     // Header section
-                    HeaderSectionContent {
-                        id: idHeadSectAddProp
+                    SwitchHeadSectCont {
+                        id: idSHeadSectAddProp
 
                         Layout.fillWidth: true
+                        Layout.bottomMargin: bottomMarginContentSect
 
                         nameSection: qsTr("Preparation data")
                     }
 
-                    CustomCheckbox {
-                        id: idPreparationDp
-                        Layout.leftMargin: marginContentSect
-
-                        nameChb: qsTr("Preparation data")
-
-                        // onCheckStateChanged: idPageProcessingPheno.sendForm['preparation']['checked'] = checked
-                    }
-
                     ColumnLayout {
-                        // spacing: 3
+                        spacing: comSpacing
                         Layout.fillWidth: true
                         Layout.leftMargin: marginContentSect
 
-                        enabled: idPreparationDp.checked
-                        opacity: idPreparationDp.checked ? 1 : 0.5
+                        enabled: idSHeadSectAddProp.checked
+                        opacity: idSHeadSectAddProp.checked ? 1 : 0.5
 
                         GroupBox {
                             padding: 0
@@ -86,10 +78,6 @@ TemplatePage {
                                 id: idCheckBoxUpdataDB
 
                                 nameChb: qsTr("Updata data base")
-
-                                // onCheckStateChanged: {
-                                //     idPageProcessingPheno.sendForm['preparation']['updatabd']['checked'] = checked
-                                // }
                             }
 
                             contentData: RowLayout {
@@ -153,23 +141,25 @@ TemplatePage {
                 Layout.fillWidth: true
 
                 contentItem: ColumnLayout {
+                    spacing: comSpacing
                     anchors.fill: parent
 
                     // Header section
                     HeaderSectionContent {
                         id: idHeadSectProper                        
                         Layout.fillWidth: true
+                        Layout.bottomMargin: bottomMarginContentSect
 
                         nameSection: qsTr("Phenotype settings")
                     }
 
                     ColumnLayout {
-                        spacing: 5
+                        spacing: comSpacing
                         Layout.fillWidth: true
                         Layout.leftMargin: marginContentSect
 
-                        enabled: !idPreparationDp.checked
-                        opacity: !idPreparationDp.checked ? 1 : 0.5
+                        enabled: !idSHeadSectAddProp.checked
+                        opacity: !idSHeadSectAddProp.checked ? 1 : 0.5
 
                         InputGroupFolder {
                             id: idDirDataFiles
@@ -223,6 +213,24 @@ TemplatePage {
                             nameChb: qsTr("Accumulate data")
                         }
 
+                        ColumnLayout {
+                            spacing: comSpacing
+                            Layout.fillWidth: true
+
+                            CustomCheckbox {
+                                id: idCheckBoxPed
+
+                                nameChb: qsTr("Pedigree")
+                            }
+
+                            CustomCheckbox {
+                                id: idCheckBoxDaug
+
+                                nameChb: qsTr("Daughters")
+                            }
+
+                        }
+
                         GroupBox {
                             padding: 0
                             Layout.fillWidth: true
@@ -231,10 +239,6 @@ TemplatePage {
                             label: CustomCheckbox {
                                 id: idCBSelectData
                                 nameChb: qsTr("Selection data:")
-
-                                // onCheckStateChanged: {
-                                //     idPageProcessingPheno.sendForm['selectdata']['checked'] = checked
-                                // }
                             }
 
                             contentData: ColumnLayout {
@@ -264,24 +268,6 @@ TemplatePage {
                             }
 
                             background: null
-                        }
-
-                        ColumnLayout {
-                            spacing: 0
-                            Layout.fillWidth: true                            
-
-                            CustomCheckbox {
-                                id: idCheckBoxPed
-
-                                nameChb: qsTr("Pedigree")
-                            }
-
-                            CustomCheckbox {
-                                id: idCheckBoxDaug
-
-                                nameChb: qsTr("Daughters")
-                            }
-
                         }
 
                     }

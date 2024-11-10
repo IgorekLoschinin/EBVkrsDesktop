@@ -22,7 +22,7 @@ TemplatePage {
         'numthread': idInputNumThred.text.length === 0 ? null : idInputNumThred.text,
         'disableoptim': idCheckBoxPrivDisOpt.checked,
         'gengivc': {
-            'status': idCheckBoxGivc.checked,
+            'status': idHeadSectGivc.checked,
             'dirreport': idInputDirReports.inputText.length === 0 ? null : idInputDirReports.inputText,
             'typereport': idGivcTypeReport.displayText
         }
@@ -233,22 +233,18 @@ TemplatePage {
                     anchors.fill: parent
 
                     // Header section
-                    HeaderSectionContent {
+                    SwitchHeadSectCont {
                         id: idHeadSectGivc
+
                         Layout.fillWidth: true
+                        Layout.bottomMargin: bottomMarginContentSect
 
                         nameSection: qsTr("Sample for givc")
                     }
 
-                    CustomCheckbox {
-                        id: idCheckBoxGivc
-
-                        nameChb: qsTr("Generating files for givc")
-                    }
-
                     ColumnLayout {
-                        enabled: idCheckBoxGivc.checked
-                        opacity: idCheckBoxGivc.checked ? 1 : 0.5
+                        enabled: idHeadSectGivc.checked
+                        opacity: idHeadSectGivc.checked ? 1 : 0.5
 
                         InputGroupFolder {
                             id: idInputDirReports

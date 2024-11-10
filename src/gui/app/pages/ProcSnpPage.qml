@@ -12,13 +12,13 @@ TemplatePage {
     sendForm: {
         'id': 'procSnp',
         'snp': {
-            'checked': idControlSnpProc.checked,
+            'checked': idSectonSnpProc.checked,
             'refSnpFile': idInputFileSnpRef.inputText.length === 0 ? null : idInputFileSnpRef.inputText,
             'sampleFile': idInputSampleD.inputText.length === 0 ? null : idInputSampleD.inputText,
             'updateFile': idInputUpdataD.inputText.length === 0 ? null : idInputUpdataD.inputText,
         },
         'fr': {
-            'checked': idControlFinalReport.checked,
+            'checked': idHeadSectProperFR.checked,
             'dirFileFr': idInputDirFrFiles.inputText.length === 0 ? null : idInputDirFrFiles.inputText,
             'callRate': idInputCR.displayText.length === 0 ? null : idInputCR.displayText,
             'saveCrFile': {
@@ -53,26 +53,21 @@ TemplatePage {
                     anchors.fill: parent
 
                     // Header section
-                    HeaderSectionContent {
-                        id: idHeadSectProper
+                    SwitchHeadSectCont {
+                        id: idSectonSnpProc
 
                         Layout.fillWidth: true
+                        Layout.bottomMargin: bottomMarginContentSect
 
                         nameSection: qsTr("Snp processing")
-                    }
-
-                    CustomCheckbox {
-                        id: idControlSnpProc
-
-                        nameChb: qsTr("SNP Control section")
                     }
 
                     ColumnLayout {
                         Layout.fillWidth: true
                         Layout.leftMargin: marginContentSect
 
-                        enabled: idControlSnpProc.checked
-                        opacity: idControlSnpProc.checked ? 1 : 0.5
+                        enabled: idSectonSnpProc.checked
+                        opacity: idSectonSnpProc.checked ? 1 : 0.5
 
                         InputGroupFile {
                             id: idInputFileSnpRef
@@ -138,25 +133,21 @@ TemplatePage {
                     anchors.fill: parent
 
                     // Header section
-                    HeaderSectionContent {
+                    SwitchHeadSectCont {
                         id: idHeadSectProperFR
+
                         Layout.fillWidth: true
+                        Layout.bottomMargin: bottomMarginContentSect
 
                         nameSection: qsTr("Final reports")
-                    }
-
-                    CustomCheckbox {
-                        id: idControlFinalReport
-
-                        nameChb: qsTr("FR Control section")
                     }
 
                     ColumnLayout {
                         Layout.fillWidth: true
                         Layout.leftMargin: marginContentSect
 
-                        enabled: idControlFinalReport.checked
-                        opacity: idControlFinalReport.checked ? 1 : 0.5
+                        enabled: idHeadSectProperFR.checked
+                        opacity: idHeadSectProperFR.checked ? 1 : 0.5
 
                         InputGroupFolder {
                             id: idInputDirFrFiles
