@@ -1,8 +1,7 @@
-import QtCore
+
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import QtQuick.Dialogs
 import "controls"
 
 
@@ -155,73 +154,32 @@ TemplatePage {
                             background: null
                         }
 
-                        // Variance table
-                        ColumnLayout {
+                        RowLayout {
                             Layout.fillWidth: true
 
-                            RowLayout {
-                                Layout.fillWidth: true
+                            Text {
+                                Layout.rightMargin: 15
 
-                                Text {
-                                    Layout.rightMargin: 15
-
-                                    text: qsTr("Variance calculation method:")
-                                    font.family: "Segoe UI"
-                                    font.pixelSize: sizeTextInSect
-                                    color: txtSection
-                                }
-
-                                CustomComboBox {
-                                    id: idSelectTypeCalVar
-                                    model: ["all", "conf"]
-                                }
+                                text: qsTr("Variance calculation method:")
+                                font.family: "Segoe UI"
+                                font.pixelSize: sizeTextInSect
+                                color: txtSection
                             }
 
-                            RowLayout {
-                                spacing: 0
-                                visible: idSelectTypeCalVar.displayText === "conf" ? true : false
-                                Layout.fillWidth: true
-
-                                TableInputVar {
-                                    id: tableInVariance
-                                    Layout.fillHeight: true
-                                }
-
-                                ColumnLayout {
-
-                                    CustomBtn {
-                                        nameBtn: qsTr("load")
-
-                                        implicitWidth: 100
-
-                                        onClicked: idLoadFileConf.open()
-
-                                        FileDialog {
-                                            id: idLoadFileConf
-                                            currentFolder: StandardPaths.standardLocations(StandardPaths.DocumentsLocation)[0]
-                                            onAccepted: console.log(selectedFile)
-                                        }
-                                    }
-
-                                    CustomBtn {
-                                        nameBtn: qsTr("save")
-
-                                        implicitWidth: 100
-
-                                        onClicked: idSaveFileConf.open()
-
-                                        FileDialog {
-                                            id: idSaveFileConf
-                                            fileMode: FileDialog.SaveFile
-                                            currentFolder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
-                                            onAccepted: console.log(selectedFile)
-                                        }
-                                    }
-
-                                }
-
+                            CustomComboBox {
+                                id: idSelectTypeCalVar
+                                model: ["all", "conf"]
                             }
+                        }
 
+                        // Variance table
+                        TableInputVar {
+                            id: tableInVariance
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            Layout.topMargin: 15
+
+                            visible: idSelectTypeCalVar.displayText === "conf" ? true : false
                         }
 
                     }
