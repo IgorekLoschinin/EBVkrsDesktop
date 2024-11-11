@@ -12,23 +12,23 @@ TemplatePage {
     sendForm: {
         'id': 'procSnp',
         'snp': {
-            'checked': idControlSnpProc.checked,
-            'refSnpFile': idInputFileSnpRef.inputText.length ? idInputFileSnpRef.inputText : null,
-            'sampleFile': idInputSampleD.inputText.length ? idInputSampleD.inputText : null,
-            'updateFile': idInputUpdataD.inputText.length ? idInputUpdataD.inputText : null,
+            'checked': idSectonSnpProc.checked,
+            'refSnpFile': idInputFileSnpRef.inputText.length === 0 ? null : idInputFileSnpRef.inputText,
+            'sampleFile': idInputSampleD.inputText.length === 0 ? null : idInputSampleD.inputText,
+            'updateFile': idInputUpdataD.inputText.length === 0 ? null : idInputUpdataD.inputText,
         },
         'fr': {
-            'checked': idControlFinalReport.checked,
-            'dirFileFr': idInputDirFrFiles.inputText.length ? idInputDirFrFiles.inputText : null,
-            'callRate': idInputCR.displayText.length ? idInputCR.displayText : null,
+            'checked': idHeadSectProperFR.checked,
+            'dirFileFr': idInputDirFrFiles.inputText.length === 0 ? null : idInputDirFrFiles.inputText,
+            'callRate': idInputCR.displayText.length === 0 ? null : idInputCR.displayText,
             'saveCrFile': {
                 'checked': idCheckBoxSaveCrFile.checked,
-                'filename': idInputFilenameSave.displayText.length ? idInputFilenameSave.displayText : null,
+                'filename': idInputFilenameSave.displayText.length === 0 ? null : idInputFilenameSave.displayText,
             },
             'addsuff': {
                 'checked': idCBAddSuffSex.checked,
                 'add': idCBAddSuff.checked,
-                'fromFile': idInputSexFromFile.inputText.length ? idInputSexFromFile.inputText : null,
+                'fromFile': idInputSexFromFile.inputText.length === 0 ? null : idInputSexFromFile.inputText,
             }
         }
     }
@@ -53,23 +53,21 @@ TemplatePage {
                     anchors.fill: parent
 
                     // Header section
-                    HeaderSectionContent {
-                        id: idHeadSectProper
+                    SwitchHeadSectCont {
+                        id: idSectonSnpProc
 
                         Layout.fillWidth: true
+                        Layout.bottomMargin: bottomMarginContentSect
 
                         nameSection: qsTr("Snp processing")
-                    }
-
-                    CustomCheckbox {
-                        id: idControlSnpProc
-
-                        nameChb: qsTr("SNP Control section")
                     }
 
                     ColumnLayout {
                         Layout.fillWidth: true
                         Layout.leftMargin: marginContentSect
+
+                        enabled: idSectonSnpProc.checked
+                        opacity: idSectonSnpProc.checked ? 1 : 0.5
 
                         InputGroupFile {
                             id: idInputFileSnpRef
@@ -135,22 +133,21 @@ TemplatePage {
                     anchors.fill: parent
 
                     // Header section
-                    HeaderSectionContent {
+                    SwitchHeadSectCont {
                         id: idHeadSectProperFR
+
                         Layout.fillWidth: true
+                        Layout.bottomMargin: bottomMarginContentSect
 
                         nameSection: qsTr("Final reports")
-                    }
-
-                    CustomCheckbox {
-                        id: idControlFinalReport
-
-                        nameChb: qsTr("FR Control section")
                     }
 
                     ColumnLayout {
                         Layout.fillWidth: true
                         Layout.leftMargin: marginContentSect
+
+                        enabled: idHeadSectProperFR.checked
+                        opacity: idHeadSectProperFR.checked ? 1 : 0.5
 
                         InputGroupFolder {
                             id: idInputDirFrFiles
@@ -174,6 +171,11 @@ TemplatePage {
                                 implicitWidth: 80
 
                                 phText: qsTr("0.90")
+
+                                validator: DoubleValidator {
+                                    bottom: 0
+                                    top: 1
+                                }
                             }
 
                             Label {

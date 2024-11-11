@@ -6,13 +6,10 @@ CheckBox {
 
     property string nameChb: qsTr("")
 
-    rightPadding: 0
-    topPadding: 0
-    bottomPadding: 4
+    padding: 0
 
-    contentItem: Text {
-        topPadding: 4
-        leftPadding: idCustomCheckBox.indicator.width
+    contentItem: Text {        
+        leftPadding: idCustomCheckBox.indicator.width + 6
 
         text: qsTr(nameChb)
         font.family: "Segoe UI"

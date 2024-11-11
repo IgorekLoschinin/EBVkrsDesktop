@@ -9,9 +9,11 @@ Page {
     property string urlPage: ""
     property var sendForm: null
 
+    readonly property int comSpacing: 8
     readonly property int leftRightMargin: 29
     readonly property int marginContentD: 30
     readonly property int marginContentSect: 15
+    readonly property int bottomMarginContentSect: 15
 
     readonly property int sizeTextLblSect: 17  // text size for section titles
     readonly property int sizeTextInSect: 16  // text size inside sections
