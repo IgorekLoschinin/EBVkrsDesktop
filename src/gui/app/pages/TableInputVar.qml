@@ -12,9 +12,14 @@ Control {
     readonly property var modFtVar: modelFeatureVar
 
     contentItem: RowLayout {
+
+        Item {
+            Layout.fillWidth: true
+        }
+
         ColumnLayout {
-            // Header table
-            Layout.alignment: Qt.AlignRight
+            // Header table            
+
             RowLayout {
                 spacing: 10
 
@@ -24,7 +29,9 @@ Control {
                     implicitWidth: 80
                     contentItem: Label {
                         text: "VarE"
-                        color: "plum"
+                        font.pixelSize: sizeTextInSect
+                        font.family: "Segoe UI"
+                        color: txtSection
 
                         leftPadding: 13
                     }
@@ -34,7 +41,9 @@ Control {
                     implicitWidth: 80
                     contentItem: Label {
                         text: "VarG"
-                        color: "plum"
+                        font.pixelSize: sizeTextInSect
+                        font.family: "Segoe UI"
+                        color: txtSection
 
                         leftPadding: 13
                     }
@@ -63,7 +72,9 @@ Control {
                             implicitWidth: 80
                             contentItem: Label {
                                 text: name
-                                color: "plum"
+                                font.pixelSize: sizeTextInSect
+                                font.family: "Segoe UI"
+                                color: txtSection
 
                                 horizontalAlignment: Qt.AlignRight
                             }
@@ -131,25 +142,15 @@ Control {
 
         RowLayout {
             spacing: 5
+            Layout.fillWidth: true
 
-            CustomBtn {
-                nameBtn: qsTr("load")
+            ButtonFileOpen {
+                id: idBtnFileSave
+                implicitWidth: 80
 
-                implicitWidth: 100
-
-                onClicked: idLoadFileConf.open()
-
-                FileDialog {
-                    id: idLoadFileConf
-                    currentFolder: StandardPaths.standardLocations(StandardPaths.DocumentsLocation)[0]
-                    onAccepted: console.log(selectedFile)
-                }
-            }
-
-            CustomBtn {
-                nameBtn: qsTr("save")
-
-                implicitWidth: 100
+                sizeImgWH: 25
+                sourceImg: "../../../icons/save3.svg"
+                switchBgColor: true
 
                 onClicked: idSaveFileConf.open()
 
@@ -161,6 +162,27 @@ Control {
                 }
             }
 
+            ButtonFileOpen {
+                id: idBtnFileUpload
+                implicitWidth: 80
+
+                sizeImgWH: 25
+                sourceImg: "../../../icons/upload3.svg"
+                switchBgColor: true
+
+                onClicked: idLoadFileConf.open()
+
+                FileDialog {
+                    id: idLoadFileConf
+                    fileMode: FileDialog.OpenFile
+                    currentFolder: StandardPaths.standardLocations(StandardPaths.DocumentsLocation)[0]
+                    onAccepted: console.log(selectedFile)
+                }
+            }
+        }
+
+        Item {
+            Layout.fillWidth: true
         }
     }
 }

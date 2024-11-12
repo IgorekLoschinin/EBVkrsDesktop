@@ -5,14 +5,18 @@ Button {
     id: idBtnFileOpen
 
     property color colorImg: "#F5EDED"
+    property string sourceImg: ""
+    property int sizeImgWH: 19
+    property bool switchBgColor: false
 
-    property color bgBtnColor: "#5d6575"
-    property color borderColorPressed: "#4A515E"
+
+    readonly property color bgBtnColor: "#5d6575"
+    readonly property color borderColorPressed: "#4A515E"
 
     // DYNAMIC COLOR
-    property color colorDef: "transparent"
-    property color colorMouseOver: "#8792A8"
-    property color colorPressed: "#4A515E"
+    readonly property color colorDef: "transparent"
+    readonly property color colorMouseOver: "#8792A8"
+    readonly property color colorPressed: "#4A515E"
 
     function dynamicColor (idBtn) {
         if (idBtn.down) {
@@ -23,16 +27,16 @@ Button {
             }
         }
 
-        return colorDef
+        return switchBgColor ? bgBtnColor : colorDef
     }
 
     contentItem: ColorImage {
-        source: "../../../icons/folder.svg"
+        source: idBtnFileOpen.sourceImg
         color: idBtnFileOpen.colorImg
 
         fillMode: Image.PreserveAspectFit
-        sourceSize.width: 19
-        sourceSize.height: 19
+        sourceSize.width: idBtnFileOpen.sizeImgWH
+        sourceSize.height: idBtnFileOpen.sizeImgWH
     }
 
     background: Rectangle {
