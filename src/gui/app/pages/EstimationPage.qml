@@ -16,23 +16,9 @@ TemplatePage {
             'gblup': idRadioBtnGBlupEbv.checked
         },
         'feature': idFeatureEbv.displayText,
-        'variance': getVariance(),
+        'variance': idSelectTypeCalVar.displayText === "conf" ? tableInVariance.getVariance(tableInVariance.modFtVar) : tableInVariance.defVariance,
         'parallel': idCheckBoxParallelEst.checked,
         'numthread': idInputNumThredEst.text.length === 0 ? null : idInputNumThredEst.text,
-    }
-
-    function getVariance() {
-        var allData = {};
-        for (var i = 0; i < tableInVariance.modFtVar.count; i++) {
-            var item = tableInVariance.modFtVar.get(i);
-
-            allData[item.name] = {
-                "varE": item.varE,
-                "varG": item.varG
-            };
-        }
-
-        return allData
     }
 
     contentData: Control {

@@ -10,6 +10,21 @@ Control {
     id: tabInVar
 
     readonly property var modFtVar: modelFeatureVar
+    property var defVariance: null
+
+    function getVariance(ftVar) {
+        var allData = {};
+        for (var i = 0; i < ftVar.count; i++) {
+            var item = ftVar.get(i);
+
+            allData[item.name] = {
+                "varE": item.varE,
+                "varG": item.varG
+            };
+        }
+
+        return allData
+    }
 
     contentItem: RowLayout {
 
@@ -135,6 +150,7 @@ Control {
                                 varG: "0"
                             });
                         }
+                        defVariance = getVariance(modelFeatureVar);
                     }
                 }
             }
