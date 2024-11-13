@@ -138,9 +138,7 @@ Control {
 
                     Component.onCompleted: {
                         // Сюда с бэкенда отправляется список признаков
-                        var featureNames = ["tip", "kt", "rost", "gt", "pz", "conform",
-                                            "1tip", "1kt", "1rost", "1gt", "1pz", "1conform",
-                                            "2tip", "2kt", "2rost", "2gt", "2pz", "2conform"];
+                        var featureNames = ["tip", "kt", "rost", "gt", "pz", "conform"];
 
                         for (var i = 0; i < featureNames.length; i++) {
                             modelFeatureVar.append({

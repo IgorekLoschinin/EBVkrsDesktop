@@ -35,7 +35,7 @@ TemplatePage {
                 padding: 0
 
                 Layout.fillWidth: true
-                Layout.topMargin: 20
+                Layout.topMargin: 10
 
                 contentItem: ColumnLayout {
                     anchors.fill: parent
@@ -172,6 +172,13 @@ TemplatePage {
                 }
 
                 background: null
+            }
+            Rectangle {
+                color: 'white'
+                height: 1
+
+                Layout.fillWidth: true
+                Layout.bottomMargin: bottomMarginContentSect
             }
 
             Item { Layout.fillHeight: true }
