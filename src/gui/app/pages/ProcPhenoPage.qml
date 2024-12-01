@@ -10,15 +10,15 @@ TemplatePage {
     urlPage: qsTr("Processing -> phenotype")
 
     sendForm: {
-        'id': 'procPheno',
+        'id': 'procpheno',
         'preparation': {
             'checked': idSHeadSectAddProp.checked,
             'updatabd': {
                 'checked': idCheckBoxUpdataDB.checked,
-                'pathTo': idInputUpdateTo.inputText.length === 0 ? null : idInputUpdateTo.inputText,
-                'pathFrom': idInputUpdateFrom.inputText.length === 0 ? null : idInputUpdateFrom.inputText,
+                'pathto': idInputUpdateTo.inputText.length === 0 ? null : idInputUpdateTo.inputText,
+                'pathfrom': idInputUpdateFrom.inputText.length === 0 ? null : idInputUpdateFrom.inputText,
             },
-            'searchDaug': idInputSearchDaug.inputText.length === 0 ? null : idInputSearchDaug.inputText,
+            'searchdaug': idInputSearchDaug.inputText.length === 0 ? null : idInputSearchDaug.inputText,
         },
         'phendata': idDirDataFiles.inputText.length === 0 ? null : idDirDataFiles.inputText,
         'feature': idSelectFeatureDp.displayText,

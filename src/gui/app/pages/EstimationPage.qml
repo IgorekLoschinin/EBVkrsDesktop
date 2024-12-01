@@ -1,4 +1,3 @@
-
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -11,7 +10,7 @@ TemplatePage {
     urlPage: qsTr("Estimate breeding value")
     sendForm: {
         'id': 'ebv',
-        'estMethod': {
+        'estmethod': {
             'blup': idRadioBtnBlupEbv.checked,
             'gblup': idRadioBtnGBlupEbv.checked
         },

@@ -76,4 +76,12 @@ StackLayout {
         ModelingPage {}
     }
 
+    Connections {
+        target: backend
+
+        function onRunMesg(data) {
+            console.log(data)
+        }
+    }
+
 }
