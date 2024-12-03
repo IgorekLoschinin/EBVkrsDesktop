@@ -1,25 +1,21 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# Copyright (C) 2023-2024 Igor Loschinin.
+# Distributed under the lgplv3 software license, see the accompanying
+# Everyone is permitted to copy and distribute verbatim copies
+# of this license document, but changing it is not allowed.
+
+__author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
+
 import sys
 
 from pathlib import Path
 
-from PySide6.QtCore import QObject, Slot, Signal
 from PySide6.QtGui import QGuiApplication
 from PySide6.QtQml import QQmlApplicationEngine
 
-
-class Backend(QObject):
-
-	# printPheno = Signal(dict)
-
-	def __init__(self) -> None:
-		QObject.__init__(self)
-
-	@Slot(dict)
-	def printFormProc(self, data: dict):
-		print(data)
+from src import Backend
 
 
 if __name__ == "__main__":
