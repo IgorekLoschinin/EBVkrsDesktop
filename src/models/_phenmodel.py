@@ -37,12 +37,14 @@ class PhenoModel(IModel):
 			raise err
 
 	def processing(self) -> None:
+		"""  """
 
 		dp_args = {}
 
 		if self._settings.preparation.checked:
 			if self._settings.preparation.updatabd.checked:
 				dp_args = {
+					"phen_files": self._settings.phendata,
 					"update": [
 						self._settings.preparation.updatabd.pathto,
 						self._settings.preparation.updatabd.pathfrom
@@ -50,34 +52,37 @@ class PhenoModel(IModel):
 					"output_dir": self._out_d
 				}
 
-			dp_args = {
-				"search_daugh": self._settings.preparation.searchdaug,
-				"output_dir": self._out_d
-			}
-
-		if self._settings.selectdata.checked:
-			dp_args = {
-				"phen_files": self._settings.phendata,
-				"feature": self._settings.feature,
-				"kod_xoz": self._settings.selectdata.filefarm,
-				"num_lact": self._settings.numlact,
-				"cal_ped": self._settings.ped,
-				"cal_daugh": self._settings.daughters,
-				"rm_daugh": self._settings.selectdata.removedaug,
-				"accum": self._settings.accummeth,
-				"output_dir": self._out_d
-			}
+			else:
+				dp_args = {
+					"phen_files": self._settings.preparation.searchdaug.datafiles,
+					"search_daugh": self._settings.preparation.searchdaug.filesires,
+					"output_dir": self._out_d
+				}
 
 		else:
-			dp_args = {
-				"phen_files": self._settings.phendata,
-				"feature": self._settings.feature,
-				"num_lact": self._settings.numlact,
-				"cal_ped": self._settings.ped,
-				"cal_daugh": self._settings.daughters,
-				"accum": self._settings.accummeth,
-				"output_dir": self._out_d
-			}
+			if self._settings.selectdata.checked:
+				dp_args = {
+					"phen_files": self._settings.phendata,
+					"feature": self._settings.feature,
+					"kod_xoz": self._settings.selectdata.filefarm,
+					"num_lact": self._settings.numlact,
+					"cal_ped": self._settings.ped,
+					"cal_daugh": self._settings.daughters,
+					"rm_daugh": self._settings.selectdata.removedaug,
+					"accum": self._settings.accummeth,
+					"output_dir": self._out_d
+				}
+
+			else:
+				dp_args = {
+					"phen_files": self._settings.phendata,
+					"feature": self._settings.feature,
+					"num_lact": self._settings.numlact,
+					"cal_ped": self._settings.ped,
+					"cal_daugh": self._settings.daughters,
+					"accum": self._settings.accummeth,
+					"output_dir": self._out_d
+				}
 
 		dp = DataProcessing(**dp_args)
 		dp.run()

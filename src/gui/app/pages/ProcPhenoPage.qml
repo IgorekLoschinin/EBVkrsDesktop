@@ -18,10 +18,13 @@ TemplatePage {
                 'pathto': idInputUpdateTo.inputText.length === 0 ? null : idInputUpdateTo.inputText,
                 'pathfrom': idInputUpdateFrom.inputText.length === 0 ? null : idInputUpdateFrom.inputText,
             },
-            'searchdaug': idInputSearchDaug.inputText.length === 0 ? null : idInputSearchDaug.inputText,
+            'searchdaug': {
+                'datafiles': idDirDataFilesForSearch.inputText.length === 0 ? null : idDirDataFilesForSearch.inputText,
+                'filesires': idInputSearchDaug.inputText.length === 0 ? null : idInputSearchDaug.inputText,
+            }
         },
         'phendata': idDirDataFiles.inputText.length === 0 ? null : idDirDataFiles.inputText,
-        'feature': idSelectFeatureDp.displayText,
+        'feature': !idControlSelectFtDp.checked ? null : idSelectFeatureDp.displayText,
         'accummeth': idAccumulateDp.checked,
         'numlact': idNumLactation.currentIndex,
         'ped': idCheckBoxPed.checked,
@@ -114,14 +117,41 @@ TemplatePage {
                             background: null
                         }
 
-                        InputGroupFile {
-                            id: idInputSearchDaug
-                            nameField: qsTr("Search daughters:")
+                        GroupBox {
+                            padding: 0
+                            Layout.fillWidth: true
 
                             enabled: !idCheckBoxUpdataDB.checked
                             opacity: !idCheckBoxUpdataDB.checked ? 1 : 0.5
 
-                            Layout.fillWidth: true
+                            label: Label {
+                                text: qsTr("Search daughters:")
+                                font.family: "Segoe UI"
+                                font.pixelSize: sizeTextInSect
+                                color: txtSection
+                            }
+
+                            contentData: ColumnLayout {
+                                anchors.fill: parent
+                                anchors.leftMargin: 30
+
+                                InputGroupFolder {
+                                    id: idDirDataFilesForSearch
+                                    nameField: qsTr("Dir data files:")
+
+                                    Layout.fillWidth: true
+                                }
+
+                                InputGroupFile {
+                                    id: idInputSearchDaug
+                                    nameField: qsTr("File bulls:")
+
+                                    Layout.fillWidth: true
+                                }
+
+                            }
+
+                            background: null
                         }
 
                     }
@@ -174,27 +204,6 @@ TemplatePage {
                             Text {
                                 Layout.rightMargin: 15
 
-                                text: qsTr("Select of Feature:")
-                                font.pixelSize: sizeTextInSect
-                                font.family: "Segoe UI"
-                                color: txtSection
-                            }
-
-                            CustomComboBox {
-                                id: idSelectFeatureDp
-                                currentIndex: 0
-                                displayText: currentText
-                                model: ['milk', 'conform', 'reprod', 'scs']
-                            }
-
-                        }
-
-                        RowLayout {
-                            Layout.fillWidth: true
-
-                            Text {
-                                Layout.rightMargin: 15
-
                                 text: qsTr("Number lactation: ")
                                 font.pixelSize: sizeTextInSect
                                 color: txtSection
@@ -204,6 +213,38 @@ TemplatePage {
                                 id: idNumLactation
                                 currentIndex: 1
                                 model: [0, 1, 2, 3]
+                            }
+                        }
+
+                        CustomCheckbox {
+                            id: idControlSelectFtDp
+
+                            contentItem: RowLayout {
+                                Layout.fillWidth: true
+
+                                Text {
+                                    leftPadding: idControlSelectFtDp.indicator.width + 6
+
+                                    text: qsTr("Select of Feature:")
+                                    font.pixelSize: sizeTextInSect
+                                    font.family: "Segoe UI"
+                                    color: txtSection
+
+                                    verticalAlignment: Text.AlignVCenter
+                                    horizontalAlignment: Text.AlignHCenter
+                                }
+
+                                CustomComboBox {
+                                    id: idSelectFeatureDp
+
+                                    enabled: idControlSelectFtDp.checked
+                                    opacity: idControlSelectFtDp.checked ? 1 : 0.5
+
+                                    currentIndex: 0
+                                    displayText: currentText
+                                    model: ['milk', 'conform', 'reprod', 'scs']
+                                }
+
                             }
                         }
 

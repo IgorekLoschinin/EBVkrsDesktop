@@ -10,8 +10,6 @@ Control {
 
     property string nameField: ""
     property string placeholderText: qsTr("Enter file path...")
-    property bool selectFile: false
-    property bool selectFolder: true
 
     property string inputText: ''
 

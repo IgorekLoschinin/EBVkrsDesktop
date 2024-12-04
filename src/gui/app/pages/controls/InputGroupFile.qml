@@ -10,10 +10,9 @@ Control {
 
     property string nameField: ""
     property string placeholderText: qsTr("Enter file path...")
-    property bool selectFile: false
-    property bool selectFolder: true
-
     property string inputText: ''
+
+    property string srcImg: "../../../icons/folder.svg"
 
     contentItem: RowLayout {
         spacing: 2
@@ -45,7 +44,7 @@ Control {
         ButtonFileOpen {
             id: idBtnFileOpen
             hoverEnabled: idInputGroupFile.enabled
-            sourceImg: "../../../icons/folder.svg"
+            sourceImg: idInputGroupFile.srcImg
 
             onClicked: windowDialog.open()
         }

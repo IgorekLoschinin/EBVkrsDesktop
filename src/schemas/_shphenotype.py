@@ -18,10 +18,15 @@ class UpdataDBM(BaseModel):
 	pathfrom: None | str
 
 
+class SearchDaughM(BaseModel):
+	datafiles: None | str
+	filesires: None | str
+
+
 class PreparationM(BaseModel):
 	checked: bool
 	updatabd: UpdataDBM
-	searchdaug: None | str
+	searchdaug: SearchDaughM
 
 
 class SelectDataM(BaseModel):
@@ -34,7 +39,7 @@ class RequestPheno(BaseModel):
 	id: str
 	preparation: PreparationM
 	phendata: None | str
-	feature: str
+	feature: None | str
 	accummeth: bool
 	numlact: int
 	ped: bool
