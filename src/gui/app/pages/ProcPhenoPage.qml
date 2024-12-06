@@ -95,6 +95,13 @@ TemplatePage {
                                     font.family: "Segoe UI"
                                     font.pixelSize: sizeTextInSect
                                     color: txtSection
+
+                                    ToolTip {
+                                        // visible: true
+                                        text:  qsTr("Это кастомная подсказка")
+                                        // delay: 500 // Задержка 500 мс перед появлением
+                                        // timeout: 3000 // Исчезнет через 3 секунды
+                                    }
                                 }
 
                                 InputGroupFolder {

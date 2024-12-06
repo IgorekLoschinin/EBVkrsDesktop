@@ -8,7 +8,6 @@
 
 __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
 
-from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 from pathlib import Path
 
 from .imodel import IModel
@@ -56,9 +55,7 @@ class ModelHandler(object):
 				case None:
 					return None
 
-			# self.model.processing()
-			with ThreadPoolExecutor(max_workers=1) as executor:
-				executor.submit(self.model.processing)
+			self.model.processing()
 
 		except Exception as e:
 			# logger.error()

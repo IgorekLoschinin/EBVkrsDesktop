@@ -27,8 +27,14 @@ class Backend(QObject):
 
 	@property
 	def common_namespace(self) -> Path:
-		""" The property returns the directory of the general environment in
-		which files are saved when the program is executed """
+		"""Returns the absolute path to the application's workspace directory.
+
+		This method constructs a path by using the current working directory
+		(cwd) and appending the `WORKSPACE_DIR` subdirectory.
+
+		:return: Path: A `Path` object representing the absolute path to the
+			workspace directory.
+		"""
 
 		return Path().cwd().joinpath(WORKSPACE_DIR)
 
@@ -53,7 +59,7 @@ class Backend(QObject):
 			print(e)
 
 		print(data.get("id"))
-		self.runMesg.emit(data)
+		self.runMesg.emit("hgjhghgjgjh")
 
 	@Slot(dict)
 	def stop(self) -> None:
