@@ -10,20 +10,22 @@ __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
 
 from pathlib import Path
 
-from PySide6.QtCore import QObject, Slot, Signal
+from PySide6.QtCore import QObject, Slot, Signal, QThread
 
 from .models.modelhandler import ModelHandler
-from src.libkrs.core.settings import WORKSPACE_DIR
+from .libkrs.core.settings import WORKSPACE_DIR
 
 
 class Backend(QObject):
 
-	runMesg = Signal(dict)
+	runMesg = Signal(str)
 	runSig = Signal(dict)
 	stopSig = Signal()
 
 	def __init__(self) -> None:
 		QObject.__init__(self)
+
+		self._thread = None
 
 	@property
 	def common_namespace(self) -> Path:
@@ -48,11 +50,24 @@ class Backend(QObject):
 		self.__make_dir_workspace()
 
 		try:
-			model_handler = ModelHandler(
-				data=data,
-				output_dir=self.common_namespace
-			)
-			model_handler.handle()
+			# self._thread = QThread()
+			# self.model_handler = ModelHandler(
+			# 	data=data,
+			# 	output_dir=self.common_namespace
+			# )
+			# # model_handler.handle()
+			# self.model_handler.moveToThread(self._thread)
+			#
+			# # Связываем сигналы и слоты
+			# self._thread.started.connect(self.model_handler.handle)  # Запуск run при старте потока
+			# self.model_handler.exitCode.connect(self._exit_code)  # Сигнал завершения
+			# self.model_handler.exitCode.connect(self._thread.quit)  # Остановка потока
+			# self._thread.finished.connect(self.model_handler.deleteLater)  # Удаление worker
+			# self._thread.finished.connect(self._thread.deleteLater)  # Удаление потока
+			#
+			# self._thread.start()  # Запуск потока
+
+			...
 
 		except Exception as e:
 			#logger.exception()
@@ -64,6 +79,10 @@ class Backend(QObject):
 	@Slot(dict)
 	def stop(self) -> None:
 		...
+
+	def _exit_code(self, code: int) -> None | int:
+		print(code)
+		return None
 
 	def __make_dir_workspace(self) -> None:
 		""" Creates a working directory - a directory of the general

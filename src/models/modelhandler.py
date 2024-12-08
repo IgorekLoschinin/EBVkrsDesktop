@@ -8,6 +8,12 @@
 
 __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
 
+from PySide6.QtCore import (
+	QObject,
+	Slot,
+	Signal
+)
+
 from pathlib import Path
 
 from .imodel import IModel
@@ -19,20 +25,24 @@ from . import (
 )
 
 
-class ModelHandler(object):
+class ModelHandler(QObject):
 	"""  """
+
+	exitCode = Signal(int)
 
 	def __init__(
 			self,
 			data: dict | None = None,
 			output_dir: str | Path | None = None
 	) -> None:
+		QObject.__init__(self)
 
 		self._data = data
 		self._output_dir = output_dir
 
 		self.model: IModel | None = None
 
+	@Slot()
 	def handle(self) -> None:
 
 		try:
@@ -60,7 +70,10 @@ class ModelHandler(object):
 		except Exception as e:
 			# logger.error()
 			print(e)
+			self.exitCode.emit(1)
 			return None
+
+		self.exitCode.emit(0)
 
 	# def _pheno_handler(self, data: dict | None) -> None:
 	# 	mod_pheno = PhenoModel(req_data=data)
