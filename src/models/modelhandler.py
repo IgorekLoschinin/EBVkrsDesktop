@@ -42,10 +42,13 @@ class ModelHandler(QObject):
 
 		self.model: IModel | None = None
 
+		# self._is_running = True
+
 	@Slot()
 	def handle(self) -> None:
 
 		try:
+			# self._is_running = True
 			match self._data.get("id"):
 				case "procpheno":
 					self.model = PhenoModel(
@@ -54,18 +57,30 @@ class ModelHandler(QObject):
 					)
 
 				case "procsnp":
-					...
+					self.model = SnpModel(
+						req_data=self._data,
+						output_dir=self._output_dir
+					)
 
 				case "ebv":
-					...
+					self.model = EbvModel(
+						req_data=self._data,
+						output_dir=self._output_dir
+					)
 
 				case "index":
-					...
+					self.model = IndModel(
+						req_data=self._data,
+						output_dir=self._output_dir
+					)
 
 				case None:
 					return None
 
 			self.model.processing()
+
+			# if self._is_running:
+			self.exitCode.emit(0)
 
 		except Exception as e:
 			# logger.error()
@@ -73,7 +88,10 @@ class ModelHandler(QObject):
 			self.exitCode.emit(1)
 			return None
 
-		self.exitCode.emit(0)
+	@Slot()
+	def stop(self) -> None:
+		# self._is_running = False
+		self.exitCode.emit(1)
 
 	# def _pheno_handler(self, data: dict | None) -> None:
 	# 	mod_pheno = PhenoModel(req_data=data)

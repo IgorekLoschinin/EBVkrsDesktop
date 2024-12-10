@@ -79,7 +79,7 @@ StackLayout {
     Connections {
         target: backend
 
-        function onRunMesg(data) {
+        function onRunSig(data) {
             console.log(data)
         }
     }

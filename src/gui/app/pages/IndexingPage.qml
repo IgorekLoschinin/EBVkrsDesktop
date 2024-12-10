@@ -10,13 +10,11 @@ TemplatePage {
     urlPage: qsTr("Indexing")
     sendForm: {
         'id': 'index',
-        'estmethod': {
-            'blup': idRadioBtnIndBlup.checked,
-            'gblup': idRadioBtnIndGBlup.checked
-        },
+        'estmethod': idComBoxTypeEstMethod.displayText,
         'feature': idSelectFeatureForInd.displayText,
         'animal': idComBoxChooseAnimal.displayText,
-        'typeind': idComBoxTypeInd.displayText,
+        'index': idRadioBtnTypeSubindex.checked,
+        'complex_i': idRadioBtnComplexInd.checked,
         'divdata': idCheckBoxDivData.checked,
         'parallel': idCheckBoxParallelInd.checked,
         'numthread': idInputNumThred.text.length === 0 ? null : idInputNumThred.text,
@@ -67,33 +65,36 @@ TemplatePage {
                             Layout.fillWidth: true
 
                             Text {
-                                text: qsTr("Estimation method:")
+                                text: qsTr("Type index: ")
                                 font.family: "Segoe UI"
                                 font.pixelSize: sizeTextInSect
                                 color: txtSection
                             }
 
                             CustomRadioBtn {
-                                id: idRadioBtnIndBlup
-                                text: qsTr("blup")
+                                id: idRadioBtnTypeSubindex
+                                text: qsTr("subindex")
                                 checked: true
                             }
 
                             CustomRadioBtn {
-                                id: idRadioBtnIndGBlup
-                                text: qsTr("gblup")
+                                id: idRadioBtnComplexInd
+                                text: qsTr("complex")
                             }
                         }
 
                         RowLayout {
-                            spacing: 40
+                            spacing: 30
                             Layout.fillWidth: true
 
                             RowLayout {
                                 Layout.fillWidth: true
 
+                                enabled: idRadioBtnTypeSubindex.checked
+                                opacity: idRadioBtnTypeSubindex.checked ? 1 : 0.5
+
                                 Text {
-                                    Layout.rightMargin: 15
+                                    Layout.rightMargin: 8
 
                                     text: qsTr("Select of Feature:")
                                     font.family: "Segoe UI"
@@ -112,7 +113,7 @@ TemplatePage {
                                 Layout.fillWidth: true
 
                                 Text {
-                                    Layout.rightMargin: 15
+                                    Layout.rightMargin: 8
 
                                     text: qsTr("Choose animal:")
                                     font.family: "Segoe UI"
@@ -131,18 +132,18 @@ TemplatePage {
                                 Layout.fillWidth: true
 
                                 Text {
-                                    Layout.rightMargin: 15
+                                    Layout.rightMargin: 8
 
-                                    text: qsTr("Type index:")
+                                    text: qsTr("Method estimate:")
                                     font.family: "Segoe UI"
                                     font.pixelSize: sizeTextInSect
                                     color: txtSection
                                 }
 
                                 CustomComboBox {
-                                    id: idComBoxTypeInd
+                                    id: idComBoxTypeEstMethod
                                     currentIndex: 0
-                                    model: ['index', 'complex']
+                                    model: ['blup', 'gblup']
                                 }
                             }
 
@@ -166,8 +167,12 @@ TemplatePage {
                                 Layout.fillWidth: true
                                 Layout.bottomMargin: 10
 
+                                enabled: idRadioBtnTypeSubindex.checked
+
                                 label: CustomCheckbox {
                                     id: idCheckBoxParallelInd
+
+                                    opacity: idRadioBtnTypeSubindex.checked ? 1 : 0.5
 
                                     nameChb: qsTr("Parallel computing")
                                 }

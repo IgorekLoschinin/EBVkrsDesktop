@@ -84,7 +84,7 @@ Control {
                         return
 
                     case "stop":
-                        // backend.stop(sendForm)
+                        backend.stop()
                         return
 
                     default:

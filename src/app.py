@@ -15,7 +15,7 @@ from pathlib import Path
 from PySide6.QtGui import QGuiApplication
 from PySide6.QtQml import QQmlApplicationEngine
 
-from src import Backend
+from src._backend import Backend
 
 
 if __name__ == "__main__":
@@ -26,7 +26,7 @@ if __name__ == "__main__":
 	main = Backend()
 	engine.rootContext().setContextProperty("backend", main)
 
-	engine.load(Path(__file__).parent / "src/gui/gui.qml")
+	engine.load(Path(__file__).parent / "gui/gui.qml")
 
 	if not engine.rootObjects():
 		sys.exit(-1)

@@ -5,11 +5,6 @@ from pydantic import BaseModel
 
 
 # -- Description of the configuration settings for processing the index --
-class EstMethodM(BaseModel):
-	blup: bool
-	gblup: bool
-
-
 class GivcModel(BaseModel):
 	status: bool
 	dirreport: None | str
@@ -18,10 +13,11 @@ class GivcModel(BaseModel):
 
 class RequestInd(BaseModel):
 	id: str
-	estmethod: EstMethodM
+	estmethod: str
 	feature: str
 	animal: str
-	typeind: str
+	index: bool
+	complex_i: bool
 	divdata: bool
 	parallel: bool
 	numthread: None | str

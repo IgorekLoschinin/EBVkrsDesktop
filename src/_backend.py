@@ -7,25 +7,26 @@
 # of this license document, but changing it is not allowed.
 
 __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
+__all__ = ('Backend', )
 
 from pathlib import Path
 
 from PySide6.QtCore import QObject, Slot, Signal, QThread
 
-from .models.modelhandler import ModelHandler
-from .libkrs.core.settings import WORKSPACE_DIR
+from src.models.modelhandler import ModelHandler
+from src.libkrs.core.settings import WORKSPACE_DIR
 
 
 class Backend(QObject):
 
-	runMesg = Signal(str)
-	runSig = Signal(dict)
+	runSig = Signal(str)
 	stopSig = Signal()
 
 	def __init__(self) -> None:
 		QObject.__init__(self)
 
 		self._thread = None
+		self._worker_md = None
 
 	@property
 	def common_namespace(self) -> Path:
@@ -51,36 +52,44 @@ class Backend(QObject):
 
 		try:
 			# self._thread = QThread()
-			# self.model_handler = ModelHandler(
-			# 	data=data,
-			# 	output_dir=self.common_namespace
-			# )
-			# # model_handler.handle()
-			# self.model_handler.moveToThread(self._thread)
-			#
-			# # Связываем сигналы и слоты
-			# self._thread.started.connect(self.model_handler.handle)  # Запуск run при старте потока
-			# self.model_handler.exitCode.connect(self._exit_code)  # Сигнал завершения
-			# self.model_handler.exitCode.connect(self._thread.quit)  # Остановка потока
-			# self._thread.finished.connect(self.model_handler.deleteLater)  # Удаление worker
-			# self._thread.finished.connect(self._thread.deleteLater)  # Удаление потока
-			#
-			# self._thread.start()  # Запуск потока
+			self._worker_md = ModelHandler(
+				data=data,
+				output_dir=self.common_namespace
+			)
+			self._worker_md.handle()
 
-			...
+			# self._worker_md.moveToThread(self._thread)
+
+			# # Link signals and slots
+			# # Run when the thread starts
+			# self._thread.started.connect(self._worker_md.handle)
+			# self._worker_md.exitCode.connect(self._exit_code)
+			# self._worker_md.exitCode.connect(self._thread.quit)
+			# self._worker_md.exitCode.connect(self._worker_md.deleteLater)
+			# self._thread.finished.connect(self._worker_md.deleteLater)
+			# self._thread.finished.connect(self._thread.deleteLater)
+			#
+			# self._thread.start()  # Starting a thread
+
+			# if self._thread.isRunning():
+			# 	print(self._thread.exec())
 
 		except Exception as e:
 			#logger.exception()
 			print(e)
 
 		print(data.get("id"))
-		self.runMesg.emit("hgjhghgjgjh")
+		self.runSig.emit("hgjhghgjgjh")
 
-	@Slot(dict)
+	@Slot()
 	def stop(self) -> None:
-		...
+		# self._worker_md.stop()
+		# self._thread.quit()
 
-	def _exit_code(self, code: int) -> None | int:
+		print("Task is stop!")
+
+	@staticmethod
+	def _exit_code(code: int) -> None | int:
 		print(code)
 		return None
 
