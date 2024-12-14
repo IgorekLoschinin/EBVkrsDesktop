@@ -174,6 +174,9 @@ Control {
                     currentFolder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
                     onAccepted: console.log(selectedFile)
                 }
+
+                ToolTip.visible: hovered
+                ToolTip.text: qsTr("Save the variance in file")
             }
 
             ButtonFileOpen {
@@ -192,6 +195,9 @@ Control {
                     currentFolder: StandardPaths.standardLocations(StandardPaths.DocumentsLocation)[0]
                     onAccepted: console.log(selectedFile)
                 }
+
+                ToolTip.visible: hovered
+                ToolTip.text: qsTr("Upload the variance from file")
             }
         }
 

@@ -14,6 +14,11 @@ from pydantic_core import ValidationError
 from .imodel import IModel
 from ..schemas import RequestEbv
 
+from ..libkrs.core import (
+    Estimator,
+    GEstimator
+)
+
 
 class EbvModel(IModel):
 	"""  """
@@ -36,26 +41,35 @@ class EbvModel(IModel):
 
 	def processing(self) -> None:
 		"""
-		            match self._opts.options.method:
-                case "blup":
-                    ebv = Estimator(
-                        feature=self._opts.options.feature,
-                        vars_f=self._opts.variance,
-                        namespace=self.common_namespace,
-                        parallel=self._opts.options.parallel,
-                        workers=self._opts.options.num_workers
-                    )
-                    ebv.start()
-
-                case "gblup":
-                    gebv = GEstimator(
-                        feature=self._opts.options.feature,
-                        vars_f=self._opts.variance,
-                        namespace=self.common_namespace,
-                        parallel=self._opts.options.parallel,
-                        workers=self._opts.options.num_workers
-                    )
-                    gebv.start()
-
-            return None
+		sendForm: {
+        'id': 'ebv',
+        'estmethod': idEbvTypeEstMethod.displayText,
+        'feature': idFeatureEbv.displayText,
+        'variance': idSelectTypeCalVar.displayText === "conf" ? tableInVariance.getVariance(tableInVariance.modFtVar) : tableInVariance.defVariance,
+        'parallel': idCheckBoxParallelEst.checked,
+        'numthread': idInputNumThredEst.text.length === 0 ? null : idInputNumThredEst.text,
+    }
 		"""
+
+		match self._settings.estmethod:
+			case "blup":
+				ebv = Estimator(
+					feature=self._settings.feature,
+					vars_f=self._settings.variance,
+					namespace=self._out_d,
+					parallel=self._settings.parallel,
+					workers=int(self._settings.numthread)
+				)
+				ebv.start()
+
+			case "gblup":
+				gebv = GEstimator(
+					feature=self._settings.feature,
+					vars_f=self._settings.variance.model_dump(),
+					namespace=self._out_d,
+					parallel=self._settings.parallel,
+					workers=int(self._settings.numthread)
+				)
+				gebv.start()
+
+		return None

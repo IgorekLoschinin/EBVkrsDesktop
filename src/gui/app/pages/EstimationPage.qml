@@ -10,10 +10,7 @@ TemplatePage {
     urlPage: qsTr("Estimate breeding value")
     sendForm: {
         'id': 'ebv',
-        'estmethod': {
-            'blup': idRadioBtnBlupEbv.checked,
-            'gblup': idRadioBtnGBlupEbv.checked
-        },
+        'estmethod': idEbvTypeEstMethod.displayText,
         'feature': idFeatureEbv.displayText,
         'variance': idSelectTypeCalVar.displayText === "conf" ? tableInVariance.getVariance(tableInVariance.modFtVar) : tableInVariance.defVariance,
         'parallel': idCheckBoxParallelEst.checked,
@@ -77,23 +74,48 @@ TemplatePage {
                         }
 
                         RowLayout {
+                            spacing: 30
                             Layout.fillWidth: true
 
-                            Text {
-                                Layout.rightMargin: 15
+                            RowLayout {
+                                Layout.fillWidth: true
 
-                                text: qsTr("Select of Feature:")
-                                font.family: "Segoe UI"
-                                font.pixelSize: sizeTextInSect
-                                color: txtSection                                
+                                Text {
+                                    Layout.rightMargin: 15
+
+                                    text: qsTr("Select of Feature:")
+                                    font.family: "Segoe UI"
+                                    font.pixelSize: sizeTextInSect
+                                    color: txtSection
+                                }
+
+                                CustomComboBox {
+                                    id: idFeatureEbv
+                                    currentIndex: 0
+                                    displayText: currentText
+                                    model: ['milk', 'conform', 'reprod', 'scs']
+                                }
                             }
 
-                            CustomComboBox {
-                                id: idFeatureEbv
-                                currentIndex: 0
-                                displayText: currentText
-                                model: ['milk', 'conform', 'reprod', 'scs']
+                            RowLayout {
+                                Layout.fillWidth: true
+
+                                Text {
+                                    Layout.rightMargin: 8
+
+                                    text: qsTr("Method estimate:")
+                                    font.family: "Segoe UI"
+                                    font.pixelSize: sizeTextInSect
+                                    color: txtSection
+                                }
+
+                                CustomComboBox {
+                                    id: idEbvTypeEstMethod
+                                    currentIndex: 0
+                                    model: ['blup', 'gblup']
+                                }
                             }
+
                         }
 
                         GroupBox {
