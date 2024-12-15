@@ -175,8 +175,10 @@ Control {
                     onAccepted: console.log(selectedFile)
                 }
 
-                ToolTip.visible: hovered
-                ToolTip.text: qsTr("Save the variance in file")
+                // ToolTip.visible: hovered
+                // ToolTip.text: qsTr("Save the variance in file")
+
+                CustomTooltip.visible: hovered
             }
 
             ButtonFileOpen {
