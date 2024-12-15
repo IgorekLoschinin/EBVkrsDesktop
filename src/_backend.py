@@ -11,12 +11,19 @@ __all__ = ('Backend', )
 
 from pathlib import Path
 
-from PySide6.QtCore import QObject, Slot, Signal, QThread
+from PySide6.QtCore import (
+	QObject,
+	Slot,
+	Signal,
+	QThread
+)
 
 from src.models.modelhandler import ModelHandler
 from src.libkrs.core.settings import WORKSPACE_DIR
+from src.libkrs.utils import logger
 
 
+@logger(name="Backend")
 class Backend(QObject):
 
 	runSig = Signal(str)
@@ -75,8 +82,7 @@ class Backend(QObject):
 			# 	print(self._thread.exec())
 
 		except Exception as e:
-			#logger.exception()
-			print(e)
+			self.exception(e)
 
 		print(data.get("id"))
 		self.runSig.emit("hgjhghgjgjh")

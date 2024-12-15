@@ -15,8 +15,10 @@ from .imodel import IModel
 from ..schemas import RequestPheno
 
 from ..libkrs.processing import DataProcessing
+from ..libkrs.utils.logger import logger
 
 
+@logger(name="PhenoModel")
 class PhenoModel(IModel):
 	"""  """
 

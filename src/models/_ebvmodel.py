@@ -15,11 +15,13 @@ from .imodel import IModel
 from ..schemas import RequestEbv
 
 from ..libkrs.core import (
-    Estimator,
-    GEstimator
+	Estimator,
+	GEstimator
 )
+from ..libkrs.utils.logger import logger
 
 
+@logger(name="EbvModel")
 class EbvModel(IModel):
 	"""  """
 
@@ -40,22 +42,13 @@ class EbvModel(IModel):
 			raise err
 
 	def processing(self) -> None:
-		"""
-		sendForm: {
-        'id': 'ebv',
-        'estmethod': idEbvTypeEstMethod.displayText,
-        'feature': idFeatureEbv.displayText,
-        'variance': idSelectTypeCalVar.displayText === "conf" ? tableInVariance.getVariance(tableInVariance.modFtVar) : tableInVariance.defVariance,
-        'parallel': idCheckBoxParallelEst.checked,
-        'numthread': idInputNumThredEst.text.length === 0 ? null : idInputNumThredEst.text,
-    }
-		"""
+		"""  """
 
 		match self._settings.estmethod:
 			case "blup":
 				ebv = Estimator(
 					feature=self._settings.feature,
-					vars_f=self._settings.variance,
+					vars_f=self._settings.variance.model_dump(),
 					namespace=self._out_d,
 					parallel=self._settings.parallel,
 					workers=int(self._settings.numthread)
@@ -73,3 +66,4 @@ class EbvModel(IModel):
 				gebv.start()
 
 		return None
+

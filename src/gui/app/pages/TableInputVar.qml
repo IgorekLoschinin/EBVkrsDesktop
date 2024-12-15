@@ -18,8 +18,8 @@ Control {
             var item = ftVar.get(i);
 
             allData[item.name] = {
-                "varE": item.varE,
-                "varG": item.varG
+                "varE": item.varE === '0' ? null : item.varE,
+                "varG": item.varG === '0' ? null : item.varG
             };
         }
 
@@ -138,7 +138,7 @@ Control {
 
                     Component.onCompleted: {
                         // Сюда с бэкенда отправляется список признаков
-                        var featureNames = ["tip", "kt", "rost", "gt", "pz", "conform"];
+                        var featureNames = ['MILK', 'FKG', 'FPRC', 'PKG', 'PPRC'];
 
                         for (var i = 0; i < featureNames.length; i++) {
                             modelFeatureVar.append({
@@ -197,7 +197,7 @@ Control {
                 }
 
                 ToolTip.visible: hovered
-                ToolTip.text: qsTr("Upload the variance from file")
+                ToolTip.text: qsTr("Load the variance from file")
             }
         }
 

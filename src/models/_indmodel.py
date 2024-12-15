@@ -20,8 +20,10 @@ from ..libkrs.index import (
 )
 
 from ..libkrs.givc import PreparationGIVC
+from ..libkrs.utils.logger import logger
 
 
+@logger(name="IndModel")
 class IndModel(IModel):
 	"""  """
 
@@ -42,27 +44,7 @@ class IndModel(IModel):
 			raise err
 
 	def processing(self) -> None:
-		"""
-		sendForm: {
-			'id': 'index',
-			'estmethod': {
-				'blup': idRadioBtnIndBlup.checked,
-				'gblup': idRadioBtnIndGBlup.checked
-			},
-			'feature': idSelectFeatureForInd.displayText,
-			'animal': idComBoxChooseAnimal.displayText,
-			'typeind': idComBoxTypeInd.displayText,
-			'divdata': idCheckBoxDivData.checked,
-			'parallel': idCheckBoxParallelInd.checked,
-			'numthread': idInputNumThred.text.length === 0 ? null : idInputNumThred.text,
-			'disableoptim': idCheckBoxPrivDisOpt.checked,
-			'gengivc': {
-				'status': idHeadSectGivc.checked,
-				'dirreport': idInputDirReports.inputText.length === 0 ? null : idInputDirReports.inputText,
-				'typereport': idGivcTypeReport.displayText
-			}
-		}
-		"""
+		"""  """
 
 		if self._settings.index:
 			ind = IndFeature(

@@ -23,8 +23,10 @@ from . import (
 	EbvModel,
 	IndModel
 )
+from ..libkrs.utils.logger import logger
 
 
+@logger(name="ModelHandler")
 class ModelHandler(QObject):
 	"""  """
 
@@ -80,8 +82,7 @@ class ModelHandler(QObject):
 			self.exitCode.emit(0)
 
 		except Exception as e:
-			# logger.error()
-			print(e)
+			self.exception(e)
 			self.exitCode.emit(1)
 			return None
 

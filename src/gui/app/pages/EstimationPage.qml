@@ -51,29 +51,6 @@ TemplatePage {
                         Layout.leftMargin: marginContentSect
 
                         RowLayout {
-                            spacing: 10
-                            Layout.fillWidth: true
-
-                            Text {
-                                text: qsTr("Estimation method:")
-                                font.family: "Segoe UI"
-                                font.pixelSize: sizeTextInSect
-                                color: txtSection
-                            }
-
-                            CustomRadioBtn {
-                                id: idRadioBtnBlupEbv
-                                text: qsTr("blup")
-                                checked: true
-                            }
-
-                            CustomRadioBtn {
-                                id: idRadioBtnGBlupEbv
-                                text: qsTr("gblup")
-                            }
-                        }
-
-                        RowLayout {
                             spacing: 30
                             Layout.fillWidth: true
 

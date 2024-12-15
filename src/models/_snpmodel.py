@@ -15,8 +15,10 @@ from .imodel import IModel
 from ..schemas import RequestSnp
 
 from ..libkrs.processing.snp import SnpProcessing
+from ..libkrs.utils.logger import logger
 
 
+@logger(name="SnpModel")
 class SnpModel(IModel):
 	"""  """
 
