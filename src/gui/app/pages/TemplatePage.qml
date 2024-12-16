@@ -21,6 +21,18 @@ Page {
     readonly property color sectionColor: "#FFFAFA"
     readonly property color txtSection: "#D1E37D"
 
+    function rePath(string) {
+        if (Qt.platform.os === 'linux') {
+            return string.replace("file://", "");
+
+        } else if (Qt.platform.os === 'win32') {
+            return string.replace("file:///", "");
+
+        } else {
+            return string;
+        }
+    }
+
     header: Control {
         id: idHeaderPage
         height: 50

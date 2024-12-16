@@ -52,7 +52,7 @@ class Backend(QObject):
 	def run(self, data: dict | None) -> None:
 
 		if data is None:
-			# logger.error("Data is not None")
+			self.error("Data is not None!")
 			return None
 
 		self.__make_dir_workspace()

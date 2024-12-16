@@ -52,8 +52,8 @@ Control {
             id: windowDialog
             currentFolder: StandardPaths.standardLocations(StandardPaths.LocateDirectory)[0]
             onAccepted: {
-                idTextInput.text = selectedFolder.toString().replace("file://", "");
-                inputText = selectedFolder.toString().replace("file://", "");
+                idTextInput.text = rePath(selectedFolder.toString());
+                inputText = rePath(selectedFolder.toString());
             }
         }
     }
