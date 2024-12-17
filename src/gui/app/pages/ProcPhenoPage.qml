@@ -252,6 +252,11 @@ TemplatePage {
                             id: idAccumulateDp
 
                             nameChb: qsTr("Accumulate data")
+
+                            CustomTooltip {
+                                object: idAccumulateDp
+                                textLbl: qsTr("Connection of the accumulation methodology.")
+                            }
                         }
 
                         ColumnLayout {
@@ -262,12 +267,22 @@ TemplatePage {
                                 id: idCheckBoxPed
 
                                 nameChb: qsTr("Pedigree")
+
+                                CustomTooltip {
+                                    object: idCheckBoxPed
+                                    textLbl: qsTr("Building a file pedigree.")
+                                }
                             }
 
                             CustomCheckbox {
                                 id: idCheckBoxDaug
 
                                 nameChb: qsTr("Daughters")
+
+                                CustomTooltip {
+                                    object: idCheckBoxDaug
+                                    textLbl: qsTr("Building a file daughters.")
+                                }
                             }
 
                         }

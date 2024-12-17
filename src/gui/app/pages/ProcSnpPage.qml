@@ -254,6 +254,13 @@ TemplatePage {
                                     id: idCBAddSuff
 
                                     nameChb: qsTr("Add suffix")
+
+                                    CustomTooltip {
+                                        object: idCBAddSuff
+                                        textLbl: qsTr("Adding suffixes from the animal number file.")
+
+                                        visible: idCBAddSuffSex.checked ? idCBAddSuff.hovered : false
+                                    }
                                 }
 
                                 InputGroupFile {

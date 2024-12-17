@@ -156,10 +156,17 @@ TemplatePage {
                             CustomCheckbox {
                                 id: idCheckBoxDivData
 
-                                nameChb: qsTr("Divide data into bulls and cows.")
+                                nameChb: qsTr("Divide data.")
 
                                 enabled: idComBoxChooseAnimal.currentIndex === 2 ? true : false
                                 opacity: idComBoxChooseAnimal.currentIndex === 2 ? 1 : 0.5
+
+                                CustomTooltip {
+                                    object: idCheckBoxDivData
+                                    textLbl: qsTr("Dividing these results into fathers and daughters reports.")
+
+                                    visible: idComBoxChooseAnimal.currentIndex === 2 ? idCheckBoxDivData.hovered : false
+                                }
                             }
 
                             GroupBox {
@@ -216,6 +223,13 @@ TemplatePage {
 
                                 enabled: idSelectFeatureForInd.displayText === "conform"
                                 opacity: idSelectFeatureForInd.displayText === "conform" ? 1 : 0.3
+
+                                CustomTooltip {
+                                    object: idCheckBoxPrivDisOpt
+                                    textLbl: qsTr("The function cancels the transformation of data to the optimal value.")
+
+                                    visible: idSelectFeatureForInd.displayText === "conform" ? idCheckBoxPrivDisOpt.hovered : false
+                                }
                             }
 
                         }

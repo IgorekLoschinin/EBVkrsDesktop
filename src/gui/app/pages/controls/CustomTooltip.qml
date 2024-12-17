@@ -13,35 +13,29 @@ Popup {
 
     modal: false
     focus: false
-    padding: 0
+    padding: 4
     visible: object.hovered
 
     x: object.width / 2 - width / 2
     y: object.height + 5
 
-    contentItem: Rectangle {
-        anchors.fill: parent
+    contentItem: Text {
+        horizontalAlignment: Qt.AlignHCenter
+        verticalAlignment: Qt.AlignVCenter
 
-        color: "#f3edf7"
-        radius: 8
-        border.color: "#f3edf7"
-
-        Text {
-            anchors.fill: parent
-
-            horizontalAlignment: Qt.AlignHCenter
-            verticalAlignment: Qt.AlignVCenter
-
-            text: tooltip.textLbl
-            font.family: "Segoe UI"
-            font.pixelSize: 14
-            color: "#49454f"
-            wrapMode: Text.Wrap
-            clip: true
-        }
+        text: tooltip.textLbl
+        font.family: "Segoe UI"
+        font.pixelSize: 14
+        color: "#49454f"
+        wrapMode: Text.Wrap
+        clip: true
     }
 
-    background: null
+    background: Rectangle {
+        color: "#f3edf7"
+        radius: 5
+        border.color: "#f3edf7"
+    }
 
     onVisibleChanged: {
         if (visible) {
