@@ -256,10 +256,12 @@ TemplatePage {
                                     nameChb: qsTr("Add suffix")
 
                                     CustomTooltip {
+                                        id: idHintAddSuff
                                         object: idCBAddSuff
                                         textLbl: qsTr("Adding suffixes from the animal number file.")
 
                                         visible: idCBAddSuffSex.checked ? idCBAddSuff.hovered : false
+                                        x: idCBAddSuff.width
                                     }
                                 }
 

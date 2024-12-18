@@ -250,12 +250,14 @@ TemplatePage {
 
                         CustomCheckbox {
                             id: idAccumulateDp
-
                             nameChb: qsTr("Accumulate data")
 
                             CustomTooltip {
+                                id: idHintAcumDp
                                 object: idAccumulateDp
                                 textLbl: qsTr("Connection of the accumulation methodology.")
+
+                                x: idAccumulateDp.width
                             }
                         }
 
@@ -265,23 +267,27 @@ TemplatePage {
 
                             CustomCheckbox {
                                 id: idCheckBoxPed
-
                                 nameChb: qsTr("Pedigree")
 
                                 CustomTooltip {
+                                    id: idHintPed
                                     object: idCheckBoxPed
                                     textLbl: qsTr("Building a file pedigree.")
+
+                                    x: idCheckBoxPed.width
                                 }
                             }
 
                             CustomCheckbox {
                                 id: idCheckBoxDaug
-
                                 nameChb: qsTr("Daughters")
 
                                 CustomTooltip {
+                                    id: idHintDaug
                                     object: idCheckBoxDaug
                                     textLbl: qsTr("Building a file daughters.")
+
+                                    x: idCheckBoxDaug.width
                                 }
                             }
 
