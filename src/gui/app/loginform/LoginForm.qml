@@ -7,24 +7,26 @@ import QtQuick.Timeline
 import "components"
 
 
-Control {
+Popup {
     id: idLogingApp
+
     width: 380
     height: 580
 
     x: parent.width/2 - width/2
     y: parent.height/2 - height/2
 
-    // property bool unlockApp: false
+    dim: true
+    visible: true
+    closePolicy: Popup.NoAutoClose
 
     // Internal Functions
     QtObject{
         id: internal
 
         function checkLogin(username, password){
-            if (username === "belplem" && password === "123") {
+            if (username === "belplem" && password === "111") {
                 idLogingApp.visible = false
-                idMainContent.visible = true
             } else {
                 if (username !== "belplem") {
                     errorUsername.visible = true
@@ -33,20 +35,24 @@ Control {
                     errorUsername.visible = false
                 }
 
-                if (password !== "123") {
+                if (password !== "111") {
                     errorPassword.visible = true
                 } else {
                     errorPassword.visible = false
                 }
             }
-
-
         }
     }
 
-    background: Rectangle {
-        radius: 10
-        color: "#0A1832"
+    Overlay.modeless: Rectangle {
+        color: "#aacfdbe7"
+        radius: bgRadius
+
+        MouseArea {
+            anchors.fill: parent
+            hoverEnabled: true
+            onPressed: { appWindow.startSystemMove() }
+        }
     }
 
     contentItem: ColumnLayout {
@@ -66,7 +72,7 @@ Control {
             colorMouseOver: "#7ece2d"
             colorDefault: "#67aa25"
 
-            onClicked: close()
+            onClicked: appWindow.close()
         }
 
         ColorImage {
@@ -301,4 +307,8 @@ Control {
 
     }
 
+    background: Rectangle {
+        radius: bgRadius
+        color: "#0A1832"
+    }
 }
