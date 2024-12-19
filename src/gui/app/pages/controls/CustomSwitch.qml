@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Controls
-// import QtQuick.Layouts
 
 Switch {
     id:idCustomSwitch
@@ -9,7 +8,6 @@ Switch {
 
     readonly property color fromBackgroundColor: "#7a859b"
     readonly property color toBackgroundColor: "#67aa25"
-
     readonly property color toFromCheckerColor: "#F3FBF7"
 
     padding: 0

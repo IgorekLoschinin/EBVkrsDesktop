@@ -1,0 +1,1 @@
+../pyside6-rcc ../src/gui/resources.qrc -o ../src/resources.py

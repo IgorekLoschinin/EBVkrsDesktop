@@ -12,9 +12,9 @@ TextField {
     QtObject{
         id: internal
 
-        property var dynamicColor: if(textField.focus){
+        property var dynamicColor: if (textField.focus) {
                                         textField.focus ? colorOnFocus : colorDefault
-                                   }else{
+                                   } else {
                                        textField.hovered ? colorMouseOver : colorDefault
                                    }
     }

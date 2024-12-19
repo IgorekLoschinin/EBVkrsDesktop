@@ -1,25 +1,22 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# Copyright (C) 2023-2024 Igor Loschinin.
+# Distributed under the lgplv3 software license, see the accompanying
+# Everyone is permitted to copy and distribute verbatim copies
+# of this license document, but changing it is not allowed.
+
+__author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
+
 import sys
+import resources
 
 from pathlib import Path
 
-from PySide6.QtCore import QObject, Slot, Signal
 from PySide6.QtGui import QGuiApplication
 from PySide6.QtQml import QQmlApplicationEngine
 
-
-class Backend(QObject):
-
-	# printPheno = Signal(dict)
-
-	def __init__(self) -> None:
-		QObject.__init__(self)
-
-	@Slot(dict)
-	def printFormProc(self, data: dict):
-		print(data)
+from src._backend import Backend
 
 
 if __name__ == "__main__":
@@ -30,7 +27,7 @@ if __name__ == "__main__":
 	main = Backend()
 	engine.rootContext().setContextProperty("backend", main)
 
-	engine.load(Path(__file__).parent / "src/gui/gui.qml")
+	engine.load(Path(__file__).parent / "gui/gui.qml")
 
 	if not engine.rootObjects():
 		sys.exit(-1)

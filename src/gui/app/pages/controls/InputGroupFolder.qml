@@ -10,8 +10,6 @@ Control {
 
     property string nameField: ""
     property string placeholderText: qsTr("Enter file path...")
-    property bool selectFile: false
-    property bool selectFolder: true
 
     property string inputText: ''
 
@@ -45,6 +43,7 @@ Control {
         ButtonFileOpen {
             id: idBtnFileOpen
             hoverEnabled: idInputGroupFolder.enabled
+            sourceImg: "qrc:/icons/folder.svg"
 
             onClicked: windowDialog.open()
         }
@@ -53,8 +52,8 @@ Control {
             id: windowDialog
             currentFolder: StandardPaths.standardLocations(StandardPaths.LocateDirectory)[0]
             onAccepted: {
-                idTextInput.text = selectedFolder.toString().replace("file:///", "");
-                inputText = selectedFolder.toString().replace("file:///", "");
+                idTextInput.text = rePath(selectedFolder.toString());
+                inputText = rePath(selectedFolder.toString());
             }
         }
     }

@@ -10,18 +10,21 @@ TemplatePage {
     urlPage: qsTr("Processing -> phenotype")
 
     sendForm: {
-        'id': 'procPheno',
+        'id': 'procpheno',
         'preparation': {
             'checked': idSHeadSectAddProp.checked,
             'updatabd': {
                 'checked': idCheckBoxUpdataDB.checked,
-                'pathTo': idInputUpdateTo.inputText.length === 0 ? null : idInputUpdateTo.inputText,
-                'pathFrom': idInputUpdateFrom.inputText.length === 0 ? null : idInputUpdateFrom.inputText,
+                'pathto': idInputUpdateTo.inputText.length === 0 ? null : idInputUpdateTo.inputText,
+                'pathfrom': idInputUpdateFrom.inputText.length === 0 ? null : idInputUpdateFrom.inputText,
             },
-            'searchDaug': idInputSearchDaug.inputText.length === 0 ? null : idInputSearchDaug.inputText,
+            'searchdaug': {
+                'datafiles': idDirDataFilesForSearch.inputText.length === 0 ? null : idDirDataFilesForSearch.inputText,
+                'filesires': idInputSearchDaug.inputText.length === 0 ? null : idInputSearchDaug.inputText,
+            }
         },
         'phendata': idDirDataFiles.inputText.length === 0 ? null : idDirDataFiles.inputText,
-        'feature': idSelectFeatureDp.displayText,
+        'feature': !idControlSelectFtDp.checked ? null : idSelectFeatureDp.displayText,
         'accummeth': idAccumulateDp.checked,
         'numlact': idNumLactation.currentIndex,
         'ped': idCheckBoxPed.checked,
@@ -40,6 +43,10 @@ TemplatePage {
 
         contentItem: ColumnLayout {
             spacing: comSpacing
+
+            ProgressWindow {
+                visible: false
+            }
 
             // Section preparation data
             GroupBox {
@@ -60,7 +67,7 @@ TemplatePage {
                         Layout.bottomMargin: bottomMarginContentSect
 
                         nameSection: qsTr("Preparation data")
-                    }
+                    }                
 
                     ColumnLayout {
                         spacing: comSpacing
@@ -114,14 +121,41 @@ TemplatePage {
                             background: null
                         }
 
-                        InputGroupFile {
-                            id: idInputSearchDaug
-                            nameField: qsTr("Search daughters:")
+                        GroupBox {
+                            padding: 0
+                            Layout.fillWidth: true
 
                             enabled: !idCheckBoxUpdataDB.checked
                             opacity: !idCheckBoxUpdataDB.checked ? 1 : 0.5
 
-                            Layout.fillWidth: true
+                            label: Label {
+                                text: qsTr("Search daughters:")
+                                font.family: "Segoe UI"
+                                font.pixelSize: sizeTextInSect
+                                color: txtSection
+                            }
+
+                            contentData: ColumnLayout {
+                                anchors.fill: parent
+                                anchors.leftMargin: 30
+
+                                InputGroupFolder {
+                                    id: idDirDataFilesForSearch
+                                    nameField: qsTr("Dir data files:")
+
+                                    Layout.fillWidth: true
+                                }
+
+                                InputGroupFile {
+                                    id: idInputSearchDaug
+                                    nameField: qsTr("File bulls:")
+
+                                    Layout.fillWidth: true
+                                }
+
+                            }
+
+                            background: null
                         }
 
                     }
@@ -174,27 +208,6 @@ TemplatePage {
                             Text {
                                 Layout.rightMargin: 15
 
-                                text: qsTr("Select of Feature:")
-                                font.pixelSize: sizeTextInSect
-                                font.family: "Segoe UI"
-                                color: txtSection
-                            }
-
-                            CustomComboBox {
-                                id: idSelectFeatureDp
-                                currentIndex: 0
-                                displayText: currentText
-                                model: ['milk', 'conform', 'reprod', 'scs']
-                            }
-
-                        }
-
-                        RowLayout {
-                            Layout.fillWidth: true
-
-                            Text {
-                                Layout.rightMargin: 15
-
                                 text: qsTr("Number lactation: ")
                                 font.pixelSize: sizeTextInSect
                                 color: txtSection
@@ -208,9 +221,48 @@ TemplatePage {
                         }
 
                         CustomCheckbox {
-                            id: idAccumulateDp
+                            id: idControlSelectFtDp
 
+                            contentItem: RowLayout {
+                                Layout.fillWidth: true
+
+                                Text {
+                                    leftPadding: idControlSelectFtDp.indicator.width + 6
+
+                                    text: qsTr("Select of Feature:")
+                                    font.pixelSize: sizeTextInSect
+                                    font.family: "Segoe UI"
+                                    color: txtSection
+
+                                    verticalAlignment: Text.AlignVCenter
+                                    horizontalAlignment: Text.AlignHCenter
+                                }
+
+                                CustomComboBox {
+                                    id: idSelectFeatureDp
+
+                                    enabled: idControlSelectFtDp.checked
+                                    opacity: idControlSelectFtDp.checked ? 1 : 0.5
+
+                                    currentIndex: 0
+                                    displayText: currentText
+                                    model: ['milk', 'conform', 'reprod', 'scs']
+                                }
+
+                            }
+                        }
+
+                        CustomCheckbox {
+                            id: idAccumulateDp
                             nameChb: qsTr("Accumulate data")
+
+                            CustomTooltip {
+                                id: idHintAcumDp
+                                object: idAccumulateDp
+                                textLbl: qsTr("Connection of the accumulation methodology.")
+
+                                x: idAccumulateDp.width
+                            }
                         }
 
                         ColumnLayout {
@@ -219,14 +271,28 @@ TemplatePage {
 
                             CustomCheckbox {
                                 id: idCheckBoxPed
-
                                 nameChb: qsTr("Pedigree")
+
+                                CustomTooltip {
+                                    id: idHintPed
+                                    object: idCheckBoxPed
+                                    textLbl: qsTr("Building a file pedigree.")
+
+                                    x: idCheckBoxPed.width
+                                }
                             }
 
                             CustomCheckbox {
                                 id: idCheckBoxDaug
-
                                 nameChb: qsTr("Daughters")
+
+                                CustomTooltip {
+                                    id: idHintDaug
+                                    object: idCheckBoxDaug
+                                    textLbl: qsTr("Building a file daughters.")
+
+                                    x: idCheckBoxDaug.width
+                                }
                             }
 
                         }
@@ -275,6 +341,13 @@ TemplatePage {
                 }
 
                 background: null
+            }
+            Rectangle {
+                color: 'white'
+                height: 1
+
+                Layout.fillWidth: true
+                Layout.bottomMargin: bottomMarginContentSect
             }
             Item { Layout.fillHeight: true }
 

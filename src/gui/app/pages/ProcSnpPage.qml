@@ -10,25 +10,25 @@ TemplatePage {
     urlPage: qsTr("Processing -> SNP")
 
     sendForm: {
-        'id': 'procSnp',
+        'id': 'procsnp',
         'snp': {
             'checked': idSectonSnpProc.checked,
-            'refSnpFile': idInputFileSnpRef.inputText.length === 0 ? null : idInputFileSnpRef.inputText,
-            'sampleFile': idInputSampleD.inputText.length === 0 ? null : idInputSampleD.inputText,
-            'updateFile': idInputUpdataD.inputText.length === 0 ? null : idInputUpdataD.inputText,
+            'refsnpfile': idInputFileSnpRef.inputText.length === 0 ? null : idInputFileSnpRef.inputText,
+            'samplefile': idInputSampleD.inputText.length === 0 ? null : idInputSampleD.inputText,
+            'updatefile': idInputUpdataD.inputText.length === 0 ? null : idInputUpdataD.inputText,
         },
         'fr': {
             'checked': idHeadSectProperFR.checked,
-            'dirFileFr': idInputDirFrFiles.inputText.length === 0 ? null : idInputDirFrFiles.inputText,
-            'callRate': idInputCR.displayText.length === 0 ? null : idInputCR.displayText,
-            'saveCrFile': {
+            'dirfilefr': idInputDirFrFiles.inputText.length === 0 ? null : idInputDirFrFiles.inputText,
+            'callrate': idInputCR.displayText.length === 0 ? null : idInputCR.displayText,
+            'savecrfile': {
                 'checked': idCheckBoxSaveCrFile.checked,
                 'filename': idInputFilenameSave.displayText.length === 0 ? null : idInputFilenameSave.displayText,
             },
             'addsuff': {
                 'checked': idCBAddSuffSex.checked,
                 'add': idCBAddSuff.checked,
-                'fromFile': idInputSexFromFile.inputText.length === 0 ? null : idInputSexFromFile.inputText,
+                'fromfile': idInputSexFromFile.inputText.length === 0 ? null : idInputSexFromFile.inputText,
             }
         }
     }
@@ -254,6 +254,15 @@ TemplatePage {
                                     id: idCBAddSuff
 
                                     nameChb: qsTr("Add suffix")
+
+                                    CustomTooltip {
+                                        id: idHintAddSuff
+                                        object: idCBAddSuff
+                                        textLbl: qsTr("Adding suffixes from the animal number file.")
+
+                                        visible: idCBAddSuffSex.checked ? idCBAddSuff.hovered : false
+                                        x: idCBAddSuff.width
+                                    }
                                 }
 
                                 InputGroupFile {
@@ -275,6 +284,13 @@ TemplatePage {
                 }
 
                 background: null
+            }
+            Rectangle {
+                color: 'white'
+                height: 1
+
+                Layout.fillWidth: true
+                Layout.bottomMargin: bottomMarginContentSect
             }
 
             Item { Layout.fillHeight: true }

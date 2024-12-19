@@ -1,5 +1,5 @@
 import QtQuick
-import QtQuick.Controls 2.15
+import QtQuick.Controls
 import QtQuick.Layouts
 import "controls"
 
@@ -10,13 +10,11 @@ TemplatePage {
     urlPage: qsTr("Indexing")
     sendForm: {
         'id': 'index',
-        'estmethod': {
-            'blup': idRadioBtnIndBlup.checked,
-            'gblup': idRadioBtnIndGBlup.checked
-        },
+        'estmethod': idComBoxTypeEstMethod.displayText,
         'feature': idSelectFeatureForInd.displayText,
         'animal': idComBoxChooseAnimal.displayText,
-        'typeind': idComBoxTypeInd.displayText,
+        'index': idRadioBtnTypeSubindex.checked,
+        'complex_i': idRadioBtnComplexInd.checked,
         'divdata': idCheckBoxDivData.checked,
         'parallel': idCheckBoxParallelInd.checked,
         'numthread': idInputNumThred.text.length === 0 ? null : idInputNumThred.text,
@@ -42,7 +40,7 @@ TemplatePage {
                 padding: 0
 
                 Layout.fillWidth: true
-                Layout.topMargin: 20
+                Layout.topMargin: 10
 
                 contentItem: ColumnLayout {
                     anchors.fill: parent
@@ -67,33 +65,36 @@ TemplatePage {
                             Layout.fillWidth: true
 
                             Text {
-                                text: qsTr("Estimation method:")
+                                text: qsTr("Type index: ")
                                 font.family: "Segoe UI"
                                 font.pixelSize: sizeTextInSect
                                 color: txtSection
                             }
 
                             CustomRadioBtn {
-                                id: idRadioBtnIndBlup
-                                text: qsTr("blup")
+                                id: idRadioBtnTypeSubindex
+                                text: qsTr("subindex")
                                 checked: true
                             }
 
                             CustomRadioBtn {
-                                id: idRadioBtnIndGBlup
-                                text: qsTr("gblup")
+                                id: idRadioBtnComplexInd
+                                text: qsTr("complex")
                             }
                         }
 
                         RowLayout {
-                            spacing: 40
+                            spacing: 30
                             Layout.fillWidth: true
 
                             RowLayout {
                                 Layout.fillWidth: true
 
+                                enabled: idRadioBtnTypeSubindex.checked
+                                opacity: idRadioBtnTypeSubindex.checked ? 1 : 0.5
+
                                 Text {
-                                    Layout.rightMargin: 15
+                                    Layout.rightMargin: 8
 
                                     text: qsTr("Select of Feature:")
                                     font.family: "Segoe UI"
@@ -112,7 +113,7 @@ TemplatePage {
                                 Layout.fillWidth: true
 
                                 Text {
-                                    Layout.rightMargin: 15
+                                    Layout.rightMargin: 8
 
                                     text: qsTr("Choose animal:")
                                     font.family: "Segoe UI"
@@ -131,18 +132,18 @@ TemplatePage {
                                 Layout.fillWidth: true
 
                                 Text {
-                                    Layout.rightMargin: 15
+                                    Layout.rightMargin: 8
 
-                                    text: qsTr("Type index:")
+                                    text: qsTr("Method estimate:")
                                     font.family: "Segoe UI"
                                     font.pixelSize: sizeTextInSect
                                     color: txtSection
                                 }
 
                                 CustomComboBox {
-                                    id: idComBoxTypeInd
+                                    id: idComBoxTypeEstMethod
                                     currentIndex: 0
-                                    model: ['index', 'complex']
+                                    model: ['blup', 'gblup']
                                 }
                             }
 
@@ -155,10 +156,19 @@ TemplatePage {
                             CustomCheckbox {
                                 id: idCheckBoxDivData
 
-                                nameChb: qsTr("Divide data into bulls and cows.")
+                                nameChb: qsTr("Divide data.")
 
                                 enabled: idComBoxChooseAnimal.currentIndex === 2 ? true : false
                                 opacity: idComBoxChooseAnimal.currentIndex === 2 ? 1 : 0.5
+
+                                CustomTooltip {
+                                    id: idHintDivData
+                                    object: idCheckBoxDivData
+                                    textLbl: qsTr("Dividing these results into fathers and daughters reports.")
+
+                                    visible: idComBoxChooseAnimal.currentIndex === 2 ? idCheckBoxDivData.hovered : false
+                                    x: idCheckBoxDivData.width
+                                }
                             }
 
                             GroupBox {
@@ -166,8 +176,12 @@ TemplatePage {
                                 Layout.fillWidth: true
                                 Layout.bottomMargin: 10
 
+                                enabled: idRadioBtnTypeSubindex.checked
+
                                 label: CustomCheckbox {
                                     id: idCheckBoxParallelInd
+
+                                    opacity: idRadioBtnTypeSubindex.checked ? 1 : 0.5
 
                                     nameChb: qsTr("Parallel computing")
                                 }
@@ -211,6 +225,15 @@ TemplatePage {
 
                                 enabled: idSelectFeatureForInd.displayText === "conform"
                                 opacity: idSelectFeatureForInd.displayText === "conform" ? 1 : 0.3
+
+                                CustomTooltip {
+                                    id: idHintPrivDisOpt
+                                    object: idCheckBoxPrivDisOpt
+                                    textLbl: qsTr("The function cancels the transformation of data to the optimal value.")
+
+                                    visible: idSelectFeatureForInd.displayText === "conform" ? idCheckBoxPrivDisOpt.hovered : false
+                                    x: idCheckBoxPrivDisOpt.width
+                                }
                             }
 
                         }
@@ -281,6 +304,13 @@ TemplatePage {
 
                 background: null
 
+            }
+            Rectangle {
+                color: 'white'
+                height: 1
+
+                Layout.fillWidth: true
+                Layout.bottomMargin: bottomMarginContentSect
             }
 
             Item { Layout.fillHeight: true }

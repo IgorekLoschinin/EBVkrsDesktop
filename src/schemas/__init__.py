@@ -8,13 +8,13 @@
 
 __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
 __all__ = (
-    'PhenoModel',
-    'SnpModel',
-    'EbvModel',
-    'IndModel'
+    'RequestEbv',
+    'RequestPheno',
+    'RequestInd',
+    'RequestSnp'
 )
 
-from ._phenmodel import PhenoModel
-from ._snpmodel import SnpModel
-from ._ebvmodel import EbvModel
-from ._indmodel import IndModel
+from ._shebv import RequestEbv
+from ._shindex import RequestInd
+from ._shsnpproc import RequestSnp
+from ._shphenotype import RequestPheno

@@ -42,5 +42,4 @@ ApplicationWindow {
     contentData: AppContentArea {
         id: idAppContentArea
     }
-
 }

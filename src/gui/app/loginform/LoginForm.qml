@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Window
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Timeline
@@ -7,46 +6,50 @@ import QtQuick.Timeline
 import "components"
 
 
-Control {
+Popup {
     id: idLogingApp
+    anchors.centerIn: parent
+
     width: 380
-    height: 580
+    height: 580    
 
-    x: parent.width/2 - width/2
-    y: parent.height/2 - height/2
-
-    // property bool unlockApp: false
+    dim: true
+    visible: true
+    closePolicy: Popup.NoAutoClose
 
     // Internal Functions
     QtObject{
         id: internal
 
         function checkLogin(username, password){
-            if (username === "belplem" && password === "123") {
+            if (username === "" && password === "") {
                 idLogingApp.visible = false
-                idMainContent.visible = true
             } else {
-                if (username !== "belplem") {
+                if (username !== "") {
                     errorUsername.visible = true
 
                 } else {
                     errorUsername.visible = false
                 }
 
-                if (password !== "123") {
+                if (password !== "") {
                     errorPassword.visible = true
                 } else {
                     errorPassword.visible = false
                 }
             }
-
-
         }
     }
 
-    background: Rectangle {
-        radius: 10
-        color: "#0A1832"
+    Overlay.modeless: Rectangle {
+        color: "#aacfdbe7"
+        radius: bgRadius
+
+        MouseArea {
+            anchors.fill: parent
+            hoverEnabled: true
+            onPressed: { appWindow.startSystemMove() }
+        }
     }
 
     contentItem: ColumnLayout {
@@ -66,7 +69,7 @@ Control {
             colorMouseOver: "#7ece2d"
             colorDefault: "#67aa25"
 
-            onClicked: close()
+            onClicked: appWindow.close()
         }
 
         ColorImage {
@@ -78,7 +81,7 @@ Control {
             Layout.bottomMargin: 100
             Layout.alignment: Qt.AlignTop
 
-            source: "../../icons/logo_app.png"
+            source: "qrc:/icons/logo_app.png"
             sourceSize.width: 40
             sourceSize.height: 90
             fillMode: Image.PreserveAspectFit
@@ -301,4 +304,8 @@ Control {
 
     }
 
+    background: Rectangle {
+        radius: bgRadius
+        color: "#0A1832"
+    }
 }

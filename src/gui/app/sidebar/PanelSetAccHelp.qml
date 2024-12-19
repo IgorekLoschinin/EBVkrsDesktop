@@ -24,7 +24,7 @@ Control {
             Layout.fillWidth: true
 
             nameBtn: qsTr("Settings")
-            sourceImg: "../../icons/setting.svg"
+            sourceImg: "qrc:/icons/setting.svg"
 
             sideLightBtn: activityLightBtn(nameBtn)
             bgTargetColor: activityTargetBtn(idBtnSettings, nameBtn)
@@ -37,7 +37,7 @@ Control {
             Layout.fillWidth: true
 
             nameBtn: qsTr("Help")
-            sourceImg: "../../icons/help.svg"
+            sourceImg: "qrc:/icons/help.svg"
 
             sideLightBtn: activityLightBtn(nameBtn)
             bgTargetColor: activityTargetBtn(idBtnHelp, nameBtn)

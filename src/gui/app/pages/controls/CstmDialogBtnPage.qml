@@ -34,12 +34,12 @@ Control {
             model: ListModel {
                 ListElement {
                     name: qsTr("run")
-                    srcImage: "../../../icons/play.svg"
+                    srcImage: "qrc:/icons/play.svg"
                     colorImg: "green"
                 }
                 ListElement {
                     name: qsTr("stop")
-                    srcImage: "../../../icons/stop.svg"
+                    srcImage: "qrc:/icons/stop.svg"
                     colorImg: "red"
                     rightMargin: true
                 }
@@ -80,10 +80,11 @@ Control {
                 onClicked: {
                     switch (model.name) {
                     case "run":
-                        backend.printFormProc(sendForm)
+                        backend.run(sendForm)
                         return
 
                     case "stop":
+                        backend.stop()
                         return
 
                     default:

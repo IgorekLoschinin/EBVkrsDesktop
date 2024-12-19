@@ -1,8 +1,6 @@
-import QtCore
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import QtQuick.Dialogs
 import "controls"
 
 
@@ -12,28 +10,11 @@ TemplatePage {
     urlPage: qsTr("Estimate breeding value")
     sendForm: {
         'id': 'ebv',
-        'estMethod': {
-            'blup': idRadioBtnBlupEbv.checked,
-            'gblup': idRadioBtnGBlupEbv.checked
-        },
+        'estmethod': idEbvTypeEstMethod.displayText,
         'feature': idFeatureEbv.displayText,
-        'variance': getVariance(),
+        'variance': idSelectTypeCalVar.displayText === "conf" ? tableInVariance.getVariance(tableInVariance.modFtVar) : tableInVariance.defVariance,
         'parallel': idCheckBoxParallelEst.checked,
         'numthread': idInputNumThredEst.text.length === 0 ? null : idInputNumThredEst.text,
-    }
-
-    function getVariance() {
-        var allData = {};
-        for (var i = 0; i < tableInVariance.modFtVar.count; i++) {
-            var item = tableInVariance.modFtVar.get(i);
-
-            allData[item.name] = {
-                "varE": item.varE,
-                "varG": item.varG
-            };
-        }
-
-        return allData
     }
 
     contentData: Control {
@@ -50,7 +31,7 @@ TemplatePage {
                 padding: 0
 
                 Layout.fillWidth: true
-                Layout.topMargin: 20
+                Layout.topMargin: 10
 
                 contentItem: ColumnLayout {
                     anchors.fill: parent
@@ -70,46 +51,48 @@ TemplatePage {
                         Layout.leftMargin: marginContentSect
 
                         RowLayout {
-                            spacing: 10
+                            spacing: 30
                             Layout.fillWidth: true
 
-                            Text {
-                                text: qsTr("Estimation method:")
-                                font.family: "Segoe UI"
-                                font.pixelSize: sizeTextInSect
-                                color: txtSection
+                            RowLayout {
+                                Layout.fillWidth: true
+
+                                Text {
+                                    Layout.rightMargin: 15
+
+                                    text: qsTr("Select of Feature:")
+                                    font.family: "Segoe UI"
+                                    font.pixelSize: sizeTextInSect
+                                    color: txtSection
+                                }
+
+                                CustomComboBox {
+                                    id: idFeatureEbv
+                                    currentIndex: 0
+                                    displayText: currentText
+                                    model: ['milk', 'conform', 'reprod', 'scs']
+                                }
                             }
 
-                            CustomRadioBtn {
-                                id: idRadioBtnBlupEbv
-                                text: qsTr("blup")
-                                checked: true
+                            RowLayout {
+                                Layout.fillWidth: true
+
+                                Text {
+                                    Layout.rightMargin: 8
+
+                                    text: qsTr("Method estimate:")
+                                    font.family: "Segoe UI"
+                                    font.pixelSize: sizeTextInSect
+                                    color: txtSection
+                                }
+
+                                CustomComboBox {
+                                    id: idEbvTypeEstMethod
+                                    currentIndex: 0
+                                    model: ['blup', 'gblup']
+                                }
                             }
 
-                            CustomRadioBtn {
-                                id: idRadioBtnGBlupEbv
-                                text: qsTr("gblup")
-                            }
-                        }
-
-                        RowLayout {
-                            Layout.fillWidth: true
-
-                            Text {
-                                Layout.rightMargin: 15
-
-                                text: qsTr("Select of Feature:")
-                                font.family: "Segoe UI"
-                                font.pixelSize: sizeTextInSect
-                                color: txtSection                                
-                            }
-
-                            CustomComboBox {
-                                id: idFeatureEbv
-                                currentIndex: 0
-                                displayText: currentText
-                                model: ['milk', 'conform', 'reprod', 'scs']
-                            }
                         }
 
                         GroupBox {
@@ -155,79 +138,45 @@ TemplatePage {
                             background: null
                         }
 
-                        // Variance table
-                        ColumnLayout {
+                        RowLayout {
                             Layout.fillWidth: true
 
-                            RowLayout {
-                                Layout.fillWidth: true
+                            Text {
+                                Layout.rightMargin: 15
 
-                                Text {
-                                    Layout.rightMargin: 15
-
-                                    text: qsTr("Variance calculation method:")
-                                    font.family: "Segoe UI"
-                                    font.pixelSize: sizeTextInSect
-                                    color: txtSection
-                                }
-
-                                CustomComboBox {
-                                    id: idSelectTypeCalVar
-                                    model: ["all", "conf"]
-                                }
+                                text: qsTr("Variance calculation method:")
+                                font.family: "Segoe UI"
+                                font.pixelSize: sizeTextInSect
+                                color: txtSection
                             }
 
-                            RowLayout {
-                                spacing: 0
-                                visible: idSelectTypeCalVar.displayText === "conf" ? true : false
-                                Layout.fillWidth: true
-
-                                TableInputVar {
-                                    id: tableInVariance
-                                    Layout.fillHeight: true
-                                }
-
-                                ColumnLayout {
-
-                                    CustomBtn {
-                                        nameBtn: qsTr("load")
-
-                                        implicitWidth: 100
-
-                                        onClicked: idLoadFileConf.open()
-
-                                        FileDialog {
-                                            id: idLoadFileConf
-                                            currentFolder: StandardPaths.standardLocations(StandardPaths.DocumentsLocation)[0]
-                                            onAccepted: console.log(selectedFile)
-                                        }
-                                    }
-
-                                    CustomBtn {
-                                        nameBtn: qsTr("save")
-
-                                        implicitWidth: 100
-
-                                        onClicked: idSaveFileConf.open()
-
-                                        FileDialog {
-                                            id: idSaveFileConf
-                                            fileMode: FileDialog.SaveFile
-                                            currentFolder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
-                                            onAccepted: console.log(selectedFile)
-                                        }
-                                    }
-
-                                }
-
+                            CustomComboBox {
+                                id: idSelectTypeCalVar
+                                model: ["all", "conf"]
                             }
+                        }
 
+                        // Variance table
+                        TableInputVar {
+                            id: tableInVariance
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            Layout.topMargin: 15
+
+                            visible: idSelectTypeCalVar.displayText === "conf" ? true : false
                         }
 
                     }
                 }
 
                 background: null
+            }
+            Rectangle {
+                color: 'white'
+                height: 1
+
+                Layout.fillWidth: true
+                Layout.bottomMargin: bottomMarginContentSect
             }
 
             Item { Layout.fillHeight: true }

@@ -21,7 +21,7 @@ Control {
         RowLayout {
             id: idMainContent
             anchors.fill: parent
-            visible: false
+            visible: true
 
             spacing: spacingPanel - 2
 
