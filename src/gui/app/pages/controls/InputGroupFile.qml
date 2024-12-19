@@ -12,7 +12,7 @@ Control {
     property string placeholderText: qsTr("Enter file path...")
     property string inputText: ''
 
-    property string srcImg: "../../../icons/folder.svg"
+    property string srcImg: "qrc:/icons/folder.svg"
 
     contentItem: RowLayout {
         spacing: 2

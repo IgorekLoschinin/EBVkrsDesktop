@@ -30,7 +30,7 @@ CheckBox {
         ColorImage {
             id: idImgTick
             visible: idCustomCheckBox.checked
-            source: "../../../icons/tick.svg"
+            source: "qrc:/icons/tick.svg"
 
             color: idCustomCheckBox.down ? "#E9D6D6" : "#FFFFFF"
             x: parent.width / 2 - width / 2

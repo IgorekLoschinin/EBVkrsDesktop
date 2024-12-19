@@ -12,7 +12,7 @@ Control {
             id: idBtnMenu
 
             contentItem: ColorImage {
-                source: "../../icons/hamburger.svg"
+                source: "qrc:/icons/hamburger.svg"
                 color: panelSett.colorImg
 
                 fillMode: Image.PreserveAspectFit

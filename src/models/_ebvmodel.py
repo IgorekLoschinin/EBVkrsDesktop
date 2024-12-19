@@ -51,7 +51,9 @@ class EbvModel(IModel):
 					vars_f=self._settings.variance.model_dump(),
 					namespace=self._out_d,
 					parallel=self._settings.parallel,
-					workers=int(self._settings.numthread)
+					workers=None
+					if self._settings.numthread is None
+					else int(self._settings.numthread)
 				)
 				ebv.start()
 
@@ -61,7 +63,9 @@ class EbvModel(IModel):
 					vars_f=self._settings.variance.model_dump(),
 					namespace=self._out_d,
 					parallel=self._settings.parallel,
-					workers=int(self._settings.numthread)
+					workers=None
+					if self._settings.numthread is None
+					else int(self._settings.numthread)
 				)
 				gebv.start()
 

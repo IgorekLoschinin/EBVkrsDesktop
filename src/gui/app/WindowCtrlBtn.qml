@@ -43,15 +43,15 @@ Control {
             model: ListModel {
                 ListElement{
                     name: "roll"
-                    sourceImg: "../icons/minus.svg"
+                    sourceImg: "qrc:/icons/minus.svg"
                 }
                 ListElement{
                     name: "fullSize"
-                    sourceImg: "../icons/maximize.svg"
+                    sourceImg: "qrc:/icons/maximize.svg"
                 }
                 ListElement{
                     name: "close"
-                    sourceImg: "../icons/close.svg"
+                    sourceImg: "qrc:/icons/close.svg"
                 }
             }
 
@@ -96,11 +96,11 @@ Control {
                     case "fullSize":
                         if (appWindow.visibility === Window.Maximized) {
                             appWindow.showNormal()
-                            model.sourceImg = "../icons/maximize.svg"
+                            model.sourceImg = "qrc:/icons/maximize.svg"
                             return
                         }
                         appWindow.showMaximized()
-                        model.sourceImg = "../icons/squares.svg"
+                        model.sourceImg = "qrc:/icons/squares.svg"
                         return
 
                     case "close":

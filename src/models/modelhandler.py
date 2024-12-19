@@ -8,6 +8,8 @@
 
 __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
 
+import time
+from multiprocessing import Process
 from PySide6.QtCore import (
 	QObject,
 	Slot,
@@ -44,7 +46,7 @@ class ModelHandler(QObject):
 
 		self.model: IModel | None = None
 
-		# self._is_running = True
+		self._obj_process = None
 
 	@Slot()
 	def handle(self) -> None:
@@ -78,7 +80,10 @@ class ModelHandler(QObject):
 				case None:
 					return None
 
-			self.model.processing()
+			self._obj_process = Process(target=self.model.processing)
+			self._obj_process.start()
+			self._obj_process.join()
+
 			self.exitCode.emit(0)
 
 		except Exception as e:
@@ -87,6 +92,9 @@ class ModelHandler(QObject):
 			return None
 
 	@Slot()
-	def stop(self) -> None:
-		# self._is_running = False
-		self.exitCode.emit(1)
+	def stop_processing(self) -> None:
+
+		if self._obj_process is not None and self._obj_process.is_alive():
+			self._obj_process.kill()
+			time.sleep(1)
+			print("Process kill!")

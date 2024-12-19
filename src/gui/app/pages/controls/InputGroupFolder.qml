@@ -43,7 +43,7 @@ Control {
         ButtonFileOpen {
             id: idBtnFileOpen
             hoverEnabled: idInputGroupFolder.enabled
-            sourceImg: "../../../icons/folder.svg"
+            sourceImg: "qrc:/icons/folder.svg"
 
             onClicked: windowDialog.open()
         }

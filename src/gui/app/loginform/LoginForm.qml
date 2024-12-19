@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Window
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Timeline
@@ -9,12 +8,10 @@ import "components"
 
 Popup {
     id: idLogingApp
+    anchors.centerIn: parent
 
     width: 380
-    height: 580
-
-    x: parent.width/2 - width/2
-    y: parent.height/2 - height/2
+    height: 580    
 
     dim: true
     visible: true
@@ -25,17 +22,17 @@ Popup {
         id: internal
 
         function checkLogin(username, password){
-            if (username === "belplem" && password === "111") {
+            if (username === "" && password === "") {
                 idLogingApp.visible = false
             } else {
-                if (username !== "belplem") {
+                if (username !== "") {
                     errorUsername.visible = true
 
                 } else {
                     errorUsername.visible = false
                 }
 
-                if (password !== "111") {
+                if (password !== "") {
                     errorPassword.visible = true
                 } else {
                     errorPassword.visible = false
@@ -84,7 +81,7 @@ Popup {
             Layout.bottomMargin: 100
             Layout.alignment: Qt.AlignTop
 
-            source: "../../icons/logo_app.png"
+            source: "qrc:/icons/logo_app.png"
             sourceSize.width: 40
             sourceSize.height: 90
             fillMode: Image.PreserveAspectFit

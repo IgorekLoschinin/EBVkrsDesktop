@@ -27,7 +27,7 @@ from src.libkrs.utils import logger
 class Backend(QObject):
 
 	runSig = Signal(str)
-	stopSig = Signal()
+	stopSig = Signal(int)
 
 	def __init__(self) -> None:
 		QObject.__init__(self)
@@ -58,46 +58,35 @@ class Backend(QObject):
 		self.__make_dir_workspace()
 
 		try:
-			# self._thread = QThread()
+			self._thread = QThread()
 			self._worker_md = ModelHandler(
 				data=data,
 				output_dir=self.common_namespace
 			)
-			self._worker_md.handle()
 
-			# self._worker_md.moveToThread(self._thread)
+			self._worker_md.moveToThread(self._thread)
 
-			# # Link signals and slots
-			# # Run when the thread starts
-			# self._thread.started.connect(self._worker_md.handle)
-			# self._worker_md.exitCode.connect(self._exit_code)
-			# self._worker_md.exitCode.connect(self._thread.quit)
-			# self._worker_md.exitCode.connect(self._worker_md.deleteLater)
-			# self._thread.finished.connect(self._worker_md.deleteLater)
-			# self._thread.finished.connect(self._thread.deleteLater)
-			#
-			# self._thread.start()  # Starting a thread
+			# Link signals and slots
+			# Run when the thread starts
+			self._thread.started.connect(self._worker_md.handle)
+			self._worker_md.exitCode.connect(self._exec_prog)
+			self._worker_md.exitCode.connect(self._thread.quit)
+			self._worker_md.exitCode.connect(self._worker_md.deleteLater)
+			self._thread.finished.connect(self._worker_md.deleteLater)
+			self._thread.finished.connect(self._thread.deleteLater)
 
-			# if self._thread.isRunning():
-			# 	print(self._thread.exec())
+			self._thread.start()  # Starting a thread
 
 		except Exception as e:
 			self.exception(e)
 
-		print(data.get("id"))
-		self.runSig.emit("hgjhghgjgjh")
-
 	@Slot()
 	def stop(self) -> None:
-		# self._worker_md.stop()
-		# self._thread.quit()
-
+		self._worker_md.stop_processing()
 		print("Task is stop!")
 
-	@staticmethod
-	def _exit_code(code: int) -> None | int:
-		print(code)
-		return None
+	def _exec_prog(self, code: int) -> None:
+		self.stopSig.emit(code)
 
 	def __make_dir_workspace(self) -> None:
 		""" Creates a working directory - a directory of the general

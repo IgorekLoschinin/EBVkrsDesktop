@@ -1,0 +1,25 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+    <file>icons/close.svg</file>
+    <file>icons/estimate.svg</file>
+    <file>icons/folder.svg</file>
+    <file>icons/hamburger.svg</file>
+    <file>icons/help.svg</file>
+    <file>icons/home.svg</file>
+    <file>icons/index.svg</file>
+    <file>icons/logo_app.png</file>
+    <file>icons/maximize.svg</file>
+    <file>icons/minus.svg</file>
+    <file>icons/modelling.svg</file>
+    <file>icons/pipeline.svg</file>
+    <file>icons/play.svg</file>
+    <file>icons/processing.svg</file>
+    <file>icons/save.svg</file>
+    <file>icons/setting.svg</file>
+    <file>icons/squares.svg</file>
+    <file>icons/stop.svg</file>
+    <file>icons/tick.svg</file>
+    <file>icons/upload.svg</file>
+    <file>icons/user.svg</file>
+</qresource>
+</RCC>

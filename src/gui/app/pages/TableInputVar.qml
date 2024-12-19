@@ -163,7 +163,7 @@ Control {
                 implicitWidth: 80
 
                 sizeImgWH: 25
-                sourceImg: "../../../icons/save3.svg"
+                sourceImg: "qrc:/icons/save.svg"
                 switchBgColor: true
 
                 onClicked: idSaveFileConf.open()
@@ -186,7 +186,7 @@ Control {
                 implicitWidth: 80
 
                 sizeImgWH: 25
-                sourceImg: "../../../icons/upload3.svg"
+                sourceImg: "qrc:/icons/upload.svg"
                 switchBgColor: true
 
                 onClicked: idLoadFileConf.open()

@@ -29,7 +29,7 @@ Page {
             return string.replace("file:///", "");
 
         } else {
-            return string;
+            return string.replace("file:///", "");
         }
     }
 

@@ -82,6 +82,10 @@ StackLayout {
         function onRunSig(data) {
             console.log(data)
         }
+
+        function onStopSig(data) {
+            console.log(data)
+        }
     }
 
 }

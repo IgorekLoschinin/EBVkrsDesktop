@@ -15,9 +15,9 @@ Button {
     QtObject{
         id: internal
 
-        property var dynamicColor: if(button.down){
+        property var dynamicColor: if (button.down) {
                                        button.down ? colorPressed : colorDefault
-                                   }else{
+                                   } else {
                                        button.hovered ? colorMouseOver : colorDefault
                                    }
     }

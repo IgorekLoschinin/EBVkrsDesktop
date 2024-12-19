@@ -44,6 +44,10 @@ TemplatePage {
         contentItem: ColumnLayout {
             spacing: comSpacing
 
+            ProgressWindow {
+                visible: false
+            }
+
             // Section preparation data
             GroupBox {
                 id: idAdditPropSection

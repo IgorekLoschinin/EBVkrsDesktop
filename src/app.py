@@ -9,6 +9,7 @@
 __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
 
 import sys
+import resources
 
 from pathlib import Path
 

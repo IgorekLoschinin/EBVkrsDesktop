@@ -14,7 +14,7 @@ Control {
             Layout.fillWidth: true
 
             nameBtn: qsTr("Home")
-            sourceImg: "../../icons/home.svg"
+            sourceImg: "qrc:/icons/home.svg"
 
             sideLightBtn: activityLightBtn(nameBtn)
             bgTargetColor: activityTargetBtn(idBtnHome, nameBtn)
@@ -35,22 +35,22 @@ Control {
             model: ListModel {
                 ListElement {
                     name: "Estimate"
-                    sourceImg: "../../icons/estimate.svg"
+                    sourceImg: "qrc:/icons/estimate.svg"
                     currInd: 4
                 }
                 ListElement {
                     name: "Index"
-                    sourceImg: "../../icons/index.svg"
+                    sourceImg: "qrc:/icons/index.svg"
                     currInd: 5
                 }
                 ListElement {
                     name: "Pipeline"
-                    sourceImg: "../../icons/pipeline.svg"
+                    sourceImg: "qrc:/icons/pipeline.svg"
                     currInd: 6
                 }
                 ListElement {
                     name: "Modeling"
-                    sourceImg: "../../icons/modelling.svg"
+                    sourceImg: "qrc:/icons/modelling.svg"
                     currInd: 7
                 }
             }

@@ -12,7 +12,7 @@ ColumnLayout {
         Layout.fillWidth: true
 
         nameBtn: qsTr("Processing")
-        sourceImg: "../../icons/processing.svg"
+        sourceImg: "qrc:/icons/processing.svg"
 
         sideLightBtn: activityLightBtn(nameBtn)
         bgTargetColor: activityTargetBtn(idProcessing, nameBtn)
