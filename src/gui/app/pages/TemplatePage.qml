@@ -64,8 +64,19 @@ Page {
         }
     }
 
-    footer: CstmDialogBtnPage{
-        id: idCustomDialogBtn
+    footer: RowLayout {
+        spacing: 3
+        height: 50
+
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+
+        Item { Layout.fillWidth: true }
+        ButtonRun {
+            id: idCustomDialogBtn
+
+            Layout.rightMargin: leftRightMargin
+        }
     }
 
     // Background page

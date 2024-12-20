@@ -2,43 +2,46 @@ import QtQuick
 import QtQuick.Controls
 
 Button {
-    id: button
+    id: idBtnRun
 
-    property string nameBtn: qsTr("Button")
-    property int fontPointSize: 10
+    property string srcImg: ""
+    property color colorImg: "green"
 
-    // Custom Properties
-    property color colorDefault: "#4891d9"
-    property color colorMouseOver: "#55AAFF"
-    property color colorPressed: "#3F7EBD"
+    property color dlgColorDef: "transparent"
+    property color dlgColorMouseOver: "#CFAF68"
+    property color dlgColorPressed: "#C79831"
 
-    QtObject{
-        id: internal
+    function dynamicColor (idBtn, cDef, cMO, cP) {
+        if (idBtn.down) {
+            return cP
+        } else {
+            if (idBtn.hovered) {
+                return cMO
+            }
+        }
 
-        property var dynamicColor: if (button.down) {
-                                       button.down ? colorPressed : colorDefault
-                                   } else {
-                                       button.hovered ? colorMouseOver : colorDefault
-                                   }
+        return cDef
     }
 
-    implicitWidth: 30
-    implicitHeight: 30
+    contentItem: ColorImage {
+        source: srcImg
+        color: colorImg
 
-    contentItem: Text {
-        text: qsTr(nameBtn)
-
-        font.family: "Segoe UI"
-        font.pointSize: fontPointSize
-
-        color: "#ffffff"
-
-        verticalAlignment: Text.AlignVCenter
-        horizontalAlignment: Text.AlignHCenter
+        fillMode: Image.PreserveAspectFit
+        sourceSize.height: 30
+        sourceSize.width: 30
     }
 
-    background: Rectangle{
-        color: internal.dynamicColor
-        radius: 10
+    background: Rectangle {
+        color: dynamicColor(
+                   idBtnRun,
+                   dlgColorDef,
+                   dlgColorMouseOver,
+                   dlgColorPressed
+        )
+
+        implicitHeight: 30
+        implicitWidth: 30
+        radius: 5
     }
 }

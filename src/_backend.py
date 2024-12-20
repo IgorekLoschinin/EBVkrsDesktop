@@ -15,11 +15,22 @@ from PySide6.QtCore import (
 	QObject,
 	Slot,
 	Signal,
-	QThread
+	Property,
+	QThread,
 )
 
 from src.models.modelhandler import ModelHandler
-from src.libkrs.core.settings import WORKSPACE_DIR
+from src.libkrs.core.settings import (
+	WORKSPACE_DIR,
+	CMD_FEATURE
+)
+from src.libkrs.est.varmodel import (
+	FEATURE_NAME_SCS,
+	FEATURE_NAME_MILK,
+	FEATURE_NAME_REPROD,
+	FEATURE_NAME_CONFORM
+)
+
 from src.libkrs.utils import logger
 
 
@@ -47,6 +58,18 @@ class Backend(QObject):
 		"""
 
 		return Path().cwd().joinpath(WORKSPACE_DIR)
+
+	@Property(dict)
+	def get_fields_table(self) -> dict[str, list[str]]:
+		return dict(zip(
+			CMD_FEATURE,
+			[
+				FEATURE_NAME_MILK,
+				FEATURE_NAME_CONFORM,
+				FEATURE_NAME_REPROD,
+				FEATURE_NAME_SCS
+			]
+		))
 
 	@Slot(dict)
 	def run(self, data: dict | None) -> None:

@@ -45,7 +45,7 @@ TemplatePage {
             spacing: comSpacing
 
             ProgressWindow {
-                visible: false
+                visible: true
             }
 
             // Section preparation data
