@@ -12,6 +12,8 @@ Control {
     readonly property var modFtVar: modelFeatureVar
     property var defVariance: null
 
+    // readonly property var fieldsName: backend.get_fields_table
+
     function getVariance(ftVar) {
         var allData = {};
         for (var i = 0; i < ftVar.count; i++) {
@@ -24,6 +26,19 @@ Control {
         }
 
         return allData
+    }
+
+    function createTable(fields) {
+        for (var i = 0; i < fields.length; i++) {
+            modelFeatureVar.append({
+                index: i,
+                name: fields[i],
+                varE: "0",
+                varG: "0"
+            });
+        }
+
+        tabInVar.defVariance = getVariance(modelFeatureVar);
     }
 
     contentItem: RowLayout {
@@ -138,12 +153,10 @@ Control {
 
                     Component.onCompleted: {
                         // Сюда с бэкенда отправляется список признаков
-                        var featureNames = ['MILK', 'FKG', 'FPRC', 'PKG', 'PPRC'];
-
-                        for (var i = 0; i < featureNames.length; i++) {
+                        for (var i = 0; i < fieldsName[idFeatureEbv.displayText].length; i++) {
                             modelFeatureVar.append({
                                 index: i,
-                                name: featureNames[i],
+                                name: fieldsName[idFeatureEbv.displayText][i],
                                 varE: "0",
                                 varG: "0"
                             });

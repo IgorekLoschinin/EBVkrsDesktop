@@ -7,7 +7,7 @@ Popup {
     id: idProgressWindow
     anchors.centerIn: parent
 
-    width: 380
+    width: 350
     height: 200
 
     // dim: true
@@ -26,39 +26,41 @@ Popup {
     }
 
     contentItem: ColumnLayout {
-        id: idContent
-
-        spacing: 5
+        id: idContent                
 
         Layout.fillWidth: true
-        Layout.alignment: Qt.AlignCenter
+        Layout.fillHeight: true
 
         ColorImage {
             id: logoImage
             color: "#7ece2d"
 
             Layout.fillWidth: true
-            Layout.alignment: Qt.AlignTop
+            Layout.topMargin: 8
+            Layout.bottomMargin: 15
 
             source: "qrc:/icons/logo_app.png"
-            sourceSize.width: 40
-            sourceSize.height: 90
+            sourceSize.width: 25
+            sourceSize.height: 50
             fillMode: Image.PreserveAspectFit
         }
 
         Label {
-            id: label1
+            id: lblInfo
+
             Layout.alignment: Qt.AlignCenter
 
             color: "#ffffff"
-            text: qsTr("Data processing in progress...")
+            text: qsTr("Data processing has started!")
             font.family: "Segoe UI"
             font.pointSize: 11
         }
 
         Label {
-            id: label2
+            id: labelProgress
+
             Layout.alignment: Qt.AlignCenter
+            Layout.fillHeight: true
 
             color: "#ffffff"
             text: qsTr("processing...")
@@ -66,8 +68,10 @@ Popup {
             font.pointSize: 11
         }
 
-        CustomBtn {
-            onClicked: dim = true
+        ButtonStop {
+            Layout.rightMargin: 8
+            Layout.bottomMargin: 8
+            Layout.alignment: Qt.AlignRight
         }
     }
 
