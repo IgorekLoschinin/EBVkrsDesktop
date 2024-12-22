@@ -6,7 +6,7 @@ CustomBtn {
     id: idBtnRun
 
     srcImg: "qrc:/icons/play.svg"
-    colorImg: "green"
+    colorImg: "#0ff54c"
 
     dlgColorDef: "#5d6575"
     dlgColorMouseOver: "#8792A8"
@@ -17,6 +17,15 @@ CustomBtn {
 
         Layout.fillWidth: true
         Layout.fillHeight: true
+
+        CustomTooltip {
+            object: idBtnRun
+            textLbl: qsTr("Run 'app'")
+
+            width: 80
+            x: - object.width + 4
+            y: object.height - 2
+        }
 
         Item { Layout.fillWidth: true }
         Text {

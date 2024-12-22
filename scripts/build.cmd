@@ -1,0 +1,1 @@
+CALL ..\venv\Scripts\pyinstaller.exe .\app.spec
