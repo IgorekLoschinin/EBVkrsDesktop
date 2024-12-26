@@ -7,9 +7,8 @@
 # of this license document, but changing it is not allowed.
 
 __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
-__all__ = ('Backend', )
+__all__ = ('Backend',)
 
-import time
 from pathlib import Path
 
 from PySide6.QtCore import (
@@ -38,11 +37,9 @@ from src.libkrs.utils import logger
 @logger(name="Backend")
 class Backend(QObject):
 
-	runSig = Signal(str)
-	finishedSig = Signal(int)
-
 	getfieldsTable = Signal(dict)
 	enablePrgW = Signal(bool)
+	finishedSig = Signal(int)
 
 	def __init__(self) -> None:
 		QObject.__init__(self)
@@ -141,7 +138,7 @@ class Backend(QObject):
 
 	def _exec_prog(self, code: int) -> None:
 		""" Method that fires when all event loops in a thread have completed -
-		 the program has completed
+		the program has completed
 
 		:param code:
 		:return:

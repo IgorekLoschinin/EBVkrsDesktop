@@ -78,7 +78,7 @@ Page {
             Layout.rightMargin: leftRightMargin
 
             onClicked: {
-                backend.run(sendForm)pa
+                backend.run(sendForm)
             }
         }
     }
