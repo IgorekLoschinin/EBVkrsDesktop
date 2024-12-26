@@ -9,6 +9,7 @@
 __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
 __all__ = ('Backend', )
 
+import time
 from pathlib import Path
 
 from PySide6.QtCore import (
@@ -38,13 +39,19 @@ from src.libkrs.utils import logger
 class Backend(QObject):
 
 	runSig = Signal(str)
-	stopSig = Signal(int)
+	finishedSig = Signal(int)
+
+	getfieldsTable = Signal(dict)
+	enablePrgW = Signal(bool)
 
 	def __init__(self) -> None:
 		QObject.__init__(self)
 
 		self._thread = None
 		self._worker_md = None
+
+		self._finished_code: int = -1
+		self._enable_prg_win: bool = False
 
 	@property
 	def common_namespace(self) -> Path:
@@ -59,7 +66,7 @@ class Backend(QObject):
 
 		return Path().cwd().joinpath(WORKSPACE_DIR)
 
-	@Property(dict)
+	@Property(dict, notify=getfieldsTable)
 	def get_fields_table(self) -> dict[str, list[str]]:
 		return dict(zip(
 			CMD_FEATURE,
@@ -70,6 +77,28 @@ class Backend(QObject):
 				FEATURE_NAME_SCS
 			]
 		))
+
+	@Property(bool, notify=enablePrgW)
+	def enable_prg_win(self) -> bool:
+		return self._enable_prg_win
+
+	@enable_prg_win.setter
+	def enable_prg_win(self, value: bool) -> None:
+		if self._enable_prg_win != value:
+			self._enable_prg_win = value
+
+			self.enablePrgW.emit(value)
+
+	@Property(int, notify=finishedSig)
+	def finished_code(self) -> int | None:
+		return self._finished_code
+
+	@finished_code.setter
+	def finished_code(self, value: int) -> None:
+		if self._finished_code != value:
+			self._finished_code = value
+
+			self.finishedSig.emit(value)
 
 	@Slot(dict)
 	def run(self, data: dict | None) -> None:
@@ -100,16 +129,24 @@ class Backend(QObject):
 
 			self._thread.start()  # Starting a thread
 
+			self.enable_prg_win = True
+
 		except Exception as e:
 			self.exception(e)
 
 	@Slot()
 	def stop(self) -> None:
 		self._worker_md.stop_processing()
-		print("Task is stop!")
+		self.enable_prg_win = False
 
 	def _exec_prog(self, code: int) -> None:
-		self.stopSig.emit(code)
+		""" Method that fires when all event loops in a thread have completed -
+		 the program has completed
+
+		:param code:
+		:return:
+		"""
+		self.finished_code = code
 
 	def __make_dir_workspace(self) -> None:
 		""" Creates a working directory - a directory of the general

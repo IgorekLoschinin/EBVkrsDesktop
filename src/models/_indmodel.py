@@ -54,7 +54,8 @@ class IndModel(IModel):
 				division=self._settings.divdata,
 				est_method=self._settings.estmethod,
 				parallel=self._settings.parallel,
-				workers=int(self._settings.numthread),
+				workers=None if self._settings.numthread is None
+				else int(self._settings.numthread),
 				disabled_optim=self._settings.disableoptim
 			)
 			ind.run()

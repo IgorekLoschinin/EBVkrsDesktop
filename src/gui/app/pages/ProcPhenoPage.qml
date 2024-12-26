@@ -6,8 +6,7 @@ import "controls"
 
 TemplatePage {
     id: idPageProcessingPheno
-
-    urlPage: qsTr("Processing -> phenotype")
+    urlPage: qsTr("Processing -> phenotype")    
 
     sendForm: {
         'id': 'procpheno',
@@ -36,6 +35,13 @@ TemplatePage {
         }
     }
 
+    Component {
+        id: pBpheno
+        ProgressWindow {
+            nameProcess: qsTr("Data processing has started!")
+        }
+    }
+
     contentData: Control {
         anchors.fill: parent
         anchors.leftMargin: marginContentD
@@ -44,8 +50,13 @@ TemplatePage {
         contentItem: ColumnLayout {
             spacing: comSpacing
 
-            ProgressWindow {
-                visible: false
+            Loader {
+                sourceComponent: {
+                    if (idContent.currentIndex === 2) {
+                        return pBpheno
+                    }
+                    return null
+                }
             }
 
             // Section preparation data

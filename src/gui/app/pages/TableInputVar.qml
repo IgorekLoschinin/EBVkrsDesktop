@@ -12,7 +12,7 @@ Control {
     readonly property var modFtVar: modelFeatureVar
     property var defVariance: null
 
-    // readonly property var fieldsName: backend.get_fields_table
+    readonly property var fieldsName: backend.get_fields_table
 
     function getVariance(ftVar) {
         var allData = {};
