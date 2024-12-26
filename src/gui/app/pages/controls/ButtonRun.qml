@@ -51,8 +51,6 @@ CustomBtn {
         Item { Layout.fillWidth: true }
     }
 
-    onClicked: backend.run(sendForm)
-
     background.implicitWidth: 90
     background.implicitHeight: 26
 }

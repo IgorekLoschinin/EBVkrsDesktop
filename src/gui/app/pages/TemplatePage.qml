@@ -76,6 +76,10 @@ Page {
             id: idCustomDialogBtn
 
             Layout.rightMargin: leftRightMargin
+
+            onClicked: {
+                backend.run(sendForm)pa
+            }
         }
     }
 

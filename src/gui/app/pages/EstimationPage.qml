@@ -17,6 +17,13 @@ TemplatePage {
         'numthread': idInputNumThredEst.text.length === 0 ? null : idInputNumThredEst.text,
     }
 
+    Component {
+        id: pBEst
+        ProgressWindow {
+            nameProcess: qsTr("Calculation of breeding value estimates has started!")
+        }
+    }
+
     contentData: Control {
         anchors.fill: parent
         anchors.leftMargin: marginContentD
@@ -24,6 +31,15 @@ TemplatePage {
 
         contentItem: ColumnLayout {
             spacing: 10
+
+            Loader {
+                sourceComponent: {
+                    if (idContent.currentIndex === 4) {
+                        return pBEst
+                    }
+                    return null
+                }
+            }
 
             // Section settings ebv
             GroupBox {

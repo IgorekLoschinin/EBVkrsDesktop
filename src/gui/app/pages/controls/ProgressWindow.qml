@@ -5,13 +5,19 @@ import QtQuick.Layouts
 
 Popup {
     id: idProgressWindow
-    anchors.centerIn: parent
+
+    property string nameProcess: ""
+    property string textMsgProgress: ""
 
     width: 350
     height: 200
 
-    // dim: true
-    visible: true
+    dim: backend.enable_prg_win
+    visible: backend.enable_prg_win
+
+    x: appWindow.width / 2 - width - 2
+    y: appWindow.height / 2 - height - 2
+
     closePolicy: Popup.NoAutoClose
 
     Overlay.modeless: Rectangle {
@@ -26,7 +32,7 @@ Popup {
     }
 
     contentItem: ColumnLayout {
-        id: idContent                
+        id: idContentPB
 
         Layout.fillWidth: true
         Layout.fillHeight: true
@@ -37,7 +43,7 @@ Popup {
 
             Layout.fillWidth: true
             Layout.topMargin: 8
-            Layout.bottomMargin: 15
+            Layout.bottomMargin: 3
 
             source: "qrc:/icons/logo_app.png"
             sourceSize.width: 25
@@ -48,12 +54,19 @@ Popup {
         Label {
             id: lblInfo
 
-            Layout.alignment: Qt.AlignCenter
+            Layout.fillWidth: true
+            Layout.leftMargin: 8
+            Layout.rightMargin: 8
 
             color: "#ffffff"
-            text: qsTr("Data processing has started!")
+            text: nameProcess
             font.family: "Segoe UI"
-            font.pointSize: 11
+            font.pointSize: 13
+            font.bold: true
+            wrapMode: Text.WordWrap
+
+            horizontalAlignment: Qt.AlignHCenter
+            verticalAlignment: Qt.AlignVCenter
         }
 
         Label {
@@ -63,9 +76,21 @@ Popup {
             Layout.fillHeight: true
 
             color: "#ffffff"
-            text: qsTr("processing...")
+            text: {
+                switch (backend.finished_code) {
+                case 0:
+                    return qsTr("Successful completion!")
+
+                case 1:
+                    return qsTr("Error completion!")
+                }
+
+                return qsTr("processing...")
+            }
+
             font.family: "Segoe UI"
             font.pointSize: 11
+            wrapMode: Text.WordWrap
         }
 
         ButtonStop {

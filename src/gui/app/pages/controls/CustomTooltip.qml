@@ -7,6 +7,7 @@ Popup {
 
     property var object: null
     property string textLbl: ''
+    property int sizeText: 14
 
     width: 120
     height: implicitHeight
@@ -25,7 +26,7 @@ Popup {
 
         text: tooltip.textLbl
         font.family: "Segoe UI"
-        font.pixelSize: 14
+        font.pixelSize: sizeText
         color: "#49454f"
         wrapMode: Text.Wrap
         clip: true

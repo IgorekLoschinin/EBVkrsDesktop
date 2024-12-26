@@ -33,6 +33,13 @@ TemplatePage {
         }
     }
 
+    Component {
+        id: pBsnpProc
+        ProgressWindow {
+            nameProcess: qsTr("SNP data processing has started!")
+        }
+    }
+
     contentData: Control {
         anchors.fill: parent
         anchors.leftMargin: marginContentD
@@ -40,6 +47,15 @@ TemplatePage {
 
         contentItem: ColumnLayout {
             spacing: 10
+
+            Loader {
+                sourceComponent: {
+                    if (idContent.currentIndex === 3) {
+                        return pBsnpProc
+                    }
+                    return null
+                }
+            }
 
             // Section Snp processing
             GroupBox {

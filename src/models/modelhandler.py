@@ -93,8 +93,8 @@ class ModelHandler(QObject):
 
 	@Slot()
 	def stop_processing(self) -> None:
-
 		if self._obj_process is not None and self._obj_process.is_alive():
 			self._obj_process.kill()
 			time.sleep(1)
-			print("Process kill!")
+
+			return

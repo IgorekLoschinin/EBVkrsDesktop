@@ -26,6 +26,13 @@ TemplatePage {
         }
     }
 
+    Component {
+        id: pBpheno
+        ProgressWindow {
+            nameProcess: qsTr("Calculation of breeding value indices has started!")
+        }
+    }
+
     contentData: Control {
         anchors.fill: parent
         anchors.leftMargin: marginContentD
@@ -33,6 +40,15 @@ TemplatePage {
 
         contentItem: ColumnLayout {
             spacing: 10
+
+            Loader {
+                sourceComponent: {
+                    if (idContent.currentIndex === 5) {
+                        return pBpheno
+                    }
+                    return null
+                }
+            }
 
             // Section Common
             GroupBox {
