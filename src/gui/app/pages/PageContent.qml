@@ -20,7 +20,8 @@ StackLayout {
             compEstPage,
             compIndPage,
             compPlPage,
-            compModlPage
+            compModlPage,
+            compSettPage
         ]
 
         delegate: Loader {
@@ -76,4 +77,9 @@ StackLayout {
         ModelingPage {}
     }
 
+    Component {
+        id: compSettPage
+
+        SettingsPage {}
+    }
 }

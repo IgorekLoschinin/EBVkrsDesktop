@@ -221,6 +221,7 @@ TemplatePage {
 
                                 text: qsTr("Number lactation: ")
                                 font.pixelSize: sizeTextInSect
+                                font.family: "Segoe UI"
                                 color: txtSection
                             }
 

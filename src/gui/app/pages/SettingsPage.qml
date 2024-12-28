@@ -1,76 +1,86 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts
+import "controls"
 
-Page {
 
-    contentItem: Rectangle {
-        color: '#1f2b43'
-        radius: bgRadius
-    }
+TemplatePage {
+    id: idPageSettings
+    urlPage: qsTr("Settings")
 
-    Label {
-        text: "Settings page"
-        color: "plum"
-
-        anchors.centerIn: parent
-
-        horizontalAlignment: Qt.AlignHCenter
-
-    }
-
-    MouseArea {
+    contentData: Control {
         anchors.fill: parent
-        onPressed: { appWindow.startSystemMove() }
+        anchors.leftMargin: marginContentD
+        anchors.rightMargin: marginContentD
+
+        contentItem: ColumnLayout {
+            spacing: comSpacing
+
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+
+            // Divining top line
+            Rectangle {
+                color: 'white'
+                height: 1
+
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignTop
+                Layout.topMargin: 10
+                Layout.bottomMargin: bottomMarginContentSect
+            }
+
+            // Language panel
+            RowLayout {
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignTop
+
+                Text {
+                    Layout.rightMargin: 3
+
+                    text: qsTr("Language: ")
+                    font.pixelSize: sizeTextInSect
+                    font.family: "Segoe UI"
+                    color: txtSection
+
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
+
+                CustomComboBox {
+                    id: idLangPanel
+
+                    Layout.alignment: Qt.AlignHCenter
+
+                    implicitWidth: 90
+
+                    currentIndex: 0
+                    model: ["English", "Russian"]
+                }
+            }
+
+            // Select path to utils *f90.exe
+            InputGroupFolder {
+                id: idInputUtilf90
+                nameField: qsTr("Dir utils *f90.exe:")
+
+                Layout.fillWidth: true
+            }
+
+            // Divining bottom line
+            Rectangle {
+                color: 'white'
+                height: 1
+
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignTop
+                Layout.topMargin: 10
+                Layout.bottomMargin: bottomMarginContentSect
+            }
+
+            Item { Layout.fillHeight: true }
+        }
     }
 
-    background: Rectangle {
-        color: "transparent"
-    }
+    footer: null
 }
-
-// ApplicationWindow {
-//     visible: true
-//     width: 640
-//     height: 480
-//     title: "Пример модального окна с Popup"
-
-//     // Кнопка для вызова модального окна
-//     Button {
-//         text: "Открыть модальное окно"
-//         anchors.centerIn: parent
-//         onClicked: myPopup.open()
-//     }
-
-//     // Модальное окно
-//     Popup {
-//         id: myPopup
-//         modal: true  // Делаем его модальным
-//         width: 300
-//         height: 200
-
-//         anchors.centerIn: parent
-//         closePolicy: Popup.CloseOnPressOutsideParent
-
-//         Rectangle {
-//             anchors.fill: parent
-//             color: "white"
-//             border.color: "black"
-
-//             Column {
-//                 anchors.centerIn: parent
-//                 spacing: 10
-
-//                 Text {
-//                     text: "Это модальное окно Popup."
-//                     horizontalAlignment: Text.AlignHCenter
-//                 }
-
-//                 Button {
-//                     text: "Закрыть"
-//                     onClicked: myPopup.close()
-//                 }
-//             }
-//         }
-//     }
-// }
-
