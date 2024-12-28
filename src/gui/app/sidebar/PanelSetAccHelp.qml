@@ -29,7 +29,10 @@ Control {
             sideLightBtn: activityLightBtn(nameBtn)
             bgTargetColor: activityTargetBtn(idBtnSettings, nameBtn)
 
-            onClicked: idSideBar.activeButton = nameBtn
+            onClicked: {
+                idSideBar.activeButton = nameBtn
+                idContent.currentIndex = 8
+            }
         }
 
         CustomBtnSb {

@@ -64,6 +64,12 @@ Page {
         }
     }
 
+    MouseArea {
+        anchors.fill: parent
+        hoverEnabled: true
+        onPressed: { appWindow.startSystemMove() }
+    }
+
     footer: RowLayout {
         spacing: 3
         height: 50
