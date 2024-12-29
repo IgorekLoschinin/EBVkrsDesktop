@@ -49,6 +49,7 @@ ComboBox {
 
             opacity: 0.9
             text: modelData
+            font.family: "Segoe UI"
             font.pixelSize: 18
             color: textColor
 

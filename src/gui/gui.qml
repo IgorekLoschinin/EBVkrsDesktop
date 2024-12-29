@@ -42,4 +42,10 @@ ApplicationWindow {
     contentData: AppContentArea {
         id: idAppContentArea
     }
+
+    // Connections {
+    //     target: translationManager
+    //     onLangChanged: Qt.callLater(() => Qt.application.retranslate())
+
+    // }
 }

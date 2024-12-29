@@ -55,7 +55,9 @@ TemplatePage {
                     implicitWidth: 90
 
                     currentIndex: 0
-                    model: ["English", "Russian"]
+                    model: translationManager.languages //["Russian", "English"]
+
+                    onCurrentTextChanged: translationManager.load_language(currentText)
                 }
             }
 

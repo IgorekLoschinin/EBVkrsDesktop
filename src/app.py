@@ -15,6 +15,7 @@ from pathlib import Path
 
 from PySide6.QtGui import QGuiApplication
 from PySide6.QtQml import QQmlApplicationEngine
+from translatemanager import TranslationManager
 
 from src._backend import Backend
 
@@ -23,6 +24,10 @@ if __name__ == "__main__":
 
 	app = QGuiApplication([])
 	engine = QQmlApplicationEngine()
+
+	# Create and upload a translator
+	translator = TranslationManager(engine)
+	engine.rootContext().setContextProperty("translationManager", translator)
 
 	main = Backend()
 	engine.rootContext().setContextProperty("backend", main)

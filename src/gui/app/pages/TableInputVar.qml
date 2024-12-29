@@ -9,9 +9,9 @@ import "controls"
 Control {
     id: tabInVar
 
-    readonly property var modFtVar: modelFeatureVar
     property var defVariance: null
 
+    readonly property var modFtVar: modelFeatureVar
     readonly property var fieldsName: backend.get_fields_table
 
     function getVariance(ftVar) {
@@ -31,14 +31,16 @@ Control {
     function createTable(fields) {
         for (var i = 0; i < fields.length; i++) {
             modelFeatureVar.append({
-                index: i,
+                // index: i,
                 name: fields[i],
                 varE: "0",
                 varG: "0"
             });
         }
 
-        tabInVar.defVariance = getVariance(modelFeatureVar);
+        defVariance = getVariance(modelFeatureVar);
+
+        return modelFeatureVar
     }
 
     contentItem: RowLayout {
@@ -48,8 +50,7 @@ Control {
         }
 
         ColumnLayout {
-            // Header table            
-
+            // Header table
             RowLayout {
                 spacing: 10
 
@@ -81,7 +82,11 @@ Control {
             }
 
             // Body - row and col
-            RowLayout {
+            RowLayout {                                
+
+                ListModel {
+                    id: modelFeatureVar
+                }
 
                 ListView {
                     id: listInputVar
@@ -91,8 +96,18 @@ Control {
                     implicitHeight: 250
                     implicitWidth: 300
 
-                    model: ListModel {
-                        id: modelFeatureVar
+                    model: {
+
+                        if (modelFeatureVar.count > 0) {
+
+                            modelFeatureVar.clear()
+                            // createTable(fieldsName[idFeatureEbv.displayText])
+                            // defVariance = getVariance(modelFeatureVar);
+                            // return modelFeatureVar
+                        }
+
+                        createTable(fieldsName[idFeatureEbv.displayText])
+                        return modelFeatureVar
                     }
 
                     delegate: RowLayout {
@@ -120,8 +135,7 @@ Control {
                             onEditingFinished: {
                                 if (idInVarE.text.length) {
                                     modelFeatureVar.set(
-                                        index,
-                                        {"varE": idInVarE.text}
+                                        index, {"varE": idInVarE.text}
                                     )
                                     return
                                 }
@@ -140,8 +154,7 @@ Control {
                             onEditingFinished: {
                                 if (idInVarG.text.length) {
                                     modelFeatureVar.set(
-                                        index,
-                                        {"varG": idInVarG.text}
+                                        index, {"varG": idInVarG.text}
                                     )
                                     return
                                 }
@@ -151,18 +164,10 @@ Control {
                         }
                     }
 
-                    Component.onCompleted: {
-                        // Сюда с бэкенда отправляется список признаков
-                        for (var i = 0; i < fieldsName[idFeatureEbv.displayText].length; i++) {
-                            modelFeatureVar.append({
-                                index: i,
-                                name: fieldsName[idFeatureEbv.displayText][i],
-                                varE: "0",
-                                varG: "0"
-                            });
-                        }
-                        defVariance = getVariance(modelFeatureVar);
-                    }
+                    // Component.onCompleted: {
+                    //     createTable(fieldsName[idFeatureEbv.displayText])
+                    //     defVariance = getVariance(modelFeatureVar);
+                    // }
                 }
             }
         }
