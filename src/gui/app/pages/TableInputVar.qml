@@ -18,6 +18,7 @@ Control {
 
     function getVariance(objModel) {
         var allData = {};
+
         for (var i = 0; i < objModel.count; i++) {
             var item = objModel.get(i);
 
@@ -30,18 +31,38 @@ Control {
         return allData
     }
 
-    function loadTable(curInd) {
+    function setVarinace(data) {
+        var subFtVar = backend.get_fields_table[idFeatureEbv.currentText]
+
+        if (currentModel !== null) {
+            currentModel.clear()
+            subFtVar.forEach(
+                (elem) => currentModel.append({
+                    name: elem,
+                    varE: data[elem].varE === 'null' ? "0" : data[elem].varE,
+                    varG: data[elem].varG === 'null' ? "0" : data[elem].varG
+                })
+            )
+
+        }
+
+        // backend.print_qml(getVariance(currentModel))
+
+
+    }
+
+    function reloadTable(curInd) {
         currentModel = modelsFtVar[curInd]
     }
 
     function createTable(objModel, lstFieldName) {
-        for (var i = 0; i < lstFieldName.length; i++) {
-            objModel.append({
-                name: lstFieldName[i],
+        lstFieldName.forEach(
+            (elem) => objModel.append({
+                name: elem,
                 varE: "0",
                 varG: "0"
-            });
-        }
+            })
+        )
 
         tabInVar.defVariance = getVariance(objModel);
 
@@ -175,7 +196,7 @@ Control {
                     id: idSaveFileConf
                     fileMode: FileDialog.SaveFile
                     currentFolder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
-                    onAccepted: console.log(selectedFile)
+                    onAccepted: backend.save_variance_conf(rePath(selectedFile.toString()))
                 }
 
                 CustomTooltip {
@@ -198,7 +219,7 @@ Control {
                     id: idLoadFileConf
                     fileMode: FileDialog.OpenFile
                     currentFolder: StandardPaths.standardLocations(StandardPaths.DocumentsLocation)[0]
-                    onAccepted: console.log(selectedFile)
+                    onAccepted: backend.load_variance_conf(rePath(selectedFile.toString()))
                 }
 
                 CustomTooltip {
@@ -210,6 +231,15 @@ Control {
 
         Item {
             Layout.fillWidth: true
+        }
+    }
+
+    Connections {
+        target: backend
+
+        function onUploadVar (data) {
+            setVarinace(data)
+            // backend.print_qml(data)
         }
     }
 }

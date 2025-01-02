@@ -31,7 +31,11 @@ from src.libkrs.est.varmodel import (
 	FEATURE_NAME_CONFORM
 )
 
-from src.libkrs.utils import logger
+from src.libkrs.utils import (
+	logger,
+	from_json,
+	to_json
+)
 
 
 @logger(name="Backend")
@@ -40,6 +44,9 @@ class Backend(QObject):
 	getfieldsTable = Signal(dict)
 	enablePrgW = Signal(bool)
 	finishedSig = Signal(int)
+
+	saveVar = Signal(str)
+	uploadVar = Signal(dict)
 
 	def __init__(self) -> None:
 		QObject.__init__(self)
@@ -62,6 +69,10 @@ class Backend(QObject):
 		"""
 
 		return Path().cwd().joinpath(WORKSPACE_DIR)
+
+	@Property(list, constant=True)
+	def list_feature(self) -> list[str]:
+		return CMD_FEATURE
 
 	@Property(dict, notify=getfieldsTable)
 	def get_fields_table(self) -> dict[str, list[str]]:
@@ -100,36 +111,38 @@ class Backend(QObject):
 	@Slot(dict)
 	def run(self, data: dict | None) -> None:
 
-		if data is None:
-			self.error("Data is not None!")
-			return None
+		# if data is None:
+		# 	self.error("Data is not None!")
+		# 	return None
+		#
+		# self.__make_dir_workspace()
+		#
+		# try:
+		# 	self._thread = QThread()
+		# 	self._worker_md = ModelHandler(
+		# 		data=data,
+		# 		output_dir=self.common_namespace
+		# 	)
+		#
+		# 	self._worker_md.moveToThread(self._thread)
+		#
+		# 	# Link signals and slots
+		# 	# Run when the thread starts
+		# 	self._thread.started.connect(self._worker_md.handle)
+		# 	self._worker_md.exitCode.connect(self._exec_prog)
+		# 	self._worker_md.exitCode.connect(self._thread.quit)
+		# 	self._worker_md.exitCode.connect(self._worker_md.deleteLater)
+		# 	self._thread.finished.connect(self._worker_md.deleteLater)
+		# 	self._thread.finished.connect(self._thread.deleteLater)
+		#
+		# 	self._thread.start()  # Starting a thread
+		#
+		# 	self.enable_prg_win = True
+		#
+		# except Exception as e:
+		# 	self.exception(e)
 
-		self.__make_dir_workspace()
-
-		try:
-			self._thread = QThread()
-			self._worker_md = ModelHandler(
-				data=data,
-				output_dir=self.common_namespace
-			)
-
-			self._worker_md.moveToThread(self._thread)
-
-			# Link signals and slots
-			# Run when the thread starts
-			self._thread.started.connect(self._worker_md.handle)
-			self._worker_md.exitCode.connect(self._exec_prog)
-			self._worker_md.exitCode.connect(self._thread.quit)
-			self._worker_md.exitCode.connect(self._worker_md.deleteLater)
-			self._thread.finished.connect(self._worker_md.deleteLater)
-			self._thread.finished.connect(self._thread.deleteLater)
-
-			self._thread.start()  # Starting a thread
-
-			self.enable_prg_win = True
-
-		except Exception as e:
-			self.exception(e)
+		print(data)
 
 	@Slot()
 	def stop(self) -> None:
@@ -151,3 +164,17 @@ class Backend(QObject):
 		if not (self.common_namespace.is_dir() and
 				self.common_namespace.exists()):
 			self.common_namespace.mkdir()
+
+	@Slot(str)
+	def save_variance_conf(self, path_file: str) -> None:
+		print(path_file)
+
+	@Slot(str)
+	def load_variance_conf(self, path_file: str) -> None:
+		data = from_json(path_file)
+
+		self.uploadVar.emit(data)
+
+	@Slot(dict)
+	def print_qml(self, data: dict) -> None:
+		print(data)

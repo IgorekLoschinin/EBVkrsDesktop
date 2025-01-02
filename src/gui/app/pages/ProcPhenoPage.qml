@@ -258,7 +258,7 @@ TemplatePage {
 
                                     currentIndex: 0
                                     displayText: currentText
-                                    model: ['milk', 'conform', 'reprod', 'scs']
+                                    model: backend.list_feature
                                 }
 
                             }
