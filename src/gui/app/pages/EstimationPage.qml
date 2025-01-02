@@ -12,7 +12,7 @@ TemplatePage {
         'id': 'ebv',
         'estmethod': idEbvTypeEstMethod.displayText,
         'feature': idFeatureEbv.displayText,
-        'variance': idSelectTypeCalVar.displayText === "conf" ? tableInVariance.getVariance(tableInVariance.modFtVar) : tableInVariance.defVariance,
+        'variance': idSelectTypeCalVar.displayText === "conf" ? tableInVariance.getVariance(tableInVariance.currentModel) : tableInVariance.defVariance,
         'parallel': idCheckBoxParallelEst.checked,
         'numthread': idInputNumThredEst.text.length === 0 ? null : idInputNumThredEst.text,
     }
@@ -87,6 +87,18 @@ TemplatePage {
                                     currentIndex: 0
                                     displayText: currentText
                                     model: ['milk', 'conform', 'reprod', 'scs']
+
+                                    onCurrentTextChanged: {
+                                        if (tableInVariance.modelsFtVar[currentIndex].count > 0) {
+                                            tableInVariance.loadTable(currentIndex)
+                                            return
+                                        }
+
+                                        tableInVariance.currentModel = tableInVariance.createTable(
+                                            tableInVariance.modelsFtVar[currentIndex],
+                                            backend.get_fields_table[idFeatureEbv.currentText]
+                                        )
+                                    }
                                 }
                             }
 
