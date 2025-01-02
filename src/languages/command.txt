@@ -1,0 +1,16 @@
+Используются lupdate и lrelease.
+
+1. Создание файла .ts
+    Выполните команду lupdate, чтобы собрать строки для перевода:
+        pyside6-lupdate.exe .\src\gui\ -ts  .\src\languages\lang_en.ts
+
+2. Редактирование файла .ts
+    Откройте файл .ts в Qt Linguist (графический редактор для перевода) или
+    отредактируйте вручную.
+        pyside6-linguist.exe
+
+3. Компиляция .ts в .qm
+    Скомпилируйте переводы с помощью lrelease:
+        pyside6-lrelease.exe .\src\languages\lang_ru.ts
+
+    Это создаст файл project_ru.qm.

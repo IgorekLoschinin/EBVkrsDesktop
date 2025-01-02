@@ -9,15 +9,17 @@ import "controls"
 Control {
     id: tabInVar
 
-    readonly property var modFtVar: modelFeatureVar
+    readonly property var modelsFtVar: [
+        modelMilk, modelConf, modelRepr, modelScs
+    ]
+
     property var defVariance: null
+    property var currentModel: null
 
-    readonly property var fieldsName: backend.get_fields_table
-
-    function getVariance(ftVar) {
+    function getVariance(objModel) {
         var allData = {};
-        for (var i = 0; i < ftVar.count; i++) {
-            var item = ftVar.get(i);
+        for (var i = 0; i < objModel.count; i++) {
+            var item = objModel.get(i);
 
             allData[item.name] = {
                 "varE": item.varE === '0' ? null : item.varE,
@@ -28,17 +30,22 @@ Control {
         return allData
     }
 
-    function createTable(fields) {
-        for (var i = 0; i < fields.length; i++) {
-            modelFeatureVar.append({
-                index: i,
-                name: fields[i],
+    function loadTable(curInd) {
+        currentModel = modelsFtVar[curInd]
+    }
+
+    function createTable(objModel, lstFieldName) {
+        for (var i = 0; i < lstFieldName.length; i++) {
+            objModel.append({
+                name: lstFieldName[i],
                 varE: "0",
                 varG: "0"
             });
         }
 
-        tabInVar.defVariance = getVariance(modelFeatureVar);
+        tabInVar.defVariance = getVariance(objModel);
+
+        return objModel
     }
 
     contentItem: RowLayout {
@@ -48,8 +55,7 @@ Control {
         }
 
         ColumnLayout {
-            // Header table            
-
+            // Header table
             RowLayout {
                 spacing: 10
 
@@ -83,6 +89,11 @@ Control {
             // Body - row and col
             RowLayout {
 
+                ListModel { id: modelMilk }
+                ListModel { id: modelConf }
+                ListModel { id: modelRepr }
+                ListModel { id: modelScs }
+
                 ListView {
                     id: listInputVar
                     clip: true
@@ -91,9 +102,7 @@ Control {
                     implicitHeight: 250
                     implicitWidth: 300
 
-                    model: ListModel {
-                        id: modelFeatureVar
-                    }
+                    model: currentModel
 
                     delegate: RowLayout {
                         spacing: 10
@@ -115,16 +124,13 @@ Control {
                             Layout.fillWidth: true
                             implicitWidth: 80
 
-                            phText: "0"
+                            phText: currentModel.get(index).varE
 
                             onEditingFinished: {
-                                if (idInVarE.text.length) {
-                                    modelFeatureVar.set(
-                                        index,
-                                        {"varE": idInVarE.text}
-                                    )
-                                    return
-                                }
+                                currentModel.set(
+                                    index,
+                                    {"varE": idInVarE.text}
+                                )
                             }
 
                             validator: DoubleValidator {}
@@ -138,30 +144,14 @@ Control {
                             phText: "0"
 
                             onEditingFinished: {
-                                if (idInVarG.text.length) {
-                                    modelFeatureVar.set(
-                                        index,
-                                        {"varG": idInVarG.text}
-                                    )
-                                    return
-                                }
+                                currentModel.set(
+                                    index,
+                                    {"varG": idInVarG.text}
+                                )
                             }
 
                             validator: DoubleValidator {}
                         }
-                    }
-
-                    Component.onCompleted: {
-                        // Сюда с бэкенда отправляется список признаков
-                        for (var i = 0; i < fieldsName[idFeatureEbv.displayText].length; i++) {
-                            modelFeatureVar.append({
-                                index: i,
-                                name: fieldsName[idFeatureEbv.displayText][i],
-                                varE: "0",
-                                varG: "0"
-                            });
-                        }
-                        defVariance = getVariance(modelFeatureVar);
                     }
                 }
             }
