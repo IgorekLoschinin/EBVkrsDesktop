@@ -34,22 +34,22 @@ Control {
         Repeater {
             model: ListModel {
                 ListElement {
-                    name: "Estimate"
+                    name: qsTr("Estimate")
                     sourceImg: "qrc:/icons/estimate.svg"
                     currInd: 4
                 }
                 ListElement {
-                    name: "Index"
+                    name: qsTr("Index")
                     sourceImg: "qrc:/icons/index.svg"
                     currInd: 5
                 }
                 ListElement {
-                    name: "Pipeline"
+                    name: qsTr("Pipeline")
                     sourceImg: "qrc:/icons/pipeline.svg"
                     currInd: 6
                 }
                 ListElement {
-                    name: "Modeling"
+                    name: qsTr("Modeling")
                     sourceImg: "qrc:/icons/modelling.svg"
                     currInd: 7
                 }

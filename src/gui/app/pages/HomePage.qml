@@ -23,8 +23,6 @@ TemplatePage {
                 Layout.topMargin: 20
                 Layout.bottomMargin: 30
 
-//                 text: qsTr("    Программное обеспечение для оценки племенной ценности крупнорогатого скота, которая предлогает
-// следующие методы для обработки, оценки и формирования отчетов: ")
                 text: qsTr("    Software for assessing the breeding value of cattle, which offers the following methods for processing, assessing and generating reports:")
                 font.pixelSize: 17
                 font.family: "Segoe UI"
@@ -37,27 +35,27 @@ TemplatePage {
                 model: ListModel {
                     ListElement {
                         name: "proc"
-                        textBtn: "Processing"
+                        textBtn: qsTr("Processing")
                     }
 
                     ListElement {
                         name: "est"
-                        textBtn: "Estimate breeding value"
+                        textBtn: qsTr("Estimate breeding value")
                     }
 
                     ListElement {
                         name: "ind"
-                        textBtn: "Idexing estimation"
+                        textBtn: qsTr("Idexing estimation")
                     }
 
                     ListElement {
                         name: "pipe"
-                        textBtn: "Pipeline"
+                        textBtn: qsTr("Pipeline")
                     }
 
                     ListElement {
                         name: "mod"
-                        textBtn: "Modeling"
+                        textBtn: qsTr("Modeling")
                     }
                 }
 

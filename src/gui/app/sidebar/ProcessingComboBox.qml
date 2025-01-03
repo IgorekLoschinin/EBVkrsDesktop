@@ -39,12 +39,12 @@ ColumnLayout {
             Repeater {
                 model: ListModel {
                     ListElement {
-                        name: "- Phenotype"
+                        name: qsTr("- Phenotype")
                         currInd: 2
                     }
 
                     ListElement {
-                        name: "- SNP"
+                        name: qsTr("- SNP")
                         currInd: 3
                     }
                 }

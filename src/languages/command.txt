@@ -2,7 +2,7 @@
 
 1. Создание файла .ts
     Выполните команду lupdate, чтобы собрать строки для перевода:
-        pyside6-lupdate.exe .\src\gui\ -ts  .\src\languages\lang_en.ts
+        pyside6-lupdate.exe .\src\gui\ -ts .\src\languages\lang_en.ts
 
 2. Редактирование файла .ts
     Откройте файл .ts в Qt Linguist (графический редактор для перевода) или

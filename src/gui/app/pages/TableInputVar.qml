@@ -23,8 +23,8 @@ Control {
             var item = objModel.get(i);
 
             allData[item.name] = {
-                "varE": item.varE === '0' ? null : Number(item.varE),
-                "varG": item.varG === '0' ? null : Number(item.varG)
+                "varE": item.varE === '0' ? null : item.varE,
+                "varG": item.varG === '0' ? null : item.varG
             };
         }
 
