@@ -121,7 +121,7 @@ TemplatePage {
                                 CustomComboBox {
                                     id: idSelectFeatureForInd
                                     currentIndex: 0
-                                    model: ['milk', 'conform', 'reprod', 'scs']
+                                    model: backend.list_feature
                                 }
                             }
 

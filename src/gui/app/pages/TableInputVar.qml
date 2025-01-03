@@ -18,30 +18,48 @@ Control {
 
     function getVariance(objModel) {
         var allData = {};
+
         for (var i = 0; i < objModel.count; i++) {
             var item = objModel.get(i);
 
             allData[item.name] = {
-                "varE": item.varE === '0' ? null : item.varE,
-                "varG": item.varG === '0' ? null : item.varG
+                "varE": item.varE === '0' ? null : Number(item.varE),
+                "varG": item.varG === '0' ? null : Number(item.varG)
             };
         }
 
         return allData
     }
 
-    function loadTable(curInd) {
+    function setVarinace(data) {
+        var subFtVar = backend.get_fields_table[idFeatureEbv.currentText]
+
+        if (currentModel !== null) {
+            currentModel.clear()
+
+            subFtVar.forEach(
+                (elem) => currentModel.append({
+                    name: elem,
+                    varE: data[elem].varE === undefined ? "0" : data[elem].varE.toString(),
+                    varG: data[elem].varG === undefined ? "0" : data[elem].varG.toString()
+                })
+            )
+        }
+
+    }
+
+    function reloadTable(curInd) {
         currentModel = modelsFtVar[curInd]
     }
 
     function createTable(objModel, lstFieldName) {
-        for (var i = 0; i < lstFieldName.length; i++) {
-            objModel.append({
-                name: lstFieldName[i],
+        lstFieldName.forEach(
+            (elem) => objModel.append({
+                name: elem,
                 varE: "0",
                 varG: "0"
-            });
-        }
+            })
+        )
 
         tabInVar.defVariance = getVariance(objModel);
 
@@ -124,7 +142,7 @@ Control {
                             Layout.fillWidth: true
                             implicitWidth: 80
 
-                            phText: currentModel.get(index).varE
+                            phText: varE
 
                             onEditingFinished: {
                                 currentModel.set(
@@ -141,7 +159,7 @@ Control {
                             Layout.fillWidth: true
                             implicitWidth: 80
 
-                            phText: "0"
+                            phText: varG
 
                             onEditingFinished: {
                                 currentModel.set(
@@ -175,7 +193,10 @@ Control {
                     id: idSaveFileConf
                     fileMode: FileDialog.SaveFile
                     currentFolder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
-                    onAccepted: console.log(selectedFile)
+                    onAccepted: backend.save_variance_conf(
+                        tabInVar.getVariance(tabInVar.currentModel),
+                        rePath(selectedFile.toString())
+                    )
                 }
 
                 CustomTooltip {
@@ -198,7 +219,7 @@ Control {
                     id: idLoadFileConf
                     fileMode: FileDialog.OpenFile
                     currentFolder: StandardPaths.standardLocations(StandardPaths.DocumentsLocation)[0]
-                    onAccepted: console.log(selectedFile)
+                    onAccepted: backend.load_variance_conf(rePath(selectedFile.toString()))
                 }
 
                 CustomTooltip {
@@ -210,6 +231,14 @@ Control {
 
         Item {
             Layout.fillWidth: true
+        }
+    }
+
+    Connections {
+        target: backend
+
+        function onUploadVar (data) {
+            setVarinace(data)
         }
     }
 }

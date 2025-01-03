@@ -86,11 +86,11 @@ TemplatePage {
                                     id: idFeatureEbv
                                     currentIndex: 0
                                     displayText: currentText
-                                    model: ['milk', 'conform', 'reprod', 'scs']
+                                    model: backend.list_feature
 
                                     onCurrentTextChanged: {
                                         if (tableInVariance.modelsFtVar[currentIndex].count > 0) {
-                                            tableInVariance.loadTable(currentIndex)
+                                            tableInVariance.reloadTable(currentIndex)
                                             return
                                         }
 
