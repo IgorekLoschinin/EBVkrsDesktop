@@ -23,8 +23,8 @@ Control {
             var item = objModel.get(i);
 
             allData[item.name] = {
-                "varE": item.varE === '0' ? null : item.varE,
-                "varG": item.varG === '0' ? null : item.varG
+                "varE": item.varE === '0' ? null : Number(item.varE),
+                "varG": item.varG === '0' ? null : Number(item.varG)
             };
         }
 
@@ -36,18 +36,15 @@ Control {
 
         if (currentModel !== null) {
             currentModel.clear()
+
             subFtVar.forEach(
                 (elem) => currentModel.append({
                     name: elem,
-                    varE: data[elem].varE === 'null' ? "0" : data[elem].varE,
-                    varG: data[elem].varG === 'null' ? "0" : data[elem].varG
+                    varE: data[elem].varE === undefined ? "0" : data[elem].varE.toString(),
+                    varG: data[elem].varG === undefined ? "0" : data[elem].varG.toString()
                 })
             )
-
         }
-
-        // backend.print_qml(getVariance(currentModel))
-
 
     }
 
@@ -145,7 +142,7 @@ Control {
                             Layout.fillWidth: true
                             implicitWidth: 80
 
-                            phText: currentModel.get(index).varE
+                            phText: varE
 
                             onEditingFinished: {
                                 currentModel.set(
@@ -162,7 +159,7 @@ Control {
                             Layout.fillWidth: true
                             implicitWidth: 80
 
-                            phText: "0"
+                            phText: varG
 
                             onEditingFinished: {
                                 currentModel.set(
@@ -196,7 +193,10 @@ Control {
                     id: idSaveFileConf
                     fileMode: FileDialog.SaveFile
                     currentFolder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
-                    onAccepted: backend.save_variance_conf(rePath(selectedFile.toString()))
+                    onAccepted: backend.save_variance_conf(
+                        tabInVar.getVariance(tabInVar.currentModel),
+                        rePath(selectedFile.toString())
+                    )
                 }
 
                 CustomTooltip {
@@ -239,7 +239,6 @@ Control {
 
         function onUploadVar (data) {
             setVarinace(data)
-            // backend.print_qml(data)
         }
     }
 }

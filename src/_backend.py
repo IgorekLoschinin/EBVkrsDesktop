@@ -45,7 +45,6 @@ class Backend(QObject):
 	enablePrgW = Signal(bool)
 	finishedSig = Signal(int)
 
-	saveVar = Signal(str)
 	uploadVar = Signal(dict)
 
 	def __init__(self) -> None:
@@ -111,38 +110,36 @@ class Backend(QObject):
 	@Slot(dict)
 	def run(self, data: dict | None) -> None:
 
-		# if data is None:
-		# 	self.error("Data is not None!")
-		# 	return None
-		#
-		# self.__make_dir_workspace()
-		#
-		# try:
-		# 	self._thread = QThread()
-		# 	self._worker_md = ModelHandler(
-		# 		data=data,
-		# 		output_dir=self.common_namespace
-		# 	)
-		#
-		# 	self._worker_md.moveToThread(self._thread)
-		#
-		# 	# Link signals and slots
-		# 	# Run when the thread starts
-		# 	self._thread.started.connect(self._worker_md.handle)
-		# 	self._worker_md.exitCode.connect(self._exec_prog)
-		# 	self._worker_md.exitCode.connect(self._thread.quit)
-		# 	self._worker_md.exitCode.connect(self._worker_md.deleteLater)
-		# 	self._thread.finished.connect(self._worker_md.deleteLater)
-		# 	self._thread.finished.connect(self._thread.deleteLater)
-		#
-		# 	self._thread.start()  # Starting a thread
-		#
-		# 	self.enable_prg_win = True
-		#
-		# except Exception as e:
-		# 	self.exception(e)
+		if data is None:
+			self.error("Data is not None!")
+			return None
 
-		print(data)
+		self.__make_dir_workspace()
+
+		try:
+			self._thread = QThread()
+			self._worker_md = ModelHandler(
+				data=data,
+				output_dir=self.common_namespace
+			)
+
+			self._worker_md.moveToThread(self._thread)
+
+			# Link signals and slots
+			# Run when the thread starts
+			self._thread.started.connect(self._worker_md.handle)
+			self._worker_md.exitCode.connect(self._exec_prog)
+			self._worker_md.exitCode.connect(self._thread.quit)
+			self._worker_md.exitCode.connect(self._worker_md.deleteLater)
+			self._thread.finished.connect(self._worker_md.deleteLater)
+			self._thread.finished.connect(self._thread.deleteLater)
+
+			self._thread.start()  # Starting a thread
+
+			self.enable_prg_win = True
+
+		except Exception as e:
+			self.exception(e)
 
 	@Slot()
 	def stop(self) -> None:
@@ -165,9 +162,9 @@ class Backend(QObject):
 				self.common_namespace.exists()):
 			self.common_namespace.mkdir()
 
-	@Slot(str)
-	def save_variance_conf(self, path_file: str) -> None:
-		print(path_file)
+	@Slot(dict, str)
+	def save_variance_conf(self, data: dict[str, dict], path_file: str) -> None:
+		to_json(data, path_file)
 
 	@Slot(str)
 	def load_variance_conf(self, path_file: str) -> None:
