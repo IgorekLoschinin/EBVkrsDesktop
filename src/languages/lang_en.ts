@@ -288,9 +288,19 @@
         <translation>Username and password</translation>
     </message>
     <message>
+        <location filename="../gui/app/loginform/LoginForm.qml" line="123"/>
+        <source>Username</source>
+        <translation>Username</translation>
+    </message>
+    <message>
         <location filename="../gui/app/loginform/LoginForm.qml" line="132"/>
         <source>username incorrect</source>
         <translation>username incorrect</translation>
+    </message>
+    <message>
+        <location filename="../gui/app/loginform/LoginForm.qml" line="141"/>
+        <source>Password</source>
+        <translation>Password</translation>
     </message>
     <message>
         <location filename="../gui/app/loginform/LoginForm.qml" line="151"/>

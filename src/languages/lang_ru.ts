@@ -288,9 +288,19 @@
         <translation>Имя пользователя и пароль</translation>
     </message>
     <message>
+        <location filename="../gui/app/loginform/LoginForm.qml" line="123"/>
+        <source>Username</source>
+        <translation>имя пользователя</translation>
+    </message>
+    <message>
         <location filename="../gui/app/loginform/LoginForm.qml" line="132"/>
         <source>username incorrect</source>
         <translation>имя пользовтеля неверно</translation>
+    </message>
+    <message>
+        <location filename="../gui/app/loginform/LoginForm.qml" line="141"/>
+        <source>Password</source>
+        <translation>пароль</translation>
     </message>
     <message>
         <location filename="../gui/app/loginform/LoginForm.qml" line="151"/>

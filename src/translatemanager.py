@@ -39,8 +39,8 @@ class TranslationManager(QObject, CheckMixin):
 		self._engine = engine
 
 		self._lang_list = {
+			"Russian": "languages/lang_ru.qm",
 			"English": "languages/lang_en.qm",
-			"Russian": "languages/lang_ru.qm"
 		}
 
 	@Property(list, notify=langList)
