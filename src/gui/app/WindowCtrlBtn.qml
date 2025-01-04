@@ -47,21 +47,18 @@ Control {
                     name: "roll"
                     sourceImg: "qrc:/icons/minus.svg"
                     ttName: qsTr("Minimize")
-                    ttWidth: 65
                     positionX: 12
                 }
                 ListElement{
                     name: "fullSize"
                     sourceImg: "qrc:/icons/maximize.svg"
                     ttName: qsTr("Maximize")
-                    ttWidth: 65
                     positionX: 12
                 }
                 ListElement{
                     name: "close"
                     sourceImg: "qrc:/icons/close.svg"
                     ttName: qsTr("Close")
-                    ttWidth: 50
                     positionX: 12
                 }
             }
@@ -72,7 +69,6 @@ Control {
                 CustomTooltip {
                     id: ttBtnWC
 
-                    width: ttWidth
                     object: idBtnWC
                     textLbl: ttName
                     sizeText: 12

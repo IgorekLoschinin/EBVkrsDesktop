@@ -6,7 +6,7 @@
     <message>
         <location filename="../gui/app/pages/controls/ButtonRun.qml" line="23"/>
         <source>Run &apos;app&apos;</source>
-        <translation>Запуск приложения</translation>
+        <translation>Запуск &apos;app&apos;</translation>
     </message>
     <message>
         <location filename="../gui/app/pages/controls/ButtonRun.qml" line="32"/>
@@ -148,7 +148,7 @@
     <message>
         <location filename="../gui/app/pages/HomePage.qml" line="53"/>
         <source>Pipeline</source>
-        <translation>Последовательность задач</translation>
+        <translation>Конвейер данных</translation>
     </message>
     <message>
         <location filename="../gui/app/pages/HomePage.qml" line="58"/>
@@ -264,7 +264,7 @@
     <message>
         <location filename="../gui/app/pages/controls/InputGroupFile.qml" line="12"/>
         <source>Enter file path...</source>
-        <translation>Путь к файлу...</translation>
+        <translation>Выберите файл...</translation>
     </message>
 </context>
 <context>
@@ -272,7 +272,7 @@
     <message>
         <location filename="../gui/app/pages/controls/InputGroupFolder.qml" line="12"/>
         <source>Enter file path...</source>
-        <translation>Путь к файлу...</translation>
+        <translation>Выберите папку...</translation>
     </message>
 </context>
 <context>
@@ -688,7 +688,7 @@ This page is under construction.</source>
     <message>
         <location filename="../gui/app/WindowCtrlBtn.qml" line="49"/>
         <source>Minimize</source>
-        <translation>Свернуть в окно</translation>
+        <translation>Свернуть</translation>
     </message>
     <message>
         <location filename="../gui/app/WindowCtrlBtn.qml" line="56"/>
@@ -703,7 +703,7 @@ This page is under construction.</source>
     <message>
         <location filename="../gui/app/WindowCtrlBtn.qml" line="126"/>
         <source>Restore</source>
-        <translation>Свернуть</translation>
+        <translation>Свернуть в окно</translation>
     </message>
 </context>
 <context>
