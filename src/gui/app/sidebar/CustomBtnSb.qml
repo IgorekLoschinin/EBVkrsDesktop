@@ -33,6 +33,7 @@ Button {
             font.pixelSize: 15
             font.family: "Segoe UI"
             opacity: opacityLblP
+            wrapMode: Text.Wrap
 
             horizontalAlignment: Qt.AlignLeft
             verticalAlignment: Qt.AlignVCenter

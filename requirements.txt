@@ -10,6 +10,6 @@ mypy==1.10.0
 openpyxl==3.1.2
 pytest==8.2.1
 pandas==2.2.2
-patool==2.2.0
+patool==3.1.0
 xlrd==2.0.1
 XlsxWriter==3.2.0

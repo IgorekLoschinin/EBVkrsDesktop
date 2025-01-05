@@ -22,8 +22,8 @@ CustomBtn {
             object: idBtnRun
             textLbl: qsTr("Run 'app'")
 
-            width: 80
-            x: - object.width + 4
+            // width: 80
+            x: - object.width + 14
             y: object.height - 2
         }
 

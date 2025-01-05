@@ -25,7 +25,7 @@ from . import (
 	EbvModel,
 	IndModel
 )
-from ..libkrs.utils.logger import logger
+from ..libkrs.utils import logger
 
 
 @logger(name="ModelHandler")

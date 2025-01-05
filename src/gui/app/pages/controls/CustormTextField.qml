@@ -7,13 +7,14 @@ TextField {
     property string phText: qsTr("")
     readonly property color colorText: "#FFFFFF"
 
-    height: 22
+    implicitHeight: 27
+
 
     placeholderText: qsTr(phText)
     placeholderTextColor: colorText
 
     font.family: "Segoe UI"
-    font.pixelSize: sizeTextInSect
+    font.pixelSize: sizeTextInSect - 1
     clip: true
     color: colorText
 

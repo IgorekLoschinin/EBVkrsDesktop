@@ -9,27 +9,28 @@ Popup {
     property string textLbl: ''
     property int sizeText: 14
 
-    width: 120
+    width: infoText.implicitWidth >= 300 ? 120 : infoText.implicitWidth + 10  //120
     height: implicitHeight
 
     modal: false
     focus: false
-    padding: 4
+    padding: 2
     visible: object.hovered
 
     x: object.width / 2 - width / 2
     y: object.height + 5
 
     contentItem: Text {
-        horizontalAlignment: Qt.AlignHCenter
-        verticalAlignment: Qt.AlignVCenter
+        id: infoText
 
         text: tooltip.textLbl
         font.family: "Segoe UI"
         font.pixelSize: sizeText
         color: "#49454f"
         wrapMode: Text.Wrap
-        clip: true
+
+        horizontalAlignment: Qt.AlignHCenter
+        verticalAlignment: Qt.AlignVCenter
     }
 
     background: Rectangle {

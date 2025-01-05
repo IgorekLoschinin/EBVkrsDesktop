@@ -9,15 +9,19 @@
 __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
 
 import sys
-import resources
+from resources import (
+	icons,
+	languages
+)
 
 from pathlib import Path
 
 from PySide6.QtGui import QGuiApplication
 from PySide6.QtQml import QQmlApplicationEngine
-from translatemanager import TranslationManager
-
-from src._backend import Backend
+from backend import (
+	Backend,
+	TranslationManager
+)
 
 
 if __name__ == "__main__":

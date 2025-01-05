@@ -120,7 +120,7 @@ Popup {
                 id: textUsername
                 Layout.alignment: Qt.AlignCenter
 
-                placeholderText: "Username"
+                placeholderText: qsTr("Username")
             }
 
             Label {
@@ -138,7 +138,7 @@ Popup {
                 id: textPassword
                 Layout.alignment: Qt.AlignCenter
 
-                placeholderText: "Password"
+                placeholderText: qsTr("Password")
                 echoMode: TextInput.Password
             }
 

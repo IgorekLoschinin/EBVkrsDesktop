@@ -15,7 +15,7 @@ from .imodel import IModel
 from ..schemas import RequestPheno
 
 from ..libkrs.processing import DataProcessing
-from ..libkrs.utils.logger import logger
+from ..libkrs.utils import logger
 
 
 @logger(name="PhenoModel")
