@@ -1,3 +1,0 @@
-[submodule "src/libkrs"]
-	path = src/libkrs
-	url = git@github.com:IgorekLoschinin/libkrs.git
