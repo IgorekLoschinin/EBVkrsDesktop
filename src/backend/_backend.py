@@ -19,19 +19,19 @@ from PySide6.QtCore import (
 	QThread,
 )
 
-from src.models.modelhandler import ModelHandler
-from src.libkrs.core.settings import (
+from .models.modelhandler import ModelHandler
+from .libkrs.core.settings import (
 	WORKSPACE_DIR,
 	CMD_FEATURE
 )
-from src.libkrs.est.varmodel import (
+from .libkrs.est.varmodel import (
 	FEATURE_NAME_SCS,
 	FEATURE_NAME_MILK,
 	FEATURE_NAME_REPROD,
 	FEATURE_NAME_CONFORM
 )
 
-from src.libkrs.utils import (
+from .libkrs.utils import (
 	logger,
 	from_json,
 	to_json

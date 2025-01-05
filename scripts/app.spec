@@ -6,6 +6,7 @@ a = Analysis(
     binaries=[],
     datas=[
         ("../src/gui", "gui"),
+        ("../src/resources", "resources")
     ],
     hiddenimports=[],
     hookspath=[],
@@ -24,6 +25,7 @@ exe = EXE(
     a.datas,
     [],
     name='krsebv',
+    icon='./icon.ico',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,

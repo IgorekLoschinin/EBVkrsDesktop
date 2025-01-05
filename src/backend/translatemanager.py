@@ -8,8 +8,6 @@
 
 __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
 
-import os
-from pathlib import Path
 
 from PySide6.QtCore import (
 	QCoreApplication,
@@ -20,7 +18,7 @@ from PySide6.QtCore import (
 	Slot,
 )
 
-from src.libkrs.utils import (
+from .libkrs.utils import (
 	logger,
 	CheckMixin
 )
@@ -39,8 +37,8 @@ class TranslationManager(QObject, CheckMixin):
 		self._engine = engine
 
 		self._lang_list = {
-			"Russian": "languages/lang_ru.qm",
-			"English": "languages/lang_en.qm",
+			"Russian": ":/languages/lang_ru.qm",
+			"English": ":/languages/lang_en.qm",
 		}
 
 	@Property(list, notify=langList)
@@ -50,19 +48,11 @@ class TranslationManager(QObject, CheckMixin):
 	@Slot(str)
 	def load_language(self, lang_name: str) -> None:
 
-		abs_path_lg = os.path.join(
-			Path(__file__).parent, self._lang_list[lang_name]
-		)
-
-		if not self.is_file(abs_path_lg):
-			self.error(f"File language {abs_path_lg} is not find.")
-			return None
-
 		if self._translator is not None:
 			QCoreApplication.instance().removeTranslator(self._translator)
 
 		self._translator = QTranslator()
-		if self._translator.load(abs_path_lg):
+		if self._translator.load(self._lang_list[lang_name]):
 
 			if QCoreApplication.instance().installTranslator(self._translator):
 				self._engine.retranslate()

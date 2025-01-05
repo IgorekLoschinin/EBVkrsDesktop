@@ -14,8 +14,8 @@ from pydantic_core import ValidationError
 from .imodel import IModel
 from ..schemas import RequestSnp
 
-from ..libkrs.processing.snp import SnpProcessing
-from ..libkrs.utils.logger import logger
+from ..libkrs.processing import SnpProcessing
+from ..libkrs.utils import logger
 
 
 @logger(name="SnpModel")

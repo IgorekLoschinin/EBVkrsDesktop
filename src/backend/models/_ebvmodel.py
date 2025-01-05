@@ -18,7 +18,7 @@ from ..libkrs.core import (
 	Estimator,
 	GEstimator
 )
-from ..libkrs.utils.logger import logger
+from ..libkrs.utils import logger
 
 
 @logger(name="EbvModel")

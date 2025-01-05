@@ -20,7 +20,7 @@ from ..libkrs.index import (
 )
 
 from ..libkrs.givc import PreparationGIVC
-from ..libkrs.utils.logger import logger
+from ..libkrs.utils import logger
 
 
 @logger(name="IndModel")
