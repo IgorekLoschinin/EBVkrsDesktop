@@ -8,6 +8,11 @@ TemplatePage {
     id: idPageSettings
     urlPage: qsTr("Settings")
 
+    sendForm: {
+        'id': 'settings',
+        'utils_f90': idInputUtilf90.inputText.length === 0 ? null : idInputUtilf90.inputText
+    }
+
     contentData: Control {
         anchors.fill: parent
         anchors.leftMargin: marginContentD
@@ -67,6 +72,7 @@ TemplatePage {
                 nameField: qsTr("Dir utils *f90.exe:")
 
                 Layout.fillWidth: true
+                inputText: backend.get_settings.utils_f90
             }
 
             // Divining bottom line
@@ -84,5 +90,38 @@ TemplatePage {
         }
     }
 
-    footer: null
+    footer: RowLayout {
+        spacing: 3
+        height: 50
+
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+
+        Item { Layout.fillWidth: true }
+        CustomBtn {
+            id: idBtnApply
+
+            Layout.rightMargin: leftRightMargin
+
+            dlgColorDef: "#5d6575"
+            dlgColorMouseOver: "#8792A8"
+            dlgColorPressed: "#4A515E"
+
+            contentItem: Text {
+                text: qsTr("Apply")
+
+                font.family: "Segoe UI"
+                font.pixelSize: 16
+
+                color: "#ffffff"
+
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+            }
+
+            background.implicitWidth: 80
+
+            onClicked: backend.set_settings(idPageSettings.sendForm)
+        }
+    }
 }

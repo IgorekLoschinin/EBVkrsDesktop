@@ -15,6 +15,7 @@ TemplatePage {
         'variance': idSelectTypeCalVar.displayText === "conf" ? tableInVariance.getVariance(tableInVariance.currentModel) : tableInVariance.defVariance,
         'parallel': idCheckBoxParallelEst.checked,
         'numthread': idInputNumThredEst.text.length === 0 ? null : idInputNumThredEst.text,
+        'utilsf90': backend.get_settings.utils_f90
     }
 
     Component {

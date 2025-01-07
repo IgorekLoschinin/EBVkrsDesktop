@@ -7,16 +7,13 @@
 # of this license document, but changing it is not allowed.
 
 __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
-__all__ = (
-    'PhenoModel',
-    'SnpModel',
-    'EbvModel',
-    'IndModel',
-    'SettingsModel'
-)
+__all__ = ("SettingsSchema",)
 
-from ._phenmodel import PhenoModel
-from ._snpmodel import SnpModel
-from ._ebvmodel import EbvModel
-from ._indmodel import IndModel
-from ._settingsmodel import SettingsModel
+
+from pydantic import BaseModel
+from ..libkrs.core.settings import RESOURCES_DIR
+
+
+class SettingsSchema(BaseModel):
+	id: str = None
+	utils_f90: str | None = str(RESOURCES_DIR.absolute())

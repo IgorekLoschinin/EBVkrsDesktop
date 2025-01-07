@@ -23,7 +23,16 @@ from ..libkrs.utils import logger
 
 @logger(name="EbvModel")
 class EbvModel(IModel):
-	"""  """
+	""" EBV model for processing requests.
+
+	This class handles EBV (Estimated Breeding Values) requests and supports
+	two estimation methods: BLUP and GBLUP.
+
+	:param req_data: Input data for configuring the model.
+	:param output_dir: Directory for saving output results.
+	:raises ValidationError: If the input data fails validation.
+	:raises Exception: For any other errors during initialization.
+	"""
 
 	def __init__(
 			self,
@@ -42,7 +51,13 @@ class EbvModel(IModel):
 			raise err
 
 	def processing(self) -> None:
-		"""  """
+		""" Processes data based on the specified estimation method.
+
+		Depending on the method, it performs one of the following:
+
+		- If the method is "blup", the ``Estimator`` class is used.
+		- If the method is "gblup", the ``GEstimator`` class is used.
+		"""
 
 		match self._settings.estmethod:
 			case "blup":
@@ -53,7 +68,8 @@ class EbvModel(IModel):
 					parallel=self._settings.parallel,
 					workers=None
 					if self._settings.numthread is None
-					else int(self._settings.numthread)
+					else int(self._settings.numthread),
+					utils=self._settings.utilsf90
 				)
 				ebv.start()
 
@@ -65,7 +81,8 @@ class EbvModel(IModel):
 					parallel=self._settings.parallel,
 					workers=None
 					if self._settings.numthread is None
-					else int(self._settings.numthread)
+					else int(self._settings.numthread),
+					utils=self._settings.utilsf90
 				)
 				gebv.start()
 

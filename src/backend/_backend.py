@@ -19,7 +19,6 @@ from PySide6.QtCore import (
 	QThread,
 )
 
-from .models.modelhandler import ModelHandler
 from .libkrs.core.settings import (
 	WORKSPACE_DIR,
 	CMD_FEATURE
@@ -30,12 +29,13 @@ from .libkrs.est.varmodel import (
 	FEATURE_NAME_REPROD,
 	FEATURE_NAME_CONFORM
 )
-
 from .libkrs.utils import (
 	logger,
 	from_json,
 	to_json
 )
+from .models.modelhandler import ModelHandler
+from .models import SettingsModel
 
 
 @logger(name="Backend")
@@ -46,12 +46,14 @@ class Backend(QObject):
 	finishedSig = Signal(int)
 
 	uploadVar = Signal(dict)
+	settingsModelSig = Signal()
 
 	def __init__(self) -> None:
 		QObject.__init__(self)
 
 		self._thread = None
 		self._worker_md = None
+		self._settings_model = SettingsModel()
 
 		self._finished_code: int = -1
 		self._enable_prg_win: bool = False
@@ -141,6 +143,8 @@ class Backend(QObject):
 		except Exception as e:
 			self.exception(e)
 
+		print(data)
+
 	@Slot()
 	def stop(self) -> None:
 		self._worker_md.stop_processing()
@@ -175,3 +179,13 @@ class Backend(QObject):
 	@Slot(dict)
 	def print_qml(self, data: dict) -> None:
 		print(data)
+
+	@Slot(dict)
+	def set_settings(self, data: dict) -> None:
+		self._settings_model.settings = data
+
+		self.settingsModelSig.emit()
+
+	@Property(dict, notify=settingsModelSig)
+	def get_settings(self) -> dict:
+		return self._settings_model.settings

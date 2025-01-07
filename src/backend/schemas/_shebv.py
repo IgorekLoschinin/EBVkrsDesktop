@@ -30,6 +30,7 @@ class RequestEbv(BaseModel):
 	variance: Any
 	parallel: bool
 	numthread: None | str
+	utilsf90: None | str
 
 	@model_validator(mode="before")
 	def validate_and_transform(cls, values):
@@ -59,4 +60,3 @@ class RequestEbv(BaseModel):
 				)
 
 		return values
-

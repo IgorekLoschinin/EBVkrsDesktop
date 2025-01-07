@@ -11,10 +11,12 @@ __all__ = (
     'RequestEbv',
     'RequestPheno',
     'RequestInd',
-    'RequestSnp'
+    'RequestSnp',
+    'SettingsSchema'
 )
 
 from ._shebv import RequestEbv
 from ._shindex import RequestInd
 from ._shsnpproc import RequestSnp
 from ._shphenotype import RequestPheno
+from ._shsettings import SettingsSchema
