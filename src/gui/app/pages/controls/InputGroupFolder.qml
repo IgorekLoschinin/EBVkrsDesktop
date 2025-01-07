@@ -36,6 +36,8 @@ Control {
             id: idTextInput
             Layout.fillWidth: true
 
+            text: inputText
+
             phText: idInputGroupFolder.placeholderText
             onEditingFinished: inputText = idTextInput.text
         }

@@ -44,7 +44,7 @@ class ModelHandler(QObject):
 		self._data = data
 		self._output_dir = output_dir
 
-		self.model: IModel | None = None
+		self._model: IModel | None = None
 
 		self._obj_process = None
 
@@ -54,25 +54,25 @@ class ModelHandler(QObject):
 		try:
 			match self._data.get("id"):
 				case "procpheno":
-					self.model = PhenoModel(
+					self._model = PhenoModel(
 						req_data=self._data,
 						output_dir=self._output_dir
 					)
 
 				case "procsnp":
-					self.model = SnpModel(
+					self._model = SnpModel(
 						req_data=self._data,
 						output_dir=self._output_dir
 					)
 
 				case "ebv":
-					self.model = EbvModel(
+					self._model = EbvModel(
 						req_data=self._data,
 						output_dir=self._output_dir
 					)
 
 				case "index":
-					self.model = IndModel(
+					self._model = IndModel(
 						req_data=self._data,
 						output_dir=self._output_dir
 					)
@@ -80,7 +80,7 @@ class ModelHandler(QObject):
 				case None:
 					return None
 
-			self._obj_process = Process(target=self.model.processing)
+			self._obj_process = Process(target=self._model.processing)
 			self._obj_process.start()
 			self._obj_process.join()
 

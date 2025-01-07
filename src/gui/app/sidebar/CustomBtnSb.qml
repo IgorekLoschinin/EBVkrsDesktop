@@ -13,6 +13,8 @@ Button {
 
     leftPadding: panelSett.lrMargin + 3
 
+    width: 150
+
     contentItem: RowLayout {
         spacing: 10
 
@@ -25,7 +27,7 @@ Button {
             sourceSize.height: panelSett.shapeImg
         }
 
-        Label {
+        Text {
             Layout.fillWidth: true
 
             color: panelSett.colorText
@@ -33,7 +35,12 @@ Button {
             font.pixelSize: 15
             font.family: "Segoe UI"
             opacity: opacityLblP
-            wrapMode: Text.Wrap
+            wrapMode: {
+                if (idSideBar.width < panelSett.sizeOpenSb) {
+                    return Text.WordWrap
+                }
+                return Text.Wrap
+            }
 
             horizontalAlignment: Qt.AlignLeft
             verticalAlignment: Qt.AlignVCenter
