@@ -8,10 +8,12 @@ import QtQuick.Dialogs
 Control {
     id: idInputGroupFolder
 
+    property string inputText: ''
     property string nameField: ""
     property string placeholderText: qsTr("Enter file path...")
 
-    property string inputText: ''
+    signal enterTextChanges
+
 
     contentItem: RowLayout {
         spacing: 2
@@ -36,10 +38,11 @@ Control {
             id: idTextInput
             Layout.fillWidth: true
 
-            text: inputText
-
             phText: idInputGroupFolder.placeholderText
-            onEditingFinished: inputText = idTextInput.text
+            onDisplayTextChanged: {
+                inputText = idTextInput.text
+                idInputGroupFolder.enterTextChanges()
+            }
         }
 
         ButtonFileOpen {

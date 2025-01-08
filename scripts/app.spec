@@ -6,7 +6,8 @@ a = Analysis(
     binaries=[],
     datas=[
         ("../src/gui", "gui"),
-        ("../src/resources", "resources")
+        ("../src/resources/icons.py", "resources/icons.py"),
+        ("../src/resources/languages.py", "resources/languages.py")
     ],
     hiddenimports=[],
     hookspath=[],

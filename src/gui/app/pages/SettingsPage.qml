@@ -8,9 +8,11 @@ TemplatePage {
     id: idPageSettings
     urlPage: qsTr("Settings")
 
+    property bool changeFlag: false
+
     sendForm: {
         'id': 'settings',
-        'utils_f90': idInputUtilf90.inputText.length === 0 ? null : idInputUtilf90.inputText
+        'utils_f90': idInputUtilf90.inputText.length === 0 ? backend.get_settings.utils_f90 : idInputUtilf90.inputText
     }
 
     contentData: Control {
@@ -72,7 +74,9 @@ TemplatePage {
                 nameField: qsTr("Dir utils *f90.exe:")
 
                 Layout.fillWidth: true
-                inputText: backend.get_settings.utils_f90
+                placeholderText: backend.get_settings.utils_f90
+
+                onEnterTextChanges: changeFlag = true
             }
 
             // Divining bottom line
@@ -103,7 +107,11 @@ TemplatePage {
 
             Layout.rightMargin: leftRightMargin
 
-            dlgColorDef: "#5d6575"
+            enabled: changeFlag
+            hoverEnabled: changeFlag
+            opacity: changeFlag ? 1 : 0.5
+
+            dlgColorDef: enabled ? dlgColorPressed : "#5d6575"
             dlgColorMouseOver: "#8792A8"
             dlgColorPressed: "#4A515E"
 
@@ -121,7 +129,10 @@ TemplatePage {
 
             background.implicitWidth: 80
 
-            onClicked: backend.set_settings(idPageSettings.sendForm)
+            onClicked: {
+                backend.set_settings(idPageSettings.sendForm)
+                changeFlag = false
+            }
         }
     }
 }

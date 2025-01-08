@@ -9,7 +9,6 @@ TextField {
 
     implicitHeight: 27
 
-
     placeholderText: qsTr(phText)
     placeholderTextColor: colorText
 

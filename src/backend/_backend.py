@@ -55,7 +55,7 @@ class Backend(QObject):
 		self._worker_md = None
 		self._settings_model = SettingsModel()
 
-		self._finished_code: int = -1
+		self._finished_code: int | None = None
 		self._enable_prg_win: bool = False
 
 	@property
@@ -126,6 +126,7 @@ class Backend(QObject):
 			)
 
 			self._worker_md.moveToThread(self._thread)
+			self.finished_code = -1
 
 			# Link signals and slots
 			# Run when the thread starts
@@ -142,8 +143,6 @@ class Backend(QObject):
 
 		except Exception as e:
 			self.exception(e)
-
-		print(data)
 
 	@Slot()
 	def stop(self) -> None:
