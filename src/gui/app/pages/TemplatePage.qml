@@ -78,6 +78,13 @@ Page {
         Layout.fillHeight: true
 
         Item { Layout.fillWidth: true }
+        // Rectangle {
+        //     color: 'white'
+        //     height: 1
+
+        //     Layout.fillWidth: true
+        //     Layout.bottomMargin: bottomMarginContentSect
+        // }
         ButtonRun {
             id: idCustomDialogBtn
 

@@ -13,7 +13,8 @@ from multiprocessing import Process
 from PySide6.QtCore import (
 	QObject,
 	Slot,
-	Signal
+	Signal,
+	QTimer
 )
 
 from pathlib import Path
@@ -47,8 +48,8 @@ class ModelHandler(QObject):
 		self._model: IModel | None = None
 
 		self._obj_process = None
+		self._timer = None
 
-	@Slot()
 	def handle(self) -> None:
 
 		try:
@@ -82,9 +83,11 @@ class ModelHandler(QObject):
 
 			self._obj_process = Process(target=self._model.processing)
 			self._obj_process.start()
-			self._obj_process.join()
 
-			self.exitCode.emit(0)
+			self._timer = QTimer(self)
+			self._timer.timeout.connect(self.handle_timeout)
+			self._timer.setInterval(1000)
+			self._timer.start()
 
 		except Exception as e:
 			self.exception(e)
@@ -95,6 +98,15 @@ class ModelHandler(QObject):
 	def stop_processing(self) -> None:
 		if self._obj_process is not None and self._obj_process.is_alive():
 			self._obj_process.kill()
-			time.sleep(1)
 
 			return
+
+	@Slot()
+	def handle_timeout(self) -> None:
+		if not self._obj_process.is_alive():
+			self.exitCode.emit(self._obj_process.exitcode)
+			self._timer.stop()
+
+			return
+
+		self._timer.setInterval(self._timer.interval() + 500)

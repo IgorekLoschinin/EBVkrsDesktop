@@ -15,8 +15,7 @@ from PySide6.QtCore import (
 	QObject,
 	Slot,
 	Signal,
-	Property,
-	QThread,
+	Property
 )
 
 from .libkrs.core.settings import (
@@ -119,25 +118,14 @@ class Backend(QObject):
 		self.__make_dir_workspace()
 
 		try:
-			self._thread = QThread()
 			self._worker_md = ModelHandler(
 				data=data,
 				output_dir=self.common_namespace
 			)
-
-			self._worker_md.moveToThread(self._thread)
 			self.finished_code = -1
 
-			# Link signals and slots
-			# Run when the thread starts
-			self._thread.started.connect(self._worker_md.handle)
+			self._worker_md.handle()
 			self._worker_md.exitCode.connect(self._exec_prog)
-			self._worker_md.exitCode.connect(self._thread.quit)
-			self._worker_md.exitCode.connect(self._worker_md.deleteLater)
-			self._thread.finished.connect(self._worker_md.deleteLater)
-			self._thread.finished.connect(self._thread.deleteLater)
-
-			self._thread.start()  # Starting a thread
 
 			self.enable_prg_win = True
 
