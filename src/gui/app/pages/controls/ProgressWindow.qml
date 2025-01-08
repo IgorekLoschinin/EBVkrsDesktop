@@ -83,9 +83,10 @@ Popup {
 
                 case 1:
                     return qsTr("Error completion!")
-                }
 
-                return qsTr("processing...")
+                case -1:
+                    return qsTr("processing...")
+                }                
             }
 
             font.family: "Segoe UI"
