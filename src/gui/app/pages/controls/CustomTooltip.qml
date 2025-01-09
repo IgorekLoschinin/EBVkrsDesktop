@@ -9,7 +9,7 @@ Popup {
     property string textLbl: ''
     property int sizeText: 14
 
-    width: infoText.implicitWidth >= 300 ? 160 : infoText.implicitWidth + 10  //120
+    width: infoText.implicitWidth >= 300 ? 200 : infoText.implicitWidth + 10  //120
     height: implicitHeight
 
     modal: false
