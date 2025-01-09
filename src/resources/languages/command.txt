@@ -14,3 +14,8 @@
         pyside6-lrelease.exe .\src\languages\lang_ru.ts
 
     Это создаст файл project_ru.qm.
+
+
+pyside6-lupdate src/gui/ -ts src/resources/languages/lang_en.ts src/resources/languages/lang_ru.ts
+pyside6-linguist.exe
+pyside6-lrelease src/resources/languages/lang_ru.ts src/resources/languages/lang_en.ts

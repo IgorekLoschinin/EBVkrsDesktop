@@ -7,7 +7,7 @@ import "controls"
 TemplatePage {
     id: idHomePage
 
-    urlPage: qsTr("Home:")
+    urlPage: qsTr("Home")
 
     contentData: Control {
         anchors.fill: parent

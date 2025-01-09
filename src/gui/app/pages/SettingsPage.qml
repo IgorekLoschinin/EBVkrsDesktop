@@ -94,44 +94,56 @@ TemplatePage {
         }
     }
 
-    footer: RowLayout {
-        spacing: 3
+    footer: ColumnLayout {
+        spacing: 0
         height: 50
 
         Layout.fillWidth: true
         Layout.fillHeight: true
 
-        Item { Layout.fillWidth: true }
-        CustomBtn {
-            id: idBtnApply
+        Rectangle {
+            color: 'white'
+            height: 1
 
-            Layout.rightMargin: leftRightMargin
+            Layout.fillWidth: true
+            Layout.leftMargin: marginContentD
+            Layout.rightMargin: marginContentD
+            Layout.alignment: Qt.AlignTop
+        }
 
-            enabled: changeFlag
-            hoverEnabled: changeFlag
-            opacity: changeFlag ? 1 : 0.5
+        RowLayout {
+            Item { Layout.fillWidth: true }
+            CustomBtn {
+                id: idBtnApply
 
-            dlgColorDef: enabled ? dlgColorPressed : "#5d6575"
-            dlgColorMouseOver: "#8792A8"
-            dlgColorPressed: "#4A515E"
+                Layout.rightMargin: leftRightMargin
 
-            contentItem: Text {
-                text: qsTr("Apply")
+                enabled: changeFlag
+                hoverEnabled: changeFlag
+                opacity: changeFlag ? 1 : 0.5
 
-                font.family: "Segoe UI"
-                font.pixelSize: 16
+                dlgColorDef: enabled ? dlgColorPressed : "#5d6575"
+                dlgColorMouseOver: "#8792A8"
+                dlgColorPressed: "#4A515E"
 
-                color: "#ffffff"
+                contentItem: Text {
+                    text: qsTr("Apply")
 
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignHCenter
-            }
+                    font.family: "Segoe UI"
+                    font.pixelSize: 16
 
-            background.implicitWidth: 80
+                    color: "#ffffff"
 
-            onClicked: {
-                backend.set_settings(idPageSettings.sendForm)
-                changeFlag = false
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
+
+                background.implicitWidth: 80
+
+                onClicked: {
+                    backend.set_settings(idPageSettings.sendForm)
+                    changeFlag = false
+                }
             }
         }
     }

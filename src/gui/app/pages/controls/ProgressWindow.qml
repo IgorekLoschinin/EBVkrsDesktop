@@ -94,10 +94,39 @@ Popup {
             wrapMode: Text.WordWrap
         }
 
-        ButtonStop {
-            Layout.rightMargin: 8
-            Layout.bottomMargin: 8
-            Layout.alignment: Qt.AlignRight
+        RowLayout {
+            spacing: 5
+            Item { Layout.fillWidth: true }
+            CustomBtn {
+                id: idBtnOK
+
+                Layout.bottomMargin: 6
+
+                dlgColorDef: "#5d6575"
+                dlgColorMouseOver: "#8792A8"
+                dlgColorPressed: "#4A515E"
+
+                contentItem: Text {
+                    text: qsTr("Ok")
+
+                    font.family: "Segoe UI"
+                    font.pixelSize: 16
+
+                    color: "#ffffff"
+
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
+
+                background.implicitWidth: 80
+
+                onClicked: backend.ok()
+            }
+
+            ButtonStop {
+                Layout.rightMargin: 6
+                Layout.bottomMargin: 6
+            }
         }
     }
 
