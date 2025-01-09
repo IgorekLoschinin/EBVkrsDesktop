@@ -43,6 +43,7 @@ class Backend(QObject):
 
 	getfieldsTable = Signal(dict)
 	enablePrgW = Signal(bool)
+	finishedCodeSig = Signal(int)
 	finishedSig = Signal(int)
 
 	uploadVar = Signal(dict)
@@ -55,6 +56,7 @@ class Backend(QObject):
 		self._worker_md = None
 		self._settings_model = SettingsModel()
 
+		self._finished: bool = False
 		self._finished_code: int | None = None
 		self._enable_prg_win: bool = False
 
@@ -98,7 +100,7 @@ class Backend(QObject):
 
 			self.enablePrgW.emit(value)
 
-	@Property(int, notify=finishedSig)
+	@Property(int, notify=finishedCodeSig)
 	def finished_code(self) -> int | None:
 		return self._finished_code
 
@@ -106,6 +108,17 @@ class Backend(QObject):
 	def finished_code(self, value: int) -> None:
 		if self._finished_code != value:
 			self._finished_code = value
+
+			self.finishedCodeSig.emit(value)
+
+	@Property(int, notify=finishedSig)
+	def finished(self) -> int | None:
+		return self._finished
+
+	@finished.setter
+	def finished(self, value: bool) -> None:
+		if self._finished != value:
+			self._finished = value
 
 			self.finishedSig.emit(value)
 
@@ -161,6 +174,7 @@ class Backend(QObject):
 		:return:
 		"""
 		self.finished_code = code
+		self.finished = True
 
 	def __make_dir_workspace(self) -> None:
 		""" Creates a working directory - a directory of the general

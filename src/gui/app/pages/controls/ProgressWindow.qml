@@ -86,7 +86,7 @@ Popup {
 
                 case -1:
                     return qsTr("processing...")
-                }                
+                }
             }
 
             font.family: "Segoe UI"
@@ -101,6 +101,10 @@ Popup {
                 id: idBtnOK
 
                 Layout.bottomMargin: 6
+
+                hoverEnabled: backend.finished
+                enabled: backend.finished
+                opacity: backend.finished ? 1 : 0.5
 
                 dlgColorDef: "#5d6575"
                 dlgColorMouseOver: "#8792A8"
@@ -124,6 +128,10 @@ Popup {
             }
 
             ButtonStop {
+                hoverEnabled: !backend.finished
+                enabled: !backend.finished
+                opacity: !backend.finished ? 1 : 0.5
+
                 Layout.rightMargin: 6
                 Layout.bottomMargin: 6
             }
