@@ -6,7 +6,7 @@ import "controls"
 
 TemplatePage {
     id: idPageProcessingPheno
-    urlPage: qsTr("Processing -> phenotype")    
+    urlPage: qsTr("Processing of phenotypic data")
 
     sendForm: {
         'id': 'procpheno',
@@ -133,6 +133,7 @@ TemplatePage {
                         }
 
                         GroupBox {
+                            id: idLblSearchDaug
                             padding: 0
                             Layout.fillWidth: true
 
@@ -155,6 +156,24 @@ TemplatePage {
                                     nameField: qsTr("Dir data files:")
 
                                     Layout.fillWidth: true
+
+                                    CustomTooltip {
+                                        id: idTTDirFilesSearch
+                                        object: idDirDataFilesForSearch
+                                        textLbl: qsTr("Directory with primary phenotypic data.")
+
+                                        visible: {
+                                            if (idSHeadSectAddProp.checked) {
+                                                if (idCheckBoxUpdataDB.checked) {
+                                                    return false
+                                                }
+                                                return idDirDataFilesForSearch.hovered
+                                            }
+
+                                            return false
+                                        }
+                                        x: 30
+                                    }
                                 }
 
                                 InputGroupFile {
@@ -162,6 +181,24 @@ TemplatePage {
                                     nameField: qsTr("File bulls:")
 
                                     Layout.fillWidth: true
+
+                                    CustomTooltip {
+                                        id: idTTFileBulls
+                                        object: idInputSearchDaug
+                                        textLbl: qsTr("File with bull registration numbers.")
+
+                                        visible: {
+                                            if (idSHeadSectAddProp.checked) {
+                                                if (idCheckBoxUpdataDB.checked) {
+                                                    return false
+                                                }
+                                                return idInputSearchDaug.hovered
+                                            }
+
+                                            return false
+                                        }
+                                        x: 30
+                                    }
                                 }
 
                             }
@@ -211,6 +248,15 @@ TemplatePage {
                             nameField: qsTr("Directory data files:")
 
                             Layout.fillWidth: true
+
+                            CustomTooltip {
+                                id: idTTDirFF
+                                object: idDirDataFiles
+                                textLbl: qsTr("Directory with primary phenotypic data.")
+                                // Директория с первичными фенотипическими данными
+
+                                x: 30
+                            }
                         }
 
                         RowLayout {
@@ -317,6 +363,14 @@ TemplatePage {
                             label: CustomCheckbox {
                                 id: idCBSelectData
                                 nameChb: qsTr("Selection data:")
+
+                                CustomTooltip {
+                                    id: idTTSelectData
+                                    object: idCBSelectData
+                                    textLbl: qsTr("Data pre-filtering.")
+
+                                    x: idCBSelectData.width
+                                }
                             }
 
                             contentData: ColumnLayout {
@@ -331,6 +385,15 @@ TemplatePage {
                                     opacity: idCBSelectData.checked ? 1 : 0.5
 
                                     nameField: qsTr("File with code farm:")
+
+                                    CustomTooltip {
+                                        id: idTTFarmCode
+                                        object: idInputFarm
+                                        textLbl: qsTr("Selection of data by farm number or code. For example, an active population.")
+
+                                        visible: idCBSelectData.checked ? idInputFarm.hovered : false
+                                        x: idTTFarmCode.width / 4
+                                    }
                                 }
 
                                 InputGroupFile {
@@ -342,6 +405,15 @@ TemplatePage {
                                     opacity: idCBSelectData.checked ? 1 : 0.5
 
                                     nameField: qsTr("Remove daughters:")
+
+                                    CustomTooltip {
+                                        id: idTTRemoveDaug
+                                        object: idInputFarm
+                                        textLbl: qsTr("Excluding daughters of bulls from the data sample, which should not be included in the calculation of ebv.")
+
+                                        visible: idCBSelectData.checked ? idInputRemoveDaug.hovered : false
+                                        x: idTTRemoveDaug.width / 3
+                                    }
                                 }
                             }
 
@@ -353,13 +425,6 @@ TemplatePage {
                 }
 
                 background: null
-            }
-            Rectangle {
-                color: 'white'
-                height: 1
-
-                Layout.fillWidth: true
-                Layout.bottomMargin: bottomMarginContentSect
             }
             Item { Layout.fillHeight: true }
 

@@ -149,6 +149,10 @@ class Backend(QObject):
 		self._worker_md.stop_processing()
 		self.enable_prg_win = False
 
+	@Slot()
+	def ok(self) -> None:
+		self.enable_prg_win = False
+
 	def _exec_prog(self, code: int) -> None:
 		""" Method that fires when all event loops in a thread have completed -
 		the program has completed

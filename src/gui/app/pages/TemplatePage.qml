@@ -52,7 +52,7 @@ Page {
                 Layout.topMargin: 15
                 Layout.leftMargin: leftRightMargin
 
-                horizontalAlignment: Qt.AlignLeft
+                horizontalAlignment: Qt.AlignHCenter
                 verticalAlignment: Qt.AlignVCenter
             }
         }
@@ -70,21 +70,33 @@ Page {
         onPressed: { appWindow.startSystemMove() }
     }
 
-    footer: RowLayout {
-        spacing: 3
+    footer: ColumnLayout {
+        spacing: 0
         height: 50
 
         Layout.fillWidth: true
         Layout.fillHeight: true
 
-        Item { Layout.fillWidth: true }
-        ButtonRun {
-            id: idCustomDialogBtn
+        Rectangle {
+            color: 'white'
+            height: 1
 
-            Layout.rightMargin: leftRightMargin
+            Layout.fillWidth: true
+            Layout.leftMargin: marginContentD
+            Layout.rightMargin: marginContentD
+            Layout.alignment: Qt.AlignTop
+        }
 
-            onClicked: {
-                backend.run(sendForm)
+        RowLayout {
+            Item { Layout.fillWidth: true }
+            ButtonRun {
+                id: idCustomDialogBtn
+
+                Layout.rightMargin: leftRightMargin
+
+                onClicked: {
+                    backend.run(sendForm)
+                }
             }
         }
     }

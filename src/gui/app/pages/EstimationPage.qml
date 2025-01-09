@@ -200,14 +200,6 @@ TemplatePage {
 
                 background: null
             }
-            Rectangle {
-                color: 'white'
-                height: 1
-
-                Layout.fillWidth: true
-                Layout.bottomMargin: bottomMarginContentSect
-            }
-
             Item { Layout.fillHeight: true }
 
         }

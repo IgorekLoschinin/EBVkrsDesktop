@@ -7,7 +7,7 @@ import "controls"
 TemplatePage {
     id: idPageProcessingSnp
 
-    urlPage: qsTr("Processing -> SNP")
+    urlPage: qsTr("Processing of genomic data (SNP)")
 
     sendForm: {
         'id': 'procsnp',
@@ -301,14 +301,6 @@ TemplatePage {
 
                 background: null
             }
-            Rectangle {
-                color: 'white'
-                height: 1
-
-                Layout.fillWidth: true
-                Layout.bottomMargin: bottomMarginContentSect
-            }
-
             Item { Layout.fillHeight: true }
 
         }

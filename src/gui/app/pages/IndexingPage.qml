@@ -7,7 +7,7 @@ import "controls"
 TemplatePage {
     id: idPageProcessing
 
-    urlPage: qsTr("Indexing")
+    urlPage: qsTr("Index estimate of breeding value")
     sendForm: {
         'id': 'index',
         'estmethod': idComBoxTypeEstMethod.displayText,
@@ -321,14 +321,6 @@ TemplatePage {
                 background: null
 
             }
-            Rectangle {
-                color: 'white'
-                height: 1
-
-                Layout.fillWidth: true
-                Layout.bottomMargin: bottomMarginContentSect
-            }
-
             Item { Layout.fillHeight: true }
 
         }
