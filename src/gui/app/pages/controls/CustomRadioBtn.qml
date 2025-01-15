@@ -3,6 +3,23 @@ import QtQuick.Controls
 
 RadioButton {
     id: idRadioBtn
+
+    // DYNAMIC COLOR
+    readonly property color colorDef: "#8792A8"
+    readonly property color colorMouseOver: "#7a8397"
+    readonly property color colorPressed: "#4A515E"
+
+    function dynamicColor (idBtn) {
+        if (idBtn.down) {
+            return colorPressed
+        } else {
+            if (idBtn.hovered) {
+                return colorMouseOver
+            }
+        }
+        return colorDef
+    }
+
     checked: false
 
     contentItem: Text {
@@ -24,7 +41,7 @@ RadioButton {
         y: parent.height / 2 - height / 2
         radius: 13
 
-        color: "#8792A8"
+        color: dynamicColor(idRadioBtn)
 
         Rectangle {
             width: parent.width / 2

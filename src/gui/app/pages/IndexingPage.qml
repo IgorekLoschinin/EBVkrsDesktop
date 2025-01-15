@@ -170,10 +170,10 @@ TemplatePage {
                             Layout.fillWidth: true
 
                             CustomCheckbox {
-                                id: idCheckBoxDivData
-
+                                id: idCheckBoxDivData                                
                                 nameChb: qsTr("Divide data.")
 
+                                hoverEnabled: idComBoxChooseAnimal.currentIndex === 2 ? true : false
                                 enabled: idComBoxChooseAnimal.currentIndex === 2 ? true : false
                                 opacity: idComBoxChooseAnimal.currentIndex === 2 ? 1 : 0.5
 
@@ -239,6 +239,7 @@ TemplatePage {
                                 id: idCheckBoxPrivDisOpt
                                 nameChb: qsTr("Disabled optimal value")
 
+                                hoverEnabled: idSelectFeatureForInd.displayText === "conform"
                                 enabled: idSelectFeatureForInd.displayText === "conform"
                                 opacity: idSelectFeatureForInd.displayText === "conform" ? 1 : 0.3
 

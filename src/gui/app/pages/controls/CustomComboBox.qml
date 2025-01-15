@@ -3,7 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 
 ComboBox {
-    id: root
+    id: idCustComboBox
 
     implicitHeight: 22
     implicitWidth: 110
@@ -16,22 +16,34 @@ ComboBox {
     property color hoverColor: "#8792A8"
     property color checkedColor: "#8792A8"
 
+    // DYNAMIC COLOR
+    function dynamicColor (idBtn) {
+        if (idBtn.down) {
+            return Qt.darker(idCustComboBox.checkedColor, 1.4)
+        } else {
+            if (idBtn.hovered) {
+                return Qt.darker(idCustComboBox.checkedColor, 1.2)
+            }
+        }
+        return idCustComboBox.checkedColor
+    }
+
     contentItem: Label {
         anchors.fill: parent
         anchors.leftMargin: 10
 
         opacity: 0.9
-        text: root.displayText
+        text: idCustComboBox.displayText
         font.pixelSize: 18
 
-        color: root.textColor
+        color: idCustComboBox.textColor
 
         verticalAlignment: Qt.AlignVCenter
     }
 
     background: Rectangle {
-        radius: root.radius
-        color: root.down ? Qt.darker(root.checkedColor, 1.2) : root.checkedColor
+        radius: idCustComboBox.radius
+        color: dynamicColor(idCustComboBox)
     }
 
     delegate: ItemDelegate {
@@ -40,8 +52,8 @@ ComboBox {
         focus: true
         hoverEnabled: true
 
-        width: root.implicitWidth
-        height: root.implicitHeight
+        width: idCustComboBox.implicitWidth
+        height: idCustComboBox.implicitHeight
 
         Label {
             anchors.fill: parent
@@ -58,14 +70,14 @@ ComboBox {
 
         background: Rectangle {
             anchors.fill: parent
-            radius: root.radius
+            radius: idCustComboBox.radius
             color: itemDelegate.hovered ? hoverColor : "transparent"
         }
     }
 
     popup: Popup {
-        width: root.implicitWidth
-        y: root.height + 2
+        width: idCustComboBox.implicitWidth
+        y: idCustComboBox.height + 2
 
         contentItem: ListView {
             clip: true
@@ -74,16 +86,16 @@ ComboBox {
 
             implicitHeight: contentHeight
 
-            model: root.popup.visible ? root.delegateModel : null
+            model: idCustComboBox.popup.visible ? idCustComboBox.delegateModel : null
         }
 
         background: Rectangle {
             clip: true
-            radius: root.radius
+            radius: idCustComboBox.radius
 
-            color: root.popupBackground
+            color: idCustComboBox.popupBackground
             border.width: 0.5
-            border.color: root.borderColor
+            border.color: idCustComboBox.borderColor
         }
     }
 

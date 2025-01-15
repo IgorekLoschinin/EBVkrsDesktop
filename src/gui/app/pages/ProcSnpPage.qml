@@ -87,7 +87,7 @@ TemplatePage {
 
                         InputGroupFile {
                             id: idInputFileSnpRef
-                            nameField: qsTr("Path to file snp:")
+                            nameField: qsTr("Path to file snp:")                                                        
 
                             Layout.fillWidth: true
                         }
@@ -99,6 +99,7 @@ TemplatePage {
 
                             label: CustomCheckbox {
                                 id: idCheckBoxSNPAddProc
+                                hoverEnabled: idSectonSnpProc.checked
 
                                 nameChb: qsTr("Additional processing")
                             }
@@ -209,6 +210,7 @@ TemplatePage {
 
                             label: CustomCheckbox {
                                 id: idCheckBoxSaveCrFile
+                                hoverEnabled: idHeadSectProperFR.checked
 
                                 nameChb: qsTr("Save call rate in file")
                             }
@@ -255,6 +257,7 @@ TemplatePage {
 
                             label: CustomCheckbox {
                                 id: idCBAddSuffSex
+                                hoverEnabled: idHeadSectProperFR.checked
 
                                 nameChb: qsTr("Add suffix sex")
                             }
@@ -268,6 +271,7 @@ TemplatePage {
 
                                 CustomCheckbox {
                                     id: idCBAddSuff
+                                    hoverEnabled: idCBAddSuffSex.checked
 
                                     nameChb: qsTr("Add suffix")
 

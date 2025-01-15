@@ -6,6 +6,22 @@ CheckBox {
 
     property string nameChb: qsTr("")
 
+    // DYNAMIC COLOR
+    readonly property color colorDef: "#8792A8"
+    readonly property color colorMouseOver: "#7a8397"
+    readonly property color colorPressed: "#4A515E"
+
+    function dynamicColor (idBtn) {
+        if (idBtn.down) {
+            return colorPressed
+        } else {
+            if (idBtn.hovered) {
+                return colorMouseOver
+            }
+        }
+        return colorDef
+    }
+
     padding: 0
 
     contentItem: Text {        
@@ -25,7 +41,7 @@ CheckBox {
         implicitWidth: 20
         implicitHeight: 20
         radius: 5
-        color: "#8792A8"
+        color: idCustomCheckBox.dynamicColor(idCustomCheckBox)//"#8792A8"
 
         ColorImage {
             id: idImgTick

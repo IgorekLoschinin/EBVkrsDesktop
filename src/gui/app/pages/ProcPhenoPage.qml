@@ -49,6 +49,7 @@ TemplatePage {
 
         contentItem: ColumnLayout {
             spacing: comSpacing
+            anchors.fill: parent
 
             Loader {
                 sourceComponent: {
@@ -94,6 +95,7 @@ TemplatePage {
 
                             label: CustomCheckbox {
                                 id: idCheckBoxUpdataDB
+                                hoverEnabled: idSHeadSectAddProp.checked
 
                                 nameChb: qsTr("Updata data base")
                             }
@@ -299,6 +301,7 @@ TemplatePage {
                                 CustomComboBox {
                                     id: idSelectFeatureDp
 
+                                    hoverEnabled: idControlSelectFtDp.checked
                                     enabled: idControlSelectFtDp.checked
                                     opacity: idControlSelectFtDp.checked ? 1 : 0.5
 

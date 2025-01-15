@@ -11,8 +11,7 @@ Control {
     property string nameField: ""
     property string placeholderText: qsTr("Enter file path...")
     property string inputText: ''
-
-    property string srcImg: "qrc:/icons/folder.svg"
+    property string srcImg: "qrc:/icons/folder.svg"    
 
     contentItem: RowLayout {
         spacing: 2
@@ -38,7 +37,7 @@ Control {
             Layout.fillWidth: true
 
             phText: idInputGroupFile.placeholderText
-            onEditingFinished: inputText = idTextInput.text
+            onDisplayTextChanged: inputText = idTextInput.text
         }
 
         ButtonFileOpen {
