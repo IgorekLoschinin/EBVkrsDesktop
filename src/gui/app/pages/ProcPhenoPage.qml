@@ -119,6 +119,18 @@ TemplatePage {
                                     nameField: qsTr("to")
 
                                     Layout.fillWidth: true
+
+                                    hoverTFolderHabler: {
+                                        if (idSHeadSectAddProp.checked) {
+                                            if (idCheckBoxUpdataDB.checked) {
+                                                return true
+                                            } else {
+                                                return false
+                                            }
+                                        }
+
+                                        return false
+                                    }
                                 }
 
                                 InputGroupFolder {
@@ -127,6 +139,18 @@ TemplatePage {
 
                                     Layout.fillWidth: true
                                     Layout.leftMargin: 30
+
+                                    hoverTFolderHabler: {
+                                        if (idSHeadSectAddProp.checked) {
+                                            if (idCheckBoxUpdataDB.checked) {
+                                                return true
+                                            } else {
+                                                return false
+                                            }
+                                        }
+
+                                        return false
+                                    }
                                 }
 
                             }
@@ -159,6 +183,17 @@ TemplatePage {
 
                                     Layout.fillWidth: true
 
+                                    hoverTFolderHabler: {
+                                        if (idSHeadSectAddProp.checked) {
+                                            if (idCheckBoxUpdataDB.checked) {
+                                                return false
+                                            }
+                                            return true
+                                        }
+
+                                        return false
+                                    }
+
                                     CustomTooltip {
                                         id: idTTDirFilesSearch
                                         object: idDirDataFilesForSearch
@@ -183,6 +218,17 @@ TemplatePage {
                                     nameField: qsTr("File bulls:")
 
                                     Layout.fillWidth: true
+
+                                    hoverTFileHabler: {
+                                        if (idSHeadSectAddProp.checked) {
+                                            if (idCheckBoxUpdataDB.checked) {
+                                                return false
+                                            }
+                                            return true
+                                        }
+
+                                        return false
+                                    }
 
                                     CustomTooltip {
                                         id: idTTFileBulls
@@ -251,13 +297,15 @@ TemplatePage {
 
                             Layout.fillWidth: true
 
+                            hoverTFolderHabler: !idSHeadSectAddProp.checked
+
                             CustomTooltip {
                                 id: idTTDirFF
                                 object: idDirDataFiles
                                 textLbl: qsTr("Directory with primary phenotypic data.")
-                                // Директория с первичными фенотипическими данными
 
                                 x: 30
+                                visible: !idSHeadSectAddProp.checked ? idDirDataFiles.hovered : false
                             }
                         }
 
@@ -277,11 +325,15 @@ TemplatePage {
                                 id: idNumLactation
                                 currentIndex: 1
                                 model: [0, 1, 2, 3]
+
+                                hoverEnabled: !idSHeadSectAddProp.checked
                             }
                         }
 
                         CustomCheckbox {
                             id: idControlSelectFtDp
+
+                            hoverEnabled: !idSHeadSectAddProp.checked
 
                             contentItem: RowLayout {
                                 Layout.fillWidth: true
@@ -317,12 +369,15 @@ TemplatePage {
                             id: idAccumulateDp
                             nameChb: qsTr("Accumulate data")
 
+                            hoverEnabled: !idSHeadSectAddProp.checked
+
                             CustomTooltip {
                                 id: idHintAcumDp
                                 object: idAccumulateDp
                                 textLbl: qsTr("Connection of the accumulation methodology.")
 
                                 x: idAccumulateDp.width
+                                visible: !idSHeadSectAddProp.checked ? idAccumulateDp.hovered : false
                             }
                         }
 
@@ -334,12 +389,15 @@ TemplatePage {
                                 id: idCheckBoxPed
                                 nameChb: qsTr("Pedigree")
 
+                                hoverEnabled: !idSHeadSectAddProp.checked
+
                                 CustomTooltip {
                                     id: idHintPed
                                     object: idCheckBoxPed
                                     textLbl: qsTr("Building a file pedigree.")
 
                                     x: idCheckBoxPed.width
+                                    visible: !idSHeadSectAddProp.checked ? idCheckBoxPed.hovered : false
                                 }
                             }
 
@@ -347,12 +405,15 @@ TemplatePage {
                                 id: idCheckBoxDaug
                                 nameChb: qsTr("Daughters")
 
+                                hoverEnabled: !idSHeadSectAddProp.checked
+
                                 CustomTooltip {
                                     id: idHintDaug
                                     object: idCheckBoxDaug
                                     textLbl: qsTr("Building a file daughters.")
 
                                     x: idCheckBoxDaug.width
+                                    visible: !idSHeadSectAddProp.checked ? idCheckBoxDaug.hovered : false
                                 }
                             }
 
@@ -367,12 +428,15 @@ TemplatePage {
                                 id: idCBSelectData
                                 nameChb: qsTr("Selection data:")
 
+                                hoverEnabled: !idSHeadSectAddProp.checked
+
                                 CustomTooltip {
                                     id: idTTSelectData
                                     object: idCBSelectData
                                     textLbl: qsTr("Data pre-filtering.")
 
                                     x: idCBSelectData.width
+                                    visible: !idSHeadSectAddProp.checked ? idCBSelectData.hovered : false
                                 }
                             }
 
@@ -381,41 +445,83 @@ TemplatePage {
 
                                 InputGroupFile {
                                     id: idInputFarm
+                                    nameField: qsTr("File with code farm:")
+
                                     Layout.fillWidth: true
                                     Layout.leftMargin: 30
 
                                     enabled: idCBSelectData.checked
                                     opacity: idCBSelectData.checked ? 1 : 0.5
 
-                                    nameField: qsTr("File with code farm:")
+                                    hoverTFileHabler: {
+                                        if (!idSHeadSectAddProp.checked) {
+                                            if (idCBSelectData.checked) {
+                                                return true
+                                            } else {
+                                                return false
+                                            }
+                                        }
+
+                                        return false
+                                    }
 
                                     CustomTooltip {
                                         id: idTTFarmCode
                                         object: idInputFarm
                                         textLbl: qsTr("Selection of data by farm number or code. For example, an active population.")
 
-                                        visible: idCBSelectData.checked ? idInputFarm.hovered : false
                                         x: idTTFarmCode.width / 4
+                                        visible: {
+                                            if (!idSHeadSectAddProp.checked) {
+                                                if (idCBSelectData.checked) {
+                                                    return idInputFarm.hovered
+                                                } else {
+                                                    return false
+                                                }
+                                            }
+                                            return false
+                                        }
                                     }
                                 }
 
                                 InputGroupFile {
                                     id: idInputRemoveDaug
+                                    nameField: qsTr("Remove daughters:")
+
                                     Layout.fillWidth: true
                                     Layout.leftMargin: 30
 
                                     enabled: idCBSelectData.checked
-                                    opacity: idCBSelectData.checked ? 1 : 0.5
+                                    opacity: idCBSelectData.checked ? 1 : 0.5                                    
 
-                                    nameField: qsTr("Remove daughters:")
+                                    hoverTFileHabler: {
+                                        if (!idSHeadSectAddProp.checked) {
+                                            if (idCBSelectData.checked) {
+                                                return true
+                                            } else {
+                                                return false
+                                            }
+                                        }
+
+                                        return false
+                                    }
 
                                     CustomTooltip {
                                         id: idTTRemoveDaug
                                         object: idInputFarm
                                         textLbl: qsTr("Excluding daughters of bulls from the data sample, which should not be included in the calculation of ebv.")
 
-                                        visible: idCBSelectData.checked ? idInputRemoveDaug.hovered : false
                                         x: idTTRemoveDaug.width / 3
+                                        visible: {
+                                            if (!idSHeadSectAddProp.checked) {
+                                                if (idCBSelectData.checked) {
+                                                    return idInputRemoveDaug.hovered
+                                                } else {
+                                                    return false
+                                                }
+                                            }
+                                            return false
+                                        }
                                     }
                                 }
                             }

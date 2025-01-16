@@ -11,6 +11,7 @@ Control {
     property string inputText: ''
     property string nameField: ""
     property string placeholderText: qsTr("Enter file path...")
+    property bool hoverTFolderHabler: true
 
     signal enterTextChanges
 
@@ -37,6 +38,7 @@ Control {
         CustormTextField {
             id: idTextInput
             Layout.fillWidth: true
+            hoverEnabled: hoverTFolderHabler
 
             phText: idInputGroupFolder.placeholderText
             onDisplayTextChanged: {

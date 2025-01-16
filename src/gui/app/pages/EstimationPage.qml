@@ -160,6 +160,8 @@ TemplatePage {
                                         bottom: 1
                                         top: 99
                                     }
+
+                                    hoverEnabled: idCheckBoxParallelEst.checked
                                 }
                                 Item { Layout.fillWidth: true }
                             }

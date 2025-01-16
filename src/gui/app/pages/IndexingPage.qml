@@ -228,6 +228,8 @@ TemplatePage {
                                             bottom: 1
                                             top: 100
                                         }
+
+                                        hoverEnabled: idCheckBoxParallelInd.checked
                                     }
                                     Item { Layout.fillWidth: true }
                                 }
@@ -293,6 +295,8 @@ TemplatePage {
 
                             Layout.fillWidth: true
                             Layout.leftMargin: marginContentSect
+
+                            hoverTFolderHabler: idHeadSectGivc.checked
                         }
 
                         RowLayout {
@@ -312,6 +316,8 @@ TemplatePage {
                                 id: idGivcTypeReport
                                 currentIndex: 0
                                 model: ['bull', 'cow', 'full']
+
+                                hoverEnabled: idHeadSectGivc.checked
                             }
                         }
 
