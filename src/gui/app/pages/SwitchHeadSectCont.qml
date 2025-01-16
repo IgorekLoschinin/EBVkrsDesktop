@@ -16,8 +16,6 @@ Control {
         CustomSwitch {
             id: idSwitchSect
 
-            nameChb: qsTr(nameSection)
-
             contentItem: Text {
                 leftPadding: idSwitchSect.indicator.width + 6
 
