@@ -11,8 +11,9 @@ Control {
     property string nameField: ""
     property string placeholderText: qsTr("Enter file path...")
     property string inputText: ''
-
     property string srcImg: "qrc:/icons/folder.svg"
+    property bool hoverTFileHabler: true
+
 
     contentItem: RowLayout {
         spacing: 2
@@ -36,9 +37,10 @@ Control {
         CustormTextField {
             id: idTextInput
             Layout.fillWidth: true
+            hoverEnabled: hoverTFileHabler
 
             phText: idInputGroupFile.placeholderText
-            onEditingFinished: inputText = idTextInput.text
+            onDisplayTextChanged: inputText = idTextInput.text
         }
 
         ButtonFileOpen {

@@ -32,7 +32,7 @@ Button {
 
             color: panelSett.colorText
             text: nameBtn
-            font.pixelSize: 15
+            font.pixelSize: 14
             font.family: "Segoe UI"
             opacity: opacityLblP
             wrapMode: {

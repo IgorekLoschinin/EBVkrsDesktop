@@ -87,9 +87,11 @@ TemplatePage {
 
                         InputGroupFile {
                             id: idInputFileSnpRef
-                            nameField: qsTr("Path to file snp:")
+                            nameField: qsTr("Path to file snp:")                                                        
 
                             Layout.fillWidth: true
+
+                            hoverTFileHabler: idSectonSnpProc.checked
                         }
 
                         GroupBox {
@@ -99,6 +101,7 @@ TemplatePage {
 
                             label: CustomCheckbox {
                                 id: idCheckBoxSNPAddProc
+                                hoverEnabled: idSectonSnpProc.checked
 
                                 nameChb: qsTr("Additional processing")
                             }
@@ -115,7 +118,19 @@ TemplatePage {
                                     Layout.fillWidth: true
 
                                     nameField: qsTr("Sample animals by id:")
+
                                     enabled: idCheckBoxSNPAddProc.checked
+                                    hoverTFileHabler: {
+                                        if (idSectonSnpProc.checked) {
+                                            if (idCheckBoxSNPAddProc.checked) {
+                                                return true
+                                            } else {
+                                                return false
+                                            }
+                                        }
+
+                                        return false
+                                    }
                                 }
 
                                 InputGroupFile {
@@ -123,7 +138,19 @@ TemplatePage {
                                     Layout.fillWidth: true
 
                                     nameField: qsTr("Update file snp:")
+
                                     enabled: idCheckBoxSNPAddProc.checked
+                                    hoverTFileHabler: {
+                                        if (idSectonSnpProc.checked) {
+                                            if (idCheckBoxSNPAddProc.checked) {
+                                                return true
+                                            } else {
+                                                return false
+                                            }
+                                        }
+
+                                        return false
+                                    }
                                 }
                             }
 
@@ -170,6 +197,8 @@ TemplatePage {
                             nameField: qsTr("Directory with finalreports files:")
 
                             Layout.fillWidth: true
+
+                            hoverTFolderHabler: idHeadSectProperFR.checked
                         }
 
                         RowLayout {
@@ -192,6 +221,8 @@ TemplatePage {
                                     bottom: 0
                                     top: 1
                                 }
+
+                                hoverEnabled: idHeadSectProperFR.checked
                             }
 
                             Label {
@@ -209,6 +240,7 @@ TemplatePage {
 
                             label: CustomCheckbox {
                                 id: idCheckBoxSaveCrFile
+                                hoverEnabled: idHeadSectProperFR.checked
 
                                 nameChb: qsTr("Save call rate in file")
                             }
@@ -234,6 +266,18 @@ TemplatePage {
                                     phText: qsTr("Name ...")
 
                                     implicitWidth: 200
+
+                                    hoverEnabled: {
+                                        if (idHeadSectProperFR.checked) {
+                                            if (idCheckBoxSaveCrFile.checked) {
+                                                return true
+                                            } else {
+                                                return false
+                                            }
+                                        }
+
+                                        return false
+                                    }
                                 }
 
                                 Label {
@@ -255,6 +299,7 @@ TemplatePage {
 
                             label: CustomCheckbox {
                                 id: idCBAddSuffSex
+                                hoverEnabled: idHeadSectProperFR.checked
 
                                 nameChb: qsTr("Add suffix sex")
                             }
@@ -264,10 +309,11 @@ TemplatePage {
                                 anchors.leftMargin: 30
 
                                 enabled: idCBAddSuffSex.checked
-                                opacity: idCBAddSuffSex.checked ? 1 : 0.6
+                                opacity: idCBAddSuffSex.checked ? 1 : 0.4
 
                                 CustomCheckbox {
                                     id: idCBAddSuff
+                                    hoverEnabled: idCBAddSuffSex.checked
 
                                     nameChb: qsTr("Add suffix")
 
@@ -285,10 +331,26 @@ TemplatePage {
                                     id: idInputSexFromFile
                                     Layout.fillWidth: true
 
-                                    enabled: !idCBAddSuff.checked
-                                    opacity: !idCBAddSuff.checked ? 1 : 0.3
+                                    enabled: idCBAddSuff.checked
+                                    opacity: idCBAddSuff.checked ? 1 : 0.4
 
                                     nameField: qsTr("Choose the file with the sex of the animals:")
+
+                                    hoverTFileHabler: {
+                                        if (idHeadSectProperFR.checked) {
+
+                                            if (idCBAddSuffSex.checked) {
+                                                if (idCBAddSuff.checked) {
+                                                    return true
+                                                } else {
+                                                    return false
+                                                }
+                                            }
+                                            return false
+
+                                        }
+                                        return false
+                                    }
                                 }
                             }
 

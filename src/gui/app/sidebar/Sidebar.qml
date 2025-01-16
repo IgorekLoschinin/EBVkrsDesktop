@@ -107,6 +107,8 @@ Control {
             id: flickableContent
             clip: true
 
+            contentWidth: parent.width
+
             Layout.fillWidth: true
             Layout.fillHeight: true
 

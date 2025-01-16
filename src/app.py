@@ -15,6 +15,7 @@ from resources import (
 )
 
 from pathlib import Path
+from multiprocessing import freeze_support
 
 from PySide6.QtGui import QGuiApplication
 from PySide6.QtQml import QQmlApplicationEngine
@@ -25,6 +26,7 @@ from backend import (
 
 
 if __name__ == "__main__":
+	freeze_support()
 
 	app = QGuiApplication([])
 	engine = QQmlApplicationEngine()

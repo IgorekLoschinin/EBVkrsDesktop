@@ -79,17 +79,6 @@ TemplatePage {
                 onEnterTextChanges: changeFlag = true
             }
 
-            // Divining bottom line
-            Rectangle {
-                color: 'white'
-                height: 1
-
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignTop
-                Layout.topMargin: 10
-                Layout.bottomMargin: bottomMarginContentSect
-            }
-
             Item { Layout.fillHeight: true }
         }
     }

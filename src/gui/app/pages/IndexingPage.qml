@@ -170,10 +170,10 @@ TemplatePage {
                             Layout.fillWidth: true
 
                             CustomCheckbox {
-                                id: idCheckBoxDivData
-
+                                id: idCheckBoxDivData                                
                                 nameChb: qsTr("Divide data.")
 
+                                hoverEnabled: idComBoxChooseAnimal.currentIndex === 2 ? true : false
                                 enabled: idComBoxChooseAnimal.currentIndex === 2 ? true : false
                                 opacity: idComBoxChooseAnimal.currentIndex === 2 ? 1 : 0.5
 
@@ -228,6 +228,8 @@ TemplatePage {
                                             bottom: 1
                                             top: 100
                                         }
+
+                                        hoverEnabled: idCheckBoxParallelInd.checked
                                     }
                                     Item { Layout.fillWidth: true }
                                 }
@@ -239,6 +241,7 @@ TemplatePage {
                                 id: idCheckBoxPrivDisOpt
                                 nameChb: qsTr("Disabled optimal value")
 
+                                hoverEnabled: idSelectFeatureForInd.displayText === "conform"
                                 enabled: idSelectFeatureForInd.displayText === "conform"
                                 opacity: idSelectFeatureForInd.displayText === "conform" ? 1 : 0.3
 
@@ -292,6 +295,8 @@ TemplatePage {
 
                             Layout.fillWidth: true
                             Layout.leftMargin: marginContentSect
+
+                            hoverTFolderHabler: idHeadSectGivc.checked
                         }
 
                         RowLayout {
@@ -311,6 +316,8 @@ TemplatePage {
                                 id: idGivcTypeReport
                                 currentIndex: 0
                                 model: ['bull', 'cow', 'full']
+
+                                hoverEnabled: idHeadSectGivc.checked
                             }
                         }
 
