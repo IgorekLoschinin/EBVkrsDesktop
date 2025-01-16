@@ -20,7 +20,7 @@ TemplatePage {
         'fr': {
             'checked': idHeadSectProperFR.checked,
             'dirfilefr': idInputDirFrFiles.inputText.length === 0 ? null : idInputDirFrFiles.inputText,
-            'callrate': idInputCR.displayText.length === 0 ? null : idInputCR.displayText,
+            'callrate': idInputCR.displayText.length === 0 ? null : idInputCR.displayText.replace(',', '.'),
             'savecrfile': {
                 'checked': idCheckBoxSaveCrFile.checked,
                 'filename': idInputFilenameSave.displayText.length === 0 ? null : idInputFilenameSave.displayText,
@@ -219,6 +219,7 @@ TemplatePage {
 
                                 validator: DoubleValidator {
                                     bottom: 0
+                                    notation: DoubleValidator.StandardNotation
                                     top: 1
                                 }
 
