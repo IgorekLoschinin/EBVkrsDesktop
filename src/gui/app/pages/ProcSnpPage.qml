@@ -20,10 +20,10 @@ TemplatePage {
         'fr': {
             'checked': idHeadSectProperFR.checked,
             'dirfilefr': idInputDirFrFiles.inputText.length === 0 ? null : idInputDirFrFiles.inputText,
-            'callrate': idInputCR.displayText.length === 0 ? null : idInputCR.displayText.replace(',', '.'),
+            'callrate': idInputCR.displayText.length === 0 ? idInputCR.phText.replace(',', '.') : idInputCR.displayText.replace(',', '.'),
             'savecrfile': {
                 'checked': idCheckBoxSaveCrFile.checked,
-                'filename': idInputFilenameSave.displayText.length === 0 ? null : idInputFilenameSave.displayText,
+                'filename': idInputFilenameSave.displayText.length === 0 ? null : idInputFilenameSave.displayText + extensionFileCr.text,
             },
             'addsuff': {
                 'checked': idCBAddSuffSex.checked,
@@ -282,6 +282,7 @@ TemplatePage {
                                 }
 
                                 Label {
+                                    id: extensionFileCr
                                     text: qsTr(".xlsx")
                                     font.family: "Segoe UI"
                                     font.pixelSize: sizeTextInSect

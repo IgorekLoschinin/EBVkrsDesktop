@@ -145,6 +145,8 @@ class Backend(QObject):
 		except Exception as e:
 			self.exception(e)
 
+		print(data)
+
 	@Slot()
 	def stop(self) -> None:
 		self._worker_md.stop_processing()
