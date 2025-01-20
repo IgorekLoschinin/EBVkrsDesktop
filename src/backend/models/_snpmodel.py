@@ -54,7 +54,7 @@ class SnpModel(IModel):
 		if self._settings.fr.checked:
 			snp_args.update({
 				"dir_fr": self._settings.fr.dirfilefr,
-				"cr": self._settings.fr.callrate,
+				"cr": float(self._settings.fr.callrate),
 				"file_cr": self._settings.fr.savecrfile,
 				"add_sex": self._settings.fr.addsuff.add,
 				"file_sex": self._settings.fr.addsuff.fromfile,

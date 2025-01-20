@@ -12,7 +12,8 @@ TemplatePage {
 
     sendForm: {
         'id': 'settings',
-        'utils_f90': idInputUtilf90.inputText.length === 0 ? backend.get_settings.utils_f90 : idInputUtilf90.inputText
+        'utils_f90': idInputUtilf90.inputText.length === 0 ? backend.get_settings.utils_f90 : idInputUtilf90.inputText,
+        'disabletooltip': true
     }
 
     contentData: Control {
@@ -77,6 +78,23 @@ TemplatePage {
                 placeholderText: backend.get_settings.utils_f90
 
                 onEnterTextChanges: changeFlag = true
+            }
+
+            // Enable  and disable tooltip
+            CustomSwitch {
+                id: idSwitchSect
+
+                contentItem: Text {
+                    leftPadding: idSwitchSect.indicator.width + 6
+
+                    text: qsTr("Disabling tooltips")
+                    font.pixelSize: sizeTextInSect
+                    font.family: "Segoe UI"
+                    color: txtSection
+
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
             }
 
             Item { Layout.fillHeight: true }
