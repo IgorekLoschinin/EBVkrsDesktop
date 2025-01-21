@@ -19,8 +19,6 @@ Control {
         property color colorMouseOver: "#8792A8"
         property color colorPressed: "#4A515E"
 
-        property color colorBgBtn: "#B3C4E0"
-        property color borderColorPress: "#3D629F"
         property int sourceSizeH: 13
         property int sourceSizeW: 13
         property int radiusBg: 5
@@ -47,19 +45,16 @@ Control {
                     name: "roll"
                     sourceImg: "qrc:/icons/minus.svg"
                     ttName: qsTr("Minimize")
-                    positionX: 12
                 }
                 ListElement{
                     name: "fullSize"
                     sourceImg: "qrc:/icons/maximize.svg"
                     ttName: qsTr("Maximize")
-                    positionX: 12
                 }
                 ListElement{
                     name: "close"
                     sourceImg: "qrc:/icons/close.svg"
                     ttName: qsTr("Close")
-                    positionX: 12
                 }
             }
 
