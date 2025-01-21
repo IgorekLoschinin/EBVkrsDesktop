@@ -120,7 +120,7 @@ TemplatePage {
                                     anchors.leftMargin: 30
 
                                     enabled: idCheckBoxSNPAddProc.checked
-                                    opacity: idCheckBoxSNPAddProc.checked ? 1 : 0.3
+                                    opacity: idCheckBoxSNPAddProc.checked ? 1 : 0.6
 
                                     InputGroupFile {
                                         id: idInputSampleD
@@ -260,7 +260,7 @@ TemplatePage {
                                     anchors.leftMargin: 30
 
                                     enabled: idCheckBoxSaveCrFile.checked
-                                    opacity: idCheckBoxSaveCrFile.checked ? 1 : 0.3
+                                    opacity: idCheckBoxSaveCrFile.checked ? 1 : 0.6
 
                                     Label {
                                         Layout.rightMargin: 15
@@ -320,7 +320,7 @@ TemplatePage {
                                     anchors.leftMargin: 30
 
                                     enabled: idCBAddSuffSex.checked
-                                    opacity: idCBAddSuffSex.checked ? 1 : 0.4
+                                    opacity: idCBAddSuffSex.checked ? 1 : 0.6
 
                                     CustomCheckbox {
                                         id: idCBAddSuff
@@ -343,7 +343,7 @@ TemplatePage {
                                         Layout.fillWidth: true
 
                                         enabled: idCBAddSuff.checked
-                                        opacity: idCBAddSuff.checked ? 1 : 0.4
+                                        opacity: idCBAddSuff.checked ? 1 : 0.6
 
                                         nameField: qsTr("Choose the file with the sex of the animals:")
 
