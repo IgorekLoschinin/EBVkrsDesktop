@@ -45,19 +45,19 @@ class SnpModel(IModel):
 
 		if self._settings.snp.checked:
 			snp_args.update({
-				"snp": self._settings.snp.refsnpfile,
-				"sample": self._settings.snp.samplefile,
-				"update": self._settings.snp.updatefile,
+				"snp": Path(self._settings.snp.refsnpfile),
+				"sample": Path(self._settings.snp.samplefile),
+				"update": Path(self._settings.snp.updatefile),
 				"out": self._out_d
 			})
 
 		if self._settings.fr.checked:
 			snp_args.update({
-				"dir_fr": self._settings.fr.dirfilefr,
+				"dir_fr": Path(self._settings.fr.dirfilefr),
 				"cr": float(self._settings.fr.callrate),
 				"file_cr": self._settings.fr.savecrfile,
 				"add_sex": self._settings.fr.addsuff.add,
-				"file_sex": self._settings.fr.addsuff.fromfile,
+				"file_sex": Path(self._settings.fr.addsuff.fromfile),
 				"out": self._out_d
 			})
 

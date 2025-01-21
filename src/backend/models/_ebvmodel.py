@@ -69,7 +69,7 @@ class EbvModel(IModel):
 					workers=None
 					if self._settings.numthread is None
 					else int(self._settings.numthread),
-					utils=self._settings.utilsf90
+					utils=Path(self._settings.utilsf90)
 				)
 				ebv.start()
 
@@ -82,7 +82,7 @@ class EbvModel(IModel):
 					workers=None
 					if self._settings.numthread is None
 					else int(self._settings.numthread),
-					utils=self._settings.utilsf90
+					utils=Path(self._settings.utilsf90)
 				)
 				gebv.start()
 

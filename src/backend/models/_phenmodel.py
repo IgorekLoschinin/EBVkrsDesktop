@@ -48,36 +48,36 @@ class PhenoModel(IModel):
 				dp_args = {
 					"phen_files": self._settings.phendata,
 					"update": [
-						self._settings.preparation.updatabd.pathto,
-						self._settings.preparation.updatabd.pathfrom
+						Path(self._settings.preparation.updatabd.pathto),
+						Path(self._settings.preparation.updatabd.pathfrom)
 					],
 					"output_dir": self._out_d
 				}
 
 			else:
 				dp_args = {
-					"phen_files": self._settings.preparation.searchdaug.datafiles,
-					"search_daugh": self._settings.preparation.searchdaug.filesires,
+					"phen_files": Path(self._settings.preparation.searchdaug.datafiles),
+					"search_daugh": Path(self._settings.preparation.searchdaug.filesires),
 					"output_dir": self._out_d
 				}
 
 		else:
 			if self._settings.selectdata.checked:
 				dp_args = {
-					"phen_files": self._settings.phendata,
+					"phen_files": Path(self._settings.phendata),
 					"feature": self._settings.feature,
-					"kod_xoz": self._settings.selectdata.filefarm,
+					"kod_xoz": Path(self._settings.selectdata.filefarm),
 					"num_lact": self._settings.numlact,
 					"cal_ped": self._settings.ped,
 					"cal_daugh": self._settings.daughters,
-					"rm_daugh": self._settings.selectdata.removedaug,
+					"rm_daugh": Path(self._settings.selectdata.removedaug),
 					"accum": self._settings.accummeth,
 					"output_dir": self._out_d
 				}
 
 			else:
 				dp_args = {
-					"phen_files": self._settings.phendata,
+					"phen_files": Path(self._settings.phendata),
 					"feature": self._settings.feature,
 					"num_lact": self._settings.numlact,
 					"cal_ped": self._settings.ped,
