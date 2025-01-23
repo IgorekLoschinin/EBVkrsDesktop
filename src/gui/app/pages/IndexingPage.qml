@@ -33,307 +33,317 @@ TemplatePage {
         }
     }
 
-    contentData: Control {
+    contentData: ScrollView {
         anchors.fill: parent
-        anchors.leftMargin: marginContentD
-        anchors.rightMargin: marginContentD
 
-        contentItem: ColumnLayout {
-            spacing: 10
+        clip: true
+        contentWidth: parent.width
 
-            Loader {
-                sourceComponent: {
-                    if (idContent.currentIndex === 5) {
-                        return pBpheno
+        ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+        ScrollBar.vertical.policy: ScrollBar.AlwaysOff
+
+        Control {
+            anchors.fill: parent
+            anchors.leftMargin: marginContentD
+            anchors.rightMargin: marginContentD
+
+            contentItem: ColumnLayout {
+                spacing: 10
+
+                Loader {
+                    sourceComponent: {
+                        if (idContent.currentIndex === 5) {
+                            return pBpheno
+                        }
+                        return null
                     }
-                    return null
                 }
-            }
 
-            // Section Common
-            GroupBox {
-                id: idSettingsIndex
-                padding: 0
+                // Section Common
+                GroupBox {
+                    id: idSettingsIndex
+                    padding: 0
 
-                Layout.fillWidth: true
-                Layout.topMargin: 10
+                    Layout.fillWidth: true
+                    Layout.topMargin: 10
 
-                contentItem: ColumnLayout {
-                    anchors.fill: parent
+                    contentItem: ColumnLayout {
+                        anchors.fill: parent
 
-                    // Header section
-                    HeaderSectionContent {
-                        id: idHeadSectComm
+                        // Header section
+                        HeaderSectionContent {
+                            id: idHeadSectComm
 
-                        Layout.fillWidth: true
+                            Layout.fillWidth: true
 
-                        nameSection: qsTr("Settings index")
-                    }
+                            nameSection: qsTr("Settings index")
+                        }
 
-                    // Content and settings section common
-                    ColumnLayout {
-                        spacing: 10
-                        Layout.fillWidth: true
-                        Layout.leftMargin: marginContentSect
-
-                        RowLayout {
+                        // Content and settings section common
+                        ColumnLayout {
                             spacing: 10
                             Layout.fillWidth: true
-
-                            Text {
-                                text: qsTr("Type index: ")
-                                font.family: "Segoe UI"
-                                font.pixelSize: sizeTextInSect
-                                color: txtSection
-                            }
-
-                            CustomRadioBtn {
-                                id: idRadioBtnTypeSubindex
-                                text: qsTr("subindex")
-                                checked: true
-                            }
-
-                            CustomRadioBtn {
-                                id: idRadioBtnComplexInd
-                                text: qsTr("complex")
-                            }
-                        }
-
-                        RowLayout {
-                            spacing: 30
-                            Layout.fillWidth: true
+                            Layout.leftMargin: marginContentSect
 
                             RowLayout {
+                                spacing: 10
                                 Layout.fillWidth: true
 
-                                enabled: idRadioBtnTypeSubindex.checked
-                                opacity: idRadioBtnTypeSubindex.checked ? 1 : 0.5
-
                                 Text {
-                                    Layout.rightMargin: 8
-
-                                    text: qsTr("Select of Feature:")
+                                    text: qsTr("Type index: ")
                                     font.family: "Segoe UI"
                                     font.pixelSize: sizeTextInSect
                                     color: txtSection
                                 }
 
-                                CustomComboBox {
-                                    id: idSelectFeatureForInd
-                                    currentIndex: 0
-                                    model: backend.list_feature
+                                CustomRadioBtn {
+                                    id: idRadioBtnTypeSubindex
+                                    text: qsTr("subindex")
+                                    checked: true
+                                }
+
+                                CustomRadioBtn {
+                                    id: idRadioBtnComplexInd
+                                    text: qsTr("complex")
                                 }
                             }
 
                             RowLayout {
+                                spacing: 30
                                 Layout.fillWidth: true
 
-                                Text {
-                                    Layout.rightMargin: 8
+                                RowLayout {
+                                    Layout.fillWidth: true
 
-                                    text: qsTr("Choose animal:")
-                                    font.family: "Segoe UI"
-                                    font.pixelSize: sizeTextInSect
-                                    color: txtSection
-                                }
-
-                                CustomComboBox {
-                                    id: idComBoxChooseAnimal
-                                    currentIndex: 0
-                                    model: ['sire', 'cow', 'all']
-                                }
-                            }
-
-                            RowLayout {
-                                Layout.fillWidth: true
-
-                                Text {
-                                    Layout.rightMargin: 8
-
-                                    text: qsTr("Method estimate:")
-                                    font.family: "Segoe UI"
-                                    font.pixelSize: sizeTextInSect
-                                    color: txtSection
-                                }
-
-                                CustomComboBox {
-                                    id: idComBoxTypeEstMethod
-                                    currentIndex: 0
-                                    model: ['blup', 'gblup']
-                                }
-                            }
-
-                        }
-
-                        // Additional property
-                        ColumnLayout {
-                            Layout.fillWidth: true
-
-                            CustomCheckbox {
-                                id: idCheckBoxDivData                                
-                                nameChb: qsTr("Divide data.")
-
-                                hoverEnabled: idComBoxChooseAnimal.currentIndex === 2 ? true : false
-                                enabled: idComBoxChooseAnimal.currentIndex === 2 ? true : false
-                                opacity: idComBoxChooseAnimal.currentIndex === 2 ? 1 : 0.5
-
-                                CustomTooltip {
-                                    id: idHintDivData
-                                    object: idCheckBoxDivData
-                                    textLbl: qsTr("Dividing these results into fathers and daughters reports.")
-
-                                    visible: idComBoxChooseAnimal.currentIndex === 2 ? idCheckBoxDivData.hovered : false
-                                    x: idCheckBoxDivData.width
-                                }
-                            }
-
-                            GroupBox {
-                                padding: 0
-                                Layout.fillWidth: true
-                                Layout.bottomMargin: 10
-
-                                enabled: idRadioBtnTypeSubindex.checked
-
-                                label: CustomCheckbox {
-                                    id: idCheckBoxParallelInd
-
+                                    enabled: idRadioBtnTypeSubindex.checked
                                     opacity: idRadioBtnTypeSubindex.checked ? 1 : 0.5
 
-                                    nameChb: qsTr("Parallel computing")
-                                }
+                                    Text {
+                                        Layout.rightMargin: 8
 
-                                contentData: RowLayout {
-                                    anchors.fill: parent
-                                    anchors.leftMargin: 30
-
-                                    enabled: idCheckBoxParallelInd.checked
-                                    opacity: idCheckBoxParallelInd.checked ? 1 : 0.3
-
-                                    Label {
-                                        Layout.rightMargin: 15
-
-                                        text: qsTr("Number of threads:")
+                                        text: qsTr("Select of Feature:")
                                         font.family: "Segoe UI"
                                         font.pixelSize: sizeTextInSect
                                         color: txtSection
                                     }
 
-                                    CustormTextField {
-                                        id: idInputNumThred
-                                        phText: qsTr("Enter...")
+                                    CustomComboBox {
+                                        id: idSelectFeatureForInd
+                                        currentIndex: 0
+                                        model: backend.list_feature
+                                    }
+                                }
 
-                                        implicitWidth: 80
+                                RowLayout {
+                                    Layout.fillWidth: true
 
-                                        validator: IntValidator {
-                                            bottom: 1
-                                            top: 100
+                                    Text {
+                                        Layout.rightMargin: 8
+
+                                        text: qsTr("Choose animal:")
+                                        font.family: "Segoe UI"
+                                        font.pixelSize: sizeTextInSect
+                                        color: txtSection
+                                    }
+
+                                    CustomComboBox {
+                                        id: idComBoxChooseAnimal
+                                        currentIndex: 0
+                                        model: ['sire', 'cow', 'all']
+                                    }
+                                }
+
+                                RowLayout {
+                                    Layout.fillWidth: true
+
+                                    Text {
+                                        Layout.rightMargin: 8
+
+                                        text: qsTr("Method estimate:")
+                                        font.family: "Segoe UI"
+                                        font.pixelSize: sizeTextInSect
+                                        color: txtSection
+                                    }
+
+                                    CustomComboBox {
+                                        id: idComBoxTypeEstMethod
+                                        currentIndex: 0
+                                        model: ['blup', 'gblup']
+                                    }
+                                }
+
+                            }
+
+                            // Additional property
+                            ColumnLayout {
+                                Layout.fillWidth: true
+
+                                CustomCheckbox {
+                                    id: idCheckBoxDivData
+                                    nameChb: qsTr("Divide data.")
+
+                                    hoverEnabled: idComBoxChooseAnimal.currentIndex === 2 ? true : false
+                                    enabled: idComBoxChooseAnimal.currentIndex === 2 ? true : false
+                                    opacity: idComBoxChooseAnimal.currentIndex === 2 ? 1 : 0.5
+
+                                    CustomTooltip {
+                                        id: idHintDivData
+                                        object: idCheckBoxDivData
+                                        textLbl: qsTr("Dividing these results into fathers and daughters reports.")
+
+                                        visible: idComBoxChooseAnimal.currentIndex === 2 ? idCheckBoxDivData.hovered : false
+                                        x: idCheckBoxDivData.width
+                                    }
+                                }
+
+                                GroupBox {
+                                    padding: 0
+                                    Layout.fillWidth: true
+                                    Layout.bottomMargin: 10
+
+                                    enabled: idRadioBtnTypeSubindex.checked
+
+                                    label: CustomCheckbox {
+                                        id: idCheckBoxParallelInd
+
+                                        opacity: idRadioBtnTypeSubindex.checked ? 1 : 0.5
+
+                                        nameChb: qsTr("Parallel computing")
+                                    }
+
+                                    contentData: RowLayout {
+                                        anchors.fill: parent
+                                        anchors.leftMargin: 30
+
+                                        enabled: idCheckBoxParallelInd.checked
+                                        opacity: idCheckBoxParallelInd.checked ? 1 : 0.3
+
+                                        Label {
+                                            Layout.rightMargin: 15
+
+                                            text: qsTr("Number of threads:")
+                                            font.family: "Segoe UI"
+                                            font.pixelSize: sizeTextInSect
+                                            color: txtSection
                                         }
 
-                                        hoverEnabled: idCheckBoxParallelInd.checked
+                                        CustormTextField {
+                                            id: idInputNumThred
+                                            phText: qsTr("Enter...")
+
+                                            implicitWidth: 80
+
+                                            validator: IntValidator {
+                                                bottom: 1
+                                                top: 100
+                                            }
+
+                                            hoverEnabled: idCheckBoxParallelInd.checked
+                                        }
+                                        Item { Layout.fillWidth: true }
                                     }
-                                    Item { Layout.fillWidth: true }
+
+                                    background: null
                                 }
 
-                                background: null
+                                CustomCheckbox {
+                                    id: idCheckBoxPrivDisOpt
+                                    nameChb: qsTr("Disabled optimal value")
+
+                                    hoverEnabled: idSelectFeatureForInd.displayText === "conform"
+                                    enabled: idSelectFeatureForInd.displayText === "conform"
+                                    opacity: idSelectFeatureForInd.displayText === "conform" ? 1 : 0.3
+
+                                    CustomTooltip {
+                                        id: idHintPrivDisOpt
+                                        object: idCheckBoxPrivDisOpt
+                                        textLbl: qsTr("The function cancels the transformation of data to the optimal value.")
+
+                                        visible: idSelectFeatureForInd.displayText === "conform" ? idCheckBoxPrivDisOpt.hovered : false
+                                        x: idCheckBoxPrivDisOpt.width
+                                    }
+                                }
+
                             }
 
-                            CustomCheckbox {
-                                id: idCheckBoxPrivDisOpt
-                                nameChb: qsTr("Disabled optimal value")
+                        }
+                    }
 
-                                hoverEnabled: idSelectFeatureForInd.displayText === "conform"
-                                enabled: idSelectFeatureForInd.displayText === "conform"
-                                opacity: idSelectFeatureForInd.displayText === "conform" ? 1 : 0.3
+                    background: null
+                }
 
-                                CustomTooltip {
-                                    id: idHintPrivDisOpt
-                                    object: idCheckBoxPrivDisOpt
-                                    textLbl: qsTr("The function cancels the transformation of data to the optimal value.")
+                // Section Sample for givc
+                GroupBox {
+                    id: idGivc
+                    padding: 0
 
-                                    visible: idSelectFeatureForInd.displayText === "conform" ? idCheckBoxPrivDisOpt.hovered : false
-                                    x: idCheckBoxPrivDisOpt.width
+                    Layout.topMargin: 10
+                    Layout.fillWidth: true
+
+                    contentItem: ColumnLayout {
+                        anchors.fill: parent
+
+                        // Header section
+                        SwitchHeadSectCont {
+                            id: idHeadSectGivc
+
+                            Layout.fillWidth: true
+                            Layout.bottomMargin: bottomMarginContentSect
+
+                            nameSection: qsTr("Sample for givc")
+                        }
+
+                        ColumnLayout {
+                            enabled: idHeadSectGivc.checked
+                            opacity: idHeadSectGivc.checked ? 1 : 0.5
+
+                            InputGroupFolder {
+                                id: idInputDirReports
+                                nameField: qsTr("Directory with reports:")
+                                placeholderText: qsTr("Enter dir... ")
+
+                                Layout.fillWidth: true
+                                Layout.leftMargin: marginContentSect
+
+                                hoverTFolderHabler: idHeadSectGivc.checked
+                            }
+
+                            RowLayout {
+                                Layout.fillWidth: true
+                                Layout.leftMargin: marginContentSect
+
+                                Text {
+                                    Layout.rightMargin: 15
+
+                                    text: qsTr("Type reports:")
+                                    font.family: "Segoe UI"
+                                    font.pixelSize: sizeTextInSect
+                                    color: txtSection
+                                }
+
+                                CustomComboBox {
+                                    id: idGivcTypeReport
+                                    currentIndex: 0
+                                    model: ['bull', 'cow', 'full']
+
+                                    hoverEnabled: idHeadSectGivc.checked
                                 }
                             }
 
                         }
 
                     }
-                }
 
-                background: null
-            }
-
-            // Section Sample for givc
-            GroupBox {
-                id: idGivc
-                padding: 0
-
-                Layout.topMargin: 10
-                Layout.fillWidth: true
-
-                contentItem: ColumnLayout {
-                    anchors.fill: parent
-
-                    // Header section
-                    SwitchHeadSectCont {
-                        id: idHeadSectGivc
-
-                        Layout.fillWidth: true
-                        Layout.bottomMargin: bottomMarginContentSect
-
-                        nameSection: qsTr("Sample for givc")
-                    }
-
-                    ColumnLayout {
-                        enabled: idHeadSectGivc.checked
-                        opacity: idHeadSectGivc.checked ? 1 : 0.5
-
-                        InputGroupFolder {
-                            id: idInputDirReports
-                            nameField: qsTr("Directory with reports:")
-                            placeholderText: qsTr("Enter dir... ")
-
-                            Layout.fillWidth: true
-                            Layout.leftMargin: marginContentSect
-
-                            hoverTFolderHabler: idHeadSectGivc.checked
-                        }
-
-                        RowLayout {
-                            Layout.fillWidth: true
-                            Layout.leftMargin: marginContentSect
-
-                            Text {
-                                Layout.rightMargin: 15
-
-                                text: qsTr("Type reports:")
-                                font.family: "Segoe UI"
-                                font.pixelSize: sizeTextInSect
-                                color: txtSection
-                            }
-
-                            CustomComboBox {
-                                id: idGivcTypeReport
-                                currentIndex: 0
-                                model: ['bull', 'cow', 'full']
-
-                                hoverEnabled: idHeadSectGivc.checked
-                            }
-                        }
-
-                    }
+                    background: null
 
                 }
-
-                background: null
+                Item { Layout.fillHeight: true }
 
             }
-            Item { Layout.fillHeight: true }
 
-        }
-
-        background: Rectangle {
-            color: "transparent"
+            background: Rectangle {
+                color: "transparent"
+            }
         }
     }
 }

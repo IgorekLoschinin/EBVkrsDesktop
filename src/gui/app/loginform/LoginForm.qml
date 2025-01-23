@@ -153,6 +153,13 @@ Popup {
                 font.pointSize: 9
             }
 
+            CustomCheckbox {
+                id: idRememberMe
+                nameChb: qsTr("Remember me")
+
+                Layout.bottomMargin: 15
+            }
+
             CustomButton {
                 id: btnLogin
                 Layout.alignment: Qt.AlignCenter
@@ -285,6 +292,25 @@ Popup {
 
         KeyframeGroup {
             target: btnLogin
+            property: "opacity"
+            Keyframe {
+                frame: 2298
+                value: 0
+            }
+
+            Keyframe {
+                frame: 2951
+                value: 1
+            }
+
+            Keyframe {
+                frame: 0
+                value: 0
+            }
+        }
+
+        KeyframeGroup {
+            target: idRememberMe
             property: "opacity"
             Keyframe {
                 frame: 2298

@@ -40,337 +40,347 @@ TemplatePage {
         }
     }
 
-    contentData: Control {
+    contentData: ScrollView {
         anchors.fill: parent
-        anchors.leftMargin: marginContentD
-        anchors.rightMargin: marginContentD
 
-        contentItem: ColumnLayout {
-            spacing: 10
+        clip: true
+        contentWidth: parent.width
 
-            Loader {
-                sourceComponent: {
-                    if (idContent.currentIndex === 3) {
-                        return pBsnpProc
+        ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+        ScrollBar.vertical.policy: ScrollBar.AlwaysOff
+
+        Control {
+            anchors.fill: parent
+            anchors.leftMargin: marginContentD
+            anchors.rightMargin: marginContentD
+
+            contentItem: ColumnLayout {
+                spacing: 10
+
+                Loader {
+                    sourceComponent: {
+                        if (idContent.currentIndex === 3) {
+                            return pBsnpProc
+                        }
+                        return null
                     }
-                    return null
                 }
-            }
 
-            // Section Snp processing
-            GroupBox {
-                id: idSnpProccSection
-                padding: 0
+                // Section Snp processing
+                GroupBox {
+                    id: idSnpProccSection
+                    padding: 0
 
-                Layout.topMargin: 10
-                Layout.fillWidth: true
+                    Layout.topMargin: 10
+                    Layout.fillWidth: true
 
-                contentItem: ColumnLayout {
-                    anchors.fill: parent
+                    contentItem: ColumnLayout {
+                        anchors.fill: parent
 
-                    // Header section
-                    SwitchHeadSectCont {
-                        id: idSectonSnpProc
-
-                        Layout.fillWidth: true
-                        Layout.bottomMargin: bottomMarginContentSect
-
-                        nameSection: qsTr("Snp processing")
-                    }
-
-                    ColumnLayout {
-                        Layout.fillWidth: true
-                        Layout.leftMargin: marginContentSect
-
-                        enabled: idSectonSnpProc.checked
-                        opacity: idSectonSnpProc.checked ? 1 : 0.5
-
-                        InputGroupFile {
-                            id: idInputFileSnpRef
-                            nameField: qsTr("Path to file snp:")                                                        
+                        // Header section
+                        SwitchHeadSectCont {
+                            id: idSectonSnpProc
 
                             Layout.fillWidth: true
+                            Layout.bottomMargin: bottomMarginContentSect
 
-                            hoverTFileHabler: idSectonSnpProc.checked
+                            nameSection: qsTr("Snp processing")
                         }
 
-                        GroupBox {
-                            padding: 0
+                        ColumnLayout {
                             Layout.fillWidth: true
-                            Layout.bottomMargin: 10
+                            Layout.leftMargin: marginContentSect
 
-                            label: CustomCheckbox {
-                                id: idCheckBoxSNPAddProc
-                                hoverEnabled: idSectonSnpProc.checked
+                            enabled: idSectonSnpProc.checked
+                            opacity: idSectonSnpProc.checked ? 1 : 0.5
 
-                                nameChb: qsTr("Additional processing")
+                            InputGroupFile {
+                                id: idInputFileSnpRef
+                                nameField: qsTr("Path to file snp:")
+
+                                Layout.fillWidth: true
+
+                                hoverTFileHabler: idSectonSnpProc.checked
                             }
 
-                            contentData: ColumnLayout {
-                                anchors.fill: parent
-                                anchors.leftMargin: 30
+                            GroupBox {
+                                padding: 0
+                                Layout.fillWidth: true
+                                Layout.bottomMargin: 10
 
-                                enabled: idCheckBoxSNPAddProc.checked
-                                opacity: idCheckBoxSNPAddProc.checked ? 1 : 0.3
+                                label: CustomCheckbox {
+                                    id: idCheckBoxSNPAddProc
+                                    hoverEnabled: idSectonSnpProc.checked
 
-                                InputGroupFile {
-                                    id: idInputSampleD
-                                    Layout.fillWidth: true
+                                    nameChb: qsTr("Additional processing")
+                                }
 
-                                    nameField: qsTr("Sample animals by id:")
+                                contentData: ColumnLayout {
+                                    anchors.fill: parent
+                                    anchors.leftMargin: 30
 
                                     enabled: idCheckBoxSNPAddProc.checked
-                                    hoverTFileHabler: {
-                                        if (idSectonSnpProc.checked) {
-                                            if (idCheckBoxSNPAddProc.checked) {
-                                                return true
-                                            } else {
-                                                return false
-                                            }
-                                        }
+                                    opacity: idCheckBoxSNPAddProc.checked ? 1 : 0.6
 
-                                        return false
+                                    InputGroupFile {
+                                        id: idInputSampleD
+                                        Layout.fillWidth: true
+
+                                        nameField: qsTr("Sample animals by id:")
+
+                                        enabled: idCheckBoxSNPAddProc.checked
+                                        hoverTFileHabler: {
+                                            if (idSectonSnpProc.checked) {
+                                                if (idCheckBoxSNPAddProc.checked) {
+                                                    return true
+                                                } else {
+                                                    return false
+                                                }
+                                            }
+
+                                            return false
+                                        }
+                                    }
+
+                                    InputGroupFile {
+                                        id: idInputUpdataD
+                                        Layout.fillWidth: true
+
+                                        nameField: qsTr("Update file snp:")
+
+                                        enabled: idCheckBoxSNPAddProc.checked
+                                        hoverTFileHabler: {
+                                            if (idSectonSnpProc.checked) {
+                                                if (idCheckBoxSNPAddProc.checked) {
+                                                    return true
+                                                } else {
+                                                    return false
+                                                }
+                                            }
+
+                                            return false
+                                        }
                                     }
                                 }
 
-                                InputGroupFile {
-                                    id: idInputUpdataD
-                                    Layout.fillWidth: true
-
-                                    nameField: qsTr("Update file snp:")
-
-                                    enabled: idCheckBoxSNPAddProc.checked
-                                    hoverTFileHabler: {
-                                        if (idSectonSnpProc.checked) {
-                                            if (idCheckBoxSNPAddProc.checked) {
-                                                return true
-                                            } else {
-                                                return false
-                                            }
-                                        }
-
-                                        return false
-                                    }
-                                }
+                                background: null
                             }
 
-                            background: null
                         }
 
                     }
 
+                    background: null
                 }
 
-                background: null
-            }
+                // Section FinalReports
+                GroupBox {
+                    id: idPropertiesFR
+                    padding: 0
 
-            // Section FinalReports
-            GroupBox {
-                id: idPropertiesFR
-                padding: 0
+                    Layout.topMargin: 10
+                    Layout.fillWidth: true
 
-                Layout.topMargin: 10
-                Layout.fillWidth: true
+                    contentItem: ColumnLayout {
+                        anchors.fill: parent
 
-                contentItem: ColumnLayout {
-                    anchors.fill: parent
-
-                    // Header section
-                    SwitchHeadSectCont {
-                        id: idHeadSectProperFR
-
-                        Layout.fillWidth: true
-                        Layout.bottomMargin: bottomMarginContentSect
-
-                        nameSection: qsTr("Final reports")
-                    }
-
-                    ColumnLayout {
-                        Layout.fillWidth: true
-                        Layout.leftMargin: marginContentSect
-
-                        enabled: idHeadSectProperFR.checked
-                        opacity: idHeadSectProperFR.checked ? 1 : 0.5
-
-                        InputGroupFolder {
-                            id: idInputDirFrFiles
-                            nameField: qsTr("Directory with finalreports files:")
+                        // Header section
+                        SwitchHeadSectCont {
+                            id: idHeadSectProperFR
 
                             Layout.fillWidth: true
+                            Layout.bottomMargin: bottomMarginContentSect
 
-                            hoverTFolderHabler: idHeadSectProperFR.checked
+                            nameSection: qsTr("Final reports")
                         }
 
-                        RowLayout {
-                            Label {
-                                Layout.rightMargin: 15
-
-                                text: qsTr("Call rate:")
-                                font.family: "Segoe UI"
-                                font.pixelSize: sizeTextInSect
-                                color: txtSection
-                            }
-
-                            CustormTextField {
-                                id: idInputCR
-                                implicitWidth: 80
-
-                                phText: qsTr("0.90")
-
-                                validator: DoubleValidator {
-                                    bottom: 0
-                                    notation: DoubleValidator.StandardNotation
-                                    top: 1
-                                }
-
-                                hoverEnabled: idHeadSectProperFR.checked
-                            }
-
-                            Label {
-                                text: qsTr(", %")
-                                font.family: "Segoe UI"
-                                font.pixelSize: sizeTextInSect
-                                color: txtSection
-                            }
-                        }
-
-                        GroupBox {
-                            padding: 0
+                        ColumnLayout {
                             Layout.fillWidth: true
-                            Layout.bottomMargin: 10
+                            Layout.leftMargin: marginContentSect
 
-                            label: CustomCheckbox {
-                                id: idCheckBoxSaveCrFile
-                                hoverEnabled: idHeadSectProperFR.checked
+                            enabled: idHeadSectProperFR.checked
+                            opacity: idHeadSectProperFR.checked ? 1 : 0.5
 
-                                nameChb: qsTr("Save call rate in file")
+                            InputGroupFolder {
+                                id: idInputDirFrFiles
+                                nameField: qsTr("Directory with finalreports files:")
+
+                                Layout.fillWidth: true
+
+                                hoverTFolderHabler: idHeadSectProperFR.checked
                             }
 
-                            contentData: RowLayout {
-                                anchors.fill: parent
-                                anchors.leftMargin: 30
-
-                                enabled: idCheckBoxSaveCrFile.checked
-                                opacity: idCheckBoxSaveCrFile.checked ? 1 : 0.3
-
+                            RowLayout {
                                 Label {
                                     Layout.rightMargin: 15
 
-                                    text: qsTr("File name:")
+                                    text: qsTr("Call rate:")
                                     font.family: "Segoe UI"
                                     font.pixelSize: sizeTextInSect
                                     color: txtSection
                                 }
 
                                 CustormTextField {
-                                    id: idInputFilenameSave
-                                    phText: qsTr("Name ...")
+                                    id: idInputCR
+                                    implicitWidth: 80
 
-                                    implicitWidth: 200
+                                    phText: qsTr("0.90")
 
-                                    hoverEnabled: {
-                                        if (idHeadSectProperFR.checked) {
-                                            if (idCheckBoxSaveCrFile.checked) {
-                                                return true
-                                            } else {
-                                                return false
-                                            }
-                                        }
-
-                                        return false
+                                    validator: DoubleValidator {
+                                        bottom: 0
+                                        notation: DoubleValidator.StandardNotation
+                                        top: 1
                                     }
+
+                                    hoverEnabled: idHeadSectProperFR.checked
                                 }
 
                                 Label {
-                                    id: extensionFileCr
-                                    text: qsTr(".xlsx")
+                                    text: qsTr(", %")
                                     font.family: "Segoe UI"
                                     font.pixelSize: sizeTextInSect
                                     color: txtSection
                                 }
-                                Item { Layout.fillWidth: true }
                             }
 
-                            background: null
-                        }
+                            GroupBox {
+                                padding: 0
+                                Layout.fillWidth: true
+                                Layout.bottomMargin: 10
 
-                        GroupBox {
-                            padding: 0
-                            Layout.fillWidth: true
-                            Layout.bottomMargin: 10
+                                label: CustomCheckbox {
+                                    id: idCheckBoxSaveCrFile
+                                    hoverEnabled: idHeadSectProperFR.checked
 
-                            label: CustomCheckbox {
-                                id: idCBAddSuffSex
-                                hoverEnabled: idHeadSectProperFR.checked
-
-                                nameChb: qsTr("Add suffix sex")
-                            }
-
-                            contentData: ColumnLayout {
-                                anchors.fill: parent
-                                anchors.leftMargin: 30
-
-                                enabled: idCBAddSuffSex.checked
-                                opacity: idCBAddSuffSex.checked ? 1 : 0.4
-
-                                CustomCheckbox {
-                                    id: idCBAddSuff
-                                    hoverEnabled: idCBAddSuffSex.checked
-
-                                    nameChb: qsTr("Add suffix")
-
-                                    CustomTooltip {
-                                        id: idHintAddSuff
-                                        object: idCBAddSuff
-                                        textLbl: qsTr("Adding suffixes from the animal number file.")
-
-                                        visible: idCBAddSuffSex.checked ? idCBAddSuff.hovered : false
-                                        x: idCBAddSuff.width
-                                    }
+                                    nameChb: qsTr("Save call rate in file")
                                 }
 
-                                InputGroupFile {
-                                    id: idInputSexFromFile
-                                    Layout.fillWidth: true
+                                contentData: RowLayout {
+                                    anchors.fill: parent
+                                    anchors.leftMargin: 30
 
-                                    enabled: idCBAddSuff.checked
-                                    opacity: idCBAddSuff.checked ? 1 : 0.4
+                                    enabled: idCheckBoxSaveCrFile.checked
+                                    opacity: idCheckBoxSaveCrFile.checked ? 1 : 0.6
 
-                                    nameField: qsTr("Choose the file with the sex of the animals:")
+                                    Label {
+                                        Layout.rightMargin: 15
 
-                                    hoverTFileHabler: {
-                                        if (idHeadSectProperFR.checked) {
+                                        text: qsTr("File name:")
+                                        font.family: "Segoe UI"
+                                        font.pixelSize: sizeTextInSect
+                                        color: txtSection
+                                    }
 
-                                            if (idCBAddSuffSex.checked) {
-                                                if (idCBAddSuff.checked) {
+                                    CustormTextField {
+                                        id: idInputFilenameSave
+                                        phText: qsTr("Name ...")
+
+                                        implicitWidth: 200
+
+                                        hoverEnabled: {
+                                            if (idHeadSectProperFR.checked) {
+                                                if (idCheckBoxSaveCrFile.checked) {
                                                     return true
                                                 } else {
                                                     return false
                                                 }
                                             }
-                                            return false
 
+                                            return false
                                         }
-                                        return false
                                     }
+
+                                    Label {
+                                        id: extensionFileCr
+                                        text: qsTr(".xlsx")
+                                        font.family: "Segoe UI"
+                                        font.pixelSize: sizeTextInSect
+                                        color: txtSection
+                                    }
+                                    Item { Layout.fillWidth: true }
                                 }
+
+                                background: null
                             }
 
-                            background: null
+                            GroupBox {
+                                padding: 0
+                                Layout.fillWidth: true
+                                Layout.bottomMargin: 10
+
+                                label: CustomCheckbox {
+                                    id: idCBAddSuffSex
+                                    hoverEnabled: idHeadSectProperFR.checked
+
+                                    nameChb: qsTr("Add suffix sex")
+                                }
+
+                                contentData: ColumnLayout {
+                                    anchors.fill: parent
+                                    anchors.leftMargin: 30
+
+                                    enabled: idCBAddSuffSex.checked
+                                    opacity: idCBAddSuffSex.checked ? 1 : 0.6
+
+                                    CustomCheckbox {
+                                        id: idCBAddSuff
+                                        hoverEnabled: idCBAddSuffSex.checked
+
+                                        nameChb: qsTr("Add suffix")
+
+                                        CustomTooltip {
+                                            id: idHintAddSuff
+                                            object: idCBAddSuff
+                                            textLbl: qsTr("Adding suffixes from the animal number file.")
+
+                                            visible: idCBAddSuffSex.checked ? idCBAddSuff.hovered : false
+                                            x: idCBAddSuff.width
+                                        }
+                                    }
+
+                                    InputGroupFile {
+                                        id: idInputSexFromFile
+                                        Layout.fillWidth: true
+
+                                        enabled: idCBAddSuff.checked
+                                        opacity: idCBAddSuff.checked ? 1 : 0.6
+
+                                        nameField: qsTr("Choose the file with the sex of the animals:")
+
+                                        hoverTFileHabler: {
+                                            if (idHeadSectProperFR.checked) {
+
+                                                if (idCBAddSuffSex.checked) {
+                                                    if (idCBAddSuff.checked) {
+                                                        return true
+                                                    } else {
+                                                        return false
+                                                    }
+                                                }
+                                                return false
+
+                                            }
+                                            return false
+                                        }
+                                    }
+                                }
+
+                                background: null
+                            }
+
                         }
 
                     }
 
+                    background: null
                 }
+                Item { Layout.fillHeight: true }
 
-                background: null
             }
-            Item { Layout.fillHeight: true }
 
-        }
-
-        background: Rectangle {
-            color: "transparent"
+            background: Rectangle {
+                color: "transparent"
+            }
         }
     }
 }

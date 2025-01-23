@@ -9,6 +9,10 @@ Popup {
     property string nameProcess: ""
     property string textMsgProgress: ""
 
+    readonly property color colorDef: "transparent"
+    readonly property color colorMouseOver: "#8792A8"
+    readonly property color colorPressed: "#4A515E"
+
     width: 350
     height: 200
 
@@ -37,18 +41,72 @@ Popup {
         Layout.fillWidth: true
         Layout.fillHeight: true
 
-        ColorImage {
-            id: logoImage
-            color: "#7ece2d"
-
+        RowLayout {
             Layout.fillWidth: true
+            Layout.fillHeight: true
+
             Layout.topMargin: 8
             Layout.bottomMargin: 3
+            Layout.rightMargin: 8
 
-            source: "qrc:/icons/logo_app.png"
-            sourceSize.width: 25
-            sourceSize.height: 50
-            fillMode: Image.PreserveAspectFit
+            ColorImage {
+                id: logoImage
+                color: "#7ece2d"
+
+                Layout.leftMargin: 90
+
+                source: "qrc:/icons/logo_app.png"
+                sourceSize.width: 25
+                sourceSize.height: 50
+                fillMode: Image.PreserveAspectFit
+            }
+
+            Item { Layout.fillWidth: true }
+
+            Button {
+                id: idBtnRoll
+
+                Layout.alignment: Qt.AlignTop
+
+                CustomTooltip {
+                    id: ttBtnWC
+
+                    object: idBtnRoll
+                    textLbl: qsTr("Minimize")
+                    sizeText: 12
+
+                    x: - ttBtnWC.width + object.width
+                }
+
+                contentItem: ColorImage {
+                    source: "qrc:/icons/minus.svg"
+                    color: "white"
+
+                    fillMode: Image.PreserveAspectFit
+                    sourceSize.height: 13
+                    sourceSize.width: 13
+                }
+
+                background: Rectangle {
+                    color: {
+                        if (idBtnRoll.down) {
+                            return colorPressed
+                        } else {
+                            if (idBtnRoll.hovered) {
+                                return colorMouseOver
+                            }
+                        }
+
+                        return colorDef
+                    }
+
+                    implicitHeight: 20
+                    implicitWidth: 20
+                    radius: 5
+                }
+
+                onClicked: appWindow.showMinimized()
+            }
         }
 
         Label {

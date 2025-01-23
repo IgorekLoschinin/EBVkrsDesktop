@@ -25,189 +25,199 @@ TemplatePage {
         }
     }
 
-    contentData: Control {
+    contentData: ScrollView {
         anchors.fill: parent
-        anchors.leftMargin: marginContentD
-        anchors.rightMargin: marginContentD
 
-        contentItem: ColumnLayout {
-            spacing: 10
+        clip: true
+        contentWidth: parent.width
 
-            Loader {
-                sourceComponent: {
-                    if (idContent.currentIndex === 4) {
-                        return pBEst
+        ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+        ScrollBar.vertical.policy: ScrollBar.AlwaysOff
+
+        Control {
+            anchors.fill: parent
+            anchors.leftMargin: marginContentD
+            anchors.rightMargin: marginContentD
+
+            contentItem: ColumnLayout {
+                spacing: 10
+
+                Loader {
+                    sourceComponent: {
+                        if (idContent.currentIndex === 4) {
+                            return pBEst
+                        }
+                        return null
                     }
-                    return null
                 }
-            }
 
-            // Section settings ebv
-            GroupBox {
-                id: idCommonSection
-                padding: 0
+                // Section settings ebv
+                GroupBox {
+                    id: idCommonSection
+                    padding: 0
 
-                Layout.fillWidth: true
-                Layout.topMargin: 10
+                    Layout.fillWidth: true
+                    Layout.topMargin: 10
 
-                contentItem: ColumnLayout {
-                    anchors.fill: parent
+                    contentItem: ColumnLayout {
+                        anchors.fill: parent
 
-                    // Header section
-                    HeaderSectionContent {
-                        id: idHeadSectComm
-                        Layout.fillWidth: true
-
-                        nameSection: qsTr("Ebv settings")
-                    }
-
-                    // Content and settings section common
-                    ColumnLayout {
-                        spacing: 10
-                        Layout.fillWidth: true
-                        Layout.leftMargin: marginContentSect
-
-                        RowLayout {
-                            spacing: 30
+                        // Header section
+                        HeaderSectionContent {
+                            id: idHeadSectComm
                             Layout.fillWidth: true
 
+                            nameSection: qsTr("Ebv settings")
+                        }
+
+                        // Content and settings section common
+                        ColumnLayout {
+                            spacing: 10
+                            Layout.fillWidth: true
+                            Layout.leftMargin: marginContentSect
+
                             RowLayout {
+                                spacing: 30
                                 Layout.fillWidth: true
 
-                                Text {
-                                    Layout.rightMargin: 15
+                                RowLayout {
+                                    Layout.fillWidth: true
 
-                                    text: qsTr("Select of Feature:")
-                                    font.family: "Segoe UI"
-                                    font.pixelSize: sizeTextInSect
-                                    color: txtSection
+                                    Text {
+                                        Layout.rightMargin: 15
+
+                                        text: qsTr("Select of Feature:")
+                                        font.family: "Segoe UI"
+                                        font.pixelSize: sizeTextInSect
+                                        color: txtSection
+                                    }
+
+                                    CustomComboBox {
+                                        id: idFeatureEbv
+                                        currentIndex: 0
+                                        displayText: currentText
+                                        model: backend.list_feature
+
+                                        onCurrentTextChanged: {
+                                            if (tableInVariance.modelsFtVar[currentIndex].count > 0) {
+                                                tableInVariance.reloadTable(currentIndex)
+                                                return
+                                            }
+
+                                            tableInVariance.currentModel = tableInVariance.createTable(
+                                                tableInVariance.modelsFtVar[currentIndex],
+                                                backend.get_fields_table[idFeatureEbv.currentText]
+                                            )
+                                        }
+                                    }
                                 }
 
-                                CustomComboBox {
-                                    id: idFeatureEbv
-                                    currentIndex: 0
-                                    displayText: currentText
-                                    model: backend.list_feature
+                                RowLayout {
+                                    Layout.fillWidth: true
 
-                                    onCurrentTextChanged: {
-                                        if (tableInVariance.modelsFtVar[currentIndex].count > 0) {
-                                            tableInVariance.reloadTable(currentIndex)
-                                            return
+                                    Text {
+                                        Layout.rightMargin: 8
+
+                                        text: qsTr("Method estimate:")
+                                        font.family: "Segoe UI"
+                                        font.pixelSize: sizeTextInSect
+                                        color: txtSection
+                                    }
+
+                                    CustomComboBox {
+                                        id: idEbvTypeEstMethod
+                                        currentIndex: 0
+                                        model: ['blup', 'gblup']
+                                    }
+                                }
+
+                            }
+
+                            GroupBox {
+                                padding: 0
+                                Layout.fillWidth: true
+
+                                label: CustomCheckbox {
+                                    id: idCheckBoxParallelEst
+
+                                    nameChb: qsTr("Parallel computing")
+                                }
+
+                                contentData: RowLayout {
+                                    anchors.fill: parent
+                                    anchors.leftMargin: 30
+
+                                    enabled: idCheckBoxParallelEst.checked
+                                    opacity: idCheckBoxParallelEst.checked ? 1 : 0.3
+
+                                    Label {
+                                        Layout.rightMargin: 15
+
+                                        text: qsTr("Number of threads:")
+                                        font.family: "Segoe UI"
+                                        font.pixelSize: sizeTextInSect
+                                        color: txtSection
+                                    }
+
+                                    CustormTextField {
+                                        id: idInputNumThredEst
+                                        phText: qsTr("Enter...")
+
+                                        implicitWidth: 80
+
+                                        validator: IntValidator {
+                                            bottom: 1
+                                            top: 99
                                         }
 
-                                        tableInVariance.currentModel = tableInVariance.createTable(
-                                            tableInVariance.modelsFtVar[currentIndex],
-                                            backend.get_fields_table[idFeatureEbv.currentText]
-                                        )
+                                        hoverEnabled: idCheckBoxParallelEst.checked
                                     }
+                                    Item { Layout.fillWidth: true }
                                 }
+
+                                background: null
                             }
 
                             RowLayout {
                                 Layout.fillWidth: true
 
                                 Text {
-                                    Layout.rightMargin: 8
+                                    Layout.rightMargin: 15
 
-                                    text: qsTr("Method estimate:")
+                                    text: qsTr("Variance calculation method:")
                                     font.family: "Segoe UI"
                                     font.pixelSize: sizeTextInSect
                                     color: txtSection
                                 }
 
                                 CustomComboBox {
-                                    id: idEbvTypeEstMethod
-                                    currentIndex: 0
-                                    model: ['blup', 'gblup']
+                                    id: idSelectTypeCalVar
+                                    model: ["all", "conf"]
                                 }
                             }
 
-                        }
+                            // Variance table
+                            TableInputVar {
+                                id: tableInVariance
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                Layout.topMargin: 15
 
-                        GroupBox {
-                            padding: 0
-                            Layout.fillWidth: true
-
-                            label: CustomCheckbox {
-                                id: idCheckBoxParallelEst
-
-                                nameChb: qsTr("Parallel computing")
+                                visible: idSelectTypeCalVar.displayText === "conf" ? true : false
                             }
 
-                            contentData: RowLayout {
-                                anchors.fill: parent
-                                anchors.leftMargin: 30
-
-                                enabled: idCheckBoxParallelEst.checked
-                                opacity: idCheckBoxParallelEst.checked ? 1 : 0.3
-
-                                Label {
-                                    Layout.rightMargin: 15
-
-                                    text: qsTr("Number of threads:")
-                                    font.family: "Segoe UI"
-                                    font.pixelSize: sizeTextInSect
-                                    color: txtSection
-                                }
-
-                                CustormTextField {
-                                    id: idInputNumThredEst
-                                    phText: qsTr("Enter...")
-
-                                    implicitWidth: 80
-
-                                    validator: IntValidator {
-                                        bottom: 1
-                                        top: 99
-                                    }
-
-                                    hoverEnabled: idCheckBoxParallelEst.checked
-                                }
-                                Item { Layout.fillWidth: true }
-                            }
-
-                            background: null
                         }
-
-                        RowLayout {
-                            Layout.fillWidth: true
-
-                            Text {
-                                Layout.rightMargin: 15
-
-                                text: qsTr("Variance calculation method:")
-                                font.family: "Segoe UI"
-                                font.pixelSize: sizeTextInSect
-                                color: txtSection
-                            }
-
-                            CustomComboBox {
-                                id: idSelectTypeCalVar
-                                model: ["all", "conf"]
-                            }
-                        }
-
-                        // Variance table
-                        TableInputVar {
-                            id: tableInVariance
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
-                            Layout.topMargin: 15
-
-                            visible: idSelectTypeCalVar.displayText === "conf" ? true : false
-                        }
-
                     }
+
+                    background: null
                 }
+                Item { Layout.fillHeight: true }
 
-                background: null
             }
-            Item { Layout.fillHeight: true }
 
-        }
-
-        background: Rectangle {
-            color: "transparent"
+            background: Rectangle {
+                color: "transparent"
+            }
         }
     }
 }
