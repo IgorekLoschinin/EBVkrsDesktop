@@ -7,9 +7,9 @@ methods. The application is built with PySide6 and QML 6.7, ensuring a modern an
 ## Features
 - **Authentication**: Secure login form for accessing the application.  
 - **Data Processing**: Configuration and filtering of phenotypic data for analysis.  
-- **Genetic Value Calculation**: Perform BLUP and GBLUP calculations to evaluate cattle breeding value.  
-- **Index-Based Breeding Value Assessment**: Calculate breeding value using index-based methods.  
-- **Report Generation**: Generate detailed reports with the results of genetic value assessments.
+- **Estimate breeding value**: Perform BLUP and GBLUP calculations to evaluate cattle breeding value.  
+- **Index estimate breeding value**: Calculate breeding value using index-based methods.  
+- **Report Generation**: Generate detailed reports with the results of estimate breeding value.
 ## Screenshots
 
 **Login Form**:  
@@ -106,13 +106,6 @@ filter phenotypic data.
 
 4. **Genetic Value Calculation**: Use the relevant modules to perform BLUP and
 GBLUP calculations.
-
-## Contribution
-
-We welcome contributions to the development of EBVkrsDesktop.  
-If you would like to report an issue, propose a new feature, or submit changes,
-please create an [Issue](https://github.com/IgorekLoschinin/EBVkrsDesktop/issues)
-
 
 ## License
 This project is licensed under the MIT License - see the 
