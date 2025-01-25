@@ -14,7 +14,7 @@ methods. The application is built with PySide6 and QML 6.7, ensuring a modern an
 
 **Login Form**:  
 <p align="center">
-  <img width="807" height="584" src="./docs/InputPage.png">
+  <img width="807" height="584" src="./docs/inputPage.png">
 </p>
 
 **Main Page**:  
@@ -24,7 +24,7 @@ methods. The application is built with PySide6 and QML 6.7, ensuring a modern an
 
 **Data Processing Page**:  
 <p align="center">
-  <img width="807" height="584" src="./docs/procPhenoPage.png">
+  <img width="807" height="584" src="./docs/phenoPage.png">
 </p>
 
 **SNP (Single Nucleotide Polymorphism) Page**:  
@@ -35,6 +35,11 @@ methods. The application is built with PySide6 and QML 6.7, ensuring a modern an
 **Estiamte breeding value Page**:  
 <p align="center">
   <img width="807" height="584" src="./docs/ebvPage.png">
+</p>
+
+**Indexing estiamte breeding value Page**:  
+<p align="center">
+  <img width="807" height="584" src="./docs/indPage.png">
 </p>
 
 ## Requirements
