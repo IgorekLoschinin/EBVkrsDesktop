@@ -19,6 +19,7 @@ ApplicationWindow {
     property int bgRadius: 10
 
     property int spacingPanel: 5
+    property bool disableTT: true  // disable tooltips on all pages
 
     width: bgWidth
     height: bgHeight

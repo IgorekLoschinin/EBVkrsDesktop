@@ -209,11 +209,15 @@ TemplatePage {
                                             textLbl: qsTr("Directory with primary phenotypic data.")
 
                                             visible: {
-                                                if (idSHeadSectAddProp.checked) {
-                                                    if (idCheckBoxUpdataDB.checked) {
-                                                        return false
+                                                if (disableTT) {
+
+                                                    if (idSHeadSectAddProp.checked) {
+                                                        if (idCheckBoxUpdataDB.checked) {
+                                                            return false
+                                                        }
+                                                        return idDirDataFilesForSearch.hovered
                                                     }
-                                                    return idDirDataFilesForSearch.hovered
+
                                                 }
 
                                                 return false
@@ -245,11 +249,13 @@ TemplatePage {
                                             textLbl: qsTr("File with bull registration numbers.")
 
                                             visible: {
-                                                if (idSHeadSectAddProp.checked) {
-                                                    if (idCheckBoxUpdataDB.checked) {
-                                                        return false
+                                                if (disableTT) {
+                                                    if (idSHeadSectAddProp.checked) {
+                                                        if (idCheckBoxUpdataDB.checked) {
+                                                            return false
+                                                        }
+                                                        return idInputSearchDaug.hovered
                                                     }
-                                                    return idInputSearchDaug.hovered
                                                 }
 
                                                 return false
@@ -314,7 +320,13 @@ TemplatePage {
                                     textLbl: qsTr("Directory with primary phenotypic data.")
 
                                     x: 30
-                                    visible: !idSHeadSectAddProp.checked ? idDirDataFiles.hovered : false
+                                    visible: {
+                                        if (disableTT) {
+                                            return !idSHeadSectAddProp.checked ? idDirDataFiles.hovered : false
+                                        }
+
+                                        return false
+                                    }
                                 }
                             }
 
@@ -386,7 +398,13 @@ TemplatePage {
                                     textLbl: qsTr("Connection of the accumulation methodology.")
 
                                     x: idAccumulateDp.width
-                                    visible: !idSHeadSectAddProp.checked ? idAccumulateDp.hovered : false
+                                    visible: {
+                                        if (disableTT) {
+                                            return !idSHeadSectAddProp.checked ? idAccumulateDp.hovered : false
+                                        }
+
+                                        return false
+                                    }
                                 }
                             }
 
@@ -406,7 +424,13 @@ TemplatePage {
                                         textLbl: qsTr("Building a file pedigree.")
 
                                         x: idCheckBoxPed.width
-                                        visible: !idSHeadSectAddProp.checked ? idCheckBoxPed.hovered : false
+                                        visible: {
+                                            if (disableTT) {
+                                                return !idSHeadSectAddProp.checked ? idCheckBoxPed.hovered : false
+                                            }
+
+                                            return false
+                                        }
                                     }
                                 }
 
@@ -422,7 +446,12 @@ TemplatePage {
                                         textLbl: qsTr("Building a file daughters.")
 
                                         x: idCheckBoxDaug.width
-                                        visible: !idSHeadSectAddProp.checked ? idCheckBoxDaug.hovered : false
+                                        visible: {
+                                            if (disableTT) {
+                                                return !idSHeadSectAddProp.checked ? idCheckBoxDaug.hovered : false
+                                            }
+                                            return false
+                                        }
                                     }
                                 }
 
@@ -446,7 +475,12 @@ TemplatePage {
                                         textLbl: qsTr("Adding a snp file to the input files when calculating gblup.")
 
                                         x: idAdditionSnpData.width
-                                        visible: !idSHeadSectAddProp.checked ? idAdditionSnpData.hovered : false
+                                        visible: {
+                                            if (disableTT) {
+                                                return !idSHeadSectAddProp.checked ? idAdditionSnpData.hovered : false
+                                            }
+                                            return false
+                                        }
                                     }
                                 }
 
@@ -498,7 +532,12 @@ TemplatePage {
                                         textLbl: qsTr("Data pre-filtering.")
 
                                         x: idCBSelectData.width
-                                        visible: !idSHeadSectAddProp.checked ? idCBSelectData.hovered : false
+                                        visible: {
+                                            if (disableTT) {
+                                                return !idSHeadSectAddProp.checked ? idCBSelectData.hovered : false
+                                            }
+                                            return false
+                                        }
                                     }
                                 }
 
@@ -534,12 +573,16 @@ TemplatePage {
 
                                             x: idTTFarmCode.width / 4
                                             visible: {
-                                                if (!idSHeadSectAddProp.checked) {
-                                                    if (idCBSelectData.checked) {
-                                                        return idInputFarm.hovered
-                                                    } else {
-                                                        return false
+                                                if (disableTT) {
+
+                                                    if (!idSHeadSectAddProp.checked) {
+                                                        if (idCBSelectData.checked) {
+                                                            return idInputFarm.hovered
+                                                        } else {
+                                                            return false
+                                                        }
                                                     }
+
                                                 }
                                                 return false
                                             }
@@ -575,11 +618,13 @@ TemplatePage {
 
                                             x: idTTRemoveDaug.width / 3
                                             visible: {
-                                                if (!idSHeadSectAddProp.checked) {
-                                                    if (idCBSelectData.checked) {
-                                                        return idInputRemoveDaug.hovered
-                                                    } else {
-                                                        return false
+                                                if (disableTT) {
+                                                    if (!idSHeadSectAddProp.checked) {
+                                                        if (idCBSelectData.checked) {
+                                                            return idInputRemoveDaug.hovered
+                                                        } else {
+                                                            return false
+                                                        }
                                                     }
                                                 }
                                                 return false

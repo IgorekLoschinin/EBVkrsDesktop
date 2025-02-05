@@ -191,7 +191,13 @@ TemplatePage {
                                         object: idCheckBoxDivData
                                         textLbl: qsTr("Dividing these results into fathers and daughters reports.")
 
-                                        visible: idComBoxChooseAnimal.currentIndex === 2 ? idCheckBoxDivData.hovered : false
+                                        visible: {
+                                            if (disableTT) {
+                                                return idComBoxChooseAnimal.currentIndex === 2 ? idCheckBoxDivData.hovered : false
+                                            }
+                                            return false
+                                        }
+
                                         x: idCheckBoxDivData.width
                                     }
                                 }
@@ -259,7 +265,13 @@ TemplatePage {
                                         object: idCheckBoxPrivDisOpt
                                         textLbl: qsTr("The function cancels the transformation of data to the optimal value.")
 
-                                        visible: idSelectFeatureForInd.displayText === "conform" ? idCheckBoxPrivDisOpt.hovered : false
+                                        visible: {
+                                            if (disableTT) {
+                                                return idSelectFeatureForInd.displayText === "conform" ? idCheckBoxPrivDisOpt.hovered : false
+                                            }
+                                            return false
+                                        }
+
                                         x: idCheckBoxPrivDisOpt.width
                                     }
                                 }

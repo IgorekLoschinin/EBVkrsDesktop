@@ -333,7 +333,14 @@ TemplatePage {
                                             object: idCBAddSuff
                                             textLbl: qsTr("Adding suffixes from the animal number file.")
 
-                                            visible: idCBAddSuffSex.checked ? idCBAddSuff.hovered : false
+                                            visible: {
+                                                if (disableTT) {
+                                                    return idCBAddSuffSex.checked ? idCBAddSuff.hovered : false
+                                                }
+
+                                                return false
+                                            }
+
                                             x: idCBAddSuff.width
                                         }
                                     }
