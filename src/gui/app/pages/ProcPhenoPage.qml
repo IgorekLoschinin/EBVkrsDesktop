@@ -28,6 +28,7 @@ TemplatePage {
         'numlact': idNumLactation.currentIndex,
         'ped': idCheckBoxPed.checked,
         'daughters': idCheckBoxDaug.checked,
+        'addfilesnp': !idAdditionSnpData.checked ? null : idInputPathSnpFile.inputText.length === 0 ? null : idInputPathSnpFile.inputText,
         'selectdata': {
             'checked': idCBSelectData.checked,
             'filefarm': idInputFarm.inputText.length === 0 ? null : idInputFarm.inputText,

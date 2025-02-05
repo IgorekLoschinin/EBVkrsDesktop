@@ -44,4 +44,5 @@ class RequestPheno(BaseModel):
 	numlact: int
 	ped: bool
 	daughters: bool
+	addfilesnp: None | str
 	selectdata: SelectDataM
