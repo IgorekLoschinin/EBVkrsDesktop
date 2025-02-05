@@ -82,10 +82,12 @@ TemplatePage {
 
             // Enable  and disable tooltip
             CustomSwitch {
-                id: idSwitchSect
+                id: idSwitchDisableTooltip
+
+                checked: true
 
                 contentItem: Text {
-                    leftPadding: idSwitchSect.indicator.width + 6
+                    leftPadding: idSwitchDisableTooltip.indicator.width + 6
 
                     text: qsTr("Disabling tooltips")
                     font.pixelSize: sizeTextInSect
@@ -95,6 +97,8 @@ TemplatePage {
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                 }
+
+                onCheckedChanged: disableTT = checked
             }
 
             Item { Layout.fillHeight: true }
