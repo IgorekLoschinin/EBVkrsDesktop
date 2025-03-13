@@ -44,7 +44,7 @@ class IndModel(IModel):
 			raise err
 
 	def processing(self) -> None:
-		"""  """
+		""" Processing a request for Index data processing """
 
 		if self._settings.index:
 			ind = IndFeature(
@@ -71,7 +71,7 @@ class IndModel(IModel):
 
 		if self._settings.gengivc.status:
 			givc = PreparationGIVC(
-				dir_files=Path(self._settings.gengivc.dirreport),
+				dir_files=self._settings.gengivc.dirreport,
 				animal=self._settings.animal
 			)
 			givc.handle()

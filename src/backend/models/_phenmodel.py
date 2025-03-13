@@ -39,7 +39,7 @@ class PhenoModel(IModel):
 			raise err
 
 	def processing(self) -> None:
-		"""  """
+		""" Processing a request for Phenotype data processing """
 
 		dp_args = {}
 
