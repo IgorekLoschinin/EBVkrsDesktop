@@ -326,12 +326,12 @@ TemplatePage {
                                         id: idCBAddSuff
                                         hoverEnabled: idCBAddSuffSex.checked
 
-                                        nameChb: qsTr("Add suffix")
+                                        nameChb: qsTr("Add")
 
                                         CustomTooltip {
                                             id: idHintAddSuff
                                             object: idCBAddSuff
-                                            textLbl: qsTr("Adding suffixes from the animal number file.")
+                                            textLbl: qsTr("Add suffix from the conversion file.")
 
                                             visible: {
                                                 if (disableTT) {
@@ -349,16 +349,16 @@ TemplatePage {
                                         id: idInputSexFromFile
                                         Layout.fillWidth: true
 
-                                        enabled: idCBAddSuff.checked
-                                        opacity: idCBAddSuff.checked ? 1 : 0.6
+                                        enabled: !idCBAddSuff.checked
+                                        opacity: !idCBAddSuff.checked ? 1 : 0.6
 
-                                        nameField: qsTr("Choose the file with the sex of the animals:")
+                                        nameField: qsTr("From the file:")
 
                                         hoverTFileHabler: {
                                             if (idHeadSectProperFR.checked) {
 
-                                                if (idCBAddSuffSex.checked) {
-                                                    if (idCBAddSuff.checked) {
+                                                if (!idCBAddSuff.checked) {
+                                                    if (idCBAddSuffSex.checked) {
                                                         return true
                                                     } else {
                                                         return false
