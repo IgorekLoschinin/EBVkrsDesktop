@@ -7,7 +7,7 @@
 # of this license document, but changing it is not allowed.
 
 __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
-__all__ = ("SettingsSchema",)
+__all__ = ("SettingsSchema", )
 
 
 from pydantic import BaseModel
