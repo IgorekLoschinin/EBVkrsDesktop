@@ -73,6 +73,7 @@ class EbvModel(IModel):
 					utils=Path(self._settings.utilsf90)
 				)
 				ebv.start()
+				return
 
 			case "gblup":
 				gebv = GEstimator(
@@ -86,5 +87,6 @@ class EbvModel(IModel):
 					utils=Path(self._settings.utilsf90)
 				)
 				gebv.start()
+				return
 
 		return None

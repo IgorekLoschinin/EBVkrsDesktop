@@ -60,6 +60,7 @@ class IndModel(IModel):
 				disabled_optim=self._settings.disableoptim
 			)
 			ind.run()
+			return
 
 		if self._settings.complex_i:
 			cind = ComplexIndex(
@@ -69,12 +70,14 @@ class IndModel(IModel):
 				dir_nspace=self._out_d
 			)
 			cind.run_cind()
+			return
 
 		if self._settings.gengivc.status:
 			givc = PreparationGIVC(
 				dir_files=self._settings.gengivc.dirreport,
-				animal=self._settings.animal
+				animal=self._settings.gengivc.typereport
 			)
 			givc.handle()
+			return
 
 		return None
