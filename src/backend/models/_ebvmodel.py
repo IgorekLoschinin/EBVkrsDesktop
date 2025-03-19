@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# Copyright (C) 2023-2024 Igor Loschinin.
+# Copyright (C) 2024-2026 Igor Loschinin.
 # Distributed under the lgplv3 software license, see the accompanying
 # Everyone is permitted to copy and distribute verbatim copies
 # of this license document, but changing it is not allowed.
 
 __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
+__all__ = ('EbvModel', )
 
 from pathlib import Path
 from pydantic_core import ValidationError
@@ -72,6 +73,7 @@ class EbvModel(IModel):
 					utils=Path(self._settings.utilsf90)
 				)
 				ebv.start()
+				return
 
 			case "gblup":
 				gebv = GEstimator(
@@ -85,5 +87,6 @@ class EbvModel(IModel):
 					utils=Path(self._settings.utilsf90)
 				)
 				gebv.start()
+				return
 
 		return None

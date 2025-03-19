@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# Copyright (C) 2023-2024 Igor Loschinin.
+# Copyright (C) 2024-2026 Igor Loschinin.
 # Distributed under the lgplv3 software license, see the accompanying
 # Everyone is permitted to copy and distribute verbatim copies
 # of this license document, but changing it is not allowed.
@@ -72,6 +72,13 @@ class Backend(QObject):
 
 		return Path().cwd().joinpath(WORKSPACE_DIR)
 
+	def __make_dir_workspace(self) -> None:
+		""" Creates a working directory - a directory of the general
+		environment if the program is launched for the first time """
+		if not (self.common_namespace.is_dir() and
+				self.common_namespace.exists()):
+			self.common_namespace.mkdir()
+
 	@Property(list, constant=True)
 	def list_feature(self) -> list[str]:
 		return CMD_FEATURE
@@ -90,6 +97,7 @@ class Backend(QObject):
 
 	@Property(bool, notify=enablePrgW)
 	def enable_prg_win(self) -> bool:
+		""" Возвращает логическое значение для вызова прогрессбара """
 		return self._enable_prg_win
 
 	@enable_prg_win.setter
@@ -101,10 +109,15 @@ class Backend(QObject):
 
 	@Property(int, notify=finishedCodeSig)
 	def finished_code(self) -> int | None:
+		""" Возвращает код завершения процесса - 0, 1, -1.
+
+		0 - Successful, 1 - Error, -1 - processing...
+		"""
 		return self._finished_code
 
 	@finished_code.setter
 	def finished_code(self, value: int) -> None:
+		""" Устанавливает код завершения процесса """
 		if self._finished_code != value:
 			self._finished_code = value
 
@@ -112,6 +125,7 @@ class Backend(QObject):
 
 	@Property(int, notify=finishedSig)
 	def finished(self) -> int | None:
+		""" Возвращает логическое значения заверщения процесса. """
 		return self._finished
 
 	@finished.setter
@@ -120,6 +134,18 @@ class Backend(QObject):
 			self._finished = value
 
 			self.finishedSig.emit(value)
+
+	@Slot()
+	def stop(self) -> None:
+		""" Сигнал для отмены или остановки процесса в прогресс баре """
+		self._worker_md.stop_processing()
+		self.enable_prg_win = False
+
+	@Slot()
+	def ok(self) -> None:
+		""" Сигнал для подтверждения что процесс завершился в прогресс баре """
+		self.enable_prg_win = False
+		self.finished = False
 
 	@Slot(dict)
 	def run(self, data: dict | None) -> None:
@@ -135,24 +161,15 @@ class Backend(QObject):
 				data=data,
 				output_dir=self.common_namespace
 			)
-			self.finished_code = -1
+			self.finished_code = -1  # Code for message 'in process...'
 
 			self._worker_md.handle()
 			self._worker_md.exitCode.connect(self._exec_prog)
 
-			self.enable_prg_win = True
+			self.enable_prg_win = True  # Trigger to activate the progress bar
 
 		except Exception as e:
 			self.exception(e)
-
-	@Slot()
-	def stop(self) -> None:
-		self._worker_md.stop_processing()
-		self.enable_prg_win = False
-
-	@Slot()
-	def ok(self) -> None:
-		self.enable_prg_win = False
 
 	def _exec_prog(self, code: int) -> None:
 		""" Method that fires when all event loops in a thread have completed -
@@ -163,13 +180,6 @@ class Backend(QObject):
 		"""
 		self.finished_code = code
 		self.finished = True
-
-	def __make_dir_workspace(self) -> None:
-		""" Creates a working directory - a directory of the general
-		environment if the program is launched for the first time """
-		if not (self.common_namespace.is_dir() and
-				self.common_namespace.exists()):
-			self.common_namespace.mkdir()
 
 	@Slot(dict, str)
 	def save_variance_conf(self, data: dict[str, dict], path_file: str) -> None:

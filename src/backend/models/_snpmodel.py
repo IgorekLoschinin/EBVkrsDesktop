@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# Copyright (C) 2023-2024 Igor Loschinin.
+# Copyright (C) 2024-2026 Igor Loschinin.
 # Distributed under the lgplv3 software license, see the accompanying
 # Everyone is permitted to copy and distribute verbatim copies
 # of this license document, but changing it is not allowed.
 
 __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
+__all__ = ('SnpModel', )
 
 from pathlib import Path
 from pydantic_core import ValidationError
@@ -39,27 +40,40 @@ class SnpModel(IModel):
 			raise err
 
 	def processing(self) -> None:
-		"""  """
+		""" Processing a request for SNP data processing. """
 
 		snp_args = {}
 
 		if self._settings.snp.checked:
 			snp_args.update({
-				"snp": Path(self._settings.snp.refsnpfile),
-				"sample": Path(self._settings.snp.samplefile),
-				"update": Path(self._settings.snp.updatefile),
+				"snp": self._settings.snp.refsnpfile,
+				"sample": self._settings.snp.samplefile,
+				"update": self._settings.snp.updatefile,
 				"out": self._out_d
 			})
 
 		if self._settings.fr.checked:
 			snp_args.update({
-				"dir_fr": Path(self._settings.fr.dirfilefr),
+				"dir_fr": self._settings.fr.dirfilefr,
 				"cr": float(self._settings.fr.callrate),
-				"file_cr": self._settings.fr.savecrfile,
-				"add_sex": self._settings.fr.addsuff.add,
-				"file_sex": Path(self._settings.fr.addsuff.fromfile),
 				"out": self._out_d
 			})
+
+			if self._settings.fr.savecrfile.checked:
+				snp_args.update({
+					"file_cr": self._settings.fr.savecrfile.filename
+				})
+
+			if self._settings.fr.addsuff.checked:
+				if self._settings.fr.addsuff.add:
+					snp_args.update({
+						"add_sex": self._settings.fr.addsuff.checked
+					})
+
+				if self._settings.fr.addsuff.fromfile is not None:
+					snp_args.update({
+						"file_sex": self._settings.fr.addsuff.fromfile
+					})
 
 		snp_prc = SnpProcessing(**snp_args)
 		snp_prc.run_snp()

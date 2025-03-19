@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# Copyright (C) 2023-2024 Igor Loschinin.
+# Copyright (C) 2024-2026 Igor Loschinin.
 # Distributed under the lgplv3 software license, see the accompanying
 # Everyone is permitted to copy and distribute verbatim copies
 # of this license document, but changing it is not allowed.
 
 __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
+__all__ = ('IndModel', )
 
 from pathlib import Path
 from pydantic_core import ValidationError
@@ -44,35 +45,36 @@ class IndModel(IModel):
 			raise err
 
 	def processing(self) -> None:
-		"""  """
+		""" Processing a request for Index data processing """
 
-		if self._settings.index:
-			ind = IndFeature(
-				feature=self._settings.feature,
-				dir_nspace=self._out_d,
-				animal=self._settings.animal,
-				division=self._settings.divdata,
-				est_method=self._settings.estmethod,
-				parallel=self._settings.parallel,
-				workers=None if self._settings.numthread is None
-				else int(self._settings.numthread),
-				disabled_optim=self._settings.disableoptim
-			)
-			ind.run()
+		if not self._settings.gengivc.status:
+			if self._settings.index:
+				ind = IndFeature(
+					feature=self._settings.feature,
+					dir_nspace=self._out_d,
+					animal=self._settings.animal,
+					division=self._settings.divdata,
+					est_method=self._settings.estmethod,
+					parallel=self._settings.parallel,
+					workers=None if self._settings.numthread is None
+					else int(self._settings.numthread),
+					disabled_optim=self._settings.disableoptim
+				)
+				ind.run()
 
-		if self._settings.complex_i:
-			cind = ComplexIndex(
-				animal=self._settings.animal,
-				division=self._settings.divdata,
-				method_est=self._settings.estmethod,
-				dir_nspace=self._out_d
-			)
-			cind.run_cind()
+			if self._settings.complex_i:
+				cind = ComplexIndex(
+					animal=self._settings.animal,
+					division=self._settings.divdata,
+					method_est=self._settings.estmethod,
+					dir_nspace=self._out_d
+				)
+				cind.run_cind()
 
-		if self._settings.gengivc.status:
+		else:
 			givc = PreparationGIVC(
 				dir_files=Path(self._settings.gengivc.dirreport),
-				animal=self._settings.animal
+				animal=self._settings.gengivc.typereport
 			)
 			givc.handle()
 
