@@ -10,13 +10,13 @@ __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
 __all__ = ('PhenoModel', )
 
 from pathlib import Path
+
 from pydantic_core import ValidationError
 
 from .imodel import IModel
-from ..schemas import RequestPheno
-
-from ..libkrs.processing import DataProcessing
+from ..libkrs.processing.dataprocessing import DataProcessing
 from ..libkrs.utils import logger
+from ..schemas import RequestPheno
 
 
 @logger(name="PhenoModel")
