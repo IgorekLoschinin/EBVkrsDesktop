@@ -10,16 +10,16 @@ __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
 __all__ = ('EbvModel', )
 
 from pathlib import Path
+
 from pydantic_core import ValidationError
 
 from .imodel import IModel
-from ..schemas import RequestEbv
-
 from ..libkrs.core import (
 	Estimator,
 	GEstimator
 )
 from ..libkrs.utils import logger
+from ..schemas import RequestEbv
 
 
 @logger(name="EbvModel")

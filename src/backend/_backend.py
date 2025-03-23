@@ -33,8 +33,8 @@ from .libkrs.utils import (
 	from_json,
 	to_json
 )
-from .models.modelhandler import ModelHandler
 from .models import SettingsModel
+from .models.modelhandler import ModelHandler
 
 
 @logger(name="Backend")
