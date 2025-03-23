@@ -17,6 +17,6 @@ __all__ = (
 
 from ._shebv import RequestEbv
 from ._shindex import RequestInd
-from ._shsnpproc import RequestSnp
 from ._shphenotype import RequestPheno
 from ._shsettings import SettingsSchema
+from ._shsnpproc import RequestSnp

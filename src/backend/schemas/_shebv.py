@@ -9,11 +9,13 @@
 __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
 __all__ = ('RequestEbv', )
 
+from typing import Any
+
 from pydantic import (
 	BaseModel,
 	model_validator
 )
-from typing import Any
+
 from ..libkrs.core.settings import CMD_FEATURE
 from ..libkrs.est.varmodel.schemas import (
 	VarConfMilk,

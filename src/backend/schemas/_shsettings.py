@@ -11,6 +11,7 @@ __all__ = ("SettingsSchema", )
 
 
 from pydantic import BaseModel
+
 from ..libkrs.core.settings import RESOURCES_DIR
 
 

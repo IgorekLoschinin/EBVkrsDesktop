@@ -7,6 +7,7 @@
 # of this license document, but changing it is not allowed.
 
 __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
+__all__ = ('TranslationManager', )
 
 
 from PySide6.QtCore import (
@@ -26,6 +27,15 @@ from .libkrs.utils import (
 
 @logger(name="TranslationManager")
 class TranslationManager(QObject, CheckMixin):
+	""" The TranslationManager class is designed to manage translations in a
+	Qt-based application. It allows you to load and modify language files
+	(.qm), and notify the application when the language changes. The class
+	uses Qt's signals and slots mechanism to interact with other components
+	of the application.
+
+	:param engine: An object that is responsible for redrawing the application
+	interface (such as the main window or QML engine).
+	"""
 
 	langChanged: Signal = Signal()
 	langList: Signal = Signal(list)
@@ -43,10 +53,20 @@ class TranslationManager(QObject, CheckMixin):
 
 	@Property(list, notify=langList)
 	def languages(self) -> list[str]:
+		""" Property that returns a list of available languages.
+
+		:return: List of strings with language names (e.g. ["English",
+		"Russian"]).
+		"""
 		return list(self._lang_list.keys())
 
 	@Slot(str)
 	def load_language(self, lang_name: str) -> None:
+		""" Method to load and set the language in an application.
+
+		:param lang_name: The name of the language to load (e.g., "English"
+		or "Russian").
+		"""
 
 		if self._translator is not None:
 			QCoreApplication.instance().removeTranslator(self._translator)

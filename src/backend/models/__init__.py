@@ -12,11 +12,11 @@ __all__ = (
     'SnpModel',
     'EbvModel',
     'IndModel',
-    'SettingsModel'
+    'SettingsModel',
 )
 
-from ._phenmodel import PhenoModel
-from ._snpmodel import SnpModel
 from ._ebvmodel import EbvModel
 from ._indmodel import IndModel
+from ._phenmodel import PhenoModel
 from ._settingsmodel import SettingsModel
+from ._snpmodel import SnpModel

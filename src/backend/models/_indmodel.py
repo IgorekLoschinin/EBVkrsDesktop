@@ -10,23 +10,31 @@ __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
 __all__ = ('IndModel', )
 
 from pathlib import Path
+
 from pydantic_core import ValidationError
 
 from .imodel import IModel
-from ..schemas import RequestInd
-
+from ..libkrs.givc import PreparationGIVC
 from ..libkrs.index import (
 	IndFeature,
 	ComplexIndex
 )
-
-from ..libkrs.givc import PreparationGIVC
 from ..libkrs.utils import logger
+from ..schemas import RequestInd
 
 
 @logger(name="IndModel")
 class IndModel(IModel):
-	"""  """
+	""" Index model for query processing.
+
+	This class processes Index queries and supports three calculation methods:
+	idnex, complexindex and data processing for givc.
+
+	:param req_data: Input data for configuring the model.
+	:param output_dir: Directory for saving output results.
+	:raises ValidationError: If the input data fails validation.
+	:raises Exception: For any other errors during initialization.
+	"""
 
 	def __init__(
 			self,

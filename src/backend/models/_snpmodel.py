@@ -10,18 +10,25 @@ __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
 __all__ = ('SnpModel', )
 
 from pathlib import Path
+
 from pydantic_core import ValidationError
 
 from .imodel import IModel
-from ..schemas import RequestSnp
-
 from ..libkrs.processing import SnpProcessing
 from ..libkrs.utils import logger
+from ..schemas import RequestSnp
 
 
 @logger(name="SnpModel")
 class SnpModel(IModel):
-	"""  """
+	""" This class handles snp data processing requests. It has two methods:
+	FinalReport file processing and snp data processing for blupf90.
+
+	:param req_data: Input data for configuring the model.
+	:param output_dir: Directory for saving output results.
+	:raises ValidationError: If the input data fails validation.
+	:raises Exception: For any other errors during initialization.
+	"""
 
 	def __init__(
 			self,

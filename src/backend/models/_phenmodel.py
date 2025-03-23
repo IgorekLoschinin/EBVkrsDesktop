@@ -21,7 +21,15 @@ from ..schemas import RequestPheno
 
 @logger(name="PhenoModel")
 class PhenoModel(IModel):
-	"""  """
+	""" Phenotype model for query processing phenotype data.
+
+	This class handles requests for processing phenotype data.
+
+	:param req_data: Input data for configuring the model.
+	:param output_dir: Directory for saving output results.
+	:raises ValidationError: If the input data fails validation.
+	:raises Exception: For any other errors during initialization.
+	"""
 
 	def __init__(
 			self,
