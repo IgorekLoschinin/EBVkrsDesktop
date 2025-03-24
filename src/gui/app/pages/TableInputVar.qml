@@ -202,6 +202,8 @@ Control {
                 CustomTooltip {
                     object: idBtnFileSave
                     textLbl: qsTr("Save the variance in file.")
+
+                    visible: disableTT ? idBtnFileSave.hovered : false
                 }
             }
 
@@ -225,6 +227,8 @@ Control {
                 CustomTooltip {
                     object: idBtnFileUpload
                     textLbl: qsTr("Load the variance from file.")
+
+                    visible: disableTT ? idBtnFileUpload.hovered : false
                 }
             }
         }
