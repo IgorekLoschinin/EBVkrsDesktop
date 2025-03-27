@@ -13,7 +13,7 @@ Control {
     property string placeholderText: qsTr("Enter file path...")
     property bool hoverTFolderHabler: true
 
-    signal enterTextChanges
+    signal enterTextChanges  // using in settingpage
 
 
     contentItem: RowLayout {

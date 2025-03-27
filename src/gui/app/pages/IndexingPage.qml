@@ -67,6 +67,9 @@ TemplatePage {
                     Layout.fillWidth: true
                     Layout.topMargin: 10
 
+                    enabled: !idHeadSectGivc.checked
+                    opacity: !idHeadSectGivc.checked ? 1 : 0.5
+
                     contentItem: ColumnLayout {
                         anchors.fill: parent
 
@@ -100,11 +103,15 @@ TemplatePage {
                                     id: idRadioBtnTypeSubindex
                                     text: qsTr("subindex")
                                     checked: true
+
+                                    hoverEnabled: !idHeadSectGivc.checked
                                 }
 
                                 CustomRadioBtn {
                                     id: idRadioBtnComplexInd
                                     text: qsTr("complex")
+
+                                    hoverEnabled: !idHeadSectGivc.checked
                                 }
                             }
 
@@ -131,6 +138,8 @@ TemplatePage {
                                         id: idSelectFeatureForInd
                                         currentIndex: 0
                                         model: backend.list_feature
+
+                                        hoverEnabled: !idHeadSectGivc.checked
                                     }
                                 }
 
@@ -150,6 +159,8 @@ TemplatePage {
                                         id: idComBoxChooseAnimal
                                         currentIndex: 0
                                         model: ['sire', 'cow', 'all']
+
+                                        hoverEnabled: !idHeadSectGivc.checked
                                     }
                                 }
 
@@ -169,6 +180,8 @@ TemplatePage {
                                         id: idComBoxTypeEstMethod
                                         currentIndex: 0
                                         model: ['blup', 'gblup']
+
+                                        hoverEnabled: !idHeadSectGivc.checked
                                     }
                                 }
 
@@ -182,7 +195,7 @@ TemplatePage {
                                     id: idCheckBoxDivData
                                     nameChb: qsTr("Divide data.")
 
-                                    hoverEnabled: idComBoxChooseAnimal.currentIndex === 2 ? true : false
+                                    hoverEnabled: !idHeadSectGivc.checked ? idComBoxChooseAnimal.currentIndex === 2 ? true : false : false
                                     enabled: idComBoxChooseAnimal.currentIndex === 2 ? true : false
                                     opacity: idComBoxChooseAnimal.currentIndex === 2 ? 1 : 0.5
 
@@ -192,9 +205,12 @@ TemplatePage {
                                         textLbl: qsTr("Dividing these results into fathers and daughters reports.")
 
                                         visible: {
-                                            if (disableTT) {
-                                                return idComBoxChooseAnimal.currentIndex === 2 ? idCheckBoxDivData.hovered : false
+                                            if (!idHeadSectGivc.checked) {
+                                                if (disableTT) {
+                                                    return idComBoxChooseAnimal.currentIndex === 2 ? idCheckBoxDivData.hovered : false
+                                                }
                                             }
+
                                             return false
                                         }
 
@@ -215,6 +231,8 @@ TemplatePage {
                                         opacity: idRadioBtnTypeSubindex.checked ? 1 : 0.5
 
                                         nameChb: qsTr("Parallel computing")
+
+                                        hoverEnabled: !idHeadSectGivc.checked
                                     }
 
                                     contentData: RowLayout {
@@ -244,7 +262,7 @@ TemplatePage {
                                                 top: 100
                                             }
 
-                                            hoverEnabled: idCheckBoxParallelInd.checked
+                                            hoverEnabled: !idHeadSectGivc.checked ? idCheckBoxParallelInd.checked : false
                                         }
                                         Item { Layout.fillWidth: true }
                                     }
@@ -256,9 +274,9 @@ TemplatePage {
                                     id: idCheckBoxPrivDisOpt
                                     nameChb: qsTr("Disabled optimal value")
 
-                                    hoverEnabled: idSelectFeatureForInd.displayText === "conform"
-                                    enabled: idSelectFeatureForInd.displayText === "conform"
-                                    opacity: idSelectFeatureForInd.displayText === "conform" ? 1 : 0.3
+                                    hoverEnabled: !idHeadSectGivc.checked ? idSelectFeatureForInd.displayText === "conform" : false
+                                    enabled: idRadioBtnTypeSubindex.checked ? idSelectFeatureForInd.displayText === "conform" : false
+                                    opacity: idRadioBtnTypeSubindex.checked ? idSelectFeatureForInd.displayText === "conform" ? 1 : 0.3 : 0.3
 
                                     CustomTooltip {
                                         id: idHintPrivDisOpt
@@ -266,9 +284,12 @@ TemplatePage {
                                         textLbl: qsTr("The function cancels the transformation of data to the optimal value.")
 
                                         visible: {
-                                            if (disableTT) {
-                                                return idSelectFeatureForInd.displayText === "conform" ? idCheckBoxPrivDisOpt.hovered : false
+                                            if (!idHeadSectGivc.checked) { // idRadioBtnTypeSubindex.checked
+                                                if (disableTT) {
+                                                    return idSelectFeatureForInd.displayText === "conform" ? idCheckBoxPrivDisOpt.hovered : false
+                                                }
                                             }
+
                                             return false
                                         }
 

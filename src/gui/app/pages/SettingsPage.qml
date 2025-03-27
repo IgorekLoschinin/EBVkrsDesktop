@@ -8,7 +8,7 @@ TemplatePage {
     id: idPageSettings
     urlPage: qsTr("Settings")
 
-    property bool changeFlag: false
+    property bool changeFlag: false  // Flag for tracking changes in the confirmation settings
 
     sendForm: {
         'id': 'settings',
