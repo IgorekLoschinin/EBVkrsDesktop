@@ -143,4 +143,4 @@ class ModelHandler(QObject):
 
 			return
 
-		# self._timer.setInterval(self._timer.interval() + 500)
+		self._timer.setInterval(self._timer.interval() + 500)
