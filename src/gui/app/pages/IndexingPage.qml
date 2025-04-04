@@ -224,6 +224,7 @@ TemplatePage {
                                     Layout.bottomMargin: 10
 
                                     enabled: idRadioBtnTypeSubindex.checked
+                                    opacity: idRadioBtnTypeSubindex.checked ? 1 : 0.5
 
                                     label: CustomCheckbox {
                                         id: idCheckBoxParallelInd
@@ -232,7 +233,7 @@ TemplatePage {
 
                                         nameChb: qsTr("Parallel computing")
 
-                                        hoverEnabled: !idHeadSectGivc.checked
+                                        hoverEnabled: !idHeadSectGivc.checked ? idRadioBtnComplexInd.checked ? false : true : false
                                     }
 
                                     contentData: RowLayout {
@@ -240,7 +241,7 @@ TemplatePage {
                                         anchors.leftMargin: 30
 
                                         enabled: idCheckBoxParallelInd.checked
-                                        opacity: idCheckBoxParallelInd.checked ? 1 : 0.3
+                                        opacity: idCheckBoxParallelInd.checked ? 1 : 0.5
 
                                         Label {
                                             Layout.rightMargin: 15
@@ -262,8 +263,19 @@ TemplatePage {
                                                 top: 100
                                             }
 
-                                            hoverEnabled: !idHeadSectGivc.checked ? idCheckBoxParallelInd.checked : false
+                                            hoverEnabled: {
+                                                if (!idHeadSectGivc.checked) {
+                                                    if (idRadioBtnComplexInd.checked) {
+                                                        return !idRadioBtnComplexInd.checked
+                                                    }
+
+                                                    return idCheckBoxParallelInd.checked
+                                                }
+
+                                                return false
+                                            }
                                         }
+
                                         Item { Layout.fillWidth: true }
                                     }
 
