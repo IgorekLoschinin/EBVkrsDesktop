@@ -52,7 +52,12 @@ Control {
         currentModel = modelsFtVar[curInd]
     }
 
-    function createTable(objModel, lstFieldName) {
+    function initTable(objModel, lstFieldName) {
+
+        if (objModel.count > 0) {
+            return objModel
+        }
+
         lstFieldName.forEach(
             (elem) => objModel.append({
                 name: elem,
@@ -60,8 +65,6 @@ Control {
                 varG: "0"
             })
         )
-
-        tabInVar.defVariance = getVariance(objModel);
 
         return objModel
     }
