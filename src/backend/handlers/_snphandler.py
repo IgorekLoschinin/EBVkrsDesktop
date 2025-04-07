@@ -49,6 +49,9 @@ class SnpHandler(IHandler):
 	def processing(self) -> None:
 		""" Processing a request for SNP data processing. """
 
+		if self._settings is None:
+			raise ValueError("Settings not initialized!")
+
 		snp_args = {}
 
 		if self._settings.snp.checked:

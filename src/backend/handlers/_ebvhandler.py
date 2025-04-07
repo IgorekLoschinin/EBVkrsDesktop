@@ -60,6 +60,9 @@ class EbvHandler(IHandler):
 		- If the method is "gblup", the ``GEstimator`` class is used.
 		"""
 
+		if self._settings is None:
+			raise ValueError("Settings not initialized!")
+
 		match self._settings.estmethod:
 			case "blup":
 				ebv = Estimator(

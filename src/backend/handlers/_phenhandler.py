@@ -50,6 +50,9 @@ class PhenoHandler(IHandler):
 	def processing(self) -> None:
 		""" Processing a request for Phenotype data processing """
 
+		if self._settings is None:
+			raise ValueError("Settings not initialized!")
+
 		dp_args = {}
 
 		if self._settings.preparation.checked:

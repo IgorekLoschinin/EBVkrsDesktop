@@ -55,6 +55,9 @@ class IndHandler(IHandler):
 	def processing(self) -> None:
 		""" Processing a request for Index data processing """
 
+		if self._settings is None:
+			raise ValueError("Settings not initialized!")
+
 		if not self._settings.gengivc.status:
 			if self._settings.index:
 				ind = IndFeature(
