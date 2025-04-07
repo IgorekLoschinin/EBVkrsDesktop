@@ -185,7 +185,11 @@ class Backend(QObject):
 		:return:
 		"""
 		self.finished_code = code
-		self.finished = True
+
+		if code == 0:
+			self.finished = True
+		else:
+			self.finished = False
 
 	@Slot(dict, str)
 	def save_variance_conf(self, data: dict[str, dict], path_file: str) -> None:
