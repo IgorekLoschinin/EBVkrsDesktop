@@ -14,8 +14,14 @@ TemplatePage {
         'snp': {
             'checked': idSectonSnpProc.checked,
             'refsnpfile': idInputFileSnpRef.inputText.length === 0 ? null : idInputFileSnpRef.inputText,
-            'samplefile': idInputSampleD.inputText.length === 0 ? null : idInputSampleD.inputText,
-            'updatefile': idInputUpdataD.inputText.length === 0 ? null : idInputUpdataD.inputText,
+            'sampleanim': {
+                'checked': idCheckBoxSNPSampleByid.checked,
+                'file': idInputSampleById.inputText.length === 0 ? null : idInputSampleById.inputText,
+            },
+            'updatesnp': {
+                'checked': idCheckBoxSNPUpdateSnp.checked,
+                'file': idInputUpdataD.inputText.length === 0 ? null : idInputUpdataD.inputText,
+            },
         },
         'fr': {
             'checked': idHeadSectProperFR.checked,
@@ -103,35 +109,36 @@ TemplatePage {
                                 hoverTFileHabler: idSectonSnpProc.checked
                             }
 
+                            // Sample animal by id
                             GroupBox {
                                 padding: 0
                                 Layout.fillWidth: true
                                 Layout.bottomMargin: 10
 
                                 label: CustomCheckbox {
-                                    id: idCheckBoxSNPAddProc
+                                    id: idCheckBoxSNPSampleByid
                                     hoverEnabled: idSectonSnpProc.checked
 
-                                    nameChb: qsTr("Additional processing")
+                                    nameChb: qsTr("Sample snp")
                                 }
 
                                 contentData: ColumnLayout {
                                     anchors.fill: parent
                                     anchors.leftMargin: 30
 
-                                    enabled: idCheckBoxSNPAddProc.checked
-                                    opacity: idCheckBoxSNPAddProc.checked ? 1 : 0.6
+                                    enabled: idCheckBoxSNPSampleByid.checked
+                                    opacity: idCheckBoxSNPSampleByid.checked ? 1 : 0.6
 
                                     InputGroupFile {
-                                        id: idInputSampleD
+                                        id: idInputSampleById
                                         Layout.fillWidth: true
 
-                                        nameField: qsTr("Sample animals by id:")
+                                        nameField: qsTr("File animal id:")
 
-                                        enabled: idCheckBoxSNPAddProc.checked
+                                        enabled: idCheckBoxSNPSampleByid.checked
                                         hoverTFileHabler: {
                                             if (idSectonSnpProc.checked) {
-                                                if (idCheckBoxSNPAddProc.checked) {
+                                                if (idCheckBoxSNPSampleByid.checked) {
                                                     return true
                                                 } else {
                                                     return false
@@ -140,18 +147,60 @@ TemplatePage {
 
                                             return false
                                         }
+
+                                        CustomTooltip {
+                                            id: idTTInputSamById
+                                            object: idInputSampleById
+                                            textLbl: qsTr("File with animal numbers (ID00001412_MA) to be sampled from snp_ref.")
+
+                                            visible: {
+                                                if (idSectonSnpProc.checked) {
+                                                    if (disableTT) {
+                                                        return idCheckBoxSNPSampleByid.checked ? idInputSampleById.hovered : false
+                                                    }
+                                                }
+
+                                                return false
+                                            }
+
+                                            x: 30
+                                        }
                                     }
+                                }
+
+                                background: null
+                            }
+
+                            // Update animal snp
+                            GroupBox {
+                                padding: 0
+                                Layout.fillWidth: true
+                                Layout.bottomMargin: 10
+
+                                label: CustomCheckbox {
+                                    id: idCheckBoxSNPUpdateSnp
+                                    hoverEnabled: idSectonSnpProc.checked
+
+                                    nameChb: qsTr("Update snp")
+                                }
+
+                                contentData: ColumnLayout {
+                                    anchors.fill: parent
+                                    anchors.leftMargin: 30
+
+                                    enabled: idCheckBoxSNPUpdateSnp.checked
+                                    opacity: idCheckBoxSNPUpdateSnp.checked ? 1 : 0.6
 
                                     InputGroupFile {
                                         id: idInputUpdataD
                                         Layout.fillWidth: true
 
-                                        nameField: qsTr("Update file snp:")
+                                        nameField: qsTr("File snp:")
 
-                                        enabled: idCheckBoxSNPAddProc.checked
+                                        enabled: idCheckBoxSNPUpdateSnp.checked
                                         hoverTFileHabler: {
                                             if (idSectonSnpProc.checked) {
-                                                if (idCheckBoxSNPAddProc.checked) {
+                                                if (idCheckBoxSNPUpdateSnp.checked) {
                                                     return true
                                                 } else {
                                                     return false
@@ -159,6 +208,24 @@ TemplatePage {
                                             }
 
                                             return false
+                                        }
+
+                                        CustomTooltip {
+                                            id: idTTUpdateSnp
+                                            object: idInputUpdataD
+                                            textLbl: qsTr("Snp file “ID00(_MA)1 0120502” to update snp_ref.")
+
+                                            visible: {
+                                                if (idSectonSnpProc.checked) {
+                                                    if (disableTT) {
+                                                        return idCheckBoxSNPUpdateSnp.checked ? idInputUpdataD.hovered : false
+                                                    }
+                                                }
+
+                                                return false
+                                            }
+
+                                            x: 30
                                         }
                                     }
                                 }

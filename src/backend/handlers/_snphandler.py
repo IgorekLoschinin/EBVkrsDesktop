@@ -57,8 +57,15 @@ class SnpHandler(IHandler):
 		if self._settings.snp.checked:
 			snp_args.update({
 				"snp": self._settings.snp.refsnpfile,
-				"sample": self._settings.snp.samplefile,
-				"update": self._settings.snp.updatefile,
+
+				"sample": None
+				if not self._settings.snp.sampleanim.checked
+				else self._settings.snp.sampleanim.file,
+
+				"update": None
+				if not self._settings.snp.updatesnp.checked
+				else self._settings.snp.updatesnp.file,
+
 				"out": self._out_d
 			})
 
