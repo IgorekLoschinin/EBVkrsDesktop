@@ -20,12 +20,12 @@ from PySide6.QtCore import (
 )
 
 from . import (
-	PhenoModel,
-	SnpModel,
-	EbvModel,
-	IndModel
+	PhenoHandler,
+	SnpHandler,
+	EbvHandler,
+	IndHandler
 )
-from .imodel import IModel
+from .ihandler import IHandler
 from ..libkrs.utils import logger
 
 
@@ -53,7 +53,7 @@ class ModelHandler(QObject):
 		self._data = data
 		self._output_dir = output_dir
 
-		self._model: IModel | None = None
+		self._handler: IHandler | None = None
 
 		self._obj_process = None
 		self._timer = None
@@ -80,25 +80,25 @@ class ModelHandler(QObject):
 		try:
 			match self._data.get("id"):
 				case "procpheno":
-					self._model = PhenoModel(
+					self._handler = PhenoHandler(
 						req_data=self._data,
 						output_dir=self._output_dir
 					)
 
 				case "procsnp":
-					self._model = SnpModel(
+					self._handler = SnpHandler(
 						req_data=self._data,
 						output_dir=self._output_dir
 					)
 
 				case "ebv":
-					self._model = EbvModel(
+					self._handler = EbvHandler(
 						req_data=self._data,
 						output_dir=self._output_dir
 					)
 
 				case "index":
-					self._model = IndModel(
+					self._handler = IndHandler(
 						req_data=self._data,
 						output_dir=self._output_dir
 					)
@@ -106,7 +106,7 @@ class ModelHandler(QObject):
 				case None:
 					return None
 
-			self._obj_process = Process(target=self._model.processing)
+			self._obj_process = Process(target=self._handler.processing)
 			self._obj_process.start()
 
 			self._timer = QTimer(self)
@@ -143,4 +143,4 @@ class ModelHandler(QObject):
 
 			return
 
-		# self._timer.setInterval(self._timer.interval() + 500)
+		self._timer.setInterval(self._timer.interval() + 500)

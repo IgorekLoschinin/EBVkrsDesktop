@@ -13,11 +13,21 @@ from pydantic import BaseModel
 
 
 # -- Description of the configuration settings for processing the SNP --
+class SampleSnpAnim(BaseModel):
+	checked: bool
+	file: None | str
+
+
+class UpdateSnp(BaseModel):
+	checked: bool
+	file: None | str
+
+
 class SnpM(BaseModel):
 	checked: bool
 	refsnpfile: None | str
-	samplefile: None | str
-	updatefile: None | str
+	sampleanim: SampleSnpAnim
+	updatesnp: UpdateSnp
 
 
 class SaveCrFileM(BaseModel):

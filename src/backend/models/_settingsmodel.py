@@ -18,6 +18,7 @@ from ..libkrs.utils import logger
 
 @logger(name="SettingsModel")
 class SettingsModel(object):
+	"""  """
 
 	def __init__(self) -> None:
 		self._settings = SettingsSchema()

@@ -95,18 +95,25 @@ TemplatePage {
                                     CustomComboBox {
                                         id: idFeatureEbv
                                         currentIndex: 0
-                                        displayText: currentText
+                                        // displayText: currentText
                                         model: backend.list_feature
 
                                         onCurrentTextChanged: {
-                                            if (tableInVariance.modelsFtVar[currentIndex].count > 0) {
-                                                tableInVariance.reloadTable(currentIndex)
+                                            if (idSelectTypeCalVar.displayText === "conf") {
+
+                                                tableInVariance.currentModel = tableInVariance.initTable(
+                                                    tableInVariance.modelsFtVar[currentIndex],
+                                                    backend.get_fields_table[idFeatureEbv.currentText]
+                                                )
+
                                                 return
                                             }
 
-                                            tableInVariance.currentModel = tableInVariance.createTable(
-                                                tableInVariance.modelsFtVar[currentIndex],
-                                                backend.get_fields_table[idFeatureEbv.currentText]
+                                            tableInVariance.defVariance = tableInVariance.getVariance(
+                                                tableInVariance.initTable(
+                                                    tableInVariance.modelsFtVar[currentIndex],
+                                                    backend.get_fields_table[idFeatureEbv.currentText]
+                                                )
                                             )
                                         }
                                     }
@@ -130,7 +137,6 @@ TemplatePage {
                                         model: ['blup', 'gblup']
                                     }
                                 }
-
                             }
 
                             GroupBox {
@@ -193,6 +199,12 @@ TemplatePage {
                                 CustomComboBox {
                                     id: idSelectTypeCalVar
                                     model: ["all", "conf"]
+
+                                    onCurrentTextChanged: {
+                                        if (idSelectTypeCalVar.currentText === "conf") {
+                                            tableInVariance.reloadTable(idFeatureEbv.currentIndex)
+                                        }
+                                    }
                                 }
                             }
 
@@ -205,7 +217,6 @@ TemplatePage {
 
                                 visible: idSelectTypeCalVar.displayText === "conf" ? true : false
                             }
-
                         }
                     }
 

@@ -7,14 +7,14 @@
 # of this license document, but changing it is not allowed.
 
 __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
-__all__ = ('SnpModel', )
+__all__ = (
+    'EbvHandler',
+    'IndHandler',
+    'PhenoHandler',
+    'SnpHandler',
+)
 
-
-from PySide6.QtCore import QObject
-
-from ..libkrs.utils import logger
-
-
-@logger(name="SnpModel")
-class SnpModel(QObject):
-	"""  """
+from ._ebvhandler import EbvHandler
+from ._indhandler import IndHandler
+from ._phenhandler import PhenoHandler
+from ._snphandler import SnpHandler

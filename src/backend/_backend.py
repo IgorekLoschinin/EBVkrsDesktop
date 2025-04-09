@@ -34,12 +34,14 @@ from .libkrs.utils import (
 	to_json
 )
 from .models import SettingsModel
-from .models.modelhandler import ModelHandler
+from .handlers.modelhandler import ModelHandler
 
 
 @logger(name="Backend")
 class Backend(QObject):
+	"""  """
 
+	getLstFeature = Signal(list)
 	getfieldsTable = Signal(dict)
 	enablePrgW = Signal(bool)
 	finishedCodeSig = Signal(int)
@@ -79,12 +81,15 @@ class Backend(QObject):
 				self.common_namespace.exists()):
 			self.common_namespace.mkdir()
 
-	@Property(list, constant=True)
+	@Property(list, notify=getLstFeature)
 	def list_feature(self) -> list[str]:
+		""" Возвраащет список команд - выбор названий признаков """
 		return CMD_FEATURE
 
 	@Property(dict, notify=getfieldsTable)
 	def get_fields_table(self) -> dict[str, list[str]]:
+		""" Возвраащет структуру где ключ - название признака, значение -
+		список полей для построения таблицы. EBVpage """
 		return dict(zip(
 			CMD_FEATURE,
 			[
@@ -102,6 +107,7 @@ class Backend(QObject):
 
 	@enable_prg_win.setter
 	def enable_prg_win(self, value: bool) -> None:
+		""" Флаг для управления прогресс баром. """
 		if self._enable_prg_win != value:
 			self._enable_prg_win = value
 
@@ -125,7 +131,7 @@ class Backend(QObject):
 
 	@Property(int, notify=finishedSig)
 	def finished(self) -> int | None:
-		""" Возвращает логическое значения заверщения процесса. """
+		""" Возвращает логическое значения заверщения программы - отключает прогресс бар. """
 		return self._finished
 
 	@finished.setter
@@ -179,14 +185,30 @@ class Backend(QObject):
 		:return:
 		"""
 		self.finished_code = code
-		self.finished = True
+
+		if code == 0:
+			self.finished = True
+		else:
+			self.finished = False
 
 	@Slot(dict, str)
 	def save_variance_conf(self, data: dict[str, dict], path_file: str) -> None:
+		""" После заполение варианс запускаетя метод для сохранеие введенных
+		данных в файл.
+
+		:param data: Данные для сохранения.
+		:param path_file: Путь к файлу для сохрания данных.
+		:return: None
+		"""
 		to_json(data, path_file)
 
 	@Slot(str)
 	def load_variance_conf(self, path_file: str) -> None:
+		""" Метод для загрузки варианс из файла.
+
+		:param path_file: Путь к файлу конфигурации варианс.
+		:return: None
+		"""
 		data = from_json(path_file)
 
 		self.uploadVar.emit(data)
