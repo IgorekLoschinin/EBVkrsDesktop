@@ -141,6 +141,24 @@ TemplatePage {
 
                                             return false
                                         }
+
+                                        CustomTooltip {
+                                            id: idTTUpdateToDB
+                                            object: idInputUpdateTo
+                                            textLbl: qsTr("Directory with new files that will be updated.")
+
+                                            visible: {
+                                                if (idSHeadSectAddProp.checked) {
+                                                    if (disableTT) {
+                                                        return idCheckBoxUpdataDB.checked ? idInputUpdateTo.hovered : false
+                                                    }
+                                                }
+
+                                                return false
+                                            }
+
+                                            x: 30
+                                        }
                                     }
 
                                     InputGroupFolder {
@@ -160,6 +178,24 @@ TemplatePage {
                                             }
 
                                             return false
+                                        }
+
+                                        CustomTooltip {
+                                            id: idTTUpdateFromDB
+                                            object: idInputUpdateFrom
+                                            textLbl: qsTr("Directory with old data - last used for estimation.")
+
+                                            visible: {
+                                                if (idSHeadSectAddProp.checked) {
+                                                    if (disableTT) {
+                                                        return idCheckBoxUpdataDB.checked ? idInputUpdateFrom.hovered : false
+                                                    }
+                                                }
+
+                                                return false
+                                            }
+
+                                            x: 30
                                         }
                                     }
 
