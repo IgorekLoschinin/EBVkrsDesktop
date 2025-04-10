@@ -217,6 +217,49 @@ TemplatePage {
 
                                 visible: idSelectTypeCalVar.displayText === "conf" ? true : false
                             }
+
+                            // Generate file conf_var
+                            RowLayout {
+                                spacing: 5
+                                Layout.fillWidth: true
+
+                                Text {
+                                    Layout.rightMargin: 15
+
+                                    color: txtSection
+
+                                    text: qsTr("Create config var ")
+                                    font.pixelSize: sizeTextInSect
+                                    font.family: "Segoe UI"
+                                    clip: true
+                                    wrapMode: Text.WordWrap
+                                }
+
+                                ButtonFileOpen {
+                                    id: idBtnFileUpload
+                                    implicitWidth: 80
+
+                                    sizeImgWH: 25
+                                    sourceImg: "qrc:/icons/upload.svg"
+                                    switchBgColor: true
+
+                                    // onClicked: idLoadFileConf.open()
+
+                                    // FileDialog {
+                                    //     id: idLoadFileConf
+                                    //     fileMode: FileDialog.OpenFile
+                                    //     currentFolder: StandardPaths.standardLocations(StandardPaths.DocumentsLocation)[0]
+                                    //     onAccepted: backend.load_variance_conf(rePath(selectedFile.toString()))
+                                    // }
+
+                                    CustomTooltip {
+                                        object: idBtnFileUpload
+                                        textLbl: qsTr("Load the variance from file.")
+
+                                        visible: disableTT ? idBtnFileUpload.hovered : false
+                                    }
+                                }
+                            }
                         }
                     }
 
