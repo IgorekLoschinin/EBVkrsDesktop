@@ -5,7 +5,7 @@ import "controls"
 
 
 TemplatePage {
-    id: idPageProcessing
+    id: idPageEstimation
 
     urlPage: qsTr("Estimate breeding value")
     sendForm: {
@@ -23,6 +23,11 @@ TemplatePage {
         ProgressWindow {
             nameProcess: qsTr("Calculation of breeding value estimates has started!")
         }
+    }
+
+    MenuGenerateCfgVar {
+        id: idMenuGehCfgVar
+        anchors.centerIn: parent
     }
 
     contentData: ScrollView {
@@ -228,7 +233,7 @@ TemplatePage {
 
                                     color: txtSection
 
-                                    text: qsTr("Create config var ")
+                                    text: qsTr("Create config var: ")
                                     font.pixelSize: sizeTextInSect
                                     font.family: "Segoe UI"
                                     clip: true
@@ -243,7 +248,7 @@ TemplatePage {
                                     sourceImg: "qrc:/icons/upload.svg"
                                     switchBgColor: true
 
-                                    // onClicked: idLoadFileConf.open()
+                                    onClicked: idMenuGehCfgVar.open()
 
                                     // FileDialog {
                                     //     id: idLoadFileConf

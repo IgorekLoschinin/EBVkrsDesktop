@@ -5,7 +5,7 @@ import "controls"
 
 
 TemplatePage {
-    id: idPageProcessing
+    id: idPageIndex
 
     urlPage: qsTr("Index estimate of breeding value")
     sendForm: {
