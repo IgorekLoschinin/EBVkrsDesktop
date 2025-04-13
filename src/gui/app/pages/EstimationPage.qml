@@ -1,7 +1,9 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+
 import "controls"
+import "../components"
 
 
 TemplatePage {
@@ -23,11 +25,6 @@ TemplatePage {
         ProgressWindow {
             nameProcess: qsTr("Calculation of breeding value estimates has started!")
         }
-    }
-
-    MenuGenerateCfgVar {
-        id: idMenuGehCfgVar
-        anchors.centerIn: parent
     }
 
     contentData: ScrollView {
@@ -192,22 +189,73 @@ TemplatePage {
                             RowLayout {
                                 Layout.fillWidth: true
 
-                                Text {
-                                    Layout.rightMargin: 15
+                                RowLayout {
+                                    Layout.fillWidth: true
+                                    Layout.rightMargin: 40
 
-                                    text: qsTr("Variance calculation method:")
-                                    font.family: "Segoe UI"
-                                    font.pixelSize: sizeTextInSect
-                                    color: txtSection
+                                    Text {
+                                        Layout.rightMargin: 5
+
+                                        text: qsTr("Variance calculation method:")
+                                        font.family: "Segoe UI"
+                                        font.pixelSize: sizeTextInSect
+                                        color: txtSection
+                                    }
+
+                                    CustomComboBox {
+                                        id: idSelectTypeCalVar
+                                        model: ["all", "conf"]
+
+                                        onCurrentTextChanged: {
+                                            if (idSelectTypeCalVar.currentText === "conf") {
+                                                tableInVariance.reloadTable(idFeatureEbv.currentIndex)
+                                            }
+                                        }
+                                    }
                                 }
 
-                                CustomComboBox {
-                                    id: idSelectTypeCalVar
-                                    model: ["all", "conf"]
 
-                                    onCurrentTextChanged: {
-                                        if (idSelectTypeCalVar.currentText === "conf") {
-                                            tableInVariance.reloadTable(idFeatureEbv.currentIndex)
+                                // Generate file conf_var
+                                RowLayout {
+                                    spacing: 5
+                                    Layout.fillWidth: true
+
+                                    MenuGenerateCfgVar { id: idMenuGehCfgVar }
+
+                                    Text {
+                                        Layout.rightMargin: 5
+
+                                        color: txtSection
+
+                                        text: qsTr("Create config var: ")
+                                        font.pixelSize: sizeTextInSect
+                                        font.family: "Segoe UI"
+                                        clip: true
+                                        wrapMode: Text.WordWrap
+                                    }
+
+                                    ButtonFileOpen {
+                                        id: idBtnFileUpload
+                                        implicitWidth: 80
+
+                                        sizeImgWH: 25
+                                        sourceImg: "qrc:/icons/upload.svg"
+                                        switchBgColor: true
+
+                                        onClicked: idMenuGehCfgVar.open()
+
+                                        // FileDialog {
+                                        //     id: idLoadFileConf
+                                        //     fileMode: FileDialog.OpenFile
+                                        //     currentFolder: StandardPaths.standardLocations(StandardPaths.DocumentsLocation)[0]
+                                        //     onAccepted: backend.load_variance_conf(rePath(selectedFile.toString()))
+                                        // }
+
+                                        CustomTooltip {
+                                            object: idBtnFileUpload
+                                            textLbl: qsTr("Load the variance from file.")
+
+                                            visible: disableTT ? idBtnFileUpload.hovered : false
                                         }
                                     }
                                 }
@@ -221,49 +269,6 @@ TemplatePage {
                                 Layout.topMargin: 15
 
                                 visible: idSelectTypeCalVar.displayText === "conf" ? true : false
-                            }
-
-                            // Generate file conf_var
-                            RowLayout {
-                                spacing: 5
-                                Layout.fillWidth: true
-
-                                Text {
-                                    Layout.rightMargin: 15
-
-                                    color: txtSection
-
-                                    text: qsTr("Create config var: ")
-                                    font.pixelSize: sizeTextInSect
-                                    font.family: "Segoe UI"
-                                    clip: true
-                                    wrapMode: Text.WordWrap
-                                }
-
-                                ButtonFileOpen {
-                                    id: idBtnFileUpload
-                                    implicitWidth: 80
-
-                                    sizeImgWH: 25
-                                    sourceImg: "qrc:/icons/upload.svg"
-                                    switchBgColor: true
-
-                                    onClicked: idMenuGehCfgVar.open()
-
-                                    // FileDialog {
-                                    //     id: idLoadFileConf
-                                    //     fileMode: FileDialog.OpenFile
-                                    //     currentFolder: StandardPaths.standardLocations(StandardPaths.DocumentsLocation)[0]
-                                    //     onAccepted: backend.load_variance_conf(rePath(selectedFile.toString()))
-                                    // }
-
-                                    CustomTooltip {
-                                        object: idBtnFileUpload
-                                        textLbl: qsTr("Load the variance from file.")
-
-                                        visible: disableTT ? idBtnFileUpload.hovered : false
-                                    }
-                                }
                             }
                         }
                     }
