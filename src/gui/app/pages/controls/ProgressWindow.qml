@@ -13,25 +13,64 @@ Popup {
     readonly property color colorMouseOver: "#8792A8"
     readonly property color colorPressed: "#4A515E"
 
+    anchors.centerIn: Overlay.overlay
+
     width: 350
     height: 200
 
     dim: backend.enable_prg_win
     visible: backend.enable_prg_win
 
-    x: appWindow.width / 2 - width - 2
-    y: appWindow.height / 2 - height - 2
-
     closePolicy: Popup.NoAutoClose
 
     Overlay.modeless: Rectangle {
-        color: "#aacfdbe7"
+        color: "transparent"
         radius: bgRadius
 
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true
             onPressed: { appWindow.startSystemMove() }
+        }
+
+        ColorAnimation on color {
+            to: "#aacfdbe7"
+            duration: 300
+            easing.type: Easing.InOutQuad
+            easing.amplitude: 1.0;
+            easing.period: 1
+        }
+    }
+
+    enter: Transition {
+        NumberAnimation {
+            property: "scale"
+            from: 0.8
+            to: 1.0
+            duration: 300
+            easing.type: Easing.InOutQuad
+        }
+        NumberAnimation {
+            property: "opacity"
+            from: 0.0
+            to: 1.0
+            duration: 200
+        }
+    }
+
+    exit: Transition {
+        NumberAnimation {
+            property: "scale"
+            from: 1.0
+            to: 0.8
+            duration: 300
+            easing.type: Easing.InOutQuad
+        }
+        NumberAnimation {
+            property: "opacity"
+            from: 1.0
+            to: 0.0
+            duration: 200
         }
     }
 

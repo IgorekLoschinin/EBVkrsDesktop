@@ -8,7 +8,7 @@ import "components"
 
 Popup {
     id: idLogingApp
-    anchors.centerIn: parent
+    anchors.centerIn: Overlay.overlay
 
     width: 380
     height: 580    
