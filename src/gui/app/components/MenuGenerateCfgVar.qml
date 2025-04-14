@@ -1,6 +1,8 @@
+import QtCore
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick.Dialogs
 
 import "../pages/controls"
 
@@ -8,21 +10,19 @@ import "../pages/controls"
 Popup {
     id: modalWindGenCfgVar
 
-    property string nameProcess: ""
-    property string textMsgProgress: ""
+    readonly property color bgColorWindow: "#0A1832"
 
-    readonly property color colorDef: "transparent"
-    readonly property color colorMouseOver: "#8792A8"
-    readonly property color colorPressed: "#4A515E"
+    readonly property color btnColorDef: "#5d6575"
+    readonly property color btnColorMouseOver: "#8792A8"
+    readonly property color btnColorPressed: "#4A515E"
 
     anchors.centerIn: Overlay.overlay
 
-    width: 480
+    width: 450
     height: 240
 
     dim: true
     visible: false
-    // padding: 0
 
     closePolicy: Popup.NoAutoClose
 
@@ -87,13 +87,11 @@ Popup {
             id: lblTitle
 
             Layout.fillWidth: true
-            // // Layout.leftMargin: 8
-            // // Layout.rightMargin: 8
 
             color: "#ffffff"
             text: qsTr("Generate config")
             font.family: "Segoe UI"
-            font.pointSize: 15
+            font.pointSize: 13
             font.bold: true
             wrapMode: Text.WordWrap
 
@@ -102,36 +100,33 @@ Popup {
         }
 
         RowLayout {
-            // spacing: 0
             Layout.fillWidth: true
             Layout.fillHeight: true
-            // Layout.leftMargin: 8
             Layout.bottomMargin: 8
 
+            // Display
             Control {
                 id: idDisplay
-                // padding: 0
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
                 contentItem: ColumnLayout {
-                    // spacing: 0
-
                     Layout.fillWidth: true
                     Layout.fillHeight: true
+
+                    Layout.alignment: Qt.AlignCenter
 
                     Label {
                         id: lblMethodGenerate
 
                         Layout.fillWidth: true
-                        // Layout.leftMargin: 8
-                        // Layout.rightMargin: 8
+                        Layout.alignment: Qt.AlignBottom
 
                         color: "#ffffff"
                         text: qsTr("From is file:")
                         font.family: "Segoe UI"
-                        font.pointSize: 13
+                        font.pointSize: 12
                         font.bold: true
                         wrapMode: Text.WordWrap
 
@@ -143,14 +138,10 @@ Popup {
                         id: lblBody
 
                         Layout.fillWidth: true
-                        // Layout.leftMargin: 8
-                        // Layout.rightMargin: 8
-
                         color: "#ffffff"
                         text: qsTr("report/blup/STAT_ConformationIndex_COWS.xlsx")
                         font.family: "Segoe UI"
                         font.pointSize: 12
-                        // font.bold: true
                         wrapMode: Text.WordWrap
 
                         horizontalAlignment: Qt.AlignHCenter
@@ -161,13 +152,12 @@ Popup {
                         id: lblInfoProgress
 
                         Layout.fillWidth: true
-                        // Layout.leftMargin: 8
-                        // Layout.rightMargin: 8
+                        Layout.alignment: Qt.AlignTop
 
                         color: "#ffffff"
                         text: qsTr("processing...")
                         font.family: "Segoe UI"
-                        font.pointSize: 13
+                        font.pointSize: 12
                         font.bold: true
                         wrapMode: Text.WordWrap
 
@@ -177,59 +167,52 @@ Popup {
                 }
 
                 background: Rectangle {
-                    color: "plum"
+                    color: "#498AF5"
                     radius: bgRadius
                 }
 
             }
 
+            // ButtonPanel
             Control {
                 id: idBtnPanel
                 padding: 0
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                // Layout.leftMargin: 8
-                // Layout.rightMargin: 8
 
                 contentItem: ColumnLayout {
                     spacing: 0
-                    // Layout.fillWidth: true
-                    // Layout.fillHeight: true
-
-                    // Item { Layout.fillWidth: true }
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
 
                     CustomBtn {
                         id: idBtnFromFile
-                        Layout.alignment: Qt.AlignBottom
 
                         Layout.fillWidth: true
+                        Layout.alignment: Qt.AlignBottom
 
-                        // Layout.bottomMargin: 6
+                        sizeImgWH: 25
+                        srcImg: "qrc:/cfgvar/icons/icBtnGenCfgVar/file.svg"
 
-                        // hoverEnabled: backend.finished
-                        // enabled: backend.finished
-                        // opacity: backend.finished ? 1 : 0.5
+                        onClicked: idOpenFromFile.open()
 
-                        dlgColorDef: "#5d6575"
-                        dlgColorMouseOver: "#8792A8"
-                        dlgColorPressed: "#4A515E"
-
-                        contentItem: Text {
-                            text: qsTr("from file")
-
-                            font.family: "Segoe UI"
-                            font.pixelSize: 16
-
-                            color: "#ffffff"
-
-                            verticalAlignment: Text.AlignVCenter
-                            horizontalAlignment: Text.AlignHCenter
+                        FileDialog {
+                            id: idOpenFromFile
+                            fileMode: FileDialog.OpenFile
+                            currentFile: StandardPaths.standardLocations(StandardPaths.LocateFile)[0]
+                            // onAccepted: backend.save_variance_conf(
+                            //     tabInVar.getVariance(tabInVar.currentModel),
+                            //     rePath(selectedFile.toString())
+                            // )
                         }
 
-                        // background.implicitHeight: 40
+                        CustomTooltip {
+                            object: idBtnFromFile
+                            textLbl: qsTr("From file.")
 
-                        onClicked: modalWindGenCfgVar.close()
+                            visible: disableTT ? idBtnFromFile.hovered : false
+                        }
                     }
 
                     CustomBtn {
@@ -237,75 +220,51 @@ Popup {
 
                         Layout.fillWidth: true
 
-                        // Layout.bottomMargin: 6
+                        sizeImgWH: 25
+                        srcImg: "qrc:/cfgvar/icons/icBtnGenCfgVar/open-folder.svg"
 
-                        // hoverEnabled: backend.finished
-                        // enabled: backend.finished
-                        // opacity: backend.finished ? 1 : 0.5
+                        onClicked: idOpenFromDir.open()
 
-                        dlgColorDef: "#5d6575"
-                        dlgColorMouseOver: "#8792A8"
-                        dlgColorPressed: "#4A515E"
-
-                        contentItem: Text {
-                            text: qsTr("from dir")
-
-                            font.family: "Segoe UI"
-                            font.pixelSize: 16
-
-                            color: "#ffffff"
-
-                            verticalAlignment: Text.AlignVCenter
-                            horizontalAlignment: Text.AlignHCenter
+                        FileDialog {
+                            id: idOpenFromDir
+                            currentFolder: StandardPaths.standardLocations(StandardPaths.LocateDirectory)[0]
+                            // onAccepted: backend.save_variance_conf(
+                            //     tabInVar.getVariance(tabInVar.currentModel),
+                            //     rePath(selectedFile.toString())
+                            // )
                         }
 
-                        // background.implicitWidth: 80
+                        CustomTooltip {
+                            object: idBtnFromDir
+                            textLbl: qsTr("From dir.")
 
-                        onClicked: modalWindGenCfgVar.close()
+                            visible: disableTT ? idBtnFromDir.hovered : false
+                        }
                     }
 
                     CustomBtn {
-                        id: idBtnCreate
-                        Layout.alignment: Qt.AlignTop
+                        id: idBtnCreateFileCfg
 
                         Layout.fillWidth: true
+                        Layout.topMargin: 15
+                        Layout.alignment: Qt.AlignTop
 
-                        // Layout.bottomMargin: 6
-
-                        // hoverEnabled: backend.finished
-                        // enabled: backend.finished
-                        // opacity: backend.finished ? 1 : 0.5
-
-                        dlgColorDef: "#5d6575"
-                        dlgColorMouseOver: "#8792A8"
-                        dlgColorPressed: "#4A515E"
-
-                        contentItem: Text {
-                            text: qsTr("Create")
-
-                            font.family: "Segoe UI"
-                            font.pixelSize: 16
-
-                            color: "#ffffff"
-
-                            verticalAlignment: Text.AlignVCenter
-                            horizontalAlignment: Text.AlignHCenter
-                        }
-
-                        // background.implicitWidth: 80
+                        sizeImgWH: 25
+                        srcImg: "qrc:/cfgvar/icons/icBtnGenCfgVar/create.svg"
 
                         onClicked: modalWindGenCfgVar.close()
+
+                        CustomTooltip {
+                            object: idBtnCreateFileCfg
+                            textLbl: qsTr("Create a config file.")
+
+                            visible: disableTT ? idBtnCreateFileCfg.hovered : false
+                        }
+
+                        background.implicitWidth: 50
                     }
-
-                    // Item { Layout.fillWidth: true }
                 }
-
-                // background: Rectangle {
-                //     color: "yellow"
-                //     radius: bgRadius
-                // }
             }
-
         }
 
         RowLayout {
@@ -326,9 +285,9 @@ Popup {
                 // enabled: backend.finished
                 // opacity: backend.finished ? 1 : 0.5
 
-                dlgColorDef: "#5d6575"
-                dlgColorMouseOver: "#8792A8"
-                dlgColorPressed: "#4A515E"
+                dlgColorDef: btnColorDef
+                dlgColorMouseOver: btnColorMouseOver
+                dlgColorPressed: btnColorPressed
 
                 contentItem: Text {
                     text: qsTr("OK")
@@ -343,6 +302,7 @@ Popup {
                 }
 
                 background.implicitWidth: 80
+                background.implicitHeight: 33
 
                 onClicked: modalWindGenCfgVar.close()
             }
@@ -352,40 +312,37 @@ Popup {
 
                 Layout.bottomMargin: 6
 
-                // hoverEnabled: backend.finished
-                // enabled: backend.finished
-                // opacity: backend.finished ? 1 : 0.5
+                sizeImgWH: 25
+                srcImg: "qrc:/icons/save.svg"
 
-                dlgColorDef: "#5d6575"
-                dlgColorMouseOver: "#8792A8"
-                dlgColorPressed: "#4A515E"
+                onClicked: idSaveFileConf.open()
 
-                contentItem: Text {
-                    text: qsTr("Save")
+                FileDialog {
+                    id: idSaveFileConf
+                    fileMode: FileDialog.SaveFile
+                    currentFolder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
+                    // onAccepted: backend.save_variance_conf(
+                    //     tabInVar.getVariance(tabInVar.currentModel),
+                    //     rePath(selectedFile.toString())
+                    // )
+                }
 
-                    font.family: "Segoe UI"
-                    font.pixelSize: 16
+                CustomTooltip {
+                    object: idBtnSave
+                    textLbl: qsTr("Save variances data to a file.")
 
-                    color: "#ffffff"
-
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignHCenter
+                    visible: disableTT ? idBtnSave.hovered : false
                 }
 
                 background.implicitWidth: 80
-
-                onClicked: modalWindGenCfgVar.close()
             }
 
-            Item {
-                // Layout.fillWidth: true
-                Layout.preferredWidth: 40
-            }
+            Item { Layout.preferredWidth: 20 }
         }
     }
 
     background: Rectangle {
         radius: bgRadius
-        color: "#0A1832"
+        color: bgColorWindow
     }
 }

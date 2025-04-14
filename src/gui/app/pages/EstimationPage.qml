@@ -234,29 +234,22 @@ TemplatePage {
                                         wrapMode: Text.WordWrap
                                     }
 
-                                    ButtonFileOpen {
-                                        id: idBtnFileUpload
-                                        implicitWidth: 80
+                                    CustomBtn {
+                                        id: idBtnGenerateCfg
 
                                         sizeImgWH: 25
-                                        sourceImg: "qrc:/icons/upload.svg"
-                                        switchBgColor: true
+                                        srcImg: "qrc:/cfgvar/icons/icBtnGenCfgVar/process.svg"
 
                                         onClicked: idMenuGehCfgVar.open()
 
-                                        // FileDialog {
-                                        //     id: idLoadFileConf
-                                        //     fileMode: FileDialog.OpenFile
-                                        //     currentFolder: StandardPaths.standardLocations(StandardPaths.DocumentsLocation)[0]
-                                        //     onAccepted: backend.load_variance_conf(rePath(selectedFile.toString()))
-                                        // }
-
                                         CustomTooltip {
-                                            object: idBtnFileUpload
-                                            textLbl: qsTr("Load the variance from file.")
+                                            object: idBtnGenerateCfg
+                                            textLbl: qsTr("Menu for creating a variances configuration file.")
 
-                                            visible: disableTT ? idBtnFileUpload.hovered : false
+                                            visible: disableTT ? idBtnGenerateCfg.hovered : false
                                         }
+
+                                        background.implicitWidth: 50
                                     }
                                 }
                             }
