@@ -1,11 +1,13 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+
 import "controls"
+import "../components"
 
 
 TemplatePage {
-    id: idPageProcessing
+    id: idPageEstimation
 
     urlPage: qsTr("Estimate breeding value")
     sendForm: {
@@ -187,23 +189,67 @@ TemplatePage {
                             RowLayout {
                                 Layout.fillWidth: true
 
-                                Text {
-                                    Layout.rightMargin: 15
+                                RowLayout {
+                                    Layout.fillWidth: true
+                                    Layout.rightMargin: 40
 
-                                    text: qsTr("Variance calculation method:")
-                                    font.family: "Segoe UI"
-                                    font.pixelSize: sizeTextInSect
-                                    color: txtSection
+                                    Text {
+                                        Layout.rightMargin: 5
+
+                                        text: qsTr("Variance calculation method:")
+                                        font.family: "Segoe UI"
+                                        font.pixelSize: sizeTextInSect
+                                        color: txtSection
+                                    }
+
+                                    CustomComboBox {
+                                        id: idSelectTypeCalVar
+                                        model: ["all", "conf"]
+
+                                        onCurrentTextChanged: {
+                                            if (idSelectTypeCalVar.currentText === "conf") {
+                                                tableInVariance.reloadTable(idFeatureEbv.currentIndex)
+                                            }
+                                        }
+                                    }
                                 }
 
-                                CustomComboBox {
-                                    id: idSelectTypeCalVar
-                                    model: ["all", "conf"]
 
-                                    onCurrentTextChanged: {
-                                        if (idSelectTypeCalVar.currentText === "conf") {
-                                            tableInVariance.reloadTable(idFeatureEbv.currentIndex)
+                                // Generate file conf_var
+                                RowLayout {
+                                    spacing: 5
+                                    Layout.fillWidth: true
+
+                                    MenuGenerateCfgVar { id: idMenuGehCfgVar }
+
+                                    Text {
+                                        Layout.rightMargin: 5
+
+                                        color: txtSection
+
+                                        text: qsTr("Create config var: ")
+                                        font.pixelSize: sizeTextInSect
+                                        font.family: "Segoe UI"
+                                        clip: true
+                                        wrapMode: Text.WordWrap
+                                    }
+
+                                    CustomBtn {
+                                        id: idBtnGenerateCfg
+
+                                        sizeImgWH: 25
+                                        srcImg: "qrc:/cfgvar/icons/icBtnGenCfgVar/process.svg"
+
+                                        onClicked: idMenuGehCfgVar.open()
+
+                                        CustomTooltip {
+                                            object: idBtnGenerateCfg
+                                            textLbl: qsTr("Menu for creating a variances configuration file.")
+
+                                            visible: disableTT ? idBtnGenerateCfg.hovered : false
                                         }
+
+                                        background.implicitWidth: 50
                                     }
                                 }
                             }

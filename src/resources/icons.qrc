@@ -1,5 +1,5 @@
 <!DOCTYPE RCC><RCC version="1.0">
-<qresource>
+<qresource prefix="/">
     <file>icons/close.svg</file>
     <file>icons/estimate.svg</file>
     <file>icons/folder.svg</file>
@@ -22,5 +22,11 @@
     <file>icons/upload.svg</file>
     <file>icons/user.svg</file>
     <file>icons/bull.png</file>
+</qresource>
+<qresource prefix="/cfgvar">
+    <file>icons/icBtnGenCfgVar/file.svg</file>
+    <file>icons/icBtnGenCfgVar/open-folder.svg</file>
+    <file>icons/icBtnGenCfgVar/create.svg</file>
+    <file>icons/icBtnGenCfgVar/process.svg</file>
 </qresource>
 </RCC>

@@ -119,6 +119,14 @@ TemplatePage {
                                     id: idCheckBoxSNPSampleByid
                                     hoverEnabled: idSectonSnpProc.checked
 
+                                    onCheckedChanged: {
+                                        if (idCheckBoxSNPSampleByid.checked) {
+                                            if (idCheckBoxSNPUpdateSnp.checked) {
+                                                idCheckBoxSNPUpdateSnp.checked = false
+                                            }
+                                        }
+                                    }
+
                                     nameChb: qsTr("Sample snp")
                                 }
 
@@ -180,6 +188,14 @@ TemplatePage {
                                 label: CustomCheckbox {
                                     id: idCheckBoxSNPUpdateSnp
                                     hoverEnabled: idSectonSnpProc.checked
+
+                                    onCheckedChanged: {
+                                        if (idCheckBoxSNPUpdateSnp.checked) {
+                                            if (idCheckBoxSNPSampleByid.checked) {
+                                                idCheckBoxSNPSampleByid.checked = false
+                                            }
+                                        }
+                                    }
 
                                     nameChb: qsTr("Update snp")
                                 }

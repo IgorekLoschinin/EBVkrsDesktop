@@ -73,49 +73,59 @@
 <context>
     <name>EstimationPage</name>
     <message>
-        <location filename="../../gui/app/pages/EstimationPage.qml" line="10"/>
+        <location filename="../../gui/app/pages/EstimationPage.qml" line="12"/>
         <source>Estimate breeding value</source>
         <translation>Оценка племенной ценности</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/EstimationPage.qml" line="24"/>
+        <location filename="../../gui/app/pages/EstimationPage.qml" line="26"/>
         <source>Calculation of breeding value estimates has started!</source>
         <translation>Расчет племенной ценности запущен!</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/EstimationPage.qml" line="70"/>
+        <location filename="../../gui/app/pages/EstimationPage.qml" line="72"/>
         <source>Ebv settings</source>
         <translation>Настройка ОПЦ</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/EstimationPage.qml" line="89"/>
+        <location filename="../../gui/app/pages/EstimationPage.qml" line="91"/>
         <source>Select of Feature:</source>
         <translation>Выбор признака:</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/EstimationPage.qml" line="121"/>
+        <location filename="../../gui/app/pages/EstimationPage.qml" line="130"/>
         <source>Method estimate:</source>
         <translation>Метод оценки:</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/EstimationPage.qml" line="143"/>
+        <location filename="../../gui/app/pages/EstimationPage.qml" line="151"/>
         <source>Parallel computing</source>
         <translation>Параллельное вычисление</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/EstimationPage.qml" line="156"/>
+        <location filename="../../gui/app/pages/EstimationPage.qml" line="164"/>
         <source>Number of threads:</source>
         <translation>Кол-во потоков:</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/EstimationPage.qml" line="164"/>
+        <location filename="../../gui/app/pages/EstimationPage.qml" line="172"/>
         <source>Enter...</source>
         <translation>Ввод...</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/EstimationPage.qml" line="187"/>
+        <location filename="../../gui/app/pages/EstimationPage.qml" line="199"/>
         <source>Variance calculation method:</source>
         <translation>Метод расчета варианс:</translation>
+    </message>
+    <message>
+        <location filename="../../gui/app/pages/EstimationPage.qml" line="230"/>
+        <source>Create config var: </source>
+        <translation>Создать конфиг варианс: </translation>
+    </message>
+    <message>
+        <location filename="../../gui/app/pages/EstimationPage.qml" line="247"/>
+        <source>Menu for creating a variances configuration file.</source>
+        <translation>Меню для создания конфигурационного файла варианс.</translation>
     </message>
 </context>
 <context>
@@ -177,92 +187,92 @@
         <translation>Расчет индексов племенной ценности запущен!</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/IndexingPage.qml" line="79"/>
+        <location filename="../../gui/app/pages/IndexingPage.qml" line="82"/>
         <source>Settings index</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/IndexingPage.qml" line="93"/>
+        <location filename="../../gui/app/pages/IndexingPage.qml" line="96"/>
         <source>Type index: </source>
         <translation>Тип индекса: </translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/IndexingPage.qml" line="101"/>
+        <location filename="../../gui/app/pages/IndexingPage.qml" line="104"/>
         <source>subindex</source>
         <translation>Частный инд</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/IndexingPage.qml" line="107"/>
+        <location filename="../../gui/app/pages/IndexingPage.qml" line="112"/>
         <source>complex</source>
         <translation>Комплексный инд</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/IndexingPage.qml" line="124"/>
+        <location filename="../../gui/app/pages/IndexingPage.qml" line="131"/>
         <source>Select of Feature:</source>
         <translation>Выбор признака:</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/IndexingPage.qml" line="143"/>
+        <location filename="../../gui/app/pages/IndexingPage.qml" line="152"/>
         <source>Choose animal:</source>
         <translation>Выбор животного:</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/IndexingPage.qml" line="162"/>
+        <location filename="../../gui/app/pages/IndexingPage.qml" line="173"/>
         <source>Method estimate:</source>
         <translation>Метод оценки:</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/IndexingPage.qml" line="183"/>
+        <location filename="../../gui/app/pages/IndexingPage.qml" line="196"/>
         <source>Divide data.</source>
         <translation>Разделить данные.</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/IndexingPage.qml" line="192"/>
+        <location filename="../../gui/app/pages/IndexingPage.qml" line="205"/>
         <source>Dividing these results into fathers and daughters reports.</source>
         <translation>Разделение результатов на отчеты отцов и дочерей.</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/IndexingPage.qml" line="217"/>
+        <location filename="../../gui/app/pages/IndexingPage.qml" line="234"/>
         <source>Parallel computing</source>
         <translation>Параллельное вычисление</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/IndexingPage.qml" line="230"/>
+        <location filename="../../gui/app/pages/IndexingPage.qml" line="249"/>
         <source>Number of threads:</source>
         <translation>Кол-во потоков:</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/IndexingPage.qml" line="238"/>
+        <location filename="../../gui/app/pages/IndexingPage.qml" line="257"/>
         <source>Enter...</source>
         <translation>Ввод...</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/IndexingPage.qml" line="257"/>
+        <location filename="../../gui/app/pages/IndexingPage.qml" line="287"/>
         <source>Disabled optimal value</source>
         <translation>Отключение оптимального значения</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/IndexingPage.qml" line="266"/>
+        <location filename="../../gui/app/pages/IndexingPage.qml" line="296"/>
         <source>The function cancels the transformation of data to the optimal value.</source>
         <translation>Функция отменяет преобразование данных к оптимальному значению.</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/IndexingPage.qml" line="305"/>
+        <location filename="../../gui/app/pages/IndexingPage.qml" line="338"/>
         <source>Sample for givc</source>
         <translation>Выборка данных для ГИВЦ</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/IndexingPage.qml" line="314"/>
+        <location filename="../../gui/app/pages/IndexingPage.qml" line="347"/>
         <source>Directory with reports:</source>
         <translation>Директория с отчетами:</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/IndexingPage.qml" line="315"/>
+        <location filename="../../gui/app/pages/IndexingPage.qml" line="348"/>
         <source>Enter dir... </source>
         <translation>Ввод... </translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/IndexingPage.qml" line="330"/>
+        <location filename="../../gui/app/pages/IndexingPage.qml" line="363"/>
         <source>Type reports:</source>
         <translation>Тип отчета:</translation>
     </message>
@@ -324,6 +334,54 @@
         <location filename="../../gui/app/loginform/LoginForm.qml" line="170"/>
         <source>Sign in</source>
         <translation>Войти</translation>
+    </message>
+</context>
+<context>
+    <name>MenuGenerateCfgVar</name>
+    <message>
+        <location filename="../../gui/app/components/MenuGenerateCfgVar.qml" line="92"/>
+        <source>Generate config</source>
+        <translation>Генератор конфига</translation>
+    </message>
+    <message>
+        <location filename="../../gui/app/components/MenuGenerateCfgVar.qml" line="127"/>
+        <source>From is file:</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../../gui/app/components/MenuGenerateCfgVar.qml" line="142"/>
+        <source>report/blup/STAT_ConformationIndex_COWS.xlsx</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../../gui/app/components/MenuGenerateCfgVar.qml" line="158"/>
+        <source>processing...</source>
+        <translation>обработка...</translation>
+    </message>
+    <message>
+        <location filename="../../gui/app/components/MenuGenerateCfgVar.qml" line="212"/>
+        <source>From file.</source>
+        <translation>Из файла.</translation>
+    </message>
+    <message>
+        <location filename="../../gui/app/components/MenuGenerateCfgVar.qml" line="239"/>
+        <source>From dir.</source>
+        <translation>Из папки output.</translation>
+    </message>
+    <message>
+        <location filename="../../gui/app/components/MenuGenerateCfgVar.qml" line="259"/>
+        <source>Create a config file.</source>
+        <translation>Создать конфиг файл.</translation>
+    </message>
+    <message>
+        <location filename="../../gui/app/components/MenuGenerateCfgVar.qml" line="293"/>
+        <source>OK</source>
+        <translation>ОК</translation>
+    </message>
+    <message>
+        <location filename="../../gui/app/components/MenuGenerateCfgVar.qml" line="332"/>
+        <source>Save variances data to a file.</source>
+        <translation>Сохранить данные варианс в файл.</translation>
     </message>
 </context>
 <context>
@@ -423,127 +481,137 @@ This page is under construction.</source>
     </message>
     <message>
         <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="148"/>
+        <source>Directory with new files that will be updated.</source>
+        <translation>Директория с новыми файлами которые будут обновляться.</translation>
+    </message>
+    <message>
+        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="166"/>
         <source>from</source>
         <translation>из</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="180"/>
+        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="186"/>
+        <source>Directory with old data - last used for estimation.</source>
+        <translation>Директория с файлами старыми - последние используемые для оценки.</translation>
+    </message>
+    <message>
+        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="216"/>
         <source>Search daughters:</source>
         <translation>Поиск дочерей:</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="192"/>
+        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="228"/>
         <source>Dir data files:</source>
         <translation>Директория с файлами данных:</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="210"/>
-        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="321"/>
+        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="246"/>
+        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="357"/>
         <source>Directory with primary phenotypic data.</source>
         <translation>Директория с первичными фенотипическими данными.</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="232"/>
+        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="268"/>
         <source>File bulls:</source>
         <translation>Файл быков:</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="250"/>
+        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="286"/>
         <source>File with bull registration numbers.</source>
         <translation>Файл с регистрационными номерами быков.</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="299"/>
+        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="335"/>
         <source>Phenotype settings</source>
         <translation>Настройки фенотипа</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="312"/>
+        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="348"/>
         <source>Directory data files:</source>
         <translation>Директория файлов с данными:</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="340"/>
+        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="376"/>
         <source>Number lactation: </source>
         <translation>Номер лактации: </translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="366"/>
+        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="402"/>
         <source>Select of Feature:</source>
         <translation>Выбор признака:</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="392"/>
+        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="428"/>
         <source>Accumulate data</source>
         <translation>Накопление данных</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="399"/>
+        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="435"/>
         <source>Connection of the accumulation methodology.</source>
         <translation>Подключение методологии накопления.</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="418"/>
+        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="454"/>
         <source>Pedigree</source>
         <translation>Родословная</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="425"/>
+        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="461"/>
         <source>Building a file pedigree.</source>
         <translation>Получение файла с родословной.</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="440"/>
+        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="476"/>
         <source>Daughters</source>
         <translation>Дочери</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="447"/>
+        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="483"/>
         <source>Building a file daughters.</source>
         <translation>Получение файла дочерей быков.</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="469"/>
+        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="505"/>
         <source>Add snp file</source>
         <translation>Добавить snp файл</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="476"/>
+        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="512"/>
         <source>Adding a snp file to the input files when calculating gblup.</source>
         <translation>Добавление snp файла к входным файлам при расчете gblup.</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="493"/>
+        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="529"/>
         <source>File snp:</source>
         <translation>Файл snp:</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="526"/>
+        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="562"/>
         <source>Selection data:</source>
         <translation>Отбор данных:</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="533"/>
+        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="569"/>
         <source>Data pre-filtering.</source>
         <translation>Предварительная фильтрация данных.</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="550"/>
+        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="586"/>
         <source>File with code farm:</source>
         <translation>Коды хозяйств:</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="573"/>
+        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="609"/>
         <source>Selection of data by farm number or code. For example, an active population.</source>
         <translation>Отбор данных по номеру или коду хозяйства. Например, активная популяция.</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="595"/>
+        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="631"/>
         <source>Remove daughters:</source>
         <translation>Удаление дочерей:</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="618"/>
+        <location filename="../../gui/app/pages/ProcPhenoPage.qml" line="654"/>
         <source>Excluding daughters of bulls from the data sample, which should not be included in the calculation of ebv.</source>
         <translation>Исключение из выборки данных дочерей быков, которые не должны участвовать в расчете ebv.</translation>
     </message>
@@ -560,97 +628,124 @@ This page is under construction.</source>
         <translation>Обработка генномных данных (SNP)</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="39"/>
+        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="45"/>
         <source>SNP data processing has started!</source>
         <translation>Обработка данных SNP запущена!</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="87"/>
+        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="93"/>
         <source>Snp processing</source>
         <translation>Обработка данных SNP</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="99"/>
+        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="105"/>
         <source>Path to file snp:</source>
         <translation>Файл snp:</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="115"/>
         <source>Additional processing</source>
-        <translation>Дополнительная обработка</translation>
+        <translation type="vanished">Дополнительная обработка</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="129"/>
         <source>Sample animals by id:</source>
-        <translation>Выбор животных по id:</translation>
+        <translation type="vanished">Выбор животных по id:</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="149"/>
         <source>Update file snp:</source>
-        <translation>Обновление snp файла:</translation>
+        <translation type="vanished">Обновление snp файла:</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="194"/>
+        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="130"/>
+        <source>Sample snp</source>
+        <translation>Выборка животных snp</translation>
+    </message>
+    <message>
+        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="144"/>
+        <source>File animal id:</source>
+        <translation>Файл id животных:</translation>
+    </message>
+    <message>
+        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="162"/>
+        <source>File with animal numbers (ID00001412_MA) to be sampled from snp_ref.</source>
+        <translation>Файл с регномерами  животных (ID00001412_MA) для выборки из snp файла.</translation>
+    </message>
+    <message>
+        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="200"/>
+        <source>Update snp</source>
+        <translation>Обновить snp</translation>
+    </message>
+    <message>
+        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="214"/>
+        <source>File snp:</source>
+        <translation>Файл snp:</translation>
+    </message>
+    <message>
+        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="232"/>
+        <source>Snp file “ID00(_MA)1 0120502” to update snp_ref.</source>
+        <translation>Snp файл “ID00(_MA)1 0120502” с данными для обновления snp_ref.</translation>
+    </message>
+    <message>
+        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="277"/>
         <source>Final reports</source>
         <translation>Отчет snp</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="206"/>
+        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="289"/>
         <source>Directory with finalreports files:</source>
         <translation>Директория с snp файлами:</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="217"/>
+        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="300"/>
         <source>Call rate:</source>
         <translation>Call rate:</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="227"/>
+        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="310"/>
         <source>0.90</source>
         <translation>0.90</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="239"/>
+        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="322"/>
         <source>, %</source>
         <translation>, %</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="255"/>
+        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="338"/>
         <source>Save call rate in file</source>
         <translation>Сохранить call rate в файл</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="268"/>
+        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="351"/>
         <source>File name:</source>
         <translation>Название файла:</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="276"/>
+        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="359"/>
         <source>Name ...</source>
         <translation>название...</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="295"/>
+        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="378"/>
         <source>.xlsx</source>
         <translation>.xlsx</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="315"/>
+        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="398"/>
         <source>Add suffix sex</source>
         <translation>Добавить суффикс пола животного</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="329"/>
+        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="412"/>
         <source>Add</source>
         <translation>Добавить</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="334"/>
+        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="417"/>
         <source>Add suffix from the conversion file.</source>
         <translation>Добавьте суффикс из файла для конвертации.</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="355"/>
+        <location filename="../../gui/app/pages/ProcSnpPage.qml" line="438"/>
         <source>From the file:</source>
         <translation>Из файла:</translation>
     </message>
@@ -715,27 +810,27 @@ This page is under construction.</source>
 <context>
     <name>ProgressWindow</name>
     <message>
-        <location filename="../../gui/app/pages/controls/ProgressWindow.qml" line="75"/>
+        <location filename="../../gui/app/pages/controls/ProgressWindow.qml" line="114"/>
         <source>Minimize</source>
         <translation>Свернуть</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/controls/ProgressWindow.qml" line="140"/>
+        <location filename="../../gui/app/pages/controls/ProgressWindow.qml" line="179"/>
         <source>Successful completion!</source>
         <translation>Успешное завершение!</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/controls/ProgressWindow.qml" line="143"/>
+        <location filename="../../gui/app/pages/controls/ProgressWindow.qml" line="182"/>
         <source>Error completion!</source>
         <translation>Ошибка!</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/controls/ProgressWindow.qml" line="146"/>
+        <location filename="../../gui/app/pages/controls/ProgressWindow.qml" line="185"/>
         <source>processing...</source>
         <translation>обработка...</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/controls/ProgressWindow.qml" line="172"/>
+        <location filename="../../gui/app/pages/controls/ProgressWindow.qml" line="211"/>
         <source>Ok</source>
         <translation>Подтвердить</translation>
     </message>
@@ -771,12 +866,12 @@ This page is under construction.</source>
 <context>
     <name>TableInputVar</name>
     <message>
-        <location filename="../../gui/app/pages/TableInputVar.qml" line="204"/>
+        <location filename="../../gui/app/pages/TableInputVar.qml" line="207"/>
         <source>Save the variance in file.</source>
         <translation>Сохранение варианс в файл.</translation>
     </message>
     <message>
-        <location filename="../../gui/app/pages/TableInputVar.qml" line="227"/>
+        <location filename="../../gui/app/pages/TableInputVar.qml" line="232"/>
         <source>Load the variance from file.</source>
         <translation>Загрузка варианс из файла.</translation>
     </message>

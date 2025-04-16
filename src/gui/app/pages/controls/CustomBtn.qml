@@ -2,14 +2,15 @@ import QtQuick
 import QtQuick.Controls
 
 Button {
-    id: idBtnRun
+    id: idCustBtn
 
     property string srcImg: ""
-    property color colorImg: "green"
+    property int sizeImgWH: 19
+    property color colorImg: "#F5EDED"
 
-    property color dlgColorDef: "transparent"
-    property color dlgColorMouseOver: "#CFAF68"
-    property color dlgColorPressed: "#C79831"
+    property color dlgColorDef: "#5d6575"
+    property color dlgColorMouseOver: "#8792A8"
+    property color dlgColorPressed: "#4A515E"
 
     function dynamicColor (idBtn, cDef, cMO, cP) {
         if (idBtn.down) {
@@ -24,24 +25,24 @@ Button {
     }
 
     contentItem: ColorImage {
-        source: srcImg
-        color: colorImg
+        source: idCustBtn.srcImg
+        color: idCustBtn.colorImg
 
         fillMode: Image.PreserveAspectFit
-        sourceSize.height: 30
-        sourceSize.width: 30
+        sourceSize.height: idCustBtn.sizeImgWH
+        sourceSize.width: idCustBtn.sizeImgWH
     }
 
     background: Rectangle {
         color: dynamicColor(
-                   idBtnRun,
-                   dlgColorDef,
-                   dlgColorMouseOver,
-                   dlgColorPressed
+                   idCustBtn,
+                   idCustBtn.dlgColorDef,
+                   idCustBtn.dlgColorMouseOver,
+                   idCustBtn.dlgColorPressed
         )
 
         implicitHeight: 30
         implicitWidth: 30
-        radius: 5
+        radius: 4
     }
 }
