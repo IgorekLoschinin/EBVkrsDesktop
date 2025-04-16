@@ -124,7 +124,7 @@ Popup {
                         Layout.alignment: Qt.AlignBottom
 
                         color: "#ffffff"
-                        text: qsTr("From is file:")
+                        text: qsTr("From is ... :")
                         font.family: "Segoe UI"
                         font.pointSize: 12
                         font.bold: true
@@ -139,7 +139,7 @@ Popup {
 
                         Layout.fillWidth: true
                         color: "#ffffff"
-                        text: qsTr("report/blup/STAT_ConformationIndex_COWS.xlsx")
+                        text: qsTr("-= Select a file or folder =-")
                         font.family: "Segoe UI"
                         font.pointSize: 12
                         wrapMode: Text.WordWrap
@@ -155,7 +155,19 @@ Popup {
                         Layout.alignment: Qt.AlignTop
 
                         color: "#ffffff"
-                        text: qsTr("processing...")
+                        text: {
+                            switch (backend.ebv_model.generate_var.fin_code) {
+                            // switch (-1) {
+                            case 0:
+                                return qsTr("Successful completion!")
+
+                            case 1:
+                                return qsTr("Error completion!")
+
+                            case -1:
+                                return qsTr("...")
+                            }
+                        }
                         font.family: "Segoe UI"
                         font.pointSize: 12
                         font.bold: true

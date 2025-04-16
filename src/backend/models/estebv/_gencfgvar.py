@@ -7,18 +7,28 @@
 # of this license document, but changing it is not allowed.
 
 __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
-__all__ = (
-    'PhenoModel',
-    'SnpModel',
-    'EbvModel',
-    'IndModel',
-    'SettingsModel',
-    'ProgBarModel'
+__all__ = ('GeneratorCfgVar', )
+
+from PySide6.QtCore import (
+	QObject,
+	Slot,
+	Signal,
+	Property
 )
 
-from .estebv import EbvModel
-from ._indmodel import IndModel
-from ._phenmodel import PhenoModel
-from ._progbarmodel import ProgBarModel
-from ._settingsmodel import SettingsModel
-from ._snpmodel import SnpModel
+
+class GeneratorCfgVar(QObject):
+	"""  """
+
+	def __init__(self) -> None:
+		QObject.__init__(self)
+
+		self._fin_code = None
+
+	@Property()
+	def fin_code(self) -> None:
+		...
+
+	@Slot()
+	def create(self) -> None:
+		...

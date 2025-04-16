@@ -16,14 +16,14 @@ from PySide6.QtCore import (
 	Property
 )
 
-from ..libkrs.core.settings import CMD_FEATURE
-from ..libkrs.est.varmodel import (
+from src.backend.libkrs.core.settings import CMD_FEATURE
+from src.backend.libkrs.est.varmodel import (
 	FEATURE_NAME_SCS,
 	FEATURE_NAME_MILK,
 	FEATURE_NAME_REPROD,
 	FEATURE_NAME_CONFORM
 )
-from ..libkrs.utils import (
+from src.backend.libkrs.utils import (
 	logger,
 	from_json,
 	to_json

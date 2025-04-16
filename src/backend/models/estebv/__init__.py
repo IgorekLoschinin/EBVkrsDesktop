@@ -7,18 +7,6 @@
 # of this license document, but changing it is not allowed.
 
 __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
-__all__ = (
-    'PhenoModel',
-    'SnpModel',
-    'EbvModel',
-    'IndModel',
-    'SettingsModel',
-    'ProgBarModel'
-)
+__all__ = ("EbvModel", )
 
-from .estebv import EbvModel
-from ._indmodel import IndModel
-from ._phenmodel import PhenoModel
-from ._progbarmodel import ProgBarModel
-from ._settingsmodel import SettingsModel
-from ._snpmodel import SnpModel
+from ._ebvmodel import EbvModel
