@@ -17,7 +17,7 @@ TemplatePage {
         'variance': idSelectTypeCalVar.displayText === "conf" ? tableInVariance.getVariance(tableInVariance.currentModel) : tableInVariance.defVariance,
         'parallel': idCheckBoxParallelEst.checked,
         'numthread': idInputNumThredEst.text.length === 0 ? null : idInputNumThredEst.text,
-        'utilsf90': backend.get_settings.utils_f90
+        'utilsf90': backend.settings_model.settings.utils_f90
     }
 
     Component {
@@ -98,14 +98,14 @@ TemplatePage {
                                         id: idFeatureEbv
                                         currentIndex: 0
                                         // displayText: currentText
-                                        model: backend.list_feature
+                                        model: backend.ebv_model.list_feature
 
                                         onCurrentTextChanged: {
                                             if (idSelectTypeCalVar.displayText === "conf") {
 
                                                 tableInVariance.currentModel = tableInVariance.initTable(
                                                     tableInVariance.modelsFtVar[currentIndex],
-                                                    backend.get_fields_table[idFeatureEbv.currentText]
+                                                    backend.ebv_model.get_fields_table[idFeatureEbv.currentText]
                                                 )
 
                                                 return
@@ -114,7 +114,7 @@ TemplatePage {
                                             tableInVariance.defVariance = tableInVariance.getVariance(
                                                 tableInVariance.initTable(
                                                     tableInVariance.modelsFtVar[currentIndex],
-                                                    backend.get_fields_table[idFeatureEbv.currentText]
+                                                    backend.ebv_model.get_fields_table[idFeatureEbv.currentText]
                                                 )
                                             )
                                         }

@@ -9,6 +9,11 @@
 __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
 __all__ = ('SettingsModel', )
 
+from PySide6.QtCore import (
+	QObject,
+	Signal,
+	Property
+)
 
 from pydantic_core import ValidationError
 
@@ -17,13 +22,19 @@ from ..libkrs.utils import logger
 
 
 @logger(name="SettingsModel")
-class SettingsModel(object):
+class SettingsModel(QObject):
 	"""  """
 
+	__slots__ = ("_settings", )
+
+	setSettingsModelSig = Signal()
+
 	def __init__(self) -> None:
+		QObject.__init__(self)
+
 		self._settings = SettingsSchema()
 
-	@property
+	@Property(dict, notify=setSettingsModelSig)
 	def settings(self) -> dict | None:
 		if self._settings is not None:
 			return self._settings.model_dump()
@@ -34,6 +45,8 @@ class SettingsModel(object):
 	def settings(self, value: dict) -> None:
 		try:
 			self._settings = SettingsSchema.model_validate(value)
+
+			self.setSettingsModelSig.emit()
 
 		except (ValidationError, Exception) as err:
 			raise err

@@ -34,6 +34,8 @@ from ..libkrs.utils import (
 class EbvModel(QObject):
 	"""  """
 
+	__slots__ = ()
+
 	uploadVar = Signal(dict)
 	getLstFeature = Signal(list)
 	getfieldsTable = Signal(dict)

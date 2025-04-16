@@ -32,7 +32,7 @@ Control {
     }
 
     function setVarinace(data) {
-        var subFtVar = backend.get_fields_table[idFeatureEbv.currentText]
+        var subFtVar = backend.ebv_model.get_fields_table[idFeatureEbv.currentText]
 
         if (currentModel !== null) {
             currentModel.clear()
@@ -196,7 +196,7 @@ Control {
                     id: idSaveFileConf
                     fileMode: FileDialog.SaveFile
                     currentFolder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
-                    onAccepted: backend.save_variance_conf(
+                    onAccepted: backend.ebv_model.save_variance_conf(
                         tabInVar.getVariance(tabInVar.currentModel),
                         rePath(selectedFile.toString())
                     )
@@ -224,7 +224,7 @@ Control {
                     id: idLoadFileConf
                     fileMode: FileDialog.OpenFile
                     currentFolder: StandardPaths.standardLocations(StandardPaths.DocumentsLocation)[0]
-                    onAccepted: backend.load_variance_conf(rePath(selectedFile.toString()))
+                    onAccepted: backend.ebv_model.load_variance_conf(rePath(selectedFile.toString()))
                 }
 
                 CustomTooltip {
@@ -242,7 +242,7 @@ Control {
     }
 
     Connections {
-        target: backend
+        target: backend.ebv_model
 
         function onUploadVar (data) {
             setVarinace(data)

@@ -13,10 +13,12 @@ __all__ = (
     'EbvModel',
     'IndModel',
     'SettingsModel',
+    'ProgBarModel'
 )
 
 from ._ebvmodel import EbvModel
 from ._indmodel import IndModel
 from ._phenmodel import PhenoModel
+from ._progbarmodel import ProgBarModel
 from ._settingsmodel import SettingsModel
 from ._snpmodel import SnpModel

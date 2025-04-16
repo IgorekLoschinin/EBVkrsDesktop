@@ -137,7 +137,7 @@ TemplatePage {
                                     CustomComboBox {
                                         id: idSelectFeatureForInd
                                         currentIndex: 0
-                                        model: backend.list_feature
+                                        model: backend.ind_model.list_feature
 
                                         hoverEnabled: !idHeadSectGivc.checked
                                     }

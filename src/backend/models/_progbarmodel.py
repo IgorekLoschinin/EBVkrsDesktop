@@ -22,12 +22,22 @@ from ..libkrs.utils import logger
 class ProgBarModel(QObject):
 	"""  """
 
+	__slots__ = (
+		"_finished",
+		"_finished_code",
+		"_enable_prg_win",
+	)
+
 	enablePrgW = Signal(bool)
 	finishedCodeSig = Signal(int)
 	finishedSig = Signal(int)
 
 	def __init__(self) -> None:
 		QObject.__init__(self)
+
+		self._finished: bool = False
+		self._finished_code: int | None = None
+		self._enable_prg_win: bool = False
 
 	@Property(bool, notify=enablePrgW)
 	def enable_prg_win(self) -> bool:

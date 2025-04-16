@@ -23,6 +23,8 @@ from ..libkrs.utils import logger
 class PhenoModel(QObject):
 	""" """
 
+	__slots__ = ()
+
 	getLstFeature = Signal(list)
 
 	def __init__(self) -> None:
