@@ -16,32 +16,42 @@ from PySide6.QtCore import (
 	Property
 )
 
-from src.backend.libkrs.core.settings import CMD_FEATURE
-from src.backend.libkrs.est.varmodel import (
+from ...libkrs.core.settings import CMD_FEATURE
+from ...libkrs.est.varmodel import (
 	FEATURE_NAME_SCS,
 	FEATURE_NAME_MILK,
 	FEATURE_NAME_REPROD,
 	FEATURE_NAME_CONFORM
 )
-from src.backend.libkrs.utils import (
+from ...libkrs.utils import (
 	logger,
 	from_json,
 	to_json
 )
+
+from ._gencfgvar import GeneratorCfgVar
 
 
 @logger(name="EbvModel")
 class EbvModel(QObject):
 	"""  """
 
-	__slots__ = ()
+	__slots__ = ("__generator_cfg_var", )
 
 	uploadVar = Signal(dict)
 	getLstFeature = Signal(list)
 	getfieldsTable = Signal(dict)
 
+	genCfgVarSig = Signal()
+
 	def __init__(self) -> None:
 		QObject.__init__(self)
+
+		self.__generator_cfg_var = GeneratorCfgVar()
+
+	@Property(GeneratorCfgVar, notify=genCfgVarSig)
+	def generator_var(self) -> GeneratorCfgVar:
+		return self.__generator_cfg_var
 
 	@Property(list, notify=getLstFeature)
 	def list_feature(self) -> list[str]:

@@ -16,6 +16,27 @@ Popup {
     readonly property color btnColorMouseOver: "#8792A8"
     readonly property color btnColorPressed: "#4A515E"
 
+    function statusGen() {
+        {
+            switch (backend.ebv_model.generator_var.fin_code) {
+            case 0:
+                return qsTr("Successful completion!")
+
+            case 1:
+                return qsTr("Error completion!")
+
+            case 2:
+                return qsTr("processing...")
+
+            case 3:
+                return qsTr("Variance is saved!")
+
+            case -1:
+                return qsTr("status")
+            }
+        }
+    }
+
     anchors.centerIn: Overlay.overlay
 
     width: 450
@@ -106,10 +127,13 @@ Popup {
 
             // Display
             Control {
-                id: idDisplay
+                id: idDisplay                
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
+                Layout.preferredWidth: modalWindGenCfgVar.width * 0.75
+                Layout.preferredHeight: modalWindGenCfgVar.height * 0.75
+
 
                 contentItem: ColumnLayout {
                     Layout.fillWidth: true
@@ -155,19 +179,7 @@ Popup {
                         Layout.alignment: Qt.AlignTop
 
                         color: "#ffffff"
-                        text: {
-                            switch (backend.ebv_model.generate_var.fin_code) {
-                            // switch (-1) {
-                            case 0:
-                                return qsTr("Successful completion!")
-
-                            case 1:
-                                return qsTr("Error completion!")
-
-                            case -1:
-                                return qsTr("...")
-                            }
-                        }
+                        text: statusGen()
                         font.family: "Segoe UI"
                         font.pointSize: 12
                         font.bold: true
@@ -213,10 +225,13 @@ Popup {
                             id: idOpenFromFile
                             fileMode: FileDialog.OpenFile
                             currentFile: StandardPaths.standardLocations(StandardPaths.LocateFile)[0]
-                            // onAccepted: backend.save_variance_conf(
-                            //     tabInVar.getVariance(tabInVar.currentModel),
-                            //     rePath(selectedFile.toString())
-                            // )
+                            onAccepted: {
+                                backend.ebv_model.generator_var.from_path(
+                                    rePath(selectedFile.toString())
+                                )
+                                lblMethodGenerate.text = qsTr("From is file:")
+                                lblBody.text = rePath(selectedFile.toString())
+                            }
                         }
 
                         CustomTooltip {
@@ -237,13 +252,16 @@ Popup {
 
                         onClicked: idOpenFromDir.open()
 
-                        FileDialog {
+                        FolderDialog {
                             id: idOpenFromDir
                             currentFolder: StandardPaths.standardLocations(StandardPaths.LocateDirectory)[0]
-                            // onAccepted: backend.save_variance_conf(
-                            //     tabInVar.getVariance(tabInVar.currentModel),
-                            //     rePath(selectedFile.toString())
-                            // )
+                            onAccepted: {
+                                backend.ebv_model.generator_var.from_path(
+                                    rePath(selectedFolder.toString())
+                                )
+                                lblMethodGenerate.text = qsTr("From is dir:")
+                                lblBody.text = rePath(selectedFolder.toString())
+                            }
                         }
 
                         CustomTooltip {
@@ -264,7 +282,7 @@ Popup {
                         sizeImgWH: 25
                         srcImg: "qrc:/cfgvar/icons/icBtnGenCfgVar/create.svg"
 
-                        onClicked: modalWindGenCfgVar.close()
+                        onClicked: backend.ebv_model.generator_var.create()
 
                         CustomTooltip {
                             object: idBtnCreateFileCfg
@@ -291,11 +309,7 @@ Popup {
             CustomBtn {
                 id: idBtnOK
 
-                Layout.bottomMargin: 6
-
-                // hoverEnabled: backend.finished
-                // enabled: backend.finished
-                // opacity: backend.finished ? 1 : 0.5
+                Layout.bottomMargin: 6                
 
                 dlgColorDef: btnColorDef
                 dlgColorMouseOver: btnColorMouseOver
@@ -324,6 +338,10 @@ Popup {
 
                 Layout.bottomMargin: 6
 
+                hoverEnabled: backend.ebv_model.generator_var.fin_code === 0
+                enabled: backend.ebv_model.generator_var.fin_code === 0
+                opacity: backend.ebv_model.generator_var.fin_code === 0 ? 1 : 0.5
+
                 sizeImgWH: 25
                 srcImg: "qrc:/icons/save.svg"
 
@@ -333,10 +351,9 @@ Popup {
                     id: idSaveFileConf
                     fileMode: FileDialog.SaveFile
                     currentFolder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
-                    // onAccepted: backend.save_variance_conf(
-                    //     tabInVar.getVariance(tabInVar.currentModel),
-                    //     rePath(selectedFile.toString())
-                    // )
+                    onAccepted: backend.ebv_model.generator_var.save(
+                        rePath(selectedFile.toString())
+                    )
                 }
 
                 CustomTooltip {
