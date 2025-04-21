@@ -388,40 +388,121 @@ TemplatePage {
                                 }
                             }
 
-                            CustomCheckbox {
-                                id: idControlSelectFtDp
+                            RowLayout {
+                                Layout.fillWidth: true
 
-                                hoverEnabled: !idSHeadSectAddProp.checked
+                                // Selection feature panel
+                                CustomCheckbox {
+                                    id: idControlSelectFtDp
 
-                                contentItem: RowLayout {
-                                    Layout.fillWidth: true
+                                    hoverEnabled: {
+                                        if (!idSHeadSectAddProp.checked) {
+                                            if (!idChBAutoProcFt) {
+                                                return idChBAutoProcFt.checked
+                                            }
 
-                                    Text {
-                                        leftPadding: idControlSelectFtDp.indicator.width + 6
+                                            return !idChBAutoProcFt.checked
+                                        }
 
-                                        text: qsTr("Select of Feature:")
-                                        font.pixelSize: sizeTextInSect
-                                        font.family: "Segoe UI"
-                                        color: txtSection
-
-                                        verticalAlignment: Text.AlignVCenter
-                                        horizontalAlignment: Text.AlignHCenter
+                                        return !idSHeadSectAddProp.checked
                                     }
 
-                                    CustomComboBox {
-                                        id: idSelectFeatureDp
+                                    enabled: !idChBAutoProcFt.checked
+                                    opacity: !idChBAutoProcFt.checked ? 1 : 0.7
+                                    checked: !idChBAutoProcFt.checked ? idChBAutoProcFt.checked : false
 
-                                        hoverEnabled: idControlSelectFtDp.checked
-                                        enabled: idControlSelectFtDp.checked
-                                        opacity: idControlSelectFtDp.checked ? 1 : 0.5
+                                    contentItem: RowLayout {
+                                        Layout.fillWidth: true
 
-                                        currentIndex: 0
-                                        displayText: currentText
-                                        model: backend.phen_model.list_feature
+                                        Text {
+                                            leftPadding: idControlSelectFtDp.indicator.width + 6
+
+                                            text: qsTr("Select of Feature:")
+                                            font.pixelSize: sizeTextInSect
+                                            font.family: "Segoe UI"
+                                            color: txtSection
+
+                                            verticalAlignment: Text.AlignVCenter
+                                            horizontalAlignment: Text.AlignHCenter
+                                        }
+
+                                        CustomComboBox {
+                                            id: idSelectFeatureDp
+
+                                            hoverEnabled: idControlSelectFtDp.checked ? !idChBAutoProcFt.checked : false
+                                            enabled: idControlSelectFtDp.checked
+                                            opacity: idControlSelectFtDp.checked ? 1 : 0.5
+
+                                            currentIndex: 0
+                                            displayText: currentText
+                                            model: backend.phen_model.list_feature
+                                        }
+
                                     }
-
                                 }
+
+                                // Autoproc feature selecton
+                                CustomCheckbox {
+                                    id: idChBAutoProcFt
+                                    Layout.leftMargin: 15
+
+                                    nameChb: qsTr("Auto")
+
+                                    hoverEnabled: !idSHeadSectAddProp.checked
+
+                                    CustomTooltip {
+                                        id: idHintAutoProc
+                                        object: idChBAutoProcFt
+                                        textLbl: qsTr("Automatic (Sequential) processing of features by list.")
+
+                                        x: idChBAutoProcFt.width
+                                        visible: {
+                                            if (disableTT) {
+                                                return !idSHeadSectAddProp.checked ? idChBAutoProcFt.hovered : false
+                                            }
+
+                                            return false
+                                        }
+                                    }
+                                }
+
                             }
+
+                            // // Selection feature panel
+                            // CustomCheckbox {
+                            //     id: idControlSelectFtDp
+
+                            //     hoverEnabled: !idSHeadSectAddProp.checked
+
+                            //     contentItem: RowLayout {
+                            //         Layout.fillWidth: true
+
+                            //         Text {
+                            //             leftPadding: idControlSelectFtDp.indicator.width + 6
+
+                            //             text: qsTr("Select of Feature:")
+                            //             font.pixelSize: sizeTextInSect
+                            //             font.family: "Segoe UI"
+                            //             color: txtSection
+
+                            //             verticalAlignment: Text.AlignVCenter
+                            //             horizontalAlignment: Text.AlignHCenter
+                            //         }
+
+                            //         CustomComboBox {
+                            //             id: idSelectFeatureDp
+
+                            //             hoverEnabled: idControlSelectFtDp.checked
+                            //             enabled: idControlSelectFtDp.checked
+                            //             opacity: idControlSelectFtDp.checked ? 1 : 0.5
+
+                            //             currentIndex: 0
+                            //             displayText: currentText
+                            //             model: backend.phen_model.list_feature
+                            //         }
+
+                            //     }
+                            // }
 
                             CustomCheckbox {
                                 id: idAccumulateDp
