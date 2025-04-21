@@ -6,13 +6,20 @@
 # Everyone is permitted to copy and distribute verbatim copies
 # of this license document, but changing it is not allowed.
 
+"""
+Phenotype Model Module.
+
+Provides the PhenoModel class which manages phenotype feature data
+for breeding value calculations.
+"""
+
 __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
 __all__ = ('PhenoModel', )
 
 from PySide6.QtCore import (
-	QObject,
-	Signal,
-	Property
+    QObject,
+    Signal,
+    Property
 )
 
 from ..libkrs.core.settings import CMD_FEATURE
@@ -21,16 +28,28 @@ from ..libkrs.utils import logger
 
 @logger(name="PhenoModel")
 class PhenoModel(QObject):
-	""" """
+    """ Model class for managing phenotype feature data.
 
-	__slots__ = ()
+    Provides access to the list of available phenotype features used in
+    breeding value calculations.
+    """
 
-	getLstFeature = Signal(list)
+    __slots__ = ()
 
-	def __init__(self) -> None:
-		QObject.__init__(self)
+    getLstFeature = Signal(list)
 
-	@Property(list, notify=getLstFeature)
-	def list_feature(self) -> list[str]:
-		""" Возвраащет список команд - названий признаков для расчета на EBVpage """
-		return CMD_FEATURE
+    def __init__(self) -> None:
+        """ Initialize the PhenoModel instance.
+
+        :return: None
+        """
+        QObject.__init__(self)
+
+    @Property(list, notify=getLstFeature)
+    def list_feature(self) -> list[str]:
+        """ Get the list of available phenotype features.
+
+        :return: List of phenotype feature names for EBV calculations.
+        :rtype: list[str]
+        """
+        return CMD_FEATURE

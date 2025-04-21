@@ -22,8 +22,7 @@ from ...libkrs.utils import logger
 
 @logger(name="GeneratorCfgVar")
 class GeneratorCfgVar(QObject):
-	"""
-	A Qt-based configuration variable generator that provides signals and
+	""" A Qt-based configuration variable generator that provides signals and
 	properties for UI integration.
 
 	This class wraps the core CreateCfgVar functionality with Qt signals and
@@ -107,8 +106,7 @@ class GeneratorCfgVar(QObject):
 
 		:param file: Destination file path (None for default location).
 
-		Post-condition:
-			Sets status to 3 (save completed).
+		Post-condition: Sets status to 3 (save completed).
 		"""
 		self._creator.to_file(file)
 		self.fin_code = 3
