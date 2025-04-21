@@ -18,8 +18,8 @@ Popup {
     width: 350
     height: 200
 
-    dim: backend.enable_prg_win
-    visible: backend.enable_prg_win
+    dim: backend.progbar_model.enable_prg_win
+    visible: backend.progbar_model.enable_prg_win
 
     closePolicy: Popup.NoAutoClose
 
@@ -174,7 +174,7 @@ Popup {
 
             color: "#ffffff"
             text: {
-                switch (backend.finished_code) {
+                switch (backend.progbar_model.finished_code) {
                 case 0:
                     return qsTr("Successful completion!")
 
@@ -199,9 +199,9 @@ Popup {
 
                 Layout.bottomMargin: 6
 
-                hoverEnabled: backend.finished
-                enabled: backend.finished
-                opacity: backend.finished ? 1 : 0.5
+                hoverEnabled: backend.progbar_model.finished
+                enabled: backend.progbar_model.finished
+                opacity: backend.progbar_model.finished ? 1 : 0.5
 
                 dlgColorDef: "#5d6575"
                 dlgColorMouseOver: "#8792A8"
@@ -225,9 +225,9 @@ Popup {
             }
 
             ButtonStop {
-                hoverEnabled: !backend.finished
-                enabled: !backend.finished
-                opacity: !backend.finished ? 1 : 0.5
+                hoverEnabled: !backend.progbar_model.finished
+                enabled: !backend.progbar_model.finished
+                opacity: !backend.progbar_model.finished ? 1 : 0.5
 
                 Layout.rightMargin: 6
                 Layout.bottomMargin: 6

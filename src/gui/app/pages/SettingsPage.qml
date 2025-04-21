@@ -13,7 +13,7 @@ TemplatePage {
     sendForm: {
         'id': 'settings',
         'utils_f90': idInputUtilf90.inputText.length === 0 ? backend.get_settings.utils_f90 : idInputUtilf90.inputText,
-        'disabletooltip': true
+        // 'disabletooltip': true
     }
 
     contentData: Control {
@@ -75,7 +75,7 @@ TemplatePage {
                 nameField: qsTr("Dir utils *f90.exe:")
 
                 Layout.fillWidth: true
-                placeholderText: backend.get_settings.utils_f90
+                placeholderText: backend.settings_model.settings.utils_f90
 
                 onEnterTextChanges: changeFlag = true
             }
@@ -152,7 +152,7 @@ TemplatePage {
                 background.implicitWidth: 80
 
                 onClicked: {
-                    backend.set_settings(idPageSettings.sendForm)
+                    backend.settings_model.settings = idPageSettings.sendForm;
                     changeFlag = false
                 }
             }

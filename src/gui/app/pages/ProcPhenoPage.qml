@@ -417,7 +417,7 @@ TemplatePage {
 
                                         currentIndex: 0
                                         displayText: currentText
-                                        model: backend.list_feature
+                                        model: backend.phen_model.list_feature
                                     }
 
                                 }
