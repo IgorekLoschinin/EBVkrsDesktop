@@ -6,6 +6,12 @@
 # Everyone is permitted to copy and distribute verbatim copies
 # of this license document, but changing it is not allowed.
 
+"""
+Phenotype Handler Module.
+
+Provides the PhenoHandler class for processing phenotype data requests.
+"""
+
 __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
 __all__ = ('PhenoHandler', )
 
@@ -21,14 +27,10 @@ from ..schemas import RequestPheno
 
 @logger(name="PhenoHandler")
 class PhenoHandler(IHandler):
-	""" Phenotype model for query processing phenotype data.
+	""" Handler for processing phenotype data requests.
 
-	This class handles requests for processing phenotype data.
-
-	:param req_data: Input data for configuring the model.
-	:param output_dir: Directory for saving output results.
-	:raises ValidationError: If the input data fails validation.
-	:raises Exception: For any other errors during initialization.
+	This class handles the processing of phenotype data according to the
+	provided configuration settings.
 	"""
 
 	def __init__(
@@ -36,7 +38,15 @@ class PhenoHandler(IHandler):
 			req_data: dict | None = None,
 			output_dir: str | Path | None = None
 	) -> None:
+		""" Initialize the PhenoHandler instance.
 
+		:param req_data: Input data for configuring the phenotype processing
+		:type req_data: dict | None
+		:param output_dir: Directory for saving output results
+		:type output_dir: str | Path | None
+		:raises ValidationError: If the input data fails validation
+		:raises Exception: For any other errors during initialization
+		"""
 		self._out_d = output_dir
 		self._settings: RequestPheno | None = None
 
@@ -48,12 +58,13 @@ class PhenoHandler(IHandler):
 			raise err
 
 	def processing(self) -> None:
-		""" Processing a request for Phenotype data processing """
+		""" Process the phenotype data request.
 
+		:raises ValueError: If settings are not initialized
+		:return: None
+		"""
 		if self._settings is None:
 			raise ValueError("Settings not initialized!")
-
-		dp_args = {}
 
 		if self._settings.preparation.checked:
 			self._preparation_data()
@@ -63,7 +74,10 @@ class PhenoHandler(IHandler):
 		self._selection_data()
 
 	def _preparation_data(self) -> None:
+		""" Handle data preparation processing.
 
+		:return: None
+		"""
 		if self._settings.preparation.updatabd.checked:
 			dp_args = {
 				"phen_files": self._settings.phendata,
@@ -84,10 +98,11 @@ class PhenoHandler(IHandler):
 		dp = DataProcessing(**dp_args)
 		dp.run()
 
-		return None
-
 	def _selection_data(self) -> None:
+		""" Handle data selection processing.
 
+		:return: None
+		"""
 		dp_args = {
 			"phen_files": self._settings.phendata,
 			"feature": self._settings.feature,
@@ -101,19 +116,13 @@ class PhenoHandler(IHandler):
 			"output_dir": self._out_d
 		}
 
-		# Sequential data processing
-		if self._settings.autoft:
-			if isinstance(self._settings.feature, list):
+		if self._settings.autoft and isinstance(self._settings.feature, list):
+			for item_ft in self._settings.feature:
+				dp_args.update({"feature": item_ft})
 
-				for item_ft in self._settings.feature:
-					dp_args.update({"feature": item_ft})
-
-					dp = DataProcessing(**dp_args)
-					dp.run()
-
-			return None
+				dp = DataProcessing(**dp_args)
+				dp.run()
+			return
 
 		dp = DataProcessing(**dp_args)
 		dp.run()
-
-		return None

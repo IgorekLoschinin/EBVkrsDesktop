@@ -31,7 +31,6 @@ class PreparationM(BaseModel):
 
 
 class SelectDataM(BaseModel):
-	# checked: bool
 	filefarm: None | str
 	removedaug: None | str
 
