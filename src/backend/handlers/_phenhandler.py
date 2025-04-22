@@ -56,49 +56,64 @@ class PhenoHandler(IHandler):
 		dp_args = {}
 
 		if self._settings.preparation.checked:
-			if self._settings.preparation.updatabd.checked:
-				dp_args = {
-					"phen_files": self._settings.phendata,
-					"update": [
-						self._settings.preparation.updatabd.pathto,
-						self._settings.preparation.updatabd.pathfrom
-					],
-					"output_dir": self._out_d
-				}
+			self._preparation_data()
 
-			else:
-				dp_args = {
-					"phen_files": self._settings.preparation.searchdaug.datafiles,
-					"search_daugh": self._settings.preparation.searchdaug.filesires,
-					"output_dir": self._out_d
-				}
+			return
+
+		self._selection_data()
+
+	def _preparation_data(self) -> None:
+
+		if self._settings.preparation.updatabd.checked:
+			dp_args = {
+				"phen_files": self._settings.phendata,
+				"update": [
+					self._settings.preparation.updatabd.pathto,
+					self._settings.preparation.updatabd.pathfrom
+				],
+				"output_dir": self._out_d
+			}
 
 		else:
-			if self._settings.selectdata.checked:
-				dp_args = {
-					"phen_files": self._settings.phendata,
-					"feature": self._settings.feature,
-					"kod_xoz": self._settings.selectdata.filefarm,
-					"num_lact": self._settings.numlact,
-					"cal_ped": self._settings.ped,
-					"cal_daugh": self._settings.daughters,
-					"rm_daugh": self._settings.selectdata.removedaug,
-					"accum": self._settings.accummeth,
-					"output_dir": self._out_d
-				}
-
-			else:
-				dp_args = {
-					"phen_files": self._settings.phendata,
-					"feature": self._settings.feature,
-					"num_lact": self._settings.numlact,
-					"cal_ped": self._settings.ped,
-					"cal_daugh": self._settings.daughters,
-					"accum": self._settings.accummeth,
-					"output_dir": self._out_d
-				}
-
-			dp_args.update({'add_snp': self._settings.addfilesnp})
+			dp_args = {
+				"phen_files": self._settings.preparation.searchdaug.datafiles,
+				"search_daugh": self._settings.preparation.searchdaug.filesires,
+				"output_dir": self._out_d
+			}
 
 		dp = DataProcessing(**dp_args)
 		dp.run()
+
+		return None
+
+	def _selection_data(self) -> None:
+
+		dp_args = {
+			"phen_files": self._settings.phendata,
+			"feature": self._settings.feature,
+			"kod_xoz": self._settings.selectdata.filefarm,
+			"num_lact": self._settings.numlact,
+			"cal_ped": self._settings.ped,
+			"cal_daugh": self._settings.daughters,
+			"rm_daugh": self._settings.selectdata.removedaug,
+			"accum": self._settings.accummeth,
+			"add_snp": self._settings.addfilesnp,
+			"output_dir": self._out_d
+		}
+
+		# Sequential data processing
+		if self._settings.autoft:
+			if isinstance(self._settings.feature, list):
+
+				for item_ft in self._settings.feature:
+					dp_args.update({"feature": item_ft})
+
+					dp = DataProcessing(**dp_args)
+					dp.run()
+
+			return None
+
+		dp = DataProcessing(**dp_args)
+		dp.run()
+
+		return None

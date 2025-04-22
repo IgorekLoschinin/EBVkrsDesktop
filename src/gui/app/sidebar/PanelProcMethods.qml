@@ -44,12 +44,12 @@ Control {
                     currInd: 5
                 }
                 ListElement {
-                    name: qsTr("Pipeline")
+                    name: qsTr("Parentage")
                     sourceImg: "qrc:/icons/pipeline.svg"
                     currInd: 6
                 }
                 ListElement {
-                    name: qsTr("Modeling")
+                    name: qsTr("BLUPF90")
                     sourceImg: "qrc:/icons/modelling.svg"
                     currInd: 7
                 }

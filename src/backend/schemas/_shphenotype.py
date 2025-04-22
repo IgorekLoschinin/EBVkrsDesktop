@@ -31,7 +31,7 @@ class PreparationM(BaseModel):
 
 
 class SelectDataM(BaseModel):
-	checked: bool
+	# checked: bool
 	filefarm: None | str
 	removedaug: None | str
 
@@ -40,7 +40,8 @@ class RequestPheno(BaseModel):
 	id: str
 	preparation: PreparationM
 	phendata: None | str
-	feature: None | str
+	feature: None | str | list[str]
+	autoft: bool
 	accummeth: bool
 	numlact: int
 	ped: bool
