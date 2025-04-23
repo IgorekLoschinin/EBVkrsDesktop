@@ -85,6 +85,9 @@ TemplatePage {
                                 RowLayout {
                                     Layout.fillWidth: true
 
+                                    enabled: idChBAutoEstFt.checked && idSelectTypeCalVar.displayText === "all" ? false : true
+                                    opacity: idChBAutoEstFt.checked && idSelectTypeCalVar.displayText === "all" ? 0.5 : 1
+
                                     Text {
                                         Layout.rightMargin: 15
 
@@ -97,8 +100,9 @@ TemplatePage {
                                     CustomComboBox {
                                         id: idFeatureEbv
                                         currentIndex: 0
-                                        // displayText: currentText
                                         model: backend.ebv_model.list_feature
+
+                                        hoverEnabled: !(idChBAutoEstFt.checked && idSelectTypeCalVar.displayText === "all")
 
                                         onCurrentTextChanged: {
                                             if (idSelectTypeCalVar.displayText === "conf") {
@@ -137,6 +141,28 @@ TemplatePage {
                                         id: idEbvTypeEstMethod
                                         currentIndex: 0
                                         model: ['blup', 'gblup']
+                                    }
+                                }
+                            }
+
+                            // Auto estimation feature
+                            CustomCheckbox {
+                                id: idChBAutoEstFt
+
+                                nameChb: qsTr("Auto")
+
+                                CustomTooltip {
+                                    id: idHintAutoEst
+                                    object: idChBAutoEstFt
+                                    textLbl: qsTr("Automatic (Sequential) estimation of features by list.")
+
+                                    x: idChBAutoEstFt.width
+                                    visible: {
+                                        if (disableTT) {
+                                            return idChBAutoEstFt.hovered ? true : false
+                                        }
+
+                                        return false
                                     }
                                 }
                             }

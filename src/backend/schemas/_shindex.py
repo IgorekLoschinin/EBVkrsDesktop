@@ -21,8 +21,9 @@ class GivcModel(BaseModel):
 
 class RequestInd(BaseModel):
 	id: str
+	auto: bool
 	estmethod: str
-	feature: str
+	feature: str | list[str]
 	animal: str
 	index: bool
 	complex_i: bool
