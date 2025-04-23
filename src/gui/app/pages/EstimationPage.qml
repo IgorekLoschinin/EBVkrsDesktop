@@ -12,12 +12,67 @@ TemplatePage {
     urlPage: qsTr("Estimate breeding value")
     sendForm: {
         'id': 'ebv',
+        'auto': idChBAutoEstFt.checked,
         'estmethod': idEbvTypeEstMethod.displayText,
-        'feature': idFeatureEbv.displayText,
-        'variance': idSelectTypeCalVar.displayText === "conf" ? tableInVariance.getVariance(tableInVariance.currentModel) : tableInVariance.defVariance,
+        'feature': idChBAutoEstFt.checked ? backend.ebv_model.list_feature : idFeatureEbv.displayText,
+        'variance': estimationFunc.handleVar(),     //idSelectTypeCalVar.displayText === "conf" ? tableInVariance.getVariance(tableInVariance.currentModel) : tableInVariance.defVariance,
         'parallel': idCheckBoxParallelEst.checked,
         'numthread': idInputNumThredEst.text.length === 0 ? null : idInputNumThredEst.text,
         'utilsf90': backend.settings_model.settings.utils_f90
+    }
+
+    QtObject {
+        id: estimationFunc
+
+        function handleVar() {
+            if (!idChBAutoEstFt.checked) {
+                if (idSelectTypeCalVar.displayText === "conf") {
+                    return tableInVariance.getVariance(tableInVariance.currentModel)
+                }
+
+                return tableInVariance.defVariance
+
+            } else {
+
+                var list_obj_var = {}
+                var lstFt = backend.ebv_model.list_feature
+
+                if (idSelectTypeCalVar.displayText === "conf") {
+                    for (var i = 0; i < lstFt.length; i++) {
+                        list_obj_var[lstFt[i]] = tableInVariance.getVariance(tableInVariance.modelsFtVar[i])
+                    }
+
+                    return list_obj_var
+                }
+
+                for (var j = 0; j < lstFt.length; j++) {
+                    list_obj_var[lstFt[j]] = tableInVariance.getVariance(
+                        tableInVariance.initTable(
+                            tableInVariance.modelsFtVar[j],
+                            backend.ebv_model.get_fields_table[lstFt[j]]
+                        )
+                    )
+                }
+
+                return list_obj_var
+
+
+                // tableInVariance.currentModel = tableInVariance.initTable(
+                //     tableInVariance.modelsFtVar[currentIndex],
+                //     backend.ebv_model.get_fields_table[idFeatureEbv.currentText]
+                // )
+
+                // tableInVariance.getVariance(
+                //     tableInVariance.initTable(
+                //         tableInVariance.modelsFtVar[currentIndex],
+                //         backend.ebv_model.get_fields_table[idFeatureEbv.currentText]
+                //     )
+                // )
+
+            }
+
+        }
+
     }
 
     Component {
@@ -77,6 +132,28 @@ TemplatePage {
                             spacing: 10
                             Layout.fillWidth: true
                             Layout.leftMargin: marginContentSect
+
+                            // Auto estimation feature
+                            CustomCheckbox {
+                                id: idChBAutoEstFt
+
+                                nameChb: qsTr("Auto")
+
+                                CustomTooltip {
+                                    id: idHintAutoEst
+                                    object: idChBAutoEstFt
+                                    textLbl: qsTr("Automatic (Sequential) estimation of features by list.")
+
+                                    x: idChBAutoEstFt.width
+                                    visible: {
+                                        if (disableTT) {
+                                            return idChBAutoEstFt.hovered ? true : false
+                                        }
+
+                                        return false
+                                    }
+                                }
+                            }
 
                             RowLayout {
                                 spacing: 30
@@ -143,29 +220,7 @@ TemplatePage {
                                         model: ['blup', 'gblup']
                                     }
                                 }
-                            }
-
-                            // Auto estimation feature
-                            CustomCheckbox {
-                                id: idChBAutoEstFt
-
-                                nameChb: qsTr("Auto")
-
-                                CustomTooltip {
-                                    id: idHintAutoEst
-                                    object: idChBAutoEstFt
-                                    textLbl: qsTr("Automatic (Sequential) estimation of features by list.")
-
-                                    x: idChBAutoEstFt.width
-                                    visible: {
-                                        if (disableTT) {
-                                            return idChBAutoEstFt.hovered ? true : false
-                                        }
-
-                                        return false
-                                    }
-                                }
-                            }
+                            }                            
 
                             GroupBox {
                                 padding: 0
