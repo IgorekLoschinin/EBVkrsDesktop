@@ -113,8 +113,8 @@ class EbvModel(QObject):
 		""" Save variance configuration data to a JSON file.
 
 		:param data: Dictionary containing variance configuration data
-			Structure: {feature_name: configuration_dict} path_file: Path to
-			the output JSON file.
+			Structure: {feature_name: configuration_dict}
+		:param path_file: Path to the output JSON file.
 
 		:return: None
 		"""

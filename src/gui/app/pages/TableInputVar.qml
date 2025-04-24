@@ -16,6 +16,7 @@ Control {
     property var defVariance: null
     property var currentModel: null
 
+    // Преобразует объект модели в словарь для передачи в бэкенд
     function getVariance(objModel) {
         var allData = {};
 
@@ -31,6 +32,49 @@ Control {
         return allData
     }
 
+    function getDefVariance(objModel) {
+        var allData = {};
+
+        for (var i = 0; i < objModel.count; i++) {
+            var item = objModel.get(i);
+
+            allData[item.name] = {
+                "varE": null,
+                "varG": null
+            };
+        }
+
+        return allData
+    }
+
+    function createTablVar(lstSubFt) {
+        // var data = {};
+
+        // for (var i = 0; i < lstDubFt.length; i++) {
+        //     data[lstDubFt[i]] = {
+        //         "varE": null,
+        //         "varG": null
+        //     };
+        // }
+
+        // return data
+
+        if (objModel.count > 0) {
+            return objModel
+        }
+
+        lstFieldName.forEach(
+            (elem) => objModel.append({
+                name: elem,
+                varE: "0",
+                varG: "0"
+            })
+        )
+
+        return objModel
+    }
+
+    // Метод, который заполняет данные из файла когда используется конфиг
     function setVarinace(data) {
         var subFtVar = backend.ebv_model.get_fields_table[idFeatureEbv.currentText]
 
@@ -48,10 +92,12 @@ Control {
 
     }
 
+    // Используется при выборе метода оценки - all or conf
     function reloadTable(curInd) {
         currentModel = modelsFtVar[curInd]
     }
 
+    // Инициализация модели - подготовка модели
     function initTable(objModel, lstFieldName) {
 
         if (objModel.count > 0) {
@@ -124,6 +170,8 @@ Control {
                     implicitWidth: 300
 
                     model: currentModel
+
+                    // highlight: Rectangle { color: "lightblue"; radius: 5 }
 
                     delegate: RowLayout {
                         spacing: 10

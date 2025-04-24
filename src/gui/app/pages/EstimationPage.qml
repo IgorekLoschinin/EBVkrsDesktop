@@ -15,7 +15,7 @@ TemplatePage {
         'auto': idChBAutoEstFt.checked,
         'estmethod': idEbvTypeEstMethod.displayText,
         'feature': idChBAutoEstFt.checked ? backend.ebv_model.list_feature : idFeatureEbv.displayText,
-        'variance': estimationFunc.handleVar(),     //idSelectTypeCalVar.displayText === "conf" ? tableInVariance.getVariance(tableInVariance.currentModel) : tableInVariance.defVariance,
+        'variance': estimationFunc.handleVar(), //idSelectTypeCalVar.displayText === "conf" ? tableInVariance.getVariance(tableInVariance.currentModel) : tableInVariance.defVariance,
         'parallel': idCheckBoxParallelEst.checked,
         'numthread': idInputNumThredEst.text.length === 0 ? null : idInputNumThredEst.text,
         'utilsf90': backend.settings_model.settings.utils_f90
@@ -25,6 +25,7 @@ TemplatePage {
         id: estimationFunc
 
         function handleVar() {
+            // Логика для одиночной модели поведения
             if (!idChBAutoEstFt.checked) {
                 if (idSelectTypeCalVar.displayText === "conf") {
                     return tableInVariance.getVariance(tableInVariance.currentModel)
@@ -37,40 +38,27 @@ TemplatePage {
                 var list_obj_var = {}
                 var lstFt = backend.ebv_model.list_feature
 
+                // Логика для автоматического - последовательного поведения
                 if (idSelectTypeCalVar.displayText === "conf") {
                     for (var i = 0; i < lstFt.length; i++) {
                         list_obj_var[lstFt[i]] = tableInVariance.getVariance(tableInVariance.modelsFtVar[i])
                     }
 
                     return list_obj_var
-                }
 
-                for (var j = 0; j < lstFt.length; j++) {
-                    list_obj_var[lstFt[j]] = tableInVariance.getVariance(
-                        tableInVariance.initTable(
-                            tableInVariance.modelsFtVar[j],
-                            backend.ebv_model.get_fields_table[lstFt[j]]
+                } else {
+                    for (var j = 0; j < lstFt.length; j++) {
+                        list_obj_var[lstFt[j]] = tableInVariance.getDefVariance(
+                            tableInVariance.initTable(
+                                tableInVariance.modelsFtVar[j],
+                                backend.ebv_model.get_fields_table[lstFt[j]]
+                            )
                         )
-                    )
+                    }
+
+                    return list_obj_var
                 }
-
-                return list_obj_var
-
-
-                // tableInVariance.currentModel = tableInVariance.initTable(
-                //     tableInVariance.modelsFtVar[currentIndex],
-                //     backend.ebv_model.get_fields_table[idFeatureEbv.currentText]
-                // )
-
-                // tableInVariance.getVariance(
-                //     tableInVariance.initTable(
-                //         tableInVariance.modelsFtVar[currentIndex],
-                //         backend.ebv_model.get_fields_table[idFeatureEbv.currentText]
-                //     )
-                // )
-
             }
-
         }
 
     }
@@ -189,10 +177,10 @@ TemplatePage {
                                                     backend.ebv_model.get_fields_table[idFeatureEbv.currentText]
                                                 )
 
-                                                return
+                                                // return
                                             }
 
-                                            tableInVariance.defVariance = tableInVariance.getVariance(
+                                            tableInVariance.defVariance = tableInVariance.getDefVariance(
                                                 tableInVariance.initTable(
                                                     tableInVariance.modelsFtVar[currentIndex],
                                                     backend.ebv_model.get_fields_table[idFeatureEbv.currentText]
