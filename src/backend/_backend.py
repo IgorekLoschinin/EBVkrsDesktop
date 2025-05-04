@@ -7,15 +7,15 @@
 # of this license document, but changing it is not allowed.
 
 """
-Backend module for application core functionality.
+	Backend module for application core functionality.
 
-This module provides the main backend controller that manages data models,
-signal handling, and processing operations. It serves as the bridge between
-the UI and business logic components.
+	This module provides the main backend controller that manages data models,
+	signal handling, and processing operations. It serves as the bridge between
+	the UI and business logic components.
 
-Classes:
-    Backend: Main backend controller class that manages application state and
-    operations.
+	Classes:
+		Backend: Main backend controller class that manages application state
+		and operations.
 """
 
 __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
@@ -147,33 +147,31 @@ class Backend(QObject):
 		:raise Exception: If processing fails, exception is caught and logged.
 		"""
 
-		print(data)
+		if data is None:
+			self.error("Data is not None!")
+			return None
 
-		# if data is None:
-		# 	self.error("Data is not None!")
-		# 	return None
-		#
-		# # Ensure workspace directory exists
-		# if not (self.common_namespace.is_dir() and
-		# 		self.common_namespace.exists()):
-		# 	self.common_namespace.mkdir()
-		#
-		# try:
-		# 	# Initialize and run model handler
-		# 	self._worker_md = ModelHandler(
-		# 		data=data,
-		# 		output_dir=self.common_namespace
-		# 	)
-		# 	self.progbar_model.finished_code = -1  # Code for 'in process' message
-		#
-		# 	self._worker_md.handle()
-		# 	self._worker_md.exitCode.connect(self._exec_prog)
-		#
-		# 	# Activate progress bar in UI
-		# 	self.progbar_model.enable_prg_win = True
-		#
-		# except Exception as e:
-		# 	self.exception(e)
+		# Ensure workspace directory exists
+		if not (self.common_namespace.is_dir() and
+				self.common_namespace.exists()):
+			self.common_namespace.mkdir()
+
+		try:
+			# Initialize and run model handler
+			self._worker_md = ModelHandler(
+				data=data,
+				output_dir=self.common_namespace
+			)
+			self.progbar_model.finished_code = -1  # Code for 'in process' message
+
+			self._worker_md.handle()
+			self._worker_md.exitCode.connect(self._exec_prog)
+
+			# Activate progress bar in UI
+			self.progbar_model.enable_prg_win = True
+
+		except Exception as e:
+			self.exception(e)
 
 	@Slot()
 	def ok(self) -> None:

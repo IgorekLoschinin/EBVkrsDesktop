@@ -15,52 +15,10 @@ TemplatePage {
         'auto': idChBAutoEstFt.checked,
         'estmethod': idEbvTypeEstMethod.displayText,
         'feature': idChBAutoEstFt.checked ? backend.ebv_model.list_feature : idFeatureEbv.displayText,
-        'variance': estimationFunc.handleVar(), //idSelectTypeCalVar.displayText === "conf" ? tableInVariance.getVariance(tableInVariance.currentModel) : tableInVariance.defVariance,
+        'variance': tableInVariance.tableVar.model.default_model,
         'parallel': idCheckBoxParallelEst.checked,
         'numthread': idInputNumThredEst.text.length === 0 ? null : idInputNumThredEst.text,
         'utilsf90': backend.settings_model.settings.utils_f90
-    }
-
-    QtObject {
-        id: estimationFunc
-
-        function handleVar() {
-            // Логика для одиночной модели поведения
-            if (!idChBAutoEstFt.checked) {
-                if (idSelectTypeCalVar.displayText === "conf") {
-                    return tableInVariance.getVariance(tableInVariance.currentModel)
-                }
-
-                return tableInVariance.defVariance
-
-            } else {
-
-                var list_obj_var = {}
-                var lstFt = backend.ebv_model.list_feature
-
-                // Логика для автоматического - последовательного поведения
-                if (idSelectTypeCalVar.displayText === "conf") {
-                    for (var i = 0; i < lstFt.length; i++) {
-                        list_obj_var[lstFt[i]] = tableInVariance.getVariance(tableInVariance.modelsFtVar[i])
-                    }
-
-                    return list_obj_var
-
-                } else {
-                    for (var j = 0; j < lstFt.length; j++) {
-                        list_obj_var[lstFt[j]] = tableInVariance.getDefVariance(
-                            tableInVariance.initTable(
-                                tableInVariance.modelsFtVar[j],
-                                backend.ebv_model.get_fields_table[lstFt[j]]
-                            )
-                        )
-                    }
-
-                    return list_obj_var
-                }
-            }
-        }
-
     }
 
     Component {
@@ -170,22 +128,8 @@ TemplatePage {
                                         hoverEnabled: !(idChBAutoEstFt.checked && idSelectTypeCalVar.displayText === "all")
 
                                         onCurrentTextChanged: {
-                                            if (idSelectTypeCalVar.displayText === "conf") {
-
-                                                tableInVariance.currentModel = tableInVariance.initTable(
-                                                    tableInVariance.modelsFtVar[currentIndex],
-                                                    backend.ebv_model.get_fields_table[idFeatureEbv.currentText]
-                                                )
-
-                                                // return
-                                            }
-
-                                            tableInVariance.defVariance = tableInVariance.getDefVariance(
-                                                tableInVariance.initTable(
-                                                    tableInVariance.modelsFtVar[currentIndex],
-                                                    backend.ebv_model.get_fields_table[idFeatureEbv.currentText]
-                                                )
-                                            )
+                                            tableInVariance.tableName = idFeatureEbv.currentText
+                                            tableInVariance.tableVar.model = backend.ebv_model.ft_var_model[idFeatureEbv.currentText]
                                         }
                                     }
                                 }
@@ -274,12 +218,6 @@ TemplatePage {
                                     CustomComboBox {
                                         id: idSelectTypeCalVar
                                         model: ["all", "conf"]
-
-                                        onCurrentTextChanged: {
-                                            if (idSelectTypeCalVar.currentText === "conf") {
-                                                tableInVariance.reloadTable(idFeatureEbv.currentIndex)
-                                            }
-                                        }
                                     }
                                 }
 
