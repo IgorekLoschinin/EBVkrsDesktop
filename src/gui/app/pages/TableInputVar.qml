@@ -9,65 +9,8 @@ import "controls"
 Control {
     id: tabInVar
 
-    readonly property var modelsFtVar: [
-        modelMilk, modelConf, modelRepr, modelScs
-    ]
-
-    property var defVariance: null
-    property var currentModel: null
-
-    function getVariance(objModel) {
-        var allData = {};
-
-        for (var i = 0; i < objModel.count; i++) {
-            var item = objModel.get(i);
-
-            allData[item.name] = {
-                "varE": item.varE === '0' ? null : item.varE,
-                "varG": item.varG === '0' ? null : item.varG
-            };
-        }
-
-        return allData
-    }
-
-    function setVarinace(data) {
-        var subFtVar = backend.ebv_model.get_fields_table[idFeatureEbv.currentText]
-
-        if (currentModel !== null) {
-            currentModel.clear()
-
-            subFtVar.forEach(
-                (elem) => currentModel.append({
-                    name: elem,
-                    varE: data[elem].varE === undefined ? "0" : data[elem].varE.toString(),
-                    varG: data[elem].varG === undefined ? "0" : data[elem].varG.toString()
-                })
-            )
-        }
-
-    }
-
-    function reloadTable(curInd) {
-        currentModel = modelsFtVar[curInd]
-    }
-
-    function initTable(objModel, lstFieldName) {
-
-        if (objModel.count > 0) {
-            return objModel
-        }
-
-        lstFieldName.forEach(
-            (elem) => objModel.append({
-                name: elem,
-                varE: "0",
-                varG: "0"
-            })
-        )
-
-        return objModel
-    }
+    property alias tableVar: listInputVar
+    property string tableName: ""
 
     contentItem: RowLayout {
 
@@ -109,12 +52,6 @@ Control {
 
             // Body - row and col
             RowLayout {
-
-                ListModel { id: modelMilk }
-                ListModel { id: modelConf }
-                ListModel { id: modelRepr }
-                ListModel { id: modelScs }
-
                 ListView {
                     id: listInputVar
                     clip: true
@@ -123,7 +60,7 @@ Control {
                     implicitHeight: 250
                     implicitWidth: 300
 
-                    model: currentModel
+                    // highlight: Rectangle { color: "lightblue"; radius: 5 }
 
                     delegate: RowLayout {
                         spacing: 10
@@ -131,7 +68,7 @@ Control {
                         Control {
                             implicitWidth: 80
                             contentItem: Label {
-                                text: name
+                                text: ftName
                                 font.pixelSize: sizeTextInSect
                                 font.family: "Segoe UI"
                                 color: txtSection
@@ -145,13 +82,14 @@ Control {
                             Layout.fillWidth: true
                             implicitWidth: 80
 
-                            phText: varE
+                            phText: '0'
+                            text: varE
 
-                            onEditingFinished: {
-                                currentModel.set(
-                                    index,
-                                    {"varE": idInVarE.text}
-                                )
+                            onEditingFinished: varE = idInVarE.text
+                            onTextEdited: {
+                                if (idInVarE.text.length === 0) {
+                                    varE = null
+                                }
                             }
 
                             validator: DoubleValidator {}
@@ -162,13 +100,14 @@ Control {
                             Layout.fillWidth: true
                             implicitWidth: 80
 
-                            phText: varG
+                            phText: '0'
+                            text: varG
 
-                            onEditingFinished: {
-                                currentModel.set(
-                                    index,
-                                    {"varG": idInVarG.text}
-                                )
+                            onEditingFinished: varG = idInVarG.text
+                            onTextEdited: {
+                                if (idInVarG.text.length === 0) {
+                                    varG = null
+                                }
                             }
 
                             validator: DoubleValidator {}
@@ -197,8 +136,7 @@ Control {
                     fileMode: FileDialog.SaveFile
                     currentFolder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
                     onAccepted: backend.ebv_model.save_variance_conf(
-                        tabInVar.getVariance(tabInVar.currentModel),
-                        rePath(selectedFile.toString())
+                        tabInVar.tableName, rePath(selectedFile.toString())
                     )
                 }
 
@@ -224,7 +162,7 @@ Control {
                     id: idLoadFileConf
                     fileMode: FileDialog.OpenFile
                     currentFolder: StandardPaths.standardLocations(StandardPaths.DocumentsLocation)[0]
-                    onAccepted: backend.ebv_model.load_variance_conf(rePath(selectedFile.toString()))
+                    onAccepted: backend.ebv_model.load_variance_conf(tabInVar.tableName, rePath(selectedFile.toString()))
                 }
 
                 CustomTooltip {
@@ -234,6 +172,13 @@ Control {
                     visible: disableTT ? idBtnFileUpload.hovered : false
                 }
             }
+
+            Button {
+                id: idResetModel
+                text: "Reset"
+                onClicked: listInputVar.model.get_data()
+                background.implicitWidth: 50
+            }
         }
 
         Item {
@@ -241,11 +186,4 @@ Control {
         }
     }
 
-    Connections {
-        target: backend.ebv_model
-
-        function onUploadVar (data) {
-            setVarinace(data)
-        }
-    }
 }

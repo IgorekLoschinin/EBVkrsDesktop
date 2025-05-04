@@ -10,8 +10,9 @@ TemplatePage {
     urlPage: qsTr("Index estimate of breeding value")
     sendForm: {
         'id': 'index',
+        'auto': idChBAutoIndexing.checked,
         'estmethod': idComBoxTypeEstMethod.displayText,
-        'feature': idSelectFeatureForInd.displayText,
+        'feature': idChBAutoIndexing.checked ? backend.ind_model.list_feature : idSelectFeatureForInd.displayText,
         'animal': idComBoxChooseAnimal.displayText,
         'index': idRadioBtnTypeSubindex.checked,
         'complex_i': idRadioBtnComplexInd.checked,
@@ -88,9 +89,39 @@ TemplatePage {
                             Layout.fillWidth: true
                             Layout.leftMargin: marginContentSect
 
+
+                            // Auto index processing feature
+                            CustomCheckbox {
+                                id: idChBAutoIndexing
+
+                                nameChb: qsTr("Auto")
+
+                                enabled: !idRadioBtnComplexInd.checked
+                                opacity: !idRadioBtnComplexInd.checked ? 1 : 0.5
+                                hoverEnabled: !idRadioBtnComplexInd.checked
+
+                                CustomTooltip {
+                                    id: idHintAutoInd
+                                    object: idChBAutoIndexing
+                                    textLbl: qsTr("Automatic (Sequential) indexing of features by list.")
+
+                                    x: idChBAutoIndexing.width
+                                    visible: {
+                                        if (disableTT) {
+                                            return idChBAutoIndexing.hovered ? true : false
+                                        }
+
+                                        return false
+                                    }
+                                }
+                            }
+
                             RowLayout {
                                 spacing: 10
                                 Layout.fillWidth: true
+
+                                enabled: idChBAutoIndexing.checked ? false : true
+                                opacity: idChBAutoIndexing.checked ? 0.5 : 1
 
                                 Text {
                                     text: qsTr("Type index: ")
@@ -122,8 +153,8 @@ TemplatePage {
                                 RowLayout {
                                     Layout.fillWidth: true
 
-                                    enabled: idRadioBtnTypeSubindex.checked
-                                    opacity: idRadioBtnTypeSubindex.checked ? 1 : 0.5
+                                    enabled: !idRadioBtnTypeSubindex.checked || idChBAutoIndexing.checked ? false : true
+                                    opacity: !idRadioBtnTypeSubindex.checked || idChBAutoIndexing.checked ? 0.5 : 1
 
                                     Text {
                                         Layout.rightMargin: 8
@@ -139,7 +170,7 @@ TemplatePage {
                                         currentIndex: 0
                                         model: backend.ind_model.list_feature
 
-                                        hoverEnabled: !idHeadSectGivc.checked
+                                        hoverEnabled: idHeadSectGivc.checked || idChBAutoIndexing.checked ? false : true
                                     }
                                 }
 
@@ -286,9 +317,40 @@ TemplatePage {
                                     id: idCheckBoxPrivDisOpt
                                     nameChb: qsTr("Disabled optimal value")
 
-                                    hoverEnabled: !idHeadSectGivc.checked ? idSelectFeatureForInd.displayText === "conform" : false
-                                    enabled: idRadioBtnTypeSubindex.checked ? idSelectFeatureForInd.displayText === "conform" : false
-                                    opacity: idRadioBtnTypeSubindex.checked ? idSelectFeatureForInd.displayText === "conform" ? 1 : 0.3 : 0.3
+                                    hoverEnabled: {
+                                        // !idHeadSectGivc.checked ? idSelectFeatureForInd.displayText === "conform" : false
+                                        if (idHeadSectGivc.checked || idChBAutoIndexing.checked || !idRadioBtnTypeSubindex.checked) {
+                                            return false
+                                        }
+
+                                        return idSelectFeatureForInd.displayText === "conform"
+                                    }
+
+                                    enabled: {
+                                        // idRadioBtnTypeSubindex.checked ? idSelectFeatureForInd.displayText === "conform" : false
+                                        if (!idRadioBtnTypeSubindex.checked || idChBAutoIndexing.checked) {
+                                            return false
+                                        }
+
+                                        return idSelectFeatureForInd.displayText === "conform"
+                                    }
+
+                                    opacity: {
+                                        // idRadioBtnTypeSubindex.checked ? idSelectFeatureForInd.displayText === "conform" ? 1 : 0.3 : 0.3
+                                        if (idChBAutoIndexing.checked) {
+                                            return 0.3
+
+                                        } else if (!idRadioBtnTypeSubindex.checked) {
+                                            return 0.3
+
+                                        } else if (idSelectFeatureForInd.displayText === "conform") {
+                                            return 1
+                                        }
+
+                                        return 0.3
+                                    }
+
+                                    checked: idChBAutoIndexing.checked ? false : false
 
                                     CustomTooltip {
                                         id: idHintPrivDisOpt

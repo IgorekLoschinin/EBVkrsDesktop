@@ -7,15 +7,15 @@
 # of this license document, but changing it is not allowed.
 
 """
-Backend module for application core functionality.
+	Backend module for application core functionality.
 
-This module provides the main backend controller that manages data models,
-signal handling, and processing operations. It serves as the bridge between
-the UI and business logic components.
+	This module provides the main backend controller that manages data models,
+	signal handling, and processing operations. It serves as the bridge between
+	the UI and business logic components.
 
-Classes:
-    Backend: Main backend controller class that manages application state and
-    operations.
+	Classes:
+		Backend: Main backend controller class that manages application state
+		and operations.
 """
 
 __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"

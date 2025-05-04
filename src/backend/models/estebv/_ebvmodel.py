@@ -38,6 +38,11 @@ from ...libkrs.utils import (
 
 from ._gencfgvar import GeneratorCfgVar
 
+from ._milkvmodel import MilkVarModel
+from ._conformvmodel import ConformVarModel
+from ._reprodvmodel import ReprodVarModel
+from ._scsvmodel import ScsVarModel
+
 
 @logger(name="EbvModel")
 class EbvModel(QObject):
@@ -57,16 +62,18 @@ class EbvModel(QObject):
 		genCfgVarSig(): Emitted when generator configuration changes
 
 	Properties:
-		generator_var (GeneratorCfgVar): Access to variance configuration generator
+		generator_var (GeneratorCfgVar): Access to variance configuration
+		generator
 		list_feature (list[str]): List of available breeding features
-		get_fields_table (dict[str, list[str]]): Table structure for EBV features
+		get_fields_table (dict[str, list[str]]): Table structure for EBV
+		features.
 	"""
 
-	__slots__ = ("__generator_cfg_var",)
+	# __slots__ = ("__generator_cfg_var",)
 
-	uploadVar = Signal(dict)
 	getLstFeature = Signal(list)
-	getfieldsTable = Signal(dict)
+	sigFtVarModel = Signal()
+
 	genCfgVarSig = Signal()
 
 	def __init__(self) -> None:
@@ -74,6 +81,11 @@ class EbvModel(QObject):
 		QObject.__init__(self)
 
 		self.__generator_cfg_var = GeneratorCfgVar()
+
+		self._milk_v_model = MilkVarModel()
+		self._conform_v_model = ConformVarModel()
+		self._reprod_v_model = ReprodVarModel()
+		self._scs_v_model = ScsVarModel()
 
 	@Property(GeneratorCfgVar, notify=genCfgVarSig)
 	def generator_var(self) -> GeneratorCfgVar:
@@ -91,47 +103,59 @@ class EbvModel(QObject):
 		"""
 		return CMD_FEATURE
 
-	@Property(dict, notify=getfieldsTable)
-	def get_fields_table(self) -> dict[str, list[str]]:
-		""" Get the table structure mapping features to their display fields.
+	@Property(dict, notify=sigFtVarModel)
+	def ft_var_model(self) -> dict[str, list[str]]:
 
-		:return dict[str, list[str]]: Dictionary where keys are feature
-			names and values are lists of display fields.
-		"""
 		return dict(zip(
 			CMD_FEATURE,
 			[
-				FEATURE_NAME_MILK,
-				FEATURE_NAME_CONFORM,
-				FEATURE_NAME_REPROD,
-				FEATURE_NAME_SCS
+				self._milk_v_model,
+				self._conform_v_model,
+				self._reprod_v_model,
+				self._scs_v_model
 			]
 		))
 
-	@Slot(dict, str)
-	def save_variance_conf(self, data: dict[str, dict], path_file: str) -> None:
+	@Slot(str, str)
+	def save_variance_conf(self, ft_name: str, path_file: str) -> None:
 		""" Save variance configuration data to a JSON file.
 
-		:param data: Dictionary containing variance configuration data
-			Structure: {feature_name: configuration_dict} path_file: Path to
-			the output JSON file.
-
-		:return: None
+		:param ft_name:
+		:param path_file:
+		:return:
 		"""
-		to_json(data, path_file)
+		to_json(self.ft_var_model.get(ft_name).get_data, path_file)
 
-	@Slot(str)
-	def load_variance_conf(self, path_file: str) -> None:
-		""" Load variance configuration from a JSON file and emit uploadVar
+	@Slot(str, str)
+	def load_variance_conf(self, ft_name: str, path_file: str) -> None:
+		"""  Load variance configuration from a JSON file and emit uploadVar
 		signal.
 
-		:param path_file: Path to the JSON configuration file.
-
-		Emits:
-			uploadVar: Signal with the loaded configuration data
-
-		:return: None
+		:param ft_name:
+		:param path_file:
+		:return:
 		"""
 		data = from_json(path_file)
 
-		self.uploadVar.emit(data)
+		self.ft_var_model.get(ft_name).set_data(data)
+
+	@Slot(str, str, bool)
+	def handler_var(
+			self,
+			method: str,
+			feature: str,
+			multi: bool | None = None
+	) -> dict | list[dict] | None:
+
+		match method:
+			case "all":
+				...
+
+			case "conf":
+				...
+
+		return None
+
+	@Slot(str)
+	def print(self, data: str) -> None:
+		print(data)

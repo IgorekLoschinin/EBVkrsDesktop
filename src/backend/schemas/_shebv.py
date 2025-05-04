@@ -29,7 +29,7 @@ from ..libkrs.est.varmodel.schemas import (
 class RequestEbv(BaseModel):
 	id: str
 	estmethod: str
-	feature: str
+	feature: str | list[str]
 	variance: Any
 	parallel: bool
 	numthread: None | str

@@ -23,16 +23,16 @@ TemplatePage {
             }
         },
         'phendata': idDirDataFiles.inputText.length === 0 ? null : idDirDataFiles.inputText,
-        'feature': !idControlSelectFtDp.checked ? null : idSelectFeatureDp.displayText,
+        'feature': !idControlSelectFtDp.checked ? !idChBAutoProcFt.checked ? null : backend.phen_model.list_feature : idSelectFeatureDp.displayText,
+        'autoft': idChBAutoProcFt.checked,
         'accummeth': idAccumulateDp.checked,
         'numlact': idNumLactation.currentIndex,
         'ped': idCheckBoxPed.checked,
         'daughters': idCheckBoxDaug.checked,
         'addfilesnp': !idAdditionSnpData.checked ? null : idInputPathSnpFile.inputText.length === 0 ? null : idInputPathSnpFile.inputText,
-        'selectdata': {
-            'checked': idCBSelectData.checked,
-            'filefarm': idInputFarm.inputText.length === 0 ? null : idInputFarm.inputText,
-            'removedaug': idInputRemoveDaug.inputText.length === 0 ? null : idInputRemoveDaug.inputText,
+        'selectdata': {            
+            'filefarm': !idCBSelectData.checked ? null : idInputFarm.inputText.length === 0 ? null : idInputFarm.inputText,
+            'removedaug': !idCBSelectData.checked ? null : idInputRemoveDaug.inputText.length === 0 ? null : idInputRemoveDaug.inputText,
         }
     }
 
@@ -388,39 +388,84 @@ TemplatePage {
                                 }
                             }
 
-                            CustomCheckbox {
-                                id: idControlSelectFtDp
+                            RowLayout {
+                                Layout.fillWidth: true
 
-                                hoverEnabled: !idSHeadSectAddProp.checked
+                                // Selection feature panel
+                                CustomCheckbox {
+                                    id: idControlSelectFtDp
 
-                                contentItem: RowLayout {
-                                    Layout.fillWidth: true
+                                    hoverEnabled: {
+                                        if (!idSHeadSectAddProp.checked) {
+                                            if (!idChBAutoProcFt) {
+                                                return idChBAutoProcFt.checked
+                                            }
 
-                                    Text {
-                                        leftPadding: idControlSelectFtDp.indicator.width + 6
+                                            return !idChBAutoProcFt.checked
+                                        }
 
-                                        text: qsTr("Select of Feature:")
-                                        font.pixelSize: sizeTextInSect
-                                        font.family: "Segoe UI"
-                                        color: txtSection
-
-                                        verticalAlignment: Text.AlignVCenter
-                                        horizontalAlignment: Text.AlignHCenter
+                                        return !idSHeadSectAddProp.checked
                                     }
 
-                                    CustomComboBox {
-                                        id: idSelectFeatureDp
+                                    enabled: !idChBAutoProcFt.checked
+                                    opacity: !idChBAutoProcFt.checked ? 1 : 0.7
+                                    checked: !idChBAutoProcFt.checked ? idChBAutoProcFt.checked : false
 
-                                        hoverEnabled: idControlSelectFtDp.checked
-                                        enabled: idControlSelectFtDp.checked
-                                        opacity: idControlSelectFtDp.checked ? 1 : 0.5
+                                    contentItem: RowLayout {
+                                        Layout.fillWidth: true
 
-                                        currentIndex: 0
-                                        displayText: currentText
-                                        model: backend.phen_model.list_feature
+                                        Text {
+                                            leftPadding: idControlSelectFtDp.indicator.width + 6
+
+                                            text: qsTr("Select of Feature:")
+                                            font.pixelSize: sizeTextInSect
+                                            font.family: "Segoe UI"
+                                            color: txtSection
+
+                                            verticalAlignment: Text.AlignVCenter
+                                            horizontalAlignment: Text.AlignHCenter
+                                        }
+
+                                        CustomComboBox {
+                                            id: idSelectFeatureDp
+
+                                            hoverEnabled: idControlSelectFtDp.checked ? !idChBAutoProcFt.checked : false
+                                            enabled: idControlSelectFtDp.checked
+                                            opacity: idControlSelectFtDp.checked ? 1 : 0.5
+
+                                            currentIndex: 0
+                                            displayText: currentText
+                                            model: backend.phen_model.list_feature
+                                        }
+
                                     }
-
                                 }
+
+                                // Autoproc feature selecton
+                                CustomCheckbox {
+                                    id: idChBAutoProcFt
+                                    Layout.leftMargin: 15
+
+                                    nameChb: qsTr("Auto")
+
+                                    hoverEnabled: !idSHeadSectAddProp.checked
+
+                                    CustomTooltip {
+                                        id: idHintAutoProc
+                                        object: idChBAutoProcFt
+                                        textLbl: qsTr("Automatic (Sequential) processing of features by list.")
+
+                                        x: idChBAutoProcFt.width
+                                        visible: {
+                                            if (disableTT) {
+                                                return !idSHeadSectAddProp.checked ? idChBAutoProcFt.hovered : false
+                                            }
+
+                                            return false
+                                        }
+                                    }
+                                }
+
                             }
 
                             CustomCheckbox {
@@ -451,9 +496,23 @@ TemplatePage {
 
                                 CustomCheckbox {
                                     id: idCheckBoxPed
-                                    nameChb: qsTr("Pedigree")
+                                    nameChb: qsTr("Pedigree")                                    
 
-                                    hoverEnabled: !idSHeadSectAddProp.checked
+                                    hoverEnabled: {
+                                        if (!idSHeadSectAddProp.checked) {
+                                            if (!idChBAutoProcFt) {
+                                                return idChBAutoProcFt.checked
+                                            }
+
+                                            return !idChBAutoProcFt.checked
+                                        }
+
+                                        return !idSHeadSectAddProp.checked
+                                    }
+
+                                    enabled: !idChBAutoProcFt.checked
+                                    opacity: !idChBAutoProcFt.checked ? 1 : 0.7
+                                    checked: !idChBAutoProcFt.checked ? idChBAutoProcFt.checked : false
 
                                     CustomTooltip {
                                         id: idHintPed
@@ -473,9 +532,23 @@ TemplatePage {
 
                                 CustomCheckbox {
                                     id: idCheckBoxDaug
-                                    nameChb: qsTr("Daughters")
+                                    nameChb: qsTr("Daughters")                                    
 
-                                    hoverEnabled: !idSHeadSectAddProp.checked
+                                    hoverEnabled: {
+                                        if (!idSHeadSectAddProp.checked) {
+                                            if (!idChBAutoProcFt) {
+                                                return idChBAutoProcFt.checked
+                                            }
+
+                                            return !idChBAutoProcFt.checked
+                                        }
+
+                                        return !idSHeadSectAddProp.checked
+                                    }
+
+                                    enabled: !idChBAutoProcFt.checked
+                                    opacity: !idChBAutoProcFt.checked ? 1 : 0.7
+                                    checked: !idChBAutoProcFt.checked ? idChBAutoProcFt.checked : false
 
                                     CustomTooltip {
                                         id: idHintDaug
@@ -502,9 +575,23 @@ TemplatePage {
 
                                 label: CustomCheckbox {
                                     id: idAdditionSnpData
-                                    nameChb: qsTr("Add snp file")
+                                    nameChb: qsTr("Add snp file")                                    
 
-                                    hoverEnabled: !idSHeadSectAddProp.checked
+                                    hoverEnabled: {
+                                        if (!idSHeadSectAddProp.checked) {
+                                            if (!idChBAutoProcFt) {
+                                                return idChBAutoProcFt.checked
+                                            }
+
+                                            return !idChBAutoProcFt.checked
+                                        }
+
+                                        return !idSHeadSectAddProp.checked
+                                    }
+
+                                    enabled: !idChBAutoProcFt.checked
+                                    opacity: !idChBAutoProcFt.checked ? 1 : 0.7
+                                    checked: !idChBAutoProcFt.checked ? idChBAutoProcFt.checked : false
 
                                     CustomTooltip {
                                         id: idTTAddSnpData
