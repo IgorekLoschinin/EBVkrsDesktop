@@ -26,11 +26,12 @@ from ...libkrs.est.varmodel import FEATURE_NAME_MILK
 class MilkVarModel(QAbstractListModel):
 
 	sigGetDefModel = Signal()
+	sigGetDataModel = Signal()
 
 	def __init__(self, parent=None):
 		super().__init__(parent)
 
-		self._data = self.default_model
+		self._data = self.default_model.copy()
 		self._keys = list(self._data.keys())
 
 		# Define roles
@@ -38,7 +39,7 @@ class MilkVarModel(QAbstractListModel):
 		self.VarERole = Qt.ItemDataRole.UserRole + 2
 		self.VarGRole = Qt.ItemDataRole.UserRole + 3
 
-	@property
+	@Property(dict, notify=sigGetDataModel)
 	def get_data(self) -> Callable[[], dict]:
 		return self._data
 

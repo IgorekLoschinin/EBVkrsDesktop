@@ -20,6 +20,7 @@
     <file>icons/stop.svg</file>
     <file>icons/tick.svg</file>
     <file>icons/upload.svg</file>
+    <file>icons/reset.svg</file>
     <file>icons/user.svg</file>
     <file>icons/bull.png</file>
 </qresource>

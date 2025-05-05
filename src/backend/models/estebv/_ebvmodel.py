@@ -104,7 +104,7 @@ class EbvModel(QObject):
 		return CMD_FEATURE
 
 	@Property(dict, notify=sigFtVarModel)
-	def ft_var_model(self) -> dict[str, list[str]]:
+	def ft_var_model(self) -> dict:
 
 		return dict(zip(
 			CMD_FEATURE,
@@ -144,17 +144,20 @@ class EbvModel(QObject):
 			self,
 			method: str,
 			feature: str,
-			multi: bool | None = None
+			# multi: bool | None = None
 	) -> dict | list[dict] | None:
+
+		if feature not in CMD_FEATURE:
+			return None
 
 		match method:
 			case "all":
-				...
+				return self.ft_var_model.get(feature).default_model
 
 			case "conf":
-				...
+				return self.ft_var_model.get(feature).get_data
 
-		return None
+		# return None
 
 	@Slot(str)
 	def print(self, data: str) -> None:
