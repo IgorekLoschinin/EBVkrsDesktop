@@ -15,10 +15,19 @@ TemplatePage {
         'auto': idChBAutoEstFt.checked,
         'estmethod': idEbvTypeEstMethod.displayText,
         'feature': idChBAutoEstFt.checked ? backend.ebv_model.list_feature : idFeatureEbv.displayText,
-        'variance': backend.ebv_model.handler_var(idSelectTypeCalVar.displayText, idFeatureEbv.currentText), //idSelectTypeCalVar.displayText !== "conf" ? tableInVariance.tableVar.default_model : tableInVariance.tableVar.get_data,
+        'variance': handleVar(idSelectTypeCalVar.displayText),//backend.ebv_model.handler_var(idSelectTypeCalVar.displayText, idFeatureEbv.currentText), //idSelectTypeCalVar.displayText !== "conf" ? tableInVariance.tableVar.default_model : tableInVariance.tableVar.get_data,
         'parallel': idCheckBoxParallelEst.checked,
         'numthread': idInputNumThredEst.text.length === 0 ? null : idInputNumThredEst.text,
         'utilsf90': backend.settings_model.settings.utils_f90
+    }
+
+    function handleVar(method) {
+
+        if (method === "conf") {
+            return tableInVariance.tableVar.get_data
+        }
+
+        return tableInVariance.tableVar.default_model
     }
 
     Component {

@@ -23,25 +23,17 @@ from PySide6.QtCore import (
 	Property
 )
 
+from ._conformvmodel import ConformVarModel
+from ._gencfgvar import GeneratorCfgVar
+from ._milkvmodel import MilkVarModel
+from ._reprodvmodel import ReprodVarModel
+from ._scsvmodel import ScsVarModel
 from ...libkrs.core.settings import CMD_FEATURE
-from ...libkrs.est.varmodel import (
-	FEATURE_NAME_SCS,
-	FEATURE_NAME_MILK,
-	FEATURE_NAME_REPROD,
-	FEATURE_NAME_CONFORM
-)
 from ...libkrs.utils import (
 	logger,
 	from_json,
 	to_json
 )
-
-from ._gencfgvar import GeneratorCfgVar
-
-from ._milkvmodel import MilkVarModel
-from ._conformvmodel import ConformVarModel
-from ._reprodvmodel import ReprodVarModel
-from ._scsvmodel import ScsVarModel
 
 
 @logger(name="EbvModel")
@@ -139,7 +131,9 @@ class EbvModel(QObject):
 
 		self.ft_var_model.get(ft_name).set_data(data)
 
-	@Slot(str, str, bool)
+	handlerVar = Signal(dict)
+
+	@Slot(str, str)
 	def handler_var(
 			self,
 			method: str,
@@ -152,10 +146,13 @@ class EbvModel(QObject):
 
 		match method:
 			case "all":
-				return self.ft_var_model.get(feature).default_model
+				self.handlerVar.emit(self.ft_var_model.get(feature).default_model)
+				return #self.ft_var_model.get(feature).default_model
 
 			case "conf":
-				return self.ft_var_model.get(feature).get_data
+
+				self.handlerVar.emit(self.ft_var_model.get(feature).get_data)
+				return #self.ft_var_model.get(feature).get_data
 
 		# return None
 
