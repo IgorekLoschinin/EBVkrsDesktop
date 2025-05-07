@@ -31,14 +31,26 @@ class RequestEbv(BaseModel):
 	estmethod: str
 	feature: str | list[str]
 	variance: Any
+	varmethod: str
 	parallel: bool
 	numthread: None | str
 	utilsf90: None | str
 
 	@model_validator(mode="before")
-	def validate_and_transform(cls, values):
+	def validate_and_transform(cls, values: dict[str, Any]):
+
+		if values.get("auto"):
+			return values
+
 		feature = values.get("feature")
-		variance = values.get("variance")
+		_variance = None
+
+		match values.get('varmethod'):
+			case "all":
+				_variance = values.get("variance").default_model
+
+			case "conf":
+				_variance = values.get("variance").get_data
 
 		# Map feature -> model type
 		_var_model = dict(
@@ -54,12 +66,12 @@ class RequestEbv(BaseModel):
 			raise ValueError(f"Invalid feature: {feature}")
 
 		# Convert variance to the expected type if possible
-		if not isinstance(variance, expected_model):
-			try:
-				values["variance"] = expected_model(**variance)
-			except Exception as e:
-				raise TypeError(
-					f"Cannot convert variance to {expected_model.__name__}: {e}"
-				)
+		try:
+			values["variance"] = expected_model(**_variance)
 
-		return values
+			return values
+
+		except Exception as e:
+			raise TypeError(
+				f"Cannot convert variance to {expected_model.__name__}: {e}"
+			)

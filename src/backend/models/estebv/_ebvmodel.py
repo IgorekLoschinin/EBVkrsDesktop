@@ -130,32 +130,3 @@ class EbvModel(QObject):
 		data = from_json(path_file)
 
 		self.ft_var_model.get(ft_name).set_data(data)
-
-	handlerVar = Signal(dict)
-
-	@Slot(str, str)
-	def handler_var(
-			self,
-			method: str,
-			feature: str,
-			# multi: bool | None = None
-	) -> dict | list[dict] | None:
-
-		if feature not in CMD_FEATURE:
-			return None
-
-		match method:
-			case "all":
-				self.handlerVar.emit(self.ft_var_model.get(feature).default_model)
-				return #self.ft_var_model.get(feature).default_model
-
-			case "conf":
-
-				self.handlerVar.emit(self.ft_var_model.get(feature).get_data)
-				return #self.ft_var_model.get(feature).get_data
-
-		# return None
-
-	@Slot(str)
-	def print(self, data: str) -> None:
-		print(data)

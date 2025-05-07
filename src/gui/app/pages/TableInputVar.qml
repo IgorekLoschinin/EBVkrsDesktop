@@ -83,7 +83,7 @@ Control {
                             implicitWidth: 80
 
                             phText: '0'
-                            text: varE // === undefined ? "" : varE
+                            text: varE === undefined ? "" : varE
 
                             onEditingFinished: varE = idInVarE.text
                             onTextEdited: {
@@ -101,7 +101,7 @@ Control {
                             implicitWidth: 80
 
                             phText: '0'
-                            text: varG // === undefined ? "" : varG
+                            text: varG === undefined ? "" : varG
 
                             onEditingFinished: varG = idInVarG.text
                             onTextEdited: {

@@ -147,33 +147,54 @@ class Backend(QObject):
 		:raise Exception: If processing fails, exception is caught and logged.
 		"""
 
-		print(data)
+		# print(data, end="\n\n")
 
-		# if data is None:
-		# 	self.error("Data is not None!")
-		# 	return None
+		# if data.get("auto"):
+		# 	# print(data, end="\n\n")
 		#
-		# # Ensure workspace directory exists
-		# if not (self.common_namespace.is_dir() and
-		# 		self.common_namespace.exists()):
-		# 	self.common_namespace.mkdir()
-		#
-		# try:
-		# 	# Initialize and run model handler
-		# 	self._worker_md = ModelHandler(
-		# 		data=data,
-		# 		output_dir=self.common_namespace
+		# 	print(
+		# 		[
+		# 			data.get("variance").get(item).default_model
+		# 			if data.get('varmethod') == "all"
+		# 			else data.get("variance").get(item).get_data
+		# 			for item in data.get("feature")
+		# 		],
+		# 		end="\n\n"
 		# 	)
-		# 	self.progbar_model.finished_code = -1  # Code for 'in process' message
 		#
-		# 	self._worker_md.handle()
-		# 	self._worker_md.exitCode.connect(self._exec_prog)
+		# else:
+		# 	match data.get('varmethod'):
+		# 		case "all":
+		# 			print(data.get("variance").default_model, end="\n\n")
 		#
-		# 	# Activate progress bar in UI
-		# 	self.progbar_model.enable_prg_win = True
-		#
-		# except Exception as e:
-		# 	self.exception(e)
+		# 		case "conf":
+		# 			print(data.get("variance").get_data, end="\n\n")
+
+		if data is None:
+			self.error("Data is not None!")
+			return None
+
+		# Ensure workspace directory exists
+		if not (self.common_namespace.is_dir() and
+				self.common_namespace.exists()):
+			self.common_namespace.mkdir()
+
+		try:
+			# Initialize and run model handler
+			self._worker_md = ModelHandler(
+				data=data,
+				output_dir=self.common_namespace
+			)
+			self.progbar_model.finished_code = -1  # Code for 'in process' message
+
+			self._worker_md.handle()
+			self._worker_md.exitCode.connect(self._exec_prog)
+
+			# Activate progress bar in UI
+			self.progbar_model.enable_prg_win = True
+
+		except Exception as e:
+			self.exception(e)
 
 	@Slot()
 	def ok(self) -> None:
