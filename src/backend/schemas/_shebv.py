@@ -28,6 +28,7 @@ from ..libkrs.est.varmodel.schemas import (
 # -- Description of the configuration settings for processing the EBV --
 class RequestEbv(BaseModel):
 	id: str
+	auto: bool
 	estmethod: str
 	feature: str | list[str]
 	variance: Any
