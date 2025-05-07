@@ -147,29 +147,6 @@ class Backend(QObject):
 		:raise Exception: If processing fails, exception is caught and logged.
 		"""
 
-		# print(data, end="\n\n")
-
-		# if data.get("auto"):
-		# 	# print(data, end="\n\n")
-		#
-		# 	print(
-		# 		[
-		# 			data.get("variance").get(item).default_model
-		# 			if data.get('varmethod') == "all"
-		# 			else data.get("variance").get(item).get_data
-		# 			for item in data.get("feature")
-		# 		],
-		# 		end="\n\n"
-		# 	)
-		#
-		# else:
-		# 	match data.get('varmethod'):
-		# 		case "all":
-		# 			print(data.get("variance").default_model, end="\n\n")
-		#
-		# 		case "conf":
-		# 			print(data.get("variance").get_data, end="\n\n")
-
 		if data is None:
 			self.error("Data is not None!")
 			return None

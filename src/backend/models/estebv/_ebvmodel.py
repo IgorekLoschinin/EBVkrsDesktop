@@ -48,9 +48,7 @@ class EbvModel(QObject):
 		- Integration with variance configuration generators
 
 	Signals:
-		uploadVar(dict): Emitted when variance configuration data is loaded
 		getLstFeature(list): Emitted with list of available breeding features
-		getfieldsTable(dict): Emitted with table structure for EBV features
 		genCfgVarSig(): Emitted when generator configuration changes
 
 	Properties:
@@ -61,7 +59,13 @@ class EbvModel(QObject):
 		features.
 	"""
 
-	# __slots__ = ("__generator_cfg_var",)
+	__slots__ = (
+		"__generator_cfg_var",
+		"_milk_v_model",
+		"_conform_v_model",
+		"_reprod_v_model",
+		"_scs_v_model",
+	)
 
 	getLstFeature = Signal(list)
 	sigFtVarModel = Signal()
