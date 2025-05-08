@@ -23,25 +23,17 @@ from PySide6.QtCore import (
 	Property
 )
 
+from ._conformvmodel import ConformVarModel
+from ._gencfgvar import GeneratorCfgVar
+from ._milkvmodel import MilkVarModel
+from ._reprodvmodel import ReprodVarModel
+from ._scsvmodel import ScsVarModel
 from ...libkrs.core.settings import CMD_FEATURE
-from ...libkrs.est.varmodel import (
-	FEATURE_NAME_SCS,
-	FEATURE_NAME_MILK,
-	FEATURE_NAME_REPROD,
-	FEATURE_NAME_CONFORM
-)
 from ...libkrs.utils import (
 	logger,
 	from_json,
 	to_json
 )
-
-from ._gencfgvar import GeneratorCfgVar
-
-from ._milkvmodel import MilkVarModel
-from ._conformvmodel import ConformVarModel
-from ._reprodvmodel import ReprodVarModel
-from ._scsvmodel import ScsVarModel
 
 
 @logger(name="EbvModel")
@@ -56,9 +48,7 @@ class EbvModel(QObject):
 		- Integration with variance configuration generators
 
 	Signals:
-		uploadVar(dict): Emitted when variance configuration data is loaded
 		getLstFeature(list): Emitted with list of available breeding features
-		getfieldsTable(dict): Emitted with table structure for EBV features
 		genCfgVarSig(): Emitted when generator configuration changes
 
 	Properties:
@@ -69,7 +59,13 @@ class EbvModel(QObject):
 		features.
 	"""
 
-	# __slots__ = ("__generator_cfg_var",)
+	__slots__ = (
+		"__generator_cfg_var",
+		"_milk_v_model",
+		"_conform_v_model",
+		"_reprod_v_model",
+		"_scs_v_model",
+	)
 
 	getLstFeature = Signal(list)
 	sigFtVarModel = Signal()
@@ -104,7 +100,7 @@ class EbvModel(QObject):
 		return CMD_FEATURE
 
 	@Property(dict, notify=sigFtVarModel)
-	def ft_var_model(self) -> dict[str, list[str]]:
+	def ft_var_model(self) -> dict:
 
 		return dict(zip(
 			CMD_FEATURE,
@@ -138,24 +134,3 @@ class EbvModel(QObject):
 		data = from_json(path_file)
 
 		self.ft_var_model.get(ft_name).set_data(data)
-
-	@Slot(str, str, bool)
-	def handler_var(
-			self,
-			method: str,
-			feature: str,
-			multi: bool | None = None
-	) -> dict | list[dict] | None:
-
-		match method:
-			case "all":
-				...
-
-			case "conf":
-				...
-
-		return None
-
-	@Slot(str)
-	def print(self, data: str) -> None:
-		print(data)

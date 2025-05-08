@@ -15,7 +15,8 @@ TemplatePage {
         'auto': idChBAutoEstFt.checked,
         'estmethod': idEbvTypeEstMethod.displayText,
         'feature': idChBAutoEstFt.checked ? backend.ebv_model.list_feature : idFeatureEbv.displayText,
-        'variance': tableInVariance.tableVar.model.default_model,
+        'variance': idChBAutoEstFt.checked ? backend.ebv_model.ft_var_model : tableInVariance.tableVar,
+        'varmethod': idSelectTypeCalVar.displayText,
         'parallel': idCheckBoxParallelEst.checked,
         'numthread': idInputNumThredEst.text.length === 0 ? null : idInputNumThredEst.text,
         'utilsf90': backend.settings_model.settings.utils_f90
@@ -129,7 +130,7 @@ TemplatePage {
 
                                         onCurrentTextChanged: {
                                             tableInVariance.tableName = idFeatureEbv.currentText
-                                            tableInVariance.tableVar.model = backend.ebv_model.ft_var_model[idFeatureEbv.currentText]
+                                            tableInVariance.tableVar = backend.ebv_model.ft_var_model[idFeatureEbv.currentText]
                                         }
                                     }
                                 }

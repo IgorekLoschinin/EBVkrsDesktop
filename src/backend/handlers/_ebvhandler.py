@@ -10,6 +10,7 @@ __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
 __all__ = ('EbvHandler', )
 
 from pathlib import Path
+from typing import Any
 
 from pydantic_core import ValidationError
 
@@ -63,11 +64,53 @@ class EbvHandler(IHandler):
 		if self._settings is None:
 			raise ValueError("Settings not initialized!")
 
+		# Multiple feature processing
+		if self._settings.auto:
+			if not (
+				isinstance(self._settings.feature, list) and
+				isinstance(self._settings.variance, dict)
+			):
+				raise TypeError(
+					"Error. The fields feature and variance is not LIST."
+				)
+
+			for item_ft in self._settings.feature:
+				if self._settings.varmethod == "conf":
+					self._handler_est_method(
+						item_ft, self._settings.variance[item_ft].get_data
+					)
+
+				else:
+					self._handler_est_method(
+						item_ft, self._settings.variance[item_ft].default_model
+					)
+
+			return
+
+		# Single feature processing
+		self._handler_est_method(
+			self._settings.feature, self._settings.variance.model_dump()
+		)
+
+		return None
+
+	def _handler_est_method(
+			self,
+			feature: str,
+			variance: dict[str, Any]
+	) -> None:
+		"""
+
+		:param feature:
+		:param variance:
+		:return:
+		"""
+
 		match self._settings.estmethod:
 			case "blup":
 				ebv = Estimator(
-					feature=self._settings.feature,
-					vars_f=self._settings.variance.model_dump(),
+					feature=feature,
+					vars_f=variance,
 					namespace=self._out_d,
 					parallel=self._settings.parallel,
 					workers=None
@@ -80,8 +123,8 @@ class EbvHandler(IHandler):
 
 			case "gblup":
 				gebv = GEstimator(
-					feature=self._settings.feature,
-					vars_f=self._settings.variance.model_dump(),
+					feature=feature,
+					vars_f=variance,
 					namespace=self._out_d,
 					parallel=self._settings.parallel,
 					workers=None

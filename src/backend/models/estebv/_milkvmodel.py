@@ -19,18 +19,21 @@ from PySide6.QtCore import (
 	Signal,
 	Property
 )
+from pydantic_core import ValidationError
 
 from ...libkrs.est.varmodel import FEATURE_NAME_MILK
+from ...libkrs.est.varmodel.schemas import VarConfMilk
 
 
 class MilkVarModel(QAbstractListModel):
 
 	sigGetDefModel = Signal()
+	sigGetDataModel = Signal()
 
 	def __init__(self, parent=None):
 		super().__init__(parent)
 
-		self._data = self.default_model
+		self._data = self.default_model.copy()
 		self._keys = list(self._data.keys())
 
 		# Define roles
@@ -38,7 +41,7 @@ class MilkVarModel(QAbstractListModel):
 		self.VarERole = Qt.ItemDataRole.UserRole + 2
 		self.VarGRole = Qt.ItemDataRole.UserRole + 3
 
-	@property
+	@Property(dict, notify=sigGetDataModel)
 	def get_data(self) -> Callable[[], dict]:
 		return self._data
 
@@ -48,12 +51,18 @@ class MilkVarModel(QAbstractListModel):
 		:param new_data:
 		:return:
 		"""
-		# валидация данных нужна что бы не запихуть молоко в экстерьер
-		if new_data != self._data:
-			self.beginResetModel()
-			self._data = new_data.copy()
-			self._keys = list(new_data.keys())
-			self.endResetModel()
+
+		try:
+			if new_data is not None:
+				self.beginResetModel()
+				self._data.update(
+					VarConfMilk.model_validate(new_data).model_dump()
+				)
+				self._keys = list(self._data.keys())
+				self.endResetModel()
+
+		except (ValidationError, Exception) as err:
+			raise err
 
 	@Property(dict, notify=sigGetDefModel)
 	def default_model(self) -> dict:
@@ -119,6 +128,6 @@ class MilkVarModel(QAbstractListModel):
 	def reset(self) -> None:
 		"""Очистить все данные в модели"""
 		self.beginResetModel()
-		self._data = self.default_model
+		self._data.update(self.default_model)
 		self._keys = list(self._data.keys())
 		self.endResetModel()

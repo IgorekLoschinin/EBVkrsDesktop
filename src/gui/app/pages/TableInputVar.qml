@@ -9,7 +9,7 @@ import "controls"
 Control {
     id: tabInVar
 
-    property alias tableVar: listInputVar
+    property alias tableVar: listInputVar.model
     property string tableName: ""
 
     contentItem: RowLayout {
@@ -83,7 +83,7 @@ Control {
                             implicitWidth: 80
 
                             phText: '0'
-                            text: varE
+                            text: varE === undefined ? "" : varE
 
                             onEditingFinished: varE = idInVarE.text
                             onTextEdited: {
@@ -101,7 +101,7 @@ Control {
                             implicitWidth: 80
 
                             phText: '0'
-                            text: varG
+                            text: varG === undefined ? "" : varG
 
                             onEditingFinished: varG = idInVarG.text
                             onTextEdited: {
@@ -173,11 +173,22 @@ Control {
                 }
             }
 
-            Button {
+            CustomBtn {
                 id: idResetModel
-                text: "Reset"
-                onClicked: listInputVar.model.get_data()
-                background.implicitWidth: 50
+
+                sizeImgWH: 25
+                srcImg: "qrc:/icons/reset.svg"
+
+                onClicked: listInputVar.model.reset()
+
+                CustomTooltip {
+                    object: idResetModel
+                    textLbl: qsTr("Reset entered data.")
+
+                    visible: disableTT ? idResetModel.hovered : false
+                }
+
+                background.implicitWidth: 80
             }
         }
 
