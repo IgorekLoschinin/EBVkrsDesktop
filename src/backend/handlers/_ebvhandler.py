@@ -68,7 +68,7 @@ class EbvHandler(IHandler):
 		if self._settings.auto:
 			if not (
 				isinstance(self._settings.feature, list) and
-				isinstance(self._settings.variance, list)
+				isinstance(self._settings.variance, dict)
 			):
 				raise TypeError(
 					"Error. The fields feature and variance is not LIST."
