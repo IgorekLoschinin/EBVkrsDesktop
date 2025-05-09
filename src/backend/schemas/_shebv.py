@@ -25,8 +25,22 @@ from ..libkrs.est.varmodel.schemas import (
 )
 
 
-# -- Description of the configuration settings for processing the EBV --
 class RequestEbv(BaseModel):
+	""" Model for EBV (Estimated Breeding Value) processing request
+	configuration.
+
+	Attributes:
+	    id: Unique identifier for the request
+	    auto: Flag for automatic processing of multiple features
+	    estmethod: Estimation method to be used ('blup' or 'gblup')
+	    feature: Single feature or list of features to process
+	    variance: Variance configuration data
+	    varmethod: Method for variance handling ('all' or 'conf')
+	    parallel: Flag for parallel processing
+	    numthread: Number of threads to use (None for default)
+	    utilsf90: Path to Fortran utilities (optional)
+	"""
+
 	id: str
 	auto: bool
 	estmethod: str
@@ -39,6 +53,15 @@ class RequestEbv(BaseModel):
 
 	@model_validator(mode="before")
 	def validate_and_transform(cls, values: dict[str, Any]):
+		""" Validate and transform input values before model initialization.
+
+		:param values: Raw input values to validate.
+		:type values: dict[str, Any]
+		:return: Validated and transformed values.
+		:rtype: dict[str, Any]
+		:raises ValueError: If feature is invalid.
+		:raises TypeError: If variance cannot be converted to expected type.
+		"""
 
 		if values.get("auto"):
 			return values
@@ -46,6 +69,7 @@ class RequestEbv(BaseModel):
 		feature = values.get("feature")
 		_variance = None
 
+		# Select variance data based on method
 		match values.get('varmethod'):
 			case "all":
 				_variance = values.get("variance").default_model
@@ -53,7 +77,7 @@ class RequestEbv(BaseModel):
 			case "conf":
 				_variance = values.get("variance").get_data
 
-		# Map feature -> model type
+		# Map features to their corresponding variance models
 		_var_model = dict(
 			zip(
 				CMD_FEATURE,
@@ -61,12 +85,12 @@ class RequestEbv(BaseModel):
 			)
 		)
 
-		# Determine the expected type based on feature
+		# Get expected model type for the feature
 		expected_model = _var_model.get(feature)
 		if not expected_model:
 			raise ValueError(f"Invalid feature: {feature}")
 
-		# Convert variance to the expected type if possible
+		# Convert variance to the expected model type
 		try:
 			values["variance"] = expected_model(**_variance)
 

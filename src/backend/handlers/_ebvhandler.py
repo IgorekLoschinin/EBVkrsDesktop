@@ -6,6 +6,14 @@
 # Everyone is permitted to copy and distribute verbatim copies
 # of this license document, but changing it is not allowed.
 
+"""
+EBV Handler Module.
+
+Provides the EbvHandler class for processing Estimated Breeding Value (EBV)
+requests. Supports both BLUP and GBLUP estimation methods for genetic
+evaluation.
+"""
+
 __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
 __all__ = ('EbvHandler', )
 
@@ -25,15 +33,10 @@ from ..schemas import RequestEbv
 
 @logger(name="EbvHandler")
 class EbvHandler(IHandler):
-	""" EBV handler of requests.
+	""" Handler for Estimated Breeding Value (EBV) calculation requests.
 
-	This class handles EBV (Estimated Breeding Values) requests and supports
-	two estimation methods: BLUP and GBLUP.
-
-	:param req_data: Input data for configuring the model.
-	:param output_dir: Directory for saving output results.
-	:raises ValidationError: If the input data fails validation.
-	:raises Exception: For any other errors during initialization.
+    Processes EBV requests using either BLUP (Best Linear Unbiased Prediction)
+    or GBLUP (Genomic BLUP) estimation methods.
 	"""
 
 	def __init__(
@@ -41,6 +44,15 @@ class EbvHandler(IHandler):
 			req_data: dict | None = None,
 			output_dir: str | Path | None = None
 	) -> None:
+		""" Initialize the EBV handler with request data and output directory.
+
+		:param req_data: Dictionary containing EBV calculation configuration.
+		:type req_data: dict | None
+		:param output_dir: Directory path for storing calculation results.
+		:type output_dir: str | Path | None
+		:raises ValidationError: If input data fails schema validation.
+		:raises Exception: For any other initialization errors.
+		"""
 
 		self._out_d = output_dir
 		self._settings: RequestEbv | None = None
@@ -53,12 +65,15 @@ class EbvHandler(IHandler):
 			raise err
 
 	def processing(self) -> None:
-		""" Processes data based on the specified estimation method.
+		""" Process EBV calculation based on configured settings.
 
-		Depending on the method, it performs one of the following:
+		Handles both single feature and multiple feature processing modes.
+		For multiple features (auto=True), processes each feature sequentially.
 
-		- If the method is "blup", the ``Estimator`` class is used.
-		- If the method is "gblup", the ``GEstimator`` class is used.
+		:raises ValueError: If settings are not properly initialized.
+		:raises TypeError: If feature/variance data types are invalid in
+			auto mode.
+		:return: None
 		"""
 
 		if self._settings is None:
@@ -99,11 +114,14 @@ class EbvHandler(IHandler):
 			feature: str,
 			variance: dict[str, Any]
 	) -> None:
-		"""
+		""" Execute the appropriate estimation method for EBV calculation.
 
-		:param feature:
-		:param variance:
-		:return:
+		:param feature: Name of the trait/feature being evaluated.
+		:type feature: str
+		:param variance: Dictionary containing variance components
+			configuration.
+		:type variance: dict[str, Any]
+		:return: None
 		"""
 
 		match self._settings.estmethod:
