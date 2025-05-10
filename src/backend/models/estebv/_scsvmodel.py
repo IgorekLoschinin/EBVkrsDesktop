@@ -6,49 +6,89 @@
 # Everyone is permitted to copy and distribute verbatim copies
 # of this license document, but changing it is not allowed.
 
+"""
+Somatic Cell Score (SCS) Variance Model Module.
+
+Provides the ScsVarModel class which handles variance configuration
+for somatic cell score traits in EBV (Estimated Breeding Value) calculations.
+"""
+
 __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
 __all__ = ('ScsVarModel', )
 
 from typing import Callable
 
-from PySide6.QtCore import (
-	QAbstractListModel,
-	QModelIndex,
-	Qt,
-	Slot,
-	Signal,
-	Property
-)
 from pydantic_core import ValidationError
 
+from ._iftvarmodel import IFtVarModel
 from ...libkrs.est.varmodel import FEATURE_NAME_SCS
 from ...libkrs.est.varmodel.schemas import VarConfSomatCell
 
 
-class ScsVarModel(QAbstractListModel):
+class ScsVarModel(IFtVarModel):
+	""" Model for managing variance configurations of somatic cell score
+	(SCS) traits.
 
-	sigGetDefModel = Signal()
+	Inherits from:
+		IFtVarModel: Base interface for feature variance models.
+
+	This class provides:
+	- Storage and management of environmental (varE) and genetic (varG)
+		variance components.
+	- Data validation using Pydantic's VarConfSomatCell schema.
+	- Qt Model/View interface through inherited functionality.
+	- Default null-initialized model structure for SCS traits.
+	"""
 
 	def __init__(self, parent=None):
+		""" Initialize the ScsVarModel with default values.
+
+		:param parent: Parent QObject for Qt ownership, defaults to None.
+		:type parent: QObject, optional
+		"""
 		super().__init__(parent)
 
-		self._data = self.default_model
-		self._keys = list(self._data.keys())
+	@property
+	def default_model(self) -> dict:
+		""" Provide the default variance structure for SCS traits.
 
-		# Define roles
-		self.FtName = Qt.ItemDataRole.UserRole + 1
-		self.VarERole = Qt.ItemDataRole.UserRole + 2
-		self.VarGRole = Qt.ItemDataRole.UserRole + 3
+		Creates a dictionary with all SCS traits initialized to null values:
+		{'varE': None, 'varG': None}
+
+		:return: Dictionary mapping SCS trait names to default variance
+			structures.
+		:rtype: dict
+		"""
+		return dict(zip(
+			FEATURE_NAME_SCS,
+			[
+				{'varE': None, 'varG': None}
+				for _ in range(len(FEATURE_NAME_SCS))
+			]
+		))
 
 	@property
 	def get_data(self) -> Callable[[], dict]:
+		""" Accessor for current variance data.
+
+		:return: Callable that returns the complete current variance data
+			dictionary.
+		:rtype: Callable[[], dict]
+		"""
 		return self._data
 
 	def set_data(self, new_data: dict) -> None:
-		"""
+		""" Update model data with validation.
 
-		:param new_data:
-		:return:
+		Performs schema validation using VarConfSomatCell before updating model
+		data. Emits model reset signals to notify views of changes.
+
+		:param new_data: Dictionary containing new variance values to validate
+			and set.
+		:type new_data: dict
+		:raises ValidationError: If input data fails schema validation.
+		:raises Exception: For any other errors during the update process.
+		:return: None
 		"""
 
 		try:
@@ -62,71 +102,3 @@ class ScsVarModel(QAbstractListModel):
 
 		except (ValidationError, Exception) as err:
 			raise err
-
-	@Property(dict, notify=sigGetDefModel)
-	def default_model(self) -> dict:
-		return dict(zip(
-			FEATURE_NAME_SCS,
-			[
-				{'varE': None, 'varG': None}
-				for _ in range(len(FEATURE_NAME_SCS))
-			]
-		))
-
-	def roleNames(self) -> dict:
-		return {
-			self.FtName: b"ftName",
-			self.VarERole: b"varE",
-			self.VarGRole: b"varG"
-		}
-
-	def rowCount(self, parent: None = QModelIndex()) -> int:
-		return len(self._keys)
-
-	def data(self, index, role=Qt.ItemDataRole.DisplayRole) -> str | None:
-		if not index.isValid() or not (0 <= index.row() < len(self._keys)):
-			return None
-
-		key = self._keys[index.row()]
-		item = self._data[key]
-
-		if role == self.FtName:
-			return key
-		elif role == self.VarERole:
-			return item['varE']
-		elif role == self.VarGRole:
-			return item['varG']
-
-		return None
-
-	def setData(self, index, value, role=Qt.ItemDataRole.EditRole) -> bool:
-		if not index.isValid() or not (0 <= index.row() < len(self._keys)):
-			return False
-
-		key = self._keys[index.row()]
-
-		# Convert QString to Python str if needed
-		if isinstance(value, str):
-			value = value.strip() if value.strip() else None
-
-		if role == self.VarERole:
-			self._data[key]['varE'] = value
-			self.dataChanged.emit(index, index, [self.VarERole])
-
-			return True
-
-		elif role == self.VarGRole:
-			self._data[key]['varG'] = value
-			self.dataChanged.emit(index, index, [self.VarGRole])
-
-			return True
-
-		return False
-
-	@Slot()
-	def reset(self) -> None:
-		"""Очистить все данные в модели"""
-		self.beginResetModel()
-		self._data.update(self.default_model)
-		self._keys = list(self._data.keys())
-		self.endResetModel()

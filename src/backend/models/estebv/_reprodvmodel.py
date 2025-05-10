@@ -6,49 +6,86 @@
 # Everyone is permitted to copy and distribute verbatim copies
 # of this license document, but changing it is not allowed.
 
+"""
+Reproduction Variance Model Module.
+
+Provides the ReprodVarModel class which handles variance configuration
+for reproduction traits in EBV (Estimated Breeding Value) calculations.
+"""
+
 __author__ = "Igor Loschinin (igor.loschinin@gmail.com)"
 __all__ = ('ReprodVarModel', )
 
 from typing import Callable
 
-from PySide6.QtCore import (
-	QAbstractListModel,
-	QModelIndex,
-	Qt,
-	Slot,
-	Signal,
-	Property
-)
 from pydantic_core import ValidationError
 
+from ._iftvarmodel import IFtVarModel
 from ...libkrs.est.varmodel import FEATURE_NAME_REPROD
 from ...libkrs.est.varmodel.schemas import VarConfReprod
 
 
-class ReprodVarModel(QAbstractListModel):
+class ReprodVarModel(IFtVarModel):
+	""" Model for managing variance configurations of reproduction traits.
 
-	sigGetDefModel = Signal()
+	Inherits from:
+		IFtVarModel: Base interface for feature variance models.
+
+	This class provides:
+	- Storage and management of variance values (varE and varG) for
+		reproduction traits.
+	- Data validation using Pydantic's VarConfReprod schema.
+	- Qt Model/View interface through inherited functionality.
+	- Default model structure for reproduction traits.
+	"""
 
 	def __init__(self, parent=None):
+		""" Initialize the ReprodVarModel with default values.
+
+		:param parent: Parent QObject, defaults to None.
+		:type parent: QObject, optional
+		"""
 		super().__init__(parent)
 
-		self._data = self.default_model
-		self._keys = list(self._data.keys())
+	@property
+	def default_model(self) -> dict:
+		""" Get the default variance model structure for reproduction traits.
 
-		# Define roles
-		self.FtName = Qt.ItemDataRole.UserRole + 1
-		self.VarERole = Qt.ItemDataRole.UserRole + 2
-		self.VarGRole = Qt.ItemDataRole.UserRole + 3
+		Creates a dictionary with all reproduction traits initialized to:
+		{'varE': None, 'varG': None}
+
+		:return: Dictionary mapping trait names to default variance structures.
+		:rtype: dict
+		"""
+		return dict(zip(
+			FEATURE_NAME_REPROD,
+			[
+				{'varE': None, 'varG': None}
+				for _ in range(len(FEATURE_NAME_REPROD))
+			]
+		))
 
 	@property
 	def get_data(self) -> Callable[[], dict]:
+		""" Get the current variance data for reproduction traits.
+
+		:return: Callable that returns the current variance data dictionary.
+		:rtype: Callable[[], dict]
+		"""
 		return self._data
 
 	def set_data(self, new_data: dict) -> None:
-		"""
+		""" Set new variance data for reproduction traits with validation.
 
-		:param new_data:
-		:return:
+		Validates the input data against the VarConfReprod schema before
+		updating. Emits model reset signals before and after updating the data.
+
+		:param new_data: Dictionary containing new variance values.
+		:type new_data: dict
+		:raises ValidationError: If data fails validation against VarConfReprod
+			schema.
+		:raises Exception: For any other errors during validation or update.
+		:return: None
 		"""
 
 		try:
@@ -62,71 +99,3 @@ class ReprodVarModel(QAbstractListModel):
 
 		except (ValidationError, Exception) as err:
 			raise err
-
-	@Property(dict, notify=sigGetDefModel)
-	def default_model(self) -> dict:
-		return dict(zip(
-			FEATURE_NAME_REPROD,
-			[
-				{'varE': None, 'varG': None}
-				for _ in range(len(FEATURE_NAME_REPROD))
-			]
-		))
-
-	def roleNames(self) -> dict:
-		return {
-			self.FtName: b"ftName",
-			self.VarERole: b"varE",
-			self.VarGRole: b"varG"
-		}
-
-	def rowCount(self, parent: None = QModelIndex()) -> int:
-		return len(self._keys)
-
-	def data(self, index, role=Qt.ItemDataRole.DisplayRole) -> str | None:
-		if not index.isValid() or not (0 <= index.row() < len(self._keys)):
-			return None
-
-		key = self._keys[index.row()]
-		item = self._data[key]
-
-		if role == self.FtName:
-			return key
-		elif role == self.VarERole:
-			return item['varE']
-		elif role == self.VarGRole:
-			return item['varG']
-
-		return None
-
-	def setData(self, index, value, role=Qt.ItemDataRole.EditRole) -> bool:
-		if not index.isValid() or not (0 <= index.row() < len(self._keys)):
-			return False
-
-		key = self._keys[index.row()]
-
-		# Convert QString to Python str if needed
-		if isinstance(value, str):
-			value = value.strip() if value.strip() else None
-
-		if role == self.VarERole:
-			self._data[key]['varE'] = value
-			self.dataChanged.emit(index, index, [self.VarERole])
-
-			return True
-
-		elif role == self.VarGRole:
-			self._data[key]['varG'] = value
-			self.dataChanged.emit(index, index, [self.VarGRole])
-
-			return True
-
-		return False
-
-	@Slot()
-	def reset(self) -> None:
-		"""Очистить все данные в модели"""
-		self.beginResetModel()
-		self._data.update(self.default_model)
-		self._keys = list(self._data.keys())
-		self.endResetModel()
