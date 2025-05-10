@@ -48,14 +48,14 @@ class EbvModel(QObject):
 	- Integration with variance configuration generators.
 
 	Signals:
-	    getLstFeature(list): Emitted with available breeding features.
-	    sigFtVarModel(): Emitted when feature variance models change.
-	    genCfgVarSig(): Emitted when generator configuration changes.
+		getLstFeature(list): Emitted with available breeding features.
+		sigFtVarModel(): Emitted when feature variance models change.
+		genCfgVarSig(): Emitted when generator configuration changes.
 
 	Properties:
-	    generator_var (GeneratorCfgVar): Variance configuration generator.
-	    list_feature (list[str]): Available breeding features.
-	    ft_var_model (dict): Mapping of features to their variance models.
+		generator_var (GeneratorCfgVar): Variance configuration generator.
+		list_feature (list[str]): Available breeding features.
+		ft_var_model (dict): Mapping of features to their variance models.
 	"""
 
 	__slots__ = (

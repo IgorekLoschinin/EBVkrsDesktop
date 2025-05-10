@@ -42,8 +42,8 @@ class MilkVarModel(QAbstractListModel):
 		- Reset functionality to default values.
 
 	Signals:
-	    sigGetDefModel: Emitted when default model is accessed.
-	    sigGetDataModel: Emitted when current data is accessed.
+		sigGetDefModel: Emitted when default model is accessed.
+		sigGetDataModel: Emitted when current data is accessed.
 	"""
 
 	sigGetDefModel = Signal()

@@ -35,8 +35,8 @@ from ..schemas import RequestEbv
 class EbvHandler(IHandler):
 	""" Handler for Estimated Breeding Value (EBV) calculation requests.
 
-    Processes EBV requests using either BLUP (Best Linear Unbiased Prediction)
-    or GBLUP (Genomic BLUP) estimation methods.
+	Processes EBV requests using either BLUP (Best Linear Unbiased Prediction)
+	or GBLUP (Genomic BLUP) estimation methods.
 	"""
 
 	def __init__(
@@ -81,24 +81,10 @@ class EbvHandler(IHandler):
 
 		# Multiple feature processing
 		if self._settings.auto:
-			if not (
-				isinstance(self._settings.feature, list) and
-				isinstance(self._settings.variance, dict)
-			):
-				raise TypeError(
-					"Error. The fields feature and variance is not LIST."
-				)
-
 			for item_ft in self._settings.feature:
-				if self._settings.varmethod == "conf":
-					self._handler_est_method(
-						item_ft, self._settings.variance[item_ft].get_data
-					)
-
-				else:
-					self._handler_est_method(
-						item_ft, self._settings.variance[item_ft].default_model
-					)
+				self._handler_est_method(
+					item_ft, self._settings.variance[item_ft]
+				)
 
 			return
 
