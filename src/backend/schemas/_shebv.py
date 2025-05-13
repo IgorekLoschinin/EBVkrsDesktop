@@ -30,15 +30,15 @@ class RequestEbv(BaseModel):
 	configuration.
 
 	Attributes:
-	    id: Unique identifier for the request
-	    auto: Flag for automatic processing of multiple features
-	    estmethod: Estimation method to be used ('blup' or 'gblup')
-	    feature: Single feature or list of features to process
-	    variance: Variance configuration data
-	    varmethod: Method for variance handling ('all' or 'conf')
-	    parallel: Flag for parallel processing
-	    numthread: Number of threads to use (None for default)
-	    utilsf90: Path to Fortran utilities (optional)
+		id: Unique identifier for the request
+		auto: Flag for automatic processing of multiple features
+		estmethod: Estimation method to be used ('blup' or 'gblup')
+		feature: Single feature or list of features to process
+		variance: Variance configuration data
+		varmethod: Method for variance handling ('all' or 'conf')
+		parallel: Flag for parallel processing
+		numthread: Number of threads to use (None for default)
+		utilsf90: Path to Fortran utilities (optional)
 	"""
 
 	id: str
@@ -64,6 +64,14 @@ class RequestEbv(BaseModel):
 		"""
 
 		if values.get("auto"):
+
+			values['variance'] = {
+				ft_name: var_m.default_model
+				if values['varmethod'] == 'all'
+				else var_m.get_data
+				for ft_name, var_m in values['variance'].items()
+			}
+
 			return values
 
 		feature = values.get("feature")
