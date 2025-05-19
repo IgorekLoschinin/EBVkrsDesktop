@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Effects
 
 Button {
     id: idBtnFileOpen
@@ -30,13 +31,22 @@ Button {
         return switchBgColor ? bgBtnColor : colorDef
     }
 
-    contentItem: ColorImage {
+    contentItem: Image {
+        id: idImgFileOpenBtn
         source: idBtnFileOpen.sourceImg
-        color: idBtnFileOpen.colorImg
 
         fillMode: Image.PreserveAspectFit
         sourceSize.width: idBtnFileOpen.sizeImgWH
         sourceSize.height: idBtnFileOpen.sizeImgWH
+
+        MultiEffect {
+            id: effect
+            anchors.fill: parent
+            source: idImgFileOpenBtn
+
+            colorization: 1.0
+            colorizationColor: idBtnFileOpen.colorImg
+        }
     }
 
     background: Rectangle {

@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick.Effects
 
 import "pages/controls"
 
@@ -71,13 +72,22 @@ Control {
                     x: - ttBtnWC.width + object.width
                 }
 
-                contentItem: ColorImage {
+                contentItem: Image {
+                    id: iconBtn
                     source: model.sourceImg
-                    color: "white"
 
                     fillMode: Image.PreserveAspectFit
                     sourceSize.height: propCtrlBtns.sourceSizeH
                     sourceSize.width: propCtrlBtns.sourceSizeW
+
+                    MultiEffect {
+                        id: effect
+                        anchors.fill: parent
+                        source: iconBtn
+
+                        colorization: 1.0
+                        colorizationColor: "white"
+                    }
                 }
 
                 background: Rectangle {
