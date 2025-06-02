@@ -83,7 +83,7 @@ Two folders will appear in the scripts folder: build and dist:
 ```
 scripts\
     build\
-    dict\
+    dist\
         KRSest.exe
 ```
 
@@ -108,5 +108,5 @@ filter phenotypic data.
 GBLUP calculations.
 
 ## License
-This project is licensed under the MIT License - see the 
+This project is licensed under the GNU GENERAL PUBLIC LICENSE - see the 
 LICENSE file for details.

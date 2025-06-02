@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Timeline
+import QtQuick.Effects
 
 import "components"
 
@@ -72,9 +73,8 @@ Popup {
             onClicked: appWindow.close()
         }
 
-        ColorImage {
+        Image {
             id: logoImage
-            color: "#7ece2d"
 
             Layout.fillWidth: true
             Layout.topMargin: 30
@@ -85,6 +85,15 @@ Popup {
             sourceSize.width: 40
             sourceSize.height: 90
             fillMode: Image.PreserveAspectFit
+
+            MultiEffect {
+                id: effect
+                anchors.fill: parent
+                source: logoImage
+
+                colorization: 1.0
+                colorizationColor: "#7ece2d"
+            }
         }
 
         ColumnLayout {

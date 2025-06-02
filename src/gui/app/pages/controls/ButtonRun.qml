@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick.Effects
 
 CustomBtn {
     id: idBtnRun
@@ -40,13 +41,22 @@ CustomBtn {
             horizontalAlignment: Text.AlignHCenter
         }
 
-        ColorImage {
+        Image {
+            id: idIconRunBtn
             source: srcImg
-            color: colorImg
 
             fillMode: Image.PreserveAspectFit
             sourceSize.height: 26
             sourceSize.width: 26
+
+            MultiEffect {
+                id: effect
+                anchors.fill: parent
+                source: idIconRunBtn
+
+                colorization: 1.0
+                colorizationColor: colorImg
+            }
         }
         Item { Layout.fillWidth: true }
     }

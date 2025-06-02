@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick.Effects
 
 
 Popup {
@@ -88,9 +89,8 @@ Popup {
             Layout.bottomMargin: 3
             Layout.rightMargin: 8
 
-            ColorImage {
+            Image {
                 id: logoImage
-                color: "#7ece2d"
 
                 Layout.leftMargin: 90
 
@@ -98,6 +98,15 @@ Popup {
                 sourceSize.width: 25
                 sourceSize.height: 50
                 fillMode: Image.PreserveAspectFit
+
+                MultiEffect {
+                    id: effect
+                    anchors.fill: parent
+                    source: logoImage
+
+                    colorization: 1.0
+                    colorizationColor: "#7ece2d"
+                }
             }
 
             Item { Layout.fillWidth: true }
@@ -117,13 +126,22 @@ Popup {
                     x: - ttBtnWC.width + object.width
                 }
 
-                contentItem: ColorImage {
+                contentItem: Image {
+                    id: idBtnMinus
                     source: "qrc:/icons/minus.svg"
-                    color: "white"
 
                     fillMode: Image.PreserveAspectFit
                     sourceSize.height: 13
                     sourceSize.width: 13
+
+                    MultiEffect {
+                        id: effect1
+                        anchors.fill: parent
+                        source: idBtnMinus
+
+                        colorization: 1.0
+                        colorizationColor: "white"
+                    }
                 }
 
                 background: Rectangle {

@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Effects
 
 Button {
     id: idCustBtn
@@ -24,13 +25,22 @@ Button {
         return cDef
     }
 
-    contentItem: ColorImage {
+    contentItem: Image {
+        id: idImgCustBtn
         source: idCustBtn.srcImg
-        color: idCustBtn.colorImg
 
         fillMode: Image.PreserveAspectFit
         sourceSize.height: idCustBtn.sizeImgWH
         sourceSize.width: idCustBtn.sizeImgWH
+
+        MultiEffect {
+            id: effect
+            anchors.fill: parent
+            source: idImgCustBtn
+
+            colorization: 1.0
+            colorizationColor: idCustBtn.colorImg
+        }
     }
 
     background: Rectangle {

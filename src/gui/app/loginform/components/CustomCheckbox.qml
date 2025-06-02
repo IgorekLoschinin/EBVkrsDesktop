@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Effects
 
 CheckBox {
     id: idCustomCheckBox
@@ -43,18 +44,26 @@ CheckBox {
         radius: 3
         color: idCustomCheckBox.dynamicColor(idCustomCheckBox)
 
-        ColorImage {
+        Image {
             id: idImgTick
             visible: idCustomCheckBox.checked
             source: "qrc:/icons/tick.svg"
 
-            color: idCustomCheckBox.down ? "#E9D6D6" : "#FFFFFF"
             x: parent.width / 2 - width / 2
             y: parent.height / 2 - height / 2
 
             fillMode: Image.PreserveAspectFit
             sourceSize.width: 15
             sourceSize.height: 15
+
+            MultiEffect {
+                id: effect
+                anchors.fill: parent
+                source: idImgTick
+
+                colorization: 1.0
+                colorizationColor: idCustomCheckBox.down ? "#E9D6D6" : "#FFFFFF"
+            }
         }
     }
 
