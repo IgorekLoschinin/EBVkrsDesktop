@@ -1,1 +1,1 @@
-CALL ..\venv\Scripts\pyinstaller.exe .\app_onedir.spec
+CALL ..\venv\Scripts\pyinstaller.exe .\app.spec
