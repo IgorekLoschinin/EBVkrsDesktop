@@ -22,6 +22,8 @@ from ..libkrs.est.varmodel.schemas import (
 	VarConfConform,
 	VarConfReprod,
 	VarConfSomatCell,
+	VarConfEaseCalving,
+	VarConfResultCalving
 )
 
 
@@ -89,7 +91,14 @@ class RequestEbv(BaseModel):
 		_var_model = dict(
 			zip(
 				CMD_FEATURE,
-				(VarConfMilk, VarConfConform, VarConfReprod, VarConfSomatCell),
+				(
+					VarConfMilk,
+					VarConfConform,
+					VarConfReprod,
+					VarConfSomatCell,
+					VarConfEaseCalving,
+					VarConfResultCalving
+				),
 			)
 		)
 
