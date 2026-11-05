@@ -29,6 +29,8 @@ from ._gencfgvar import GeneratorCfgVar
 from ._milkvmodel import MilkVarModel
 from ._reprodvmodel import ReprodVarModel
 from ._scsvmodel import ScsVarModel
+from ._lgcvmodel import LgcVarModel
+from ._rzcvmodel import RzcVarModel
 from ...libkrs.core.settings import CMD_FEATURE
 from ...libkrs.utils import (
 	logger,
@@ -64,6 +66,8 @@ class EbvModel(QObject):
 		"_conform_v_model",
 		"_reprod_v_model",
 		"_scs_v_model",
+		"_lgc_v_model",
+		"_rzc_v_model",
 	)
 
 	getLstFeature = Signal(list)
@@ -81,6 +85,8 @@ class EbvModel(QObject):
 		self._conform_v_model = ConformVarModel()
 		self._reprod_v_model = ReprodVarModel()
 		self._scs_v_model = ScsVarModel()
+		self._lgc_v_model = LgcVarModel()
+		self._rzc_v_model = RzcVarModel()
 
 	@Property(GeneratorCfgVar, notify=genCfgVarSig)
 	def generator_var(self) -> GeneratorCfgVar:
@@ -111,7 +117,9 @@ class EbvModel(QObject):
 				self._milk_v_model,
 				self._conform_v_model,
 				self._reprod_v_model,
-				self._scs_v_model
+				self._scs_v_model,
+				self._lgc_v_model,
+				self._rzc_v_model
 			]
 		))
 
